@@ -16,12 +16,12 @@ import Airdrop from "./page/AirDrop";
 function App() {
   const [loading, setLoading] = useState(false);
   const [tab, setTab] = useState<string>('Exchange');
-  // useEffect(() => {
-  //   setLoading(true);
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //   }, 3000);
-  // }, []);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+  }, []);
   return (
     <Router>
       {loading ? (

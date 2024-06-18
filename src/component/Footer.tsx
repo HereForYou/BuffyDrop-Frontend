@@ -1,6 +1,3 @@
-import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-
 interface IFooterProps {
   tab: string;
   setTab: (status: string) => void;
