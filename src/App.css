@@ -1,0 +1,116 @@
+@keyframes fadeInMoveUp {
+  0% {
+    opacity: 0;
+    top: 40%;
+  }
+
+  40% {
+    opacity: 1;
+    top: 35%;
+  }
+
+  90% {
+    opacity: 1;
+    top: 30%;
+  }
+
+  100% {
+    opacity: 0;
+    top: 30%;
+  }
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 1px;
+  /* Width of the scrollbar */
+  height: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f100;
+  /* Color of the track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #24224d;
+  /* Color of the scrollbar thumb */
+  background: #4D8CEC;
+  /* Color of the scrollbar thumb */
+  border-radius: 4px;
+  /* Rounded corners for the scrollbar thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  /* Color of the scrollbar thumb on hover */
+}
+
+.not-selectable {
+  user-select: none;
+  pointer-events: none;
+}
+
+.animate-fadeInMoveUp {
+  animation-name: fadeInMoveUp;
+  animation-duration: 0.5s;
+  /* Adjust duration as needed */
+  animation-fill-mode: both;
+  /* Keeps the final state */
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  text-align: center;
+  color: #2862e0;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.customCard {
+  background-color: #2862e0;
+  color: white;
+  box-shadow: 0 10px 27px rgba(40, 98, 224, 0.55);
+  border-radius: 10px;
+}
