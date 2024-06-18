@@ -2,7 +2,7 @@ import InviteCard from "../component/InviteCard";
 import FriendCard from "../component/FriendCard";
 const Friends = () => {
   return (
-    <div className="px-4 pb-24">
+    <div className="pb-24">
       <p className=" text-4xl font-bold">Invite Friends!</p>
       <p className=" text-xl pt-4 pb-6">
         You and your friend will receive bonuses!

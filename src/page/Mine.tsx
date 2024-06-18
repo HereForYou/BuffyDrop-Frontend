@@ -29,11 +29,11 @@ function Mine() {
   const [tab, setTab] = useState<string>("Markets");
   return (
     <>
-      <div className="h-full flex flex-col text-center items-center justify-start py-[40px]">
+      <div className="h-full w-full flex flex-col text-center items-center justify-start py-[40px]">
         <AnaylsisCard />
-        <div className="pb-[84px]">
-          <div className="flex flex-col justify-center items-center gap-2 w-full">
-            <div className="flex flex-row justify-center items-center mt-4">
+        <div className="pb-[84px] w-full">
+          <div className="flex flex-col justify-between items-center gap-2 w-full">
+            <div className="flex flex-row justify-center items-center mt-4 w-full">
               <img src="/image/dollar.png" alt="" className="w-14 h-14 mt-1" />
               <h1 className="text-5xl  ml-3 font-bold">
                 {formatNumberWithCommas(680432)}
@@ -41,7 +41,7 @@ function Mine() {
             </div>
             <TimeText />
             <DailyCard />
-            <div className="grid grid-cols-3 w-full pt-4 gap-2">
+            <div className="flex flex-row justify-between items-center w-full pt-4 gap-2">
               <ComboCard image="/image/com_3.png" content="Top 10 pairs" />
               <ComboCard image="/image/mikeT.png" content="Security Audition" />
               <ComboCard image="/image/com_1.png" content="Licence Ethiopia" />
