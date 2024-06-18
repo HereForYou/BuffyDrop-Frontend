@@ -108,7 +108,7 @@ const Exchange: React.FC<IExchangeProps> = ({ setTab }) => {
             <ProgressBar value={remainedEnergy / 10} />
           </div>
         </div>
-        <div className="w-[60%]">
+        <div className="w-[400px]">
           <div
             className={`relative bg-[url('/image/mikeToken.png')] rounded-full bg-cover w-full aspect-square z-10 ${remainedEnergy > 0
               ? "cursor-pointer"
