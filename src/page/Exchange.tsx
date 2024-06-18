@@ -5,10 +5,9 @@ import "react-toastify/dist/ReactToastify.css";
 import AnaylsisCard from "../component/section/AnalysisCard";
 import ProgressBar from "../component/ProgressBar";
 interface IExchangeProps {
-  tab: string;
   setTab: (status: string) => void;
 }
-const Exchange: React.FC<IExchangeProps> = ({ tab, setTab }) => {
+const Exchange: React.FC<IExchangeProps> = ({ setTab }) => {
   const [imgStatus, setImgStatus] = useState(false);
   const [token, setToken] = useState<number>(0);
   const [remainedEnergy, setRemainedEnergy] = useState<number>(1000);
