@@ -29,7 +29,7 @@ function Mine() {
   const [tab, setTab] = useState<string>("Markets");
   return (
     <>
-      <div className="h-full w-full flex flex-col text-center items-center justify-start py-[40px]">
+      <div className="h-full w-full flex flex-col text-center items-center justify-start py-2">
         <AnaylsisCard />
         <div className="pb-[84px] w-full">
           <div className="flex flex-col justify-between items-center gap-2 w-full">

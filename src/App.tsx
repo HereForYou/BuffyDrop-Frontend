@@ -28,7 +28,7 @@ function App() {
         <Loading />
       ) : (
         <div className="h-full max-h-screen overflow-hidden w-full py-2">
-          <div className="h-screen overflow-auto pb-[84px] px-[40px] dM-Sans bg-[white]">
+          <div className="h-screen overflow-auto pb-[84px] px-[20px] dM-Sans bg-[white]">
             {
               tab == 'Exchange' && <Exchange setTab={setTab} />
             }
