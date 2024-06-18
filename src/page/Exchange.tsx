@@ -93,8 +93,8 @@ const Exchange: React.FC<IExchangeProps> = ({ setTab }) => {
     <>
       <div className="h-full flex flex-col text-center items-center justify-between py-[40px]">
         <AnaylsisCard />
-        <div className="flex flex-col justify-center items-center mb-7 gap-2 w-full">
-          <div className="flex flex-row justify-center items-center mt-4">
+        <div className="flex flex-col justify-center items-center m-2 gap-2 w-full">
+          <div className="flex flex-row justify-center items-center">
             <img
               src="/image/dollar.png"
               alt=""
@@ -108,7 +108,7 @@ const Exchange: React.FC<IExchangeProps> = ({ setTab }) => {
             <ProgressBar value={remainedEnergy / 10} />
           </div>
         </div>
-        <div className="w-[400px]">
+        <div className="w-[300px]">
           <div
             className={`relative bg-[url('/image/mikeToken.png')] rounded-full bg-cover w-full aspect-square z-10 ${remainedEnergy > 0
               ? "cursor-pointer"

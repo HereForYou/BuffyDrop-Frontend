@@ -30,7 +30,7 @@ const Footer: React.FC<IFooterProps> = ({ tab, setTab }) => {
     setTab(tab);
   }
   return (
-    <div className="flex flex-row justify-between absolute z-1 h-[80px] w-full bottom-0 items-center border-[#2862e0] border-t-2 px-4 rounded-2xl bg-white">
+    <div className="flex flex-row justify-between absolute z-10 h-[80px] w-full bottom-0 items-center border-[#2862e0] border-t-2 px-4 rounded-2xl bg-white">
       {
         tabs.map((item, index) => (
           <div key={index} onClick={() => handleClick(item.name)} className={`flex flex-col items-center justify-center cursor-pointer transform origin-bottom transition ${item.name === tab
