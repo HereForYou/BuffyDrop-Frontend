@@ -7,15 +7,22 @@ interface IHomeProps {
   totalPoint: number;
   handleMining: () => void;
   handleStopMining: () => void;
+  setTotalPoint: (value: number) => void;
+  setClaimShow: (status: boolean) => void;
   start: boolean;
   hour: number;
   min: number;
   sec: number;
   claimShow: boolean;
-  handleClaim: () => void;
 }
-const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining, handleStopMining, claimShow, handleClaim, start, hour, min, sec }) => {
-
+const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining, handleStopMining, claimShow, setTotalPoint, setClaimShow, start, hour, min, sec }) => {
+  const handleClaim = () => {
+    if (user) {
+      let newpoint = totalPoint + point;
+      setTotalPoint(newpoint);
+      setClaimShow(false);
+    }
+  }
   return (
     <div className="h-full flex flex-col text-center items-center justify-between py-2">
       <AnaylsisCard />

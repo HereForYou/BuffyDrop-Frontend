@@ -15,31 +15,28 @@ import Earn from "./page/Earn";
 import Airdrop from "./page/AirDrop";
 
 function App() {
-  let countdownTime = 60;
+  let countdownTime = 10;
   let points = -0.002;
 
   const [loading, setLoading] = useState(false);
   const [tab, setTab] = useState<string>('Exchange');
-
   const { user } = useTelegram();
-
   const [start, setStart] = useState<boolean>(false);
   const [claimShow, setClaimShow] = useState<boolean>(false);
-
   const [intervalId, setIntervalId] = useState<any>();
-  // const [cnt, setCnt] = useState<number>(0);
   const [point, setPoint] = useState<number>(0.000);
   const [totalPoint, setTotalPoint] = useState<number>(0.000);
-
   const [hour, setHour] = useState<number>(0);
   const [min, setMin] = useState<number>(0);
   const [sec, setSec] = useState<number>(0);
 
   const handleMining = () => {
     if (user) {
+      countdownTime = 10;
       setStart(true);
       let interval_Id = setInterval(() => {
         setIntervalId(interval_Id);
+        console.log("setIntervalId", interval_Id);
         if (countdownTime >= 0) {
           let hours = Math.floor(countdownTime / 3600);
           let minutes = Math.floor((countdownTime % 3600) / 60);
@@ -50,10 +47,9 @@ function App() {
           points += 0.002;
           setPoint(points);
           countdownTime--;
-          // setCnt(countdownTime);
         }
         else {
-          clearInterval(intervalId);
+          clearInterval(interval_Id);
           setStart(false);
           setClaimShow(true);
           points = 0;
@@ -65,23 +61,16 @@ function App() {
   const handleStopMining = () => {
     clearInterval(intervalId);
     setStart(false);
-    setTotalPoint(point);
+    let newpoint = point + points;
+    setTotalPoint(newpoint);
   }
 
-  const handleClaim = () => {
-    if (user) {
-      setTotalPoint(point);
-      setStart(false);
-      setClaimShow(false);
-    }
-  }
-
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-  }, []);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 1000);
+  // }, []);
 
   return (
     <Router>
@@ -93,7 +82,7 @@ function App() {
             {
               tab == 'Exchange' && <Exchange user={user} point={point} totalPoint={totalPoint}
                 handleMining={handleMining} handleStopMining={handleStopMining} claimShow={claimShow}
-                handleClaim={handleClaim}
+                setTotalPoint={setTotalPoint} setClaimShow={setClaimShow}
                 start={start} hour={hour} min={min} sec={sec} />
             }
             {
