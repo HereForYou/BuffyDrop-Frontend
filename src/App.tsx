@@ -15,7 +15,7 @@ import Earn from "./page/Earn";
 import Airdrop from "./page/AirDrop";
 
 function App() {
-  let countdownTime = 10;
+  let countdownTime = 60;
   let points = -0.002;
 
   const [loading, setLoading] = useState(false);
@@ -32,7 +32,7 @@ function App() {
 
   const handleMining = () => {
     if (user) {
-      countdownTime = 10;
+      countdownTime = 60;
       setStart(true);
       let interval_Id = setInterval(() => {
         setIntervalId(interval_Id);
