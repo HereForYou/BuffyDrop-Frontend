@@ -1,7 +1,7 @@
 import EarnCard from "../component/EarnCard";
 const Earn = () => {
   return (
-    <div className="pb-[84px]">
+    <div className="pb-[40px]">
       <div className="flex justify-center items-center">
         <img src="image/dollar.png" className="w-32 h-32" />
       </div>
