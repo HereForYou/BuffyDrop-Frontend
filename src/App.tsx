@@ -27,7 +27,7 @@ function App() {
   const [claimShow, setClaimShow] = useState<boolean>(false);
 
   const [intervalId, setIntervalId] = useState<any>();
-  const [cnt, setCnt] = useState<number>(0);
+  // const [cnt, setCnt] = useState<number>(0);
   const [point, setPoint] = useState<number>(0.000);
   const [totalPoint, setTotalPoint] = useState<number>(0.000);
 
@@ -50,7 +50,7 @@ function App() {
           points += 0.002;
           setPoint(points);
           countdownTime--;
-          setCnt(countdownTime);
+          // setCnt(countdownTime);
         }
         else {
           clearInterval(intervalId);
