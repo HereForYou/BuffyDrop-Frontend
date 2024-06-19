@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@pixi/react": "^7.1.2",
     "@reduxjs/toolkit": "^2.2.5",
     "@tonconnect/ui-react": "^2.0.5",

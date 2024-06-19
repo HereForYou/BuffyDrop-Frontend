@@ -113,4 +113,17 @@
   color: white;
   box-shadow: 0 10px 27px rgba(40, 98, 224, 0.55);
   border-radius: 10px;
+  padding: 10px;
+}
+
+.customBtn {
+  background-color: #2862e0;
+  color: white;
+  box-shadow: 0 10px 27px rgba(40, 98, 224, 0.55);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.customBtn:hover {
+  opacity: 0.9;
 }
