@@ -91,7 +91,7 @@ const Exchange: React.FC<IExchangeProps> = ({ setTab }) => {
 
   return (
     <>
-      <div className="h-full flex flex-col text-center items-center justify-between py-2 mb-[84px]">
+      <div className="h-full flex flex-col text-center items-center justify-between py-2">
         <AnaylsisCard />
         <div className="flex flex-col justify-center items-center m-2 gap-2 w-full">
           <div className="flex flex-row justify-center items-center">
