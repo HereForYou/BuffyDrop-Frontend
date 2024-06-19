@@ -1,7 +1,5 @@
 import React from "react";
 import AnaylsisCard from "../component/section/AnalysisCard";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faWallet } from '@fortawesome/free-solid-svg-icons';
 
 interface IHomeProps {
   user: any;
@@ -21,16 +19,12 @@ const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining,
   return (
     <div className="h-full flex flex-col text-center items-center justify-between py-2">
       <AnaylsisCard />
-      <div className="flex flex-col items-center justify-center gap-3">
+      <div className="flex flex-col items-center justify-center">
         <img className="logo h-[120px] w-[120px] rounded-full" src="/image/bleggs-miniapp.png" alt="logo" />
-        <h3 className="tgId text-[32px]  opacity-80">{user?.first_name} {user?.last_name}</h3>
+        <h3 className="tgId text-[24px]  opacity-80">{user?.first_name} {user?.last_name}</h3>
       </div>
-      <div className="flex flex-col balance gap-6 pt-2">
-        <div className="flex flex-row items-center justify-center gap-3">
-          <FontAwesomeIcon className='cursor-pointer  hover:text-graydark hover:opacity-70 transition-all duration-700' icon={faWallet} />
-          <h4 className="text-[20px]">balances</h4>
-        </div>
-        <h1 className="font-bold text-[52px] ">{totalPoint.toFixed(3)}</h1>
+      <div className="flex flex-col balance gap-2 pt-2">
+        <h1 className="font-bold text-[32px] ">{totalPoint.toFixed(3)}</h1>
         <h3 className="font-bold text-[20px]">POINTS</h3>
       </div>
       {

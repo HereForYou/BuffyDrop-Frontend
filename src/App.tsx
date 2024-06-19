@@ -71,6 +71,7 @@ function App() {
   const handleClaim = () => {
     if (user) {
       setTotalPoint(point);
+      setStart(false);
       setClaimShow(false);
     }
   }
