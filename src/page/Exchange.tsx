@@ -27,8 +27,6 @@ const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining,
     <div className="h-full flex flex-col text-center items-center justify-between py-2">
       <AnaylsisCard />
       <div className="flex flex-col items-center justify-center">
-        <h2>Welcome to @investdexmanagement</h2>
-        <h2>This is Anton Zakun</h2>
         <img className="logo h-[120px] w-[120px] rounded-full" src="/image/bleggs-miniapp.png" alt="logo" />
         <h3 className="tgId text-[24px]  opacity-80">{user?.first_name} {user?.last_name}</h3>
       </div>
