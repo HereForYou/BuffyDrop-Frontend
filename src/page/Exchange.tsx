@@ -2,7 +2,6 @@ import React from "react";
 import ProgressBar from "../component/ProgressBar";
 
 interface IHomeProps {
-  level: any;
   user: any;
   point: number;
   totalPoint: number;
@@ -16,7 +15,7 @@ interface IHomeProps {
   sec: number;
   claimShow: boolean;
 }
-const Exchange: React.FC<IHomeProps> = ({ level, user, point, totalPoint, handleMining, handleStopMining, claimShow, setTotalPoint, setClaimShow, start, hour, min, sec }) => {
+const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining, handleStopMining, claimShow, setTotalPoint, setClaimShow, start, hour, min, sec }) => {
   const handleClaim = () => {
     if (!user) {
       let newpoint = totalPoint + point;

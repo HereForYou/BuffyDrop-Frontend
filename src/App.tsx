@@ -158,7 +158,7 @@ function App() {
               tab == 'Splash' && <Splash />
             }
             {
-              tab == 'Exchange' && <Exchange level={level} user={user} point={point} totalPoint={totalPoint}
+              tab == 'Exchange' && <Exchange user={user} point={point} totalPoint={totalPoint}
                 handleMining={handleMining} handleStopMining={handleStopMining} claimShow={claimShow}
                 setTotalPoint={setTotalPoint} setClaimShow={setClaimShow}
                 start={start} hour={hour} min={min} sec={sec} />
