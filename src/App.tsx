@@ -50,7 +50,7 @@ function App() {
   }, [totalPoint]);
 
   const handleMining = () => {
-    if (!user) {
+    if (user) {
       countdownTime = 60;
       setStart(true);
       let interval_Id = setInterval(() => {
@@ -136,7 +136,7 @@ function App() {
 
   return (
     <Router>
-      <div className={`h-full max-h-screen overflow-hidden w-full md:w-[30%] 
+      <div className={`h-full max-h-screen overflow-hidden w-full lg:w-[30%] 
         ${tab == 'Splash' && 'bg-splash-back'}
         ${tab == 'Exchange' && 'bg-home-back'}
         ${tab == 'Mine' && 'bg-mine-back'}

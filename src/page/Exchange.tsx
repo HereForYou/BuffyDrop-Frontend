@@ -17,7 +17,7 @@ interface IHomeProps {
 }
 const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining, handleStopMining, claimShow, setTotalPoint, setClaimShow, start, hour, min, sec }) => {
   const handleClaim = () => {
-    if (!user) {
+    if (user) {
       let newpoint = totalPoint + point;
       setTotalPoint(newpoint);
       setClaimShow(false);
