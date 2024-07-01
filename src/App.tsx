@@ -5,13 +5,9 @@ import Exchange from "./page/Exchange";
 import { useTelegram } from "./hooks/useTelegram";
 import axios from "axios";
 import { toast } from 'react-hot-toast';
-
-// import Ranking from "./page/Ranking";
-// import Task from "./page/Task";
 import { ToastContainer } from "react-toastify";
 import Footer from "./component/Footer";
 import Loading from "./component/Loading";
-import Boost from "./page/Boost";
 import Mine from "./page/Mine";
 import Friends from "./page/Friends";
 import Earn from "./page/Earn";
@@ -26,7 +22,7 @@ function App() {
   const hasShownWarningRef = useRef(false); // Use a ref to track if warning has been shown
   const [inviteMsg, setInviteMsg] = useState<boolean>(false);
 
-  const [task, setTask] = useState<string[]>([]);
+  // const [task, setTask] = useState<string[]>([]);
 
   const [loading, setLoading] = useState(false);
   const [tab, setTab] = useState<string>('Splash');
@@ -166,9 +162,6 @@ function App() {
                 handleMining={handleMining} handleStopMining={handleStopMining} claimShow={claimShow}
                 setTotalPoint={setTotalPoint} setClaimShow={setClaimShow}
                 start={start} hour={hour} min={min} sec={sec} />
-            }
-            {
-              tab == 'Boost' && <Boost />
             }
             {
               tab == 'Mine' && <Mine />

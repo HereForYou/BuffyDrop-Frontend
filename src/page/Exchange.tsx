@@ -1,5 +1,4 @@
 import React from "react";
-import AnalysisCard from "../component/section/AnalysisCard";
 import ProgressBar from "../component/ProgressBar";
 
 interface IHomeProps {
@@ -19,7 +18,7 @@ interface IHomeProps {
 }
 const Exchange: React.FC<IHomeProps> = ({ level, user, point, totalPoint, handleMining, handleStopMining, claimShow, setTotalPoint, setClaimShow, start, hour, min, sec }) => {
   const handleClaim = () => {
-    if (user) {
+    if (!user) {
       let newpoint = totalPoint + point;
       setTotalPoint(newpoint);
       setClaimShow(false);
@@ -56,35 +55,43 @@ const Exchange: React.FC<IHomeProps> = ({ level, user, point, totalPoint, handle
           )
         ) : (
           <div className="flex flex-col gap-2 w-full">
-            <div className="customCard flex flex-row w-full  justify-between items-center">
-              <img src="/image/axs.png" alt="pick-icon" className="h-[30px] w-[30px]" />
-              <h4 className="text-[24px]">{point.toFixed(3)}</h4>
+            <div className="customCard-container">
+              <div className="customCard flex flex-row w-full justify-between items-center font-bold">
+                <img src="/image/axs.png" alt="pick-icon" className="h-[30px] w-[30px]" />
+                <h4 className="text-[20px]">{point.toFixed(3)}</h4>
+              </div>
             </div>
-            <div className="customCard flex flex-row w-full  justify-between items-center">
-              <h2 className="earning text-[28px]">Earning</h2>
-              <section className="flex flex-row gap-4">
-                <>
-                  <div className="flex flex-col text-center">
-                    <h3 className="text-[24px]">{hour}</h3>
-                    <h4 className="text-[12px]">Hours</h4>
-                  </div>
-                  <div className="flex flex-col text-center">
-                    <h3 className="text-[24px]">{min}</h3>
-                    <h4 className="text-[12px]">Mins</h4>
-                  </div>
-                  <div className="flex flex-col text-center">
-                    <h3 className="text-[24px]">{sec}</h3>
-                    <h4 className="text-[12px]">Secs</h4>
-                  </div>
-                </>
-              </section>
-            </div >
-            <button onClick={handleStopMining} className="customBtn py-4 px-4">Stop Mining</button>
+            <div className="customCard-container font-bold">
+              <div className="customCard flex flex-row w-full  justify-between items-center">
+                <h2 className="earning text-[24px]">Earning</h2>
+                <section className="flex flex-row gap-4">
+                  <>
+                    <div className="flex flex-col text-center">
+                      <h3 className="text-[16px]">{hour}</h3>
+                      <h4 className="text-[12px]">Hours</h4>
+                    </div>
+                    <div className="flex flex-col text-center">
+                      <h3 className="text-[16px]">{min}</h3>
+                      <h4 className="text-[12px]">Mins</h4>
+                    </div>
+                    <div className="flex flex-col text-center">
+                      <h3 className="text-[16px]">{sec}</h3>
+                      <h4 className="text-[12px]">Secs</h4>
+                    </div>
+                  </>
+                </section>
+              </div >
+            </div>
+            <div className="customCard-container p-[4px] rounded-full">
+              <div onClick={handleStopMining} className="customCard cursor-pointer py-2 rounded-full">
+                <h2 className="text-[16px] font-bold">STOP MINING</h2>
+              </div>
+            </div>
           </div>
         )
       }
       <div className="flex flex-row items-center justify-start w-full text-[20px] text-white lilita">
-        <img src="boost.svg" alt="boost" className="h-[40px] aspect-square" />
+        <img src="boost.png" alt="boost" className="h-[40px] aspect-square" />
         <h2>10 MH /&nbsp;</h2>
         <h2>30 Min</h2>
       </div>
