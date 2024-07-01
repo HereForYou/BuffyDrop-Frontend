@@ -7,7 +7,6 @@ import axios from "axios";
 import { toast } from 'react-hot-toast';
 import { ToastContainer } from "react-toastify";
 import Footer from "./component/Footer";
-import Loading from "./component/Loading";
 import Mine from "./page/Mine";
 import Friends from "./page/Friends";
 import Earn from "./page/Earn";
@@ -19,12 +18,11 @@ function App() {
   let countdownTime = 60;
   let points = 0;
 
-  const hasShownWarningRef = useRef(false); // Use a ref to track if warning has been shown
+  const hasShownWarningRef = useRef(false);
   const [inviteMsg, setInviteMsg] = useState<boolean>(false);
 
   // const [task, setTask] = useState<string[]>([]);
-
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [tab, setTab] = useState<string>('Splash');
   const { user, start_param } = useTelegram();
   const [start, setStart] = useState<boolean>(false);
@@ -86,20 +84,16 @@ function App() {
   }
 
   useEffect(() => {
-    setLoading(true);
+    setTab('Splash');
     setTimeout(() => {
-      setLoading(false);
-      setTab('Splash');
-      setTimeout(() => {
-        setTab('Exchange');
-      }, 1500);
+      setTab('Exchange');
     }, 1500);
   }, []);
 
   useEffect(() => {
     if (user && !hasShownWarningRef.current && tab == "Exchange") {
       hasShownWarningRef.current = true;
-      setLoading(true);
+      // setLoading(true);
       let data = {
         userName: user?.username,
         firstName: user?.first_name,
@@ -131,7 +125,7 @@ function App() {
             toast.success("Successfully Invited!");
             setInviteMsg(true);
           }
-          setLoading(false);
+          // setLoading(false);
         })
         .catch(error => {
           // toast.error("error", error);
@@ -142,10 +136,7 @@ function App() {
 
   return (
     <Router>
-      {loading ? (
-        <Loading />
-      ) : (
-        <div className={`h-full max-h-screen overflow-hidden w-[30%] 
+      <div className={`h-full max-h-screen overflow-hidden w-full md:w-[30%] 
         ${tab == 'Splash' && 'bg-splash-back'}
         ${tab == 'Exchange' && 'bg-home-back'}
         ${tab == 'Mine' && 'bg-mine-back'}
@@ -153,34 +144,32 @@ function App() {
         ${tab == 'Earn' && 'bg-task-back'}
         ${tab == 'Airdrop' && 'bg-airdrop-back'}
         bg-cover`}>
-          <div className="h-screen overflow-auto pb-[64px] pt-[40px] px-[20px]">
-            {
-              tab == 'Splash' && <Splash />
-            }
-            {
-              tab == 'Exchange' && <Exchange user={user} point={point} totalPoint={totalPoint}
-                handleMining={handleMining} handleStopMining={handleStopMining} claimShow={claimShow}
-                setTotalPoint={setTotalPoint} setClaimShow={setClaimShow}
-                start={start} hour={hour} min={min} sec={sec} />
-            }
-            {
-              tab == 'Mine' && <Mine />
-            }
-            {
-              tab == 'Friends' && <Friends />
-            }
-            {
-              tab == 'Earn' && <Earn />
-            }
-            {
-              tab == 'Airdrop' && <Airdrop />
-            }
-            <ToastContainer />
-          </div>
-          <Footer tab={tab} setTab={setTab} />
+        <div className="h-screen overflow-auto pb-[64px] pt-[40px] px-[20px]">
+          {
+            tab == 'Splash' && <Splash />
+          }
+          {
+            tab == 'Exchange' && <Exchange user={user} point={point} totalPoint={totalPoint}
+              handleMining={handleMining} handleStopMining={handleStopMining} claimShow={claimShow}
+              setTotalPoint={setTotalPoint} setClaimShow={setClaimShow}
+              start={start} hour={hour} min={min} sec={sec} />
+          }
+          {
+            tab == 'Mine' && <Mine />
+          }
+          {
+            tab == 'Friends' && <Friends />
+          }
+          {
+            tab == 'Earn' && <Earn />
+          }
+          {
+            tab == 'Airdrop' && <Airdrop />
+          }
+          <ToastContainer />
         </div>
-      )
-      }
+        <Footer tab={tab} setTab={setTab} />
+      </div>
     </Router >
   );
 }
