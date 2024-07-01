@@ -137,7 +137,7 @@ function App() {
         ${tab == 'Earn' && 'bg-task-back'}
         ${tab == 'Airdrop' && 'bg-airdrop-back'}
         bg-cover`}>
-        <div className="h-screen overflow-auto pb-[64px] pt-[40px] px-[20px]">
+        <div className="h-screen overflow-auto pb-[64px] pt-[20px] px-[20px]">
           {
             tab == 'Splash' && <Splash setTab={setTab} />
           }

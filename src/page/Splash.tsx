@@ -19,10 +19,10 @@ const Splash = ({ setTab }: { setTab: (tab: string) => void }) => {
         </div>
       </div>
       <div className="flex flex-col">
-        <section className="flex flex-row w-full badge items-baseline justify-between">
-          <img src="badge 1.png" alt="badge" className="h-[80px] aspect-square" />
-          <img src="badge 2.png" alt="badge" className="h-[150px] aspect-auto" />
-          <img src="badge 3.png" alt="badge" className="h-[80px] aspect-square" />
+        <section className="flex flex-row w-full badge items-baseline justify-around">
+          <img src="badge 1.png" alt="badge" className="h-[60px] aspect-square" />
+          <img src="badge 2.png" alt="badge" className="h-[100px] aspect-auto" />
+          <img src="badge 3.png" alt="badge" className="h-[60px] aspect-square" />
         </section>
         <section className="grid grid-cols-3 space-x-1">
           <div>

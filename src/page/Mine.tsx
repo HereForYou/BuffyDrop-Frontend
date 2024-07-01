@@ -2,8 +2,8 @@ import ProgressBar from "../component/ProgressBar";
 
 function Mine() {
   return (
-    <>
-      <div className="h-full w-full flex flex-col text-center items-center justify-between py-2 gap-4 pb-[30px]">
+    <div className="pb-[40px]">
+      <div className="h-full w-full flex flex-col text-center items-center justify-between py-2 gap-4">
         <div className="flex flex-row w-full items-center justify-center gap-4 text-[16px] font-extrabold">
           <div className="customCard-container w-[55%]">
             <div className="customCard group w-full py-4 transition relative duration-300 cursor-pointer hover:translate-y-[3px] hover:shadow-[0 -8px 0px 0px #2196f3]">
@@ -70,7 +70,7 @@ function Mine() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
