@@ -4,24 +4,29 @@ interface IFooterProps {
 }
 const tabs = [
   {
-    name: "Exchange",
-    img: "/image/mining.png"
+    id: "Mine",
+    name: "Leaderboard",
+    img: "rank.svg"
   },
   {
-    name: "Mine",
-    img: "/image/axs.png"
+    id: "Friends",
+    name: "Referrals",
+    img: "referral.svg"
   },
   {
-    name: "Friends",
-    img: "/image/friends.png"
+    id: "Exchange",
+    name: "Home",
+    img: "home.svg"
   },
   {
-    name: "Earn",
-    img: "/image/earn.png"
+    id: "Earn",
+    name: "Daily Tasks",
+    img: "task.svg"
   },
   {
-    name: "Airdrop",
-    img: "/image/hamstercoin.png"
+    id: "Airdrop",
+    name: "Miner",
+    img: "badge.svg"
   },
 
 ]
@@ -30,23 +35,26 @@ const Footer: React.FC<IFooterProps> = ({ tab, setTab }) => {
     setTab(tab);
   }
   return (
-    <div className="flex flex-row justify-between absolute z-10 h-[80px] w-full bottom-0 items-center border-[#2862e0] border-t-2 px-4 rounded-2xl bg-white">
+    <div className="footer grid grid-cols-5 justify-between absolute z-10 h-[60px] w-full md:w-[30%] bottom-0 items-center px-4 rounded-2xl">
       {
         tabs.map((item, index) => (
-          <div key={index} onClick={() => handleClick(item.name)} className={`flex flex-col items-center justify-center cursor-pointer transform origin-bottom transition ${item.name === tab
-            ? "scale-[110%] opacity-100 p-1 lg:p-2 rounded-2xl font-extrabold"
-            : "opacity-60"
+          <div key={index} onClick={() => handleClick(item.id)} className={`flex flex-col items-center justify-center cursor-pointer transform origin-bottom transition 
+            ${item.id === tab
+              ? "scale-[110%]"
+              : "opacity-60"
             }`}>
-            <img
-              src={item.img}
-              alt="play"
-              className="w-6 h-6 lg:w-8 lg:h-8"
-            />
-            <p className="text-[10px] lg:text-sm ">{item.name}</p>
+            <div className={`flex flex-col items-center justify-center font-extrabold ${item.id === tab && 'border-b-2 border-[#D18729]'} gap-1`}>
+              <img
+                src={item.img}
+                alt="play"
+                className="w-5 h-5"
+              />
+              <h3 className="text-[10px]">{item.name}</h3>
+            </div>
           </div>
         ))
       }
-    </div>
+    </div >
   );
 }
 export default Footer;

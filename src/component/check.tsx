@@ -7,11 +7,11 @@ interface CheckComProps {
 const CheckCom: React.FC<CheckComProps> = ({ flag }) => {
   return (
     <>
-      <div className=" bg-[#2862e0] w-8 h-8 rounded-full flex items-center justify-center">
+      <div className="flex items-center justify-center">
         {flag === true ? (
-          <img src="image/check.png" className="w-6 h-6" />
+          <img src="check.png" className="w-[40px] aspect-square" />
         ) : (
-          <div className=" bg-white w-6 h-6 rounded-full" />
+          <img src="uncheck.png" className="w-[40px] aspect-square" />
         )}
       </div>
     </>

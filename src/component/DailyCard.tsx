@@ -7,7 +7,7 @@ const DailyCard = () => {
             Daily Combo
           </span>
         </div>
-        <div className="bg-white rounded-xl p-1 sm-p-2 flex space-x-4 items-center">
+        <div className="bg-white rounded-[10px] p-1 sm-p-2 flex space-x-4 items-center">
           <img src="/image/dollar.png" alt="" className="w-8 h-8" />
           <span className="text-sm md:text-xl text-[#2862e0]">+{5352342}</span>
           <img src="/image/check.png" alt="" className="w-8 h-8" />

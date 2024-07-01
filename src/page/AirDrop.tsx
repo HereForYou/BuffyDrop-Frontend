@@ -1,37 +1,31 @@
 import CheckCom from "../component/check";
 const Airdrop = () => {
   return (
-    <div className="py-10 pb-24">
-      <div className="ml-2">
-        <div className="flex justify-center items-center">
-          <img src="image/hamstercoin.png" className="w-34 h-32" />
+    <div className="flex flex-col justify-between h-full pl-2 pb-[30px] pt-[150px]">
+      <h1 className="lilita text-[40px] font-bold p-2">
+        coming soon!
+      </h1>
+      <div className="mt-6">
+        <div className="flex items-center justify-start">
+          <CheckCom flag={true} />
+          <h2 className="text-[16px] ml-2 font-bold">Exchange negotiations</h2>
         </div>
-        <p className=" text-3xl font-bold p-2">
-          Get ready, Airdrop is
-          <br /> coming soon!
-        </p>
-        <div className="mt-6">
-          <div className="flex">
-            <CheckCom flag={true} />
-            <p className=" text-xl ml-2">Exchange negotiations</p>
-          </div>
-          <img src="image/thredot.png" className="w-2 h-4 ml-3" />
-          <div className="flex">
-            <CheckCom flag={true} />
-            <p className=" text-xl ml-2">Market Maker negotiations</p>
-          </div>
-          <img src="image/thredot.png" className="w-2 h-4 ml-3" />
-          <div className="flex">
-            <CheckCom flag={true} />
-            <p className=" text-xl ml-2 text-left">
-              Key partnerships are coming
-            </p>
-          </div>
-          <img src="image/thredot.png" className="w-2 h-4 ml-3" />
-          <div className="flex">
-            <CheckCom flag={false} />
-            <p className=" text-xl ml-2">Airdorp task list</p>
-          </div>
+        <img src="line.png" className="w-2 h-4 ml-3" />
+        <div className="flex items-center justify-start">
+          <CheckCom flag={true} />
+          <h2 className="text-[16px] ml-2 font-bold">Market Maker negotiations</h2>
+        </div>
+        <img src="line.png" className="w-2 h-4 ml-3" />
+        <div className="flex items-center justify-start">
+          <CheckCom flag={true} />
+          <h2 className="text-[16px] ml-2 font-bold text-left">
+            Key partnerships are coming
+          </h2>
+        </div>
+        <img src="line.png" className="w-2 h-4 ml-3" />
+        <div className="flex items-center justify-start">
+          <CheckCom flag={false} />
+          <h2 className="text-[16px] ml-2 font-bold">Airdorp task list</h2>
         </div>
       </div>
     </div>

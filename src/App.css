@@ -66,7 +66,12 @@
   justify-content: center;
   margin: 0 auto;
   text-align: center;
-  color: #2862e0;
+  color: #012335;
+  font-family: 'Inter';
+}
+
+.lilita {
+  font-family: 'Lilita One';
 }
 
 .logo {
@@ -108,22 +113,37 @@
   color: #888;
 }
 
+.right-skew {
+  clip-path: polygon(0 0, 100% 0, 99.5% 100%, 0% 100%);
+}
+
 .customCard {
-  background-color: #2862e0;
-  color: white;
-  box-shadow: 0 10px 27px rgba(40, 98, 224, 0.55);
+  background-color: #FFD798;
   border-radius: 10px;
   padding: 10px;
 }
 
-.customBtn {
-  background-color: #2862e0;
-  color: white;
-  box-shadow: 0 10px 27px rgba(40, 98, 224, 0.55);
+.customCard:hover {
+  transform: translateY(-3px);
+}
+
+.customCard-container {
+  background-image: linear-gradient(to bottom, #FFD798, #D18729);
   border-radius: 10px;
-  padding: 10px;
+  padding: 6px;
+  position: relative;
+}
+
+.customBtn {
+  background-image: linear-gradient(to bottom, #72B5BC, #023744);
+  color: white;
+  border: solid 2px #023744;
 }
 
 .customBtn:hover {
   opacity: 0.9;
+}
+
+.footer {
+  background-color: #FFD798;
 }

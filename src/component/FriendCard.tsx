@@ -11,33 +11,33 @@ const FriendCard: React.FC<FriendCardProps> = ({
   profit,
 }) => {
   return (
-    <div className="customCard grid grid-col-1  grid-col-1 w-full">
-      <div className="group rounded-xl p-3 sm:p-4 md:p-5 transition relative duration-300 cursor-pointer hover:translate-y-[3px] hover:shadow-[0 -8px 0px 0px #2196f3] flex justify-between">
-        <div className="flex grid-cols-2 gap-3 w-full">
+    <div className="customCard-container right-skew grid grid-col-1  grid-col-1 w-full">
+      <div className="customCard right-skew group rounded-[10px] p-3 transition relative duration-300 cursor-pointer hover:translate-y-[3px] hover:shadow-[0 -8px 0px 0px #2196f3] flex justify-between">
+        <div className="flex flex-row items-center justify-between gap-2 w-full">
           <img
-            src="/image/hamster.png"
+            src="friend-icon.svg"
             alt=""
-            className="w-12 h-12 max-sm:w-10 max-sm:h-10"
+            className="w-8 h-8"
           />
           <div className="flex flex-row w-full justify-between">
-            <div className="space-y-3 max-sm:space-y-1">
-              <p className=" text-lg font-semibold text-left max-sm:text-sm">
+            <div className="space-y-1 max-sm:space-y-1">
+              <p className="text-[14px] font-bold text-left max-sm:text-sm">
                 {name}
               </p>
               <div className="flex items-center">
-                <p className=" max-sm:text-sm">{role}</p>
+                <p className="text-[12px]">{role}</p>
                 <img
-                  src="/image/dollar.png"
+                  src="dollar.png"
                   alt=""
-                  className="w-4 h-4 ml-1 sm:w-5 sm:h-5 md:w-6 md:h-6"
+                  className="w-4 h-4 ml-1"
                 />
-                <p className="text-orange-400">+{profit}</p>
+                <h3 className="text-[12px] font-bold">+{profit}</h3>
               </div>
             </div>
-            <div className="flex items-center">
-              <img src="/image/dollar.png" alt="" className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />
-              <p className="">{value}</p>
-            </div>
+          </div>
+          <div className="flex flex-col items-center">
+            <img src="dollar.png" alt="" className="w-8 aspect-square" />
+            <h3 className="text-[12px] font-bold">{value}</h3>
           </div>
         </div>
       </div>

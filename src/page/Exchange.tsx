@@ -1,7 +1,9 @@
 import React from "react";
-import AnaylsisCard from "../component/section/AnalysisCard";
+import AnalysisCard from "../component/section/AnalysisCard";
+import ProgressBar from "../component/ProgressBar";
 
 interface IHomeProps {
+  level: any;
   user: any;
   point: number;
   totalPoint: number;
@@ -15,7 +17,7 @@ interface IHomeProps {
   sec: number;
   claimShow: boolean;
 }
-const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining, handleStopMining, claimShow, setTotalPoint, setClaimShow, start, hour, min, sec }) => {
+const Exchange: React.FC<IHomeProps> = ({ level, user, point, totalPoint, handleMining, handleStopMining, claimShow, setTotalPoint, setClaimShow, start, hour, min, sec }) => {
   const handleClaim = () => {
     if (user) {
       let newpoint = totalPoint + point;
@@ -24,22 +26,33 @@ const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining,
     }
   }
   return (
-    <div className="h-full flex flex-col text-center items-center justify-between py-2">
-      <AnaylsisCard />
-      <div className="flex flex-col items-center justify-center">
-        <img className="logo h-[120px] w-[120px] rounded-full" src="/image/bleggs-miniapp.png" alt="logo" />
-        <h3 className="tgId text-[24px]  opacity-80">{user?.first_name} {user?.last_name}</h3>
+    <div className="h-full flex flex-col text-center items-center justify-between py-2 px-4">
+      <div className="customCard-container w-full">
+        <div className="customCard group py-4 transition relative duration-300 cursor-pointer hover:translate-y-[3px] hover:shadow-[0 -8px 0px 0px #2196f3]">
+          <h2 className="text-[24px] font-extrabold">$BLEGGS Miner</h2>
+        </div>
       </div>
-      <div className="flex flex-col balance gap-2 pt-2">
-        <h1 className="font-bold text-[32px] ">{totalPoint.toFixed(3)}</h1>
-        <h3 className="font-bold text-[20px]">POINTS</h3>
+      <div className="flex flex-col items-center justify-center w-full">
+        <img className="logo h-[120px] w-[120px] rounded-full" src="dollar.png" alt="logo" />
+        <div className="flex flex-col balance gap-2 w-full">
+          <h1 className="font-bold text-[30px] ">{totalPoint}$BLEGGS</h1>
+          <ProgressBar value={70} />
+        </div>
       </div>
       {
         !start ? (
           claimShow ? (
-            <button onClick={handleClaim} className="customBtn py-2 px-4">Claim</button>
+            <div className="bg-white p-[10px] rounded-full">
+              <button onClick={handleClaim} className="customBtn startBt aspect-square rounded-full py-2 px-4">
+                <h2 className="text-[30px] font-bold">CLAIM</h2>
+              </button>
+            </div>
           ) : (
-            <button onClick={handleMining} className="customBtn startBt py-2 px-4">Start Mining</button>
+            <div className="bg-white p-[10px] rounded-full">
+              <button onClick={handleMining} className="customBtn startBt aspect-square rounded-full py-2 px-4">
+                <h2 className="text-[30px] font-bold">START<br />MINING</h2>
+              </button>
+            </div>
           )
         ) : (
           <div className="flex flex-col gap-2 w-full">
@@ -70,6 +83,11 @@ const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining,
           </div>
         )
       }
+      <div className="flex flex-row items-center justify-start w-full text-[20px] text-white lilita">
+        <img src="boost.svg" alt="boost" className="h-[40px] aspect-square" />
+        <h2>10 MH /&nbsp;</h2>
+        <h2>30 Min</h2>
+      </div>
     </div >
   )
 }

@@ -1,20 +1,21 @@
 import ExpCard from "../Card";
-const AnaylsisCard = () => {
+
+const AnalysisCard = ({ level }: { level: any }) => {
   return (
     <div className="flex flex-col-3 sm:gap-1 md:gap-2 lg:gap-3 justify-between items-center w-full">
-      <ExpCard earn="Earn per tap" profit="+8" flag={true} />
+      <ExpCard earn="Earn per tap" profit={`+${level.earnPerSecond}`} flag={true} />
       <ExpCard
-        earn="Coins to level up"
-        profit="1M"
+        earn="Profit per hour"
+        profit={`Level:${level.level}`}
         flag={false}
       />
       <ExpCard
-        earn="Profit per hour"
-        profit="+612.15K"
+        earn="Coins to level up"
+        profit={`+${level.coinsToLevelUp}`}
         flag={false}
       />
     </div>
   );
 };
 
-export default AnaylsisCard;
+export default AnalysisCard;

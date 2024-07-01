@@ -1,8 +1,11 @@
 import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Exchange from "./page/Exchange";
 import { useTelegram } from "./hooks/useTelegram";
+import axios from "axios";
+import { toast } from 'react-hot-toast';
+
 // import Ranking from "./page/Ranking";
 // import Task from "./page/Task";
 import { ToastContainer } from "react-toastify";
@@ -13,14 +16,21 @@ import Mine from "./page/Mine";
 import Friends from "./page/Friends";
 import Earn from "./page/Earn";
 import Airdrop from "./page/AirDrop";
+import { levelStandard, ENDPOINT } from "./data";
+import Splash from "./page/Splash";
 
 function App() {
   let countdownTime = 60;
-  let points = -0.002;
+  let points = 0;
+
+  const hasShownWarningRef = useRef(false); // Use a ref to track if warning has been shown
+  const [inviteMsg, setInviteMsg] = useState<boolean>(false);
+
+  const [task, setTask] = useState<string[]>([]);
 
   const [loading, setLoading] = useState(false);
-  const [tab, setTab] = useState<string>('Exchange');
-  const { user } = useTelegram();
+  const [tab, setTab] = useState<string>('Splash');
+  const { user, start_param } = useTelegram();
   const [start, setStart] = useState<boolean>(false);
   const [claimShow, setClaimShow] = useState<boolean>(false);
   const [intervalId, setIntervalId] = useState<any>();
@@ -30,13 +40,27 @@ function App() {
   const [min, setMin] = useState<number>(0);
   const [sec, setSec] = useState<number>(0);
 
+  const [level, setLevel] = useState<any>({
+    level: 1,
+    earnPerSecond: 1,
+    coinsToLevelUp: 10000,
+  });
+
+  useEffect(() => {
+    for (let i = 0; i < 10; i++) {
+      if (levelStandard[i].coinsToLevelUp >= totalPoint) {
+        setLevel(levelStandard[i]);
+        break;
+      }
+    }
+  }, [totalPoint]);
+
   const handleMining = () => {
-    if (user) {
+    if (!user) {
       countdownTime = 60;
       setStart(true);
       let interval_Id = setInterval(() => {
         setIntervalId(interval_Id);
-        console.log("setIntervalId", interval_Id);
         if (countdownTime >= 0) {
           let hours = Math.floor(countdownTime / 3600);
           let minutes = Math.floor((countdownTime % 3600) / 60);
@@ -44,7 +68,7 @@ function App() {
           setHour(hours);
           setMin(minutes);
           setSec(seconds);
-          points += 0.002;
+          points += level.earnPerSecond;
           setPoint(points);
           countdownTime--;
         }
@@ -69,18 +93,76 @@ function App() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
+      setTab('Splash');
+      setTimeout(() => {
+        setTab('Exchange');
+      }, 1500);
     }, 1500);
   }, []);
+
+  useEffect(() => {
+    if (user && !hasShownWarningRef.current && tab == "Exchange") {
+      hasShownWarningRef.current = true;
+      setLoading(true);
+      let data = {
+        userName: user?.username,
+        firstName: user?.first_name,
+        lastName: user?.last_name,
+        countLimit: 12 * 60 * 60,
+        start_param: start_param
+      };
+      axios.post(`${ENDPOINT}/api/user/${user?.id}`, data)
+        .then(response => {
+          const userInfo = response.data.user;
+          setTotalPoint(userInfo.totalPoints);
+          // setTask(userInfo.task);
+          clearInterval(userInfo.intervalId);
+          points = userInfo.curPoints;
+          countdownTime = userInfo.countDown;
+          if (countdownTime == 0 && points != 0) {
+            setClaimShow(true);
+            setStart(false);
+            setPoint(points);
+          }
+          else if (countdownTime != 0 && points != 0) {
+            setStart(true);
+            handleMining();
+          }
+          else if (countdownTime == 0 && points == 0) {
+            countdownTime = 12 * 60 * 60;
+          }
+          if (start_param && !inviteMsg && start_param != userInfo.inviteLink) {
+            toast.success("Successfully Invited!");
+            setInviteMsg(true);
+          }
+          setLoading(false);
+        })
+        .catch(error => {
+          // toast.error("error", error);
+          console.error('Error occurred during PUT request:', error);
+        });
+    }
+  }, [tab]);
 
   return (
     <Router>
       {loading ? (
         <Loading />
       ) : (
-        <div className="h-full max-h-screen overflow-hidden w-full">
-          <div className="h-screen overflow-auto pb-[84px] px-[20px] dM-Sans bg-[white]">
+        <div className={`h-full max-h-screen overflow-hidden w-[30%] 
+        ${tab == 'Splash' && 'bg-splash-back'}
+        ${tab == 'Exchange' && 'bg-home-back'}
+        ${tab == 'Mine' && 'bg-mine-back'}
+        ${tab == 'Friends' && 'bg-friend-back'}
+        ${tab == 'Earn' && 'bg-task-back'}
+        ${tab == 'Airdrop' && 'bg-airdrop-back'}
+        bg-cover`}>
+          <div className="h-screen overflow-auto pb-[64px] pt-[40px] px-[20px]">
             {
-              tab == 'Exchange' && <Exchange user={user} point={point} totalPoint={totalPoint}
+              tab == 'Splash' && <Splash />
+            }
+            {
+              tab == 'Exchange' && <Exchange level={level} user={user} point={point} totalPoint={totalPoint}
                 handleMining={handleMining} handleStopMining={handleStopMining} claimShow={claimShow}
                 setTotalPoint={setTotalPoint} setClaimShow={setClaimShow}
                 start={start} hour={hour} min={min} sec={sec} />
