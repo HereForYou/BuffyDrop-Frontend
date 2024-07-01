@@ -12,8 +12,8 @@ const FriendCard: React.FC<FriendCardProps> = ({
 }) => {
   return (
     <div className="customCard-container right-skew grid grid-col-1  grid-col-1 w-full">
-      <div className="customCard right-skew group rounded-[10px] p-3 transition relative duration-300 cursor-pointer hover:translate-y-[3px] hover:shadow-[0 -8px 0px 0px #2196f3] flex justify-between">
-        <div className="flex flex-row items-center justify-between gap-2 w-full">
+      <div className="customCard right-skew group rounded-[10px] p-3 px-6 transition relative duration-300 cursor-pointer hover:translate-y-[3px] hover:shadow-[0 -8px 0px 0px #2196f3] flex justify-between">
+        <div className="flex flex-row items-center justify-between gap-4 w-full">
           <img
             src="friend-icon.svg"
             alt=""

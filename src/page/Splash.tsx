@@ -1,4 +1,4 @@
-const Splash = () => {
+const Splash = ({ setTab }: { setTab: (tab: string) => void }) => {
   return (
     <div className="flex flex-col justify-between h-full pb-[20px]">
       <div className="flex flex-col w-full gap-2 text-white">
@@ -13,7 +13,7 @@ const Splash = () => {
         </h1>
         <h2 className="text-[13px]">Engage, Earn, and Grow with the Community</h2>
         <div className="customCard-container rounded-full">
-          <div className="customCard rounded-full py-1 text-[#012335] font-bold">
+          <div onClick={() => setTab('Exchange')} className="customCard rounded-full py-1 text-[#012335] font-bold">
             <h2>Start Earning BLEGGS Today!</h2>
           </div>
         </div>
@@ -21,7 +21,7 @@ const Splash = () => {
       <div className="flex flex-col">
         <section className="flex flex-row w-full badge items-baseline justify-between">
           <img src="badge 1.png" alt="badge" className="h-[80px] aspect-square" />
-          <img src="badge 2.png" alt="badge" className="h-[120px] aspect-square" />
+          <img src="badge 2.png" alt="badge" className="h-[150px] aspect-auto" />
           <img src="badge 3.png" alt="badge" className="h-[80px] aspect-square" />
         </section>
         <section className="grid grid-cols-3 space-x-1">

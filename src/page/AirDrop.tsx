@@ -1,10 +1,13 @@
 import CheckCom from "../component/check";
 const Airdrop = () => {
   return (
-    <div className="flex flex-col justify-between h-full pl-2 pb-[30px] pt-[150px]">
-      <h1 className="lilita text-[40px] font-bold p-2">
-        coming soon!
-      </h1>
+    <div className="flex flex-col justify-between h-full pl-2 pb-[30px] pt-[30px]">
+      <div className="flex flex-col items-center justify-center">
+        <img src="airdrop.png" className="w-[160px]" />
+        <h1 className="lilita text-[40px] font-bold p-2">
+          coming soon!
+        </h1>
+      </div>
       <div className="mt-6">
         <div className="flex items-center justify-start">
           <CheckCom flag={true} />

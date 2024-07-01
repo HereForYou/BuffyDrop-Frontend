@@ -84,13 +84,6 @@ function App() {
   }
 
   useEffect(() => {
-    setTab('Splash');
-    setTimeout(() => {
-      setTab('Exchange');
-    }, 1500);
-  }, []);
-
-  useEffect(() => {
     if (user && !hasShownWarningRef.current && tab == "Exchange") {
       hasShownWarningRef.current = true;
       // setLoading(true);
@@ -146,7 +139,7 @@ function App() {
         bg-cover`}>
         <div className="h-screen overflow-auto pb-[64px] pt-[40px] px-[20px]">
           {
-            tab == 'Splash' && <Splash />
+            tab == 'Splash' && <Splash setTab={setTab} />
           }
           {
             tab == 'Exchange' && <Exchange user={user} point={point} totalPoint={totalPoint}

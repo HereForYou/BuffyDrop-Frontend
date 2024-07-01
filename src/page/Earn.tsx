@@ -35,8 +35,8 @@ const Earn = () => {
   return (
     <div className="pb-[40px]">
       <p className="lilita text-3xl font-bold p-4 text-white">Earn More $BLEGGS</p>
-      <p className="lilita text-xl font-bold p-4 text-left text-white">Daily tasks</p>
-      <div className="py-3">
+      <p className="lilita text-xl font-bold text-left text-white">Daily tasks</p>
+      <div className="py-2">
         <EarnCard
           title="Daily rewoard"
           image="gift.svg"
@@ -44,12 +44,12 @@ const Earn = () => {
           flag={true}
         />
       </div>
-      <div className="flex flex-row justify-between items-center py-2">
-        <p className="lilita text-white text-left py-2  text-xl font-semibold">
+      <div className="flex flex-row justify-between items-center pb-2">
+        <p className="lilita text-white text-left text-xl font-semibold">
           Tasks List
         </p>
       </div>
-      <div className="mt-3 space-y-2">
+      <div className="space-y-2">
         {
           Tasks.map((task) => (
             <EarnCard

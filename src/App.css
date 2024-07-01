@@ -121,6 +121,7 @@
   background-color: #FFD798;
   border-radius: 10px;
   padding: 10px;
+  cursor: pointer;
 }
 
 .customCard:hover {

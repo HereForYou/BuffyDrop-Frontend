@@ -7,7 +7,7 @@ interface EarnCardProps {
 const EarnCard: React.FC<EarnCardProps> = ({ title, image, flag, profit }) => {
   return (
     <div className="customCard-container grid grid-col-1 grid-col-1 w-full">
-      <div className="customCard group p-2 transition relative duration-300 cursor-pointer hover:shadow-[0 -8px 0px 0px #2196f3] flex justify-between">
+      <div className="customCard group p-2 px-6 transition relative duration-300 cursor-pointer hover:shadow-[0 -8px 0px 0px #2196f3] flex justify-between">
         <div className="flex grid-cols-2 gap-3 w-full">
           <div className="my-auto w-14">
             <img src={image} alt="icon" className="w-8 aspect-square" />
