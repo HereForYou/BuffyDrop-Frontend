@@ -65,6 +65,7 @@ function App() {
               currentLevel: i
             })
               .then(response => {
+                console.log('response', response.data);
               })
               .catch(error => {
                 console.error('Error occurred during PUT request:', error);
@@ -88,6 +89,7 @@ function App() {
             status: 'Mining'
           })
             .then(response => {
+              console.log('response', response.data);
               saveIntervalId = true;
             })
             .catch(error => {
@@ -120,7 +122,8 @@ function App() {
     clearInterval(intervalId);
     setStart(false);
     axios.put(`${ENDPOINT}/api/user/${user?.id}`, { points: point, countDown: currentCount, status: 'Waiting' })
-      .then(res => {
+      .then(response => {
+        console.log('response', response.data);
         let newpoint = point + totalPoint;
         setTotalPoint(newpoint);
       })

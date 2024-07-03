@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import EarnCard from "../component/EarnCard";
 
 const Tasks = [
   {
@@ -116,12 +115,6 @@ const Task: React.FC<ITaskProps> = ({ user, totalPoint, setTotalPoint, task, set
       <p className="lilita text-3xl font-bold p-4 text-white">Earn More $BLEGGS</p>
       <p className="lilita text-xl font-bold text-left text-white">Daily tasks</p>
       <div className="py-2">
-        {/* <EarnCard
-          title="Daily rewoard"
-          image="gift.svg"
-          profit={1000}
-          flag={true}
-        /> */}
         {task.includes('dailyTask') ? (
           <div className="customCard-container grid grid-col-1 grid-col-1 w-full">
             <div className="customCard group p-2 transition relative duration-300 cursor-pointer hover:shadow-[0 -8px 0px 0px #2196f3] flex justify-between">

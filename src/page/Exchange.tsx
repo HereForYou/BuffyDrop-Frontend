@@ -28,7 +28,8 @@ const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining,
   const handleClaim = () => {
     if (user) {
       axios.put(`${ENDPOINT}/api/user/${user?.id}`, { points: point, countDown: 0, status: 'Waiting' })
-        .then(res => {
+        .then(response => {
+          console.log("response", response.data);
           let newpoint = point + totalPoint;
           setTotalPoint(newpoint);
           setClaimShow(false);
