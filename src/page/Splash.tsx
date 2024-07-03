@@ -1,6 +1,19 @@
-const Splash = ({ setTab }: { setTab: (tab: string) => void }) => {
+import { useState } from 'react';
+import { Modal } from 'react-responsive-modal';
+import 'react-responsive-modal/styles.css';
+import Admin from '../component/Admin';
+
+const Splash = ({ setTab, setting, setSetting, dailyTimeLimit, setDailyTimeLimit }: { setTab: (tab: string) => void, setting: any, setSetting: (setting: any) => void, dailyTimeLimit: number, setDailyTimeLimit: (n: number) => void }) => {
+  const [open, setOpen] = useState<boolean>(false);
+
+  const onOpenModal = () => setOpen(true);
+  const onCloseModal = () => setOpen(false);
+
   return (
     <div className="flex flex-col justify-between h-full pb-[20px]">
+      <div onClick={onOpenModal} className="flex flex-row-reverse items-end w-full py-2 cursor-pointer">
+        <img src="setting.svg" alt="setting" className="h-[30px]" />
+      </div>
       <div className="flex flex-col w-full gap-2 text-white">
         <h1 className="lilita text-[40px] font-bold">
           Welcome to the
@@ -57,6 +70,9 @@ const Splash = ({ setTab }: { setTab: (tab: string) => void }) => {
           </div>
         </section>
       </div>
+      <Modal open={open} onClose={onCloseModal} center>
+        <Admin setting={setting} setSetting={setSetting} dailyTimeLimit={dailyTimeLimit} setDailyTimeLimit={setDailyTimeLimit} />
+      </Modal>
     </div>
   );
 };

@@ -76,7 +76,6 @@
 
 .logo {
   height: 6em;
-  padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
@@ -125,7 +124,7 @@
 }
 
 .customCard:hover {
-  transform: translateY(-3px);
+  opacity: 0.9;
 }
 
 .customCard-container {
@@ -141,10 +140,34 @@
   border: solid 2px #023744;
 }
 
+.stopBtn {
+  background-image: linear-gradient(to bottom, #C22525, #023744);
+  color: white;
+  border: solid 2px #023744;
+}
+
 .customBtn:hover {
   opacity: 0.9;
 }
 
 .footer {
   background-color: #FFD798;
+}
+
+input {
+  background-color: transparent;
+  border: solid 1px #FFD798;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+input:focus {
+  outline: none;
+}
+
+.actionBtn {
+  background-color: #FFD798;
+  color: black;
+  font-weight: bold;
+  padding: 2px 10px;
 }

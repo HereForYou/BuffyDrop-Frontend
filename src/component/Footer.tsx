@@ -19,7 +19,7 @@ const tabs = [
     img: "home.svg"
   },
   {
-    id: "Earn",
+    id: "Task",
     name: "Daily Tasks",
     img: "task.svg"
   },
@@ -43,7 +43,7 @@ const Footer: React.FC<IFooterProps> = ({ tab, setTab }) => {
               ? "scale-[110%]"
               : "opacity-60"
             }`}>
-            <div className={`flex flex-col items-center justify-center font-extrabold ${item.id === tab && 'border-b-2 border-[#D18729]'} gap-1`}>
+            <div className={`flex flex-col items-center justify-center font-extrabold ${item.id === tab && 'border-b-2 border-[#fff]'} gap-1`}>
               <img
                 src={item.img}
                 alt="play"
