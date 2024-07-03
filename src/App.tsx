@@ -159,7 +159,7 @@ function App() {
           clearInterval(userInfo.intervalId);
           points = userInfo.curPoints;
           countdownTime = userInfo.countDown;
-          if (countdownTime > dailyTimeLimit * 60) countdownTime = dailyTimeLimit * 60;
+          // if (countdownTime > dailyTimeLimit * 60) countdownTime = dailyTimeLimit * 60;
           if (countdownTime == 0) setReachDailyLimit(true);
           setCurrentCount(countdownTime);
           if (userInfo.status == 'Waiting to Claim') {
