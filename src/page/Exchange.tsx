@@ -17,14 +17,15 @@ interface IHomeProps {
   min: number;
   sec: number;
   claimShow: boolean;
-  dailyTimeLimit: number;
+  power: any;
+  timeLimit: any;
   level: any;
   nextLevel: any;
   loading: boolean;
   reachDailyLimit: boolean;
   setReachDailyLimit: (status: boolean) => void;
 }
-const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining, handleStopMining, claimShow, reachDailyLimit, setReachDailyLimit, setTotalPoint, setClaimShow, start, hour, min, sec, dailyTimeLimit, level, nextLevel, loading }) => {
+const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining, handleStopMining, claimShow, reachDailyLimit, setReachDailyLimit, setTotalPoint, setClaimShow, start, hour, min, sec, timeLimit, power, level, nextLevel, loading }) => {
   const handleClaim = () => {
     if (user) {
       axios.put(`${ENDPOINT}/api/user/${user?.id}`, { points: point, countDown: 0, status: 'Waiting' })
@@ -52,7 +53,7 @@ const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining,
                 loading ? (
                   <Loader width="15" />
                 ) : (
-                  <h1 className="font-bold text-[30px]">
+                  <h1 className="font-bold text-[30px] text-white">
                     {totalPoint}&nbsp;$BLEGGS
                   </h1>
                 )
@@ -63,7 +64,7 @@ const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining,
         ) : (
           <>
             <div className="customCard-container w-full">
-              <div className="customCard group py-4 transition relative duration-300 cursor-pointer hover:translate-y-[3px] hover:shadow-[0 -8px 0px 0px #2196f3]">
+              <div className="customCard group py-4 transition relative duration-300 cursor-default hover:shadow-[0 -8px 0px 0px #2196f3]">
                 <h2 className="text-[24px] font-extrabold">$BLEGGS Miner</h2>
               </div >
             </div >
@@ -74,12 +75,12 @@ const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining,
                   loading ? (
                     <Loader width="15" />
                   ) : (
-                    <h1 className="font-bold text-[30px] ">
+                    <h1 className="font-bold text-[30px] text-white">
                       {totalPoint}$BLEGGS
                     </h1>
                   )
                 }
-                <div className="flex flex-row w-full justify-between items-center">
+                <div className="flex flex-row w-full justify-between items-center text-white">
                   {
                     loading ? (
                       <Loader width="15" />
@@ -95,7 +96,7 @@ const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining,
                     )
                   }
                 </div>
-                <ProgressBar value={totalPoint / (nextLevel.coinsToLevelUp - level.coinsToLevelUp) * 100} />
+                <ProgressBar value={(totalPoint - level.coinsToLevelUp) / (nextLevel.coinsToLevelUp - level.coinsToLevelUp) * 100} />
               </div>
             </div>
           </>
@@ -111,7 +112,7 @@ const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining,
             </div>
           ) : (
             reachDailyLimit ? (
-              <h2 className="text-[16px]" > You reached out the dailyTimeLimit</h2>
+              <h2 className="text-[16px] text-white" > You reached out the timeLimit</h2>
             ) : (
               <div className="bg-white p-[10px] rounded-full">
                 <button onClick={handleMining} className="customBtn startBt aspect-square rounded-full py-2 px-4">
@@ -176,7 +177,7 @@ const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining,
           loading ? (
             <Loader width="20" />
           ) : (
-            <h2>{level.earnPerSecond} MH /&nbsp;<span>{dailyTimeLimit} Min</span></h2>
+            <h2>{power.value} MH /&nbsp;<span>{timeLimit.value} Min</span></h2>
           )
         }
       </div>

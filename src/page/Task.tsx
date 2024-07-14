@@ -2,40 +2,6 @@ import React from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 
-const Tasks = [
-  {
-    id: "telegram",
-    title: "Join our TG channel",
-    image: "telegram.svg",
-    profit: 1000,
-    flag: true,
-    link: "https://t.me/bleggs"
-  },
-  {
-    id: "youtube",
-    title: "Get Exclusive listing info",
-    image: "youtube.svg",
-    profit: 1000,
-    flag: false,
-    link: "https://t.me/bleggs"
-  },
-  {
-    id: "twitter",
-    title: "Follow your X account",
-    image: "twitter.svg",
-    profit: 1000,
-    flag: true,
-    link: "https://t.me/bleggs"
-  },
-  {
-    id: "Choose",
-    title: "Choose",
-    image: "choose.svg",
-    profit: 1000,
-    flag: true,
-    link: "https://t.me/bleggs"
-  },
-];
 import { ENDPOINT } from "../data";
 
 interface ITaskProps {
@@ -44,9 +10,10 @@ interface ITaskProps {
   setTotalPoint: (status: number) => void;
   task: string[];
   setTask: (status: string[]) => void;
+  setting: any;
 }
 
-const Task: React.FC<ITaskProps> = ({ user, totalPoint, setTotalPoint, task, setTask }) => {
+const Task: React.FC<ITaskProps> = ({ user, totalPoint, setTotalPoint, task, setTask, setting }) => {
 
   const handleFollow = (link: any, id: any, profit: any) => {
     if (id == "dailyTask") {
@@ -117,7 +84,7 @@ const Task: React.FC<ITaskProps> = ({ user, totalPoint, setTotalPoint, task, set
       <div className="py-2">
         {task.includes('dailyTask') ? (
           <div className="customCard-container grid grid-col-1 grid-col-1 w-full">
-            <div className="customCard group p-2 transition relative duration-300 cursor-pointer hover:shadow-[0 -8px 0px 0px #2196f3] flex justify-between">
+            <div className="customCard group p-2 transition relative duration-300 cursor-default hover:shadow-[0 -8px 0px 0px #2196f3] flex justify-between">
               <div className="flex grid-cols-2 gap-3 w-full">
                 <div className="my-auto w-14">
                   <img src="gift.svg" alt="icon" className="w-8 aspect-square" />
@@ -129,7 +96,7 @@ const Task: React.FC<ITaskProps> = ({ user, totalPoint, setTotalPoint, task, set
                     </p>
                     <div className="flex items-center">
                       <img src="dollar.png" alt="" className="w-4 h-4" />
-                      <p className="text-[13px] ml-1 font-bold">+1000</p>
+                      <p className="text-[13px] ml-1 font-bold">+{setting.dailyRevenue}</p>
                     </div>
                   </div>
                   <div className="flex items-center">
@@ -140,8 +107,8 @@ const Task: React.FC<ITaskProps> = ({ user, totalPoint, setTotalPoint, task, set
             </div>
           </div>
         ) : (
-          <div onClick={() => handleFollow('none', 'dailyTask', 1000)} className="customCard-container grid grid-col-1 grid-col-1 w-full">
-            <div className="customCard group p-2 transition relative duration-300 cursor-pointer hover:shadow-[0 -8px 0px 0px #2196f3] flex justify-between">
+          <div onClick={() => handleFollow('none', 'dailyTask', setting.dailyRevenue)} className="customCard-container grid grid-col-1 grid-col-1 w-full">
+            <div className="customCard group p-2 transition relative duration-300 cursor-pointer hover:translate-y-[3px] hover:bg-inherit hover:shadow-[0 -8px 0px 0px #2196f3] flex justify-between">
               <div className="flex grid-cols-2 gap-3 w-full">
                 <div className="my-auto w-14">
                   <img src="gift.svg" alt="icon" className="w-8 aspect-square" />
@@ -172,13 +139,13 @@ const Task: React.FC<ITaskProps> = ({ user, totalPoint, setTotalPoint, task, set
       </div>
       <div className="space-y-2 max-h-[260px] overflow-y-auto">
         {
-          Tasks.map((item) => (
+          setting?.taskList.map((item: any) => (
             task.includes(item.id) ? (
               <div key={item.id} className="customCard-container grid grid-col-1 grid-col-1 w-full">
-                <div className="customCard group p-2 transition relative duration-300 cursor-pointer hover:shadow-[0 -8px 0px 0px #2196f3] flex justify-between">
+                <div className="customCard group p-2 transition relative duration-300 cursor-default hover:shadow-[0 -8px 0px 0px #2196f3] flex justify-between">
                   <div className="flex grid-cols-2 gap-3 w-full">
                     <div className="my-auto w-14">
-                      <img src={item.image} alt="icon" className="w-8 aspect-square" />
+                      <img src={`${item.image ? item.image : 'choose.svg'}`} alt="icon" className="w-8 aspect-square" />
                     </div>
                     <div className="flex flex-row w-full justify-between">
                       <div className="space-y-2">
@@ -199,10 +166,10 @@ const Task: React.FC<ITaskProps> = ({ user, totalPoint, setTotalPoint, task, set
               </div>
             ) : (
               <div onClick={() => handleFollow(item.link, item.id, item.profit)} key={item.id} className="customCard-container grid grid-col-1 grid-col-1 w-full">
-                <div className="customCard group p-2 transition relative duration-300 cursor-pointer hover:shadow-[0 -8px 0px 0px #2196f3] flex justify-between">
+                <div className="customCard group p-2 transition relative duration-300 cursor-pointer hover:bg-inherit hover:translate-y-[3px] hover:shadow-[0 -8px 0px 0px #2196f3] flex justify-between">
                   <div className="flex grid-cols-2 gap-3 w-full">
                     <div className="my-auto w-14">
-                      <img src={item.image} alt="icon" className="w-8 aspect-square" />
+                      <img src={`${item.image ? item.image : 'choose.svg'}`} alt="icon" className="w-8 aspect-square" />
                     </div>
                     <div className="flex flex-row w-full justify-between">
                       <div className="space-y-2">
@@ -222,7 +189,6 @@ const Task: React.FC<ITaskProps> = ({ user, totalPoint, setTotalPoint, task, set
                 </div>
               </div>
             )
-
           ))
         }
       </div>

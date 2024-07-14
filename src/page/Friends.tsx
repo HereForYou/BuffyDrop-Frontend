@@ -50,7 +50,7 @@ const Friends = ({ user }: { user: any }) => {
   }
   const handleClipBoardCopy = async () => {
     legacyCopy(`
-https://t.me/BLEGGSBot/BLEGGSMiniApp?startapp=${inviteLink}
+https://t.me/Bleggs_bot/Bleggs?startapp=${inviteLink}
 ${desText}`);
     toast.success("Successfully Copied!");
   }
@@ -58,9 +58,9 @@ ${desText}`);
     <div className="pb-[40px]">
       <h1 className="lilita text-4xl font-bold text-white pb-[30px]">Invite Friends!</h1>
       <div className="space-y-2 py-3">
-        <InviteCard title="Invite a friend" profit="343,3432" setShowModal={setShowModal} />
+        <InviteCard title="Invite a friend" profit="1000" setShowModal={setShowModal} />
       </div>
-      <div className="flex flex-col justify-between items-start">
+      <div className="flex flex-col justify-between items-start text-white">
         <h3 className="lilita text-left text-[20px] font-bold">
           Friends Invited
         </h3>
@@ -80,16 +80,16 @@ ${desText}`);
                 return (
                   <FriendCard
                     key={friend.userName}
-                    name="Lari0 | FutureValueApp"
-                    role="Platium"
+                    name={friend.userName}
+                    role="Friend"
                     profit={friend.totalPoints}
-                    value="+321K"
+                    value={friend.totalPoints}
                   />
                 )
               })
             ) : (
               <div>
-                <h4 className="opacity-30 pt-10">
+                <h4 className="opacity-30 pt-10 text-white">
                   No Friends yet
                 </h4>
               </div>
@@ -102,20 +102,20 @@ ${desText}`);
         <div className="h-[5px] rounded-full w-[80px] bg-black opacity-80 self-center"></div>
         <h2 className="text-[32px]">Invite Friends</h2>
         <h4 className="text-[16px] text-gray opacity-70">You have <span className="text-red-600 font-bold">Unlimited</span> invitations available</h4>
-        <a href={`https://t.me/share/url?url=https://t.me/BLEGGSBot/BLEGGSMiniApp?startapp=${inviteLink}&text=${desText}`} target="blank" className="customCard-container p-[4px] rounded-full text-white hover:text-white">
-          <div className="customCard cursor-pointer py-2 rounded-full">
+        <a href={`https://t.me/share/url?url=https://t.me/Bleggs_bot/Bleggs?startapp=${inviteLink}&text=${desText}`} target="blank" className="customCard-container p-[4px] rounded-full text-white hover:text-white">
+          <div className="customCard cursor-pointer py-2 hover:bg-inherit rounded-full">
             <FontAwesomeIcon icon={faPaperPlane} className="mr-5" />
             Send
           </div>
         </a>
         <div className="customCard-container p-[4px] rounded-full">
-          <div onClick={handleClipBoardCopy} className="customCard cursor-pointer py-2 rounded-full">
+          <div onClick={handleClipBoardCopy} className="customCard cursor-pointer hover:bg-inherit py-2 rounded-full">
             <FontAwesomeIcon icon={faClone} className="mr-5" />
             Copy Link
           </div>
         </div>
         <div className="customCard-container p-[4px] rounded-full">
-          <div onClick={() => setShowModal(false)} className="customCard cursor-pointer py-2 rounded-full">
+          <div onClick={() => setShowModal(false)} className="customCard cursor-pointer hover:bg-inherit py-2 rounded-full">
             Cancel
           </div>
         </div>

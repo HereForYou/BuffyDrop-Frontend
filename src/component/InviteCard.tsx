@@ -6,7 +6,7 @@ interface InviteCardProps {
 const InviteCard: React.FC<InviteCardProps> = ({ setShowModal, title, profit }) => {
   return (
     <div onClick={() => setShowModal(true)} className="customCard-container grid grid-col-1 grid-col-1 w-full">
-      <div className="customCard flex justify-start px-1 gap-2 group transition relative duration-300 cursor-pointer hover:translate-y-[3px] hover:shadow-[0 -8px 0px 0px #2196f3]">
+      <div className="customCard flex justify-start px-1 gap-2 group transition relative duration-300 cursor-pointer hover:bg-inherit hover:translate-y-[3px] hover:shadow-[0 -8px 0px 0px #2196f3]">
         <img
           src="gift.svg"
           alt=""
