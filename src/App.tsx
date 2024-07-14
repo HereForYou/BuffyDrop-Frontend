@@ -178,13 +178,14 @@ function App() {
           countdownTime = userData.countDown;
           if (countdownTime == 0) setReachDailyLimit(true);
           setCurrentCount(countdownTime);
-          if (userData.status == 'Waiting to Claim') {
+          if (userData.status == 'Waiting to Claim' && tab == "Exchange") {
             setClaimShow(true);
             setStart(false);
             setPoint(points);
           }
-          else if (userData.status == 'Mining') {
+          else if (userData.status == 'Mining' && tab == "Exchange") {
             setStart(true);
+            setClaimShow(false);
             handleMining();
           }
           if (start_param && !inviteMsg && start_param != userData.inviteLink) {
