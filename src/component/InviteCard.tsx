@@ -1,7 +1,7 @@
 interface InviteCardProps {
   setShowModal: (status: boolean) => void;
   title: string;
-  profit: string;
+  profit: number;
 }
 const InviteCard: React.FC<InviteCardProps> = ({ setShowModal, title, profit }) => {
   return (

@@ -11,7 +11,7 @@ import { ENDPOINT } from "../data";
 
 const desText = `\nCome and join me on the journey with Bleggs! Click the invite link and begin farming to unlock exciting rewards! 🎁`;
 
-const Friends = ({ user }: { user: any }) => {
+const Friends = ({ user, inviteRevenue }: { user: any, inviteRevenue: number }) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [inviteLink, setInviteLink] = useState<string>("");
   const [friends, setFriends] = useState<object[]>([]);
@@ -58,7 +58,7 @@ ${desText}`);
     <div className="pb-[40px]">
       <h1 className="lilita text-4xl font-bold text-white pb-[30px]">Invite Friends!</h1>
       <div className="space-y-2 py-3">
-        <InviteCard title="Invite a friend" profit="1000" setShowModal={setShowModal} />
+        <InviteCard title="Invite a friend" profit={inviteRevenue} setShowModal={setShowModal} />
       </div>
       <div className="flex flex-col justify-between items-start text-white">
         <h3 className="lilita text-left text-[20px] font-bold">
@@ -82,7 +82,7 @@ ${desText}`);
                     key={friend.userName}
                     name={friend.userName}
                     role="Friend"
-                    profit={friend.totalPoints}
+                    level={friend.level}
                     value={friend.totalPoints}
                   />
                 )
@@ -98,7 +98,7 @@ ${desText}`);
         }
 
       </div>
-      <div className={`absolute customCard-container flex flex-col w-full md:w-[400px] md:mx-auto right-0 text-white px-4 py-2 pb-8 gap-4 transition-all duration-500 ease-out transform ${showModal ? 'bottom-[40px]' : 'bottom-[-400px]'}`}>
+      <div className={`absolute customCard-container flex flex-col w-full right-0 text-white px-4 py-2 pb-8 gap-4 transition-all duration-500 ease-out transform ${showModal ? 'bottom-[40px]' : 'bottom-[-400px]'}`}>
         <div className="h-[5px] rounded-full w-[80px] bg-black opacity-80 self-center"></div>
         <h2 className="text-[32px]">Invite Friends</h2>
         <h4 className="text-[16px] text-gray opacity-70">You have <span className="text-red-600 font-bold">Unlimited</span> invitations available</h4>

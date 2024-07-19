@@ -33,7 +33,9 @@ const Mine: React.FC<IMineProps> = ({ user, power, setPower, timeLimit, setTimeL
             if (res.data) toast.success("Boosted successfully!");
             let newPoint = totalPoint - setting.dailyTimeLimitList[timeLimit.id].coinsToBoost;
             setTotalPoint(newPoint);
-            let newCounts = currentCount + (setting.dailyTimeLimitList[timeLimit.id].value - timeLimit) * 60;
+            // let newCounts = currentCount + (setting.dailyTimeLimitList[timeLimit.id].value - timeLimit.value) * 60;
+            console.log('', currentCount);
+            let newCounts = setting.dailyTimeLimitList[timeLimit.id].value * 60;
             setCurrentCount(newCounts);
             setTimeLimit(setting.dailyTimeLimitList[timeLimit.id]);
           })

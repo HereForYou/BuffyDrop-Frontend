@@ -27,7 +27,6 @@ function App() {
   let countdownTime = 1;
   let points = 0;
   let saveIntervalId = false;
-
   const hasShownWarningRef = useRef(false);
   const { user, start_param } = useTelegram();
 
@@ -40,7 +39,7 @@ function App() {
   const [start, setStart] = useState<boolean>(false);
   const [reachDailyLimit, setReachDailyLimit] = useState<boolean>(false);
   const [claimShow, setClaimShow] = useState<boolean>(false);
-  const [intervalId, setIntervalId] = useState<any>();
+  const [intervalId, setIntervalId] = useState<number>(0);
   const [point, setPoint] = useState<number>(0.000);
   const [referral, setReferral] = useState<number>(0);
   const [currentCount, setCurrentCount] = useState<number>(0);
@@ -83,9 +82,11 @@ function App() {
 
   const handleMining = () => {
     if (user) {
-      setStart(true);
       countdownTime = currentCount;
+      setStart(true);
       let interval_Id = setInterval(async () => {
+        clearInterval(interval_Id - 2);
+        clearInterval(interval_Id - 1);
         setIntervalId(interval_Id);
         if (!saveIntervalId) {
           try {
@@ -120,15 +121,20 @@ function App() {
       }, 1000);
     }
   };
+  useEffect(() => {
+    if (point === 0) {
+      setStart(false);
+    }
+  }, [point]);
 
   const handleStopMining = () => {
     clearInterval(intervalId);
-    setStart(false);
     axios.put(`${ENDPOINT}/api/user/${user?.id}`, { points: point, countDown: currentCount, status: 'Waiting' })
       .then(response => {
         console.log('response', response.data);
         let newpoint = point + totalPoint;
         setTotalPoint(newpoint);
+        setPoint(0);
       })
       .catch(err => {
         console.error(err);
@@ -226,7 +232,7 @@ function App() {
               totalPoint={totalPoint} setTotalPoint={setTotalPoint} level={level} nextLevel={nextLevel} loading={loading} />
           }
           {
-            (user && tab == 'Friends') && <Friends user={user} />
+            (user && tab == 'Friends') && <Friends user={user} inviteRevenue={setting.inviteRevenue} />
           }
           {
             (user && tab == 'Task') && <Task user={user} totalPoint={totalPoint} setTotalPoint={setTotalPoint} setting={setting} task={task} setTask={setTask} />

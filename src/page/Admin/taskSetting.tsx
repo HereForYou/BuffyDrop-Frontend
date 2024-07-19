@@ -8,6 +8,8 @@ import { ENDPOINT } from "../../data";
 const TaskSetting = ({ setting, setSetting }: { setting: any, setSetting: (value: any) => void }) => {
     const [editRow, setEditRow] = useState<number>(-1);
     const [addMode, setAddMode] = useState<boolean>(false);
+    const [dailyRevenueEdit, setDailyRevenueEdit] = useState<boolean>(false);
+    const [inviteRevenueEdit, setInviteRevenueEdit] = useState<boolean>(false);
 
     const [settingItem, setSettingItem] = useState<any>({
         id: "",
@@ -15,6 +17,9 @@ const TaskSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
         title: "",
         link: ""
     })
+
+    const [dailyRevenue, setDailyRevenue] = useState<string>("");
+    const [inviteRevenue, setInviteRevenue] = useState<string>("");
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSettingItem({
@@ -56,10 +61,134 @@ const TaskSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
             })
     }
 
+    const handleDailyRevenueSave = () => {
+        let data = {
+            newRevenue: parseInt(dailyRevenue, 10),
+        }
+        axios.put(`${ENDPOINT}/api/setting/update/dailyRevenue`, data)
+            .then(res => {
+                setSetting(res.data);
+                toast.success("Updated successfully!");
+            })
+            .catch(err => {
+                console.error("Something went wrong.", err);
+            })
+    }
+    const handleInviteRevenueSave = () => {
+        let data = {
+            newRevenue: parseInt(inviteRevenue, 10),
+        }
+        axios.put(`${ENDPOINT}/api/setting/update/inviteRevenue`, data)
+            .then(res => {
+                setSetting(res.data);
+                toast.success("Updated successfully!");
+            })
+            .catch(err => {
+                console.error("Something went wrong.", err);
+            })
+    }
     return (
         <>
             <div className="overflow-y-auto text-white py-[30px] w-full">
                 <div className="h-[60vh] w-full overflow-y-auto py-2">
+                    <div className="flex flex-row w-full justify-around items-center py-8">
+                        <div className="flex flex-row justify-between items-center gap-8">
+                            <h3 className="text-[15px]">Daily Revenue:</h3>
+                            {
+                                !dailyRevenueEdit ? (
+                                    <>
+                                        <h3 className="text-[15px]">{setting.dailyRevenue} BLEGGS</h3>
+                                        <button onClick={
+                                            () => {
+                                                setDailyRevenueEdit(true);
+                                                setDailyRevenue(setting?.dailyRevenue)
+                                            }
+                                        } className="actionBtn">
+                                            <FontAwesomeIcon icon={faPencil} className="mr-1" />
+                                            Edit
+                                        </button>
+                                    </>
+                                ) : (
+                                    <>
+                                        <input
+                                            type="text" className="h-[30px] w-[150px]"
+                                            placeholder="Daily Revenue"
+                                            name="dailyRevenue"
+                                            value={dailyRevenue}
+                                            onChange={(e: ChangeEvent<HTMLInputElement>) => setDailyRevenue(e.target.value)}
+                                        />
+                                        <div className="flex flex-row gap-2">
+                                            <button onClick={
+                                                () => {
+                                                    setDailyRevenueEdit(false);
+                                                    handleDailyRevenueSave();
+                                                }
+                                            } className="actionBtn">
+                                                <FontAwesomeIcon icon={faSave} className="mr-1" />
+                                                Save
+                                            </button>
+                                            <button onClick={
+                                                () => {
+                                                    setDailyRevenueEdit(false);
+                                                }
+                                            } className="actionBtn">
+                                                <FontAwesomeIcon icon={faXmark} className="mr-1" />
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </>
+                                )
+                            }
+                        </div>
+                        <div className="flex flex-row justify-between items-center gap-8">
+                            <h3 className="text-[15px]">Invite Revenue:</h3>
+                            {
+                                !inviteRevenueEdit ? (
+                                    <>
+                                        <h3 className="text-[15px]">{setting.inviteRevenue} BLEGGS</h3>
+                                        <button onClick={
+                                            () => {
+                                                setInviteRevenueEdit(true);
+                                                setInviteRevenue(setting?.inviteRevenue)
+                                            }
+                                        } className="actionBtn">
+                                            <FontAwesomeIcon icon={faPencil} className="mr-1" />
+                                            Edit
+                                        </button>
+                                    </>
+                                ) : (
+                                    <>
+                                        <input
+                                            type="text" className="h-[30px] w-[150px]"
+                                            placeholder="Invite Revenue"
+                                            name="inviteRevenue"
+                                            value={inviteRevenue}
+                                            onChange={(e: ChangeEvent<HTMLInputElement>) => setInviteRevenue(e.target.value)}
+                                        />
+                                        <div className="flex flex-row gap-2">
+                                            <button onClick={
+                                                () => {
+                                                    setInviteRevenueEdit(false);
+                                                    handleInviteRevenueSave();
+                                                }
+                                            } className="actionBtn">
+                                                <FontAwesomeIcon icon={faSave} className="mr-1" />
+                                                Save
+                                            </button>
+                                            <button onClick={
+                                                () => {
+                                                    setInviteRevenueEdit(false);
+                                                }
+                                            } className="actionBtn">
+                                                <FontAwesomeIcon icon={faXmark} className="mr-1" />
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </>
+                                )
+                            }
+                        </div>
+                    </div>
                     <table className="text-center w-full">
                         <thead>
                             <tr>

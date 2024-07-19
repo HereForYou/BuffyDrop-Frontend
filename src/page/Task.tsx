@@ -26,7 +26,7 @@ const Task: React.FC<ITaskProps> = ({ user, totalPoint, setTotalPoint, task, set
             let newPoints = totalPoint + profit;
             setTotalPoint(newPoints);
             setTask([...task, id]);
-            toast.success("Congratulation! You just earned 100 POINTS");
+            toast.success(`+${profit} $BLEGGS!`);
           }
         })
         .catch(err => {
@@ -44,7 +44,7 @@ const Task: React.FC<ITaskProps> = ({ user, totalPoint, setTotalPoint, task, set
             let newPoints = totalPoint + profit;
             setTotalPoint(newPoints);
             setTask([...task, id]);
-            toast.success("Congratulation! You just earned 100 POINTS");
+            toast.success(`+${profit} $BLEGGS!`);
           }
         })
         .catch(err => {
@@ -55,7 +55,6 @@ const Task: React.FC<ITaskProps> = ({ user, totalPoint, setTotalPoint, task, set
     }
     else {
       window.open(link, '_blank');
-      //axios
       setTimeout(() => {
         axios.put(`${ENDPOINT}/api/user/task/${user?.id}`, {
           id,
@@ -66,7 +65,7 @@ const Task: React.FC<ITaskProps> = ({ user, totalPoint, setTotalPoint, task, set
               let newPoints = totalPoint + profit;
               setTotalPoint(newPoints);
               setTask([...task, id]);
-              toast.success("Congratulation! You just earned 100 POINTS");
+              toast.success(`+${profit} $BLEGGS!`);
             }
           })
           .catch(err => {
@@ -92,7 +91,7 @@ const Task: React.FC<ITaskProps> = ({ user, totalPoint, setTotalPoint, task, set
                 <div className="flex flex-row w-full justify-between">
                   <div className="space-y-2">
                     <p className="text-[14px] font-semibold text-left">
-                      Daily rewoard
+                      Daily reward
                     </p>
                     <div className="flex items-center">
                       <img src="dollar.png" alt="" className="w-4 h-4" />

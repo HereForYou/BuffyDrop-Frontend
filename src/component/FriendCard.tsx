@@ -1,14 +1,14 @@
 interface FriendCardProps {
   name: string;
   role: string;
-  profit: string;
+  level: number;
   value: string;
 }
 const FriendCard: React.FC<FriendCardProps> = ({
   name,
   value,
   role,
-  profit,
+  level,
 }) => {
   return (
     <div className="customCard-container right-skew grid grid-col-1  grid-col-1 w-full">
@@ -31,7 +31,7 @@ const FriendCard: React.FC<FriendCardProps> = ({
                   alt=""
                   className="w-4 h-4 ml-1"
                 />
-                <h3 className="text-[12px] font-bold">+{profit}</h3>
+                <h3 className="text-[12px] font-bold">Level: {level}</h3>
               </div>
             </div>
           </div>
