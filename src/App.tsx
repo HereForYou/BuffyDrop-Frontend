@@ -14,7 +14,8 @@ import { ENDPOINT } from "./data";
 import Splash from "./page/Splash";
 import Task from "./page/Task";
 import Admin from "./page/Admin";
-
+import { isMobileDevice } from "./utils/mobileDetect";
+import QRCode from 'qrcode.react';
 // const user = {
 //   id: '6552593434',
 //   username: 'sniper131388',
@@ -48,6 +49,8 @@ function App() {
   const [nextLevel, setNextLevel] = useState<any>({});
   const [timeLimit, setTimeLimit] = useState<any>({});
   const [power, setPower] = useState<any>({});
+
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   useEffect(() => {
     if (setting.levelStandard) {
@@ -155,6 +158,10 @@ function App() {
     return () => clearInterval(interval);
   }, [start, currentCount]);
 
+  useEffect(() => {
+    setIsMobile(isMobileDevice());
+  }, []);
+
   const handleMining = () => {
     if (user) {
       setStart(true);
@@ -177,46 +184,64 @@ function App() {
 
   return (
     <Router>
-      <div className={`h-full max-h-screen overflow-hidden w-full`}>
-        <div className={`relative h-screen overflow-hidden pb-[64px] px-[20px]`}>
-          {
-            (user && tab == 'Splash') && <Splash power={power} totalPoint={totalPoint}
-              referral={referral} setTab={setTab} />
-          }
-          {
-            (user && tab == 'Exchange') && <Exchange user={user} point={point} totalPoint={totalPoint}
-              handleMining={handleMining} handleStopMining={handleStopMining} claimShow={claimShow}
-              setTotalPoint={setTotalPoint} setClaimShow={setClaimShow}
-              reachDailyLimit={reachDailyLimit}
-              setReachDailyLimit={setReachDailyLimit}
-              start={start} hour={hour} min={min} sec={sec}
-              timeLimit={timeLimit} power={power}
-              level={level} nextLevel={nextLevel}
-              loading={loading} />
-          }
-          {
-            (user && tab == 'Mine') && <Mine power={power} setPower={setPower} timeLimit={timeLimit} setTimeLimit={setTimeLimit}
-              setCurrentCount={setCurrentCount} currentCount={currentCount} user={user} setting={setting}
-              totalPoint={totalPoint} setTotalPoint={setTotalPoint} level={level} nextLevel={nextLevel} loading={loading} />
-          }
-          {
-            (user && tab == 'Friends') && <Friends user={user} inviteRevenue={setting.inviteRevenue} />
-          }
-          {
-            (user && tab == 'Task') && <Task user={user} totalPoint={totalPoint} setTotalPoint={setTotalPoint} setting={setting} task={task} setTask={setTask} />
-          }
-          {
-            (user && tab == 'Leaderboard') && <Leaderboard user={user} />
-          }
-          {
-            <Admin setting={setting} setSetting={setSetting} />
-          }
-          <ToastContainer />
+      {
+        (user && isMobile) && (
+          <div className={`h-full max-h-screen overflow-hidden w-full`}>
+            <div className={`relative h-screen overflow-hidden pb-[64px] px-[20px]`}>
+              {
+                (tab == 'Splash') && <Splash power={power} totalPoint={totalPoint}
+                  referral={referral} setTab={setTab} />
+              }
+              {
+                (tab == 'Exchange') && <Exchange user={user} point={point} totalPoint={totalPoint}
+                  handleMining={handleMining} handleStopMining={handleStopMining} claimShow={claimShow}
+                  setTotalPoint={setTotalPoint} setClaimShow={setClaimShow}
+                  reachDailyLimit={reachDailyLimit}
+                  setReachDailyLimit={setReachDailyLimit}
+                  start={start} hour={hour} min={min} sec={sec}
+                  timeLimit={timeLimit} power={power}
+                  level={level} nextLevel={nextLevel}
+                  loading={loading} />
+              }
+              {
+                (tab == 'Mine') && <Mine power={power} setPower={setPower} timeLimit={timeLimit} setTimeLimit={setTimeLimit}
+                  setCurrentCount={setCurrentCount} currentCount={currentCount} user={user} setting={setting}
+                  totalPoint={totalPoint} setTotalPoint={setTotalPoint} level={level} nextLevel={nextLevel} loading={loading} />
+              }
+              {
+                (tab == 'Friends') && <Friends user={user} inviteRevenue={setting.inviteRevenue} />
+              }
+              {
+                (tab == 'Task') && <Task user={user} totalPoint={totalPoint} setTotalPoint={setTotalPoint} setting={setting} task={task} setTask={setTask} />
+              }
+              {
+                (tab == 'Leaderboard') && <Leaderboard user={user} />
+              }
+              <ToastContainer />
+            </div>
+            {
+              (tab !== 'Splash' && tab !== 'Admin') && <Footer tab={tab} setTab={setTab} />
+            }
+          </div>
+        )
+      }
+      {
+        !user && (
+          <div className={`h-full max-h-screen overflow-hidden w-full`}>
+            <div className={`relative h-screen overflow-hidden pb-[64px] px-[20px]`}>
+              <Admin setting={setting} setSetting={setSetting} />
+            </div>
+          </div>
+        )
+      }
+      {
+        (!isMobile && user) &&
+        <div className="flex flex-col justify-center items-center gap-2">
+          <h2 className="text-[24px] text-white font-bold">Play on your mobile</h2>
+          <QRCode value="https://t.me/Bleggesminer_bot" size={256} />
+          <a href="https://t.me/Bleggesminer_bot" className="text-[24px] text-white font-bold hover:text-white">@Bleggesminer_bot</a>
         </div>
-        {
-          (tab !== 'Splash' && tab !== 'Admin') && <Footer tab={tab} setTab={setTab} />
-        }
-      </div>
+      }
     </Router >
   );
 }

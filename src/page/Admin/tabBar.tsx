@@ -5,27 +5,27 @@ interface IFooterProps {
 const tabs = [
     {
         id: "Time",
-        name: "Time Setting",
+        name: "Time",
         img: "time.svg"
     },
     {
         id: "Power",
-        name: "Power Setting",
+        name: "Power",
         img: "rocket.svg"
     },
     {
         id: "Level",
-        name: "Level Setting",
+        name: "Level",
         img: "badge.svg"
     },
     {
         id: "Task",
-        name: "Task Setting",
+        name: "Task",
         img: "task.svg"
     },
     {
         id: "Admin",
-        name: "Admin Setting",
+        name: "Admin",
         img: "admin.svg"
     },
 ]

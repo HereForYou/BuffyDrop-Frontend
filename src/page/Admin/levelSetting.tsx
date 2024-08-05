@@ -70,7 +70,7 @@ const LevelSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
                                 setting?.levelStandard.map((item: any, index: number) => (
                                     editRow !== index ? (
                                         <tr key={index}>
-                                            <td className="text-[13px] font-bold w-[30%]">{item.level}</td>
+                                            <td className="text-[13px] font-bold w-[10%] md:w-[30%]">{item.level}</td>
                                             <td className="text-[13px] w-[30%]">{item.coinsToLevelUp}</td>
                                             <td className="text-[13px] w-[30%] space-x-4">
                                                 <button onClick={
@@ -85,7 +85,9 @@ const LevelSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
                                                     }
                                                 } className="actionBtn">
                                                     <FontAwesomeIcon icon={faPencil} className="mr-1" />
-                                                    Edit
+                                                    {/* <h3 className="hidden md:flex">
+                                                        Edit
+                                                    </h3> */}
                                                 </button>
                                                 <button onClick={
                                                     () => {
@@ -94,13 +96,15 @@ const LevelSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
                                                     }
                                                 } className="actionBtn">
                                                     <FontAwesomeIcon icon={faTrashCan} className="mr-1" />
-                                                    Delete
+                                                    {/* <h3 className="hidden md:flex">
+                                                        Delete
+                                                    </h3> */}
                                                 </button>
                                             </td>
                                         </tr>
                                     ) : (
                                         <tr key={index} className="">
-                                            <td className="text-[13px] font-bold w-[30%]">{item.level}</td>
+                                            <td className="text-[13px] font-bold w-[10%] md:w-[30%]">{item.level}</td>
                                             <td className="text-[13px] font-bold w-[30%]">
                                                 <input
                                                     type="text" className="h-[30px] w-[60px]"
@@ -113,11 +117,16 @@ const LevelSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
                                             <td className="text-[13px] w-[30%] space-x-4">
                                                 <button onClick={submitSetting} className="actionBtn">
                                                     <FontAwesomeIcon icon={faSave} className="mr-1" />
-                                                    Save
+                                                    {/* <h3 className="hidden md:flex">
+                                                        Save
+                                                    </h3> */}
+
                                                 </button>
                                                 <button onClick={() => setEditRow(-1)} className="actionBtn">
                                                     <FontAwesomeIcon icon={faXmark} className="mr-1" />
-                                                    Cancel
+                                                    {/* <h3 className="hidden md:flex">
+                                                        Cancel
+                                                    </h3> */}
                                                 </button>
                                             </td>
                                         </tr>
@@ -140,11 +149,15 @@ const LevelSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
                                         <td className="text-[13px] space-x-4">
                                             <button onClick={() => { setAddMode(false), submitSetting(); }} className="actionBtn">
                                                 <FontAwesomeIcon icon={faSave} className="mr-1" />
-                                                Save
+                                                {/* <h3 className="hidden md:flex">
+                                                    Save
+                                                </h3> */}
                                             </button>
                                             <button onClick={() => { setAddMode(false) }} className="actionBtn">
                                                 <FontAwesomeIcon icon={faXmark} className="mr-1" />
-                                                Cancel
+                                                {/* <h3 className="hidden md:flex">
+                                                    Cancel
+                                                </h3> */}
                                             </button>
                                         </td>
                                     </tr>

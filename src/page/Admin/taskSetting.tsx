@@ -90,8 +90,8 @@ const TaskSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
     return (
         <>
             <div className="overflow-y-auto text-white py-[30px] w-full">
-                <div className="h-[60vh] w-full overflow-y-auto py-2">
-                    <div className="flex flex-row w-full justify-around items-center py-8">
+                <div className="h-[70vh] w-full overflow-y-auto py-2">
+                    <div className="flex flex-col md:flex-row w-full justify-around items-center md:py-8 gap-1">
                         <div className="flex flex-row justify-between items-center gap-8">
                             <h3 className="text-[15px]">Daily Revenue:</h3>
                             {
@@ -105,13 +105,15 @@ const TaskSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
                                             }
                                         } className="actionBtn">
                                             <FontAwesomeIcon icon={faPencil} className="mr-1" />
-                                            Edit
+                                            {/* <h3 className="hidden md:flex">
+                                                Edit
+                                            </h3> */}
                                         </button>
                                     </>
                                 ) : (
                                     <>
                                         <input
-                                            type="text" className="h-[30px] w-[150px]"
+                                            type="text" className="h-[30px] w-[60px]"
                                             placeholder="Daily Revenue"
                                             name="dailyRevenue"
                                             value={dailyRevenue}
@@ -125,7 +127,9 @@ const TaskSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
                                                 }
                                             } className="actionBtn">
                                                 <FontAwesomeIcon icon={faSave} className="mr-1" />
-                                                Save
+                                                {/* <h3 className="hidden md:flex">
+                                                    Save
+                                                </h3> */}
                                             </button>
                                             <button onClick={
                                                 () => {
@@ -133,7 +137,9 @@ const TaskSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
                                                 }
                                             } className="actionBtn">
                                                 <FontAwesomeIcon icon={faXmark} className="mr-1" />
-                                                Cancel
+                                                {/* <h3 className="hidden md:flex">
+                                                    Cancel
+                                                </h3> */}
                                             </button>
                                         </div>
                                     </>
@@ -153,13 +159,15 @@ const TaskSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
                                             }
                                         } className="actionBtn">
                                             <FontAwesomeIcon icon={faPencil} className="mr-1" />
-                                            Edit
+                                            {/* <h3 className="hidden md:flex">
+                                                Edit
+                                            </h3> */}
                                         </button>
                                     </>
                                 ) : (
                                     <>
                                         <input
-                                            type="text" className="h-[30px] w-[150px]"
+                                            type="text" className="h-[30px] w-[60px]"
                                             placeholder="Invite Revenue"
                                             name="inviteRevenue"
                                             value={inviteRevenue}
@@ -173,7 +181,9 @@ const TaskSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
                                                 }
                                             } className="actionBtn">
                                                 <FontAwesomeIcon icon={faSave} className="mr-1" />
-                                                Save
+                                                {/* <h3 className="hidden md:flex">
+                                                    Save
+                                                </h3> */}
                                             </button>
                                             <button onClick={
                                                 () => {
@@ -181,7 +191,9 @@ const TaskSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
                                                 }
                                             } className="actionBtn">
                                                 <FontAwesomeIcon icon={faXmark} className="mr-1" />
-                                                Cancel
+                                                {/* <h3 className="hidden md:flex">
+                                                    Cancel
+                                                </h3> */}
                                             </button>
                                         </div>
                                     </>
@@ -192,12 +204,12 @@ const TaskSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
                     <table className="text-center w-full">
                         <thead>
                             <tr>
-                                <td className="text-[15px] font-bold">No</td>
-                                <td className="text-[15px] font-bold">ID</td>
-                                <td className="text-[15px] font-bold">Title</td>
-                                <td className="text-[15px] font-bold">Profit</td>
-                                <td className="text-[15px] font-bold">Link</td>
-                                <td className="text-[15px] font-bold">Action</td>
+                                <td className="hidden md:flex text-[15px] font-bold">No</td>
+                                <td className="text-[13px] md:text-[15px] font-bold">ID</td>
+                                <td className="text-[13px] md:text-[15px] font-bold">Title</td>
+                                <td className="text-[13px] md:text-[15px] font-bold">Profit</td>
+                                <td className="text-[13px] md:text-[15px] font-bold">Link</td>
+                                <td className="text-[13px] md:text-[15px] font-bold">Action</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -205,12 +217,12 @@ const TaskSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
                                 setting?.taskList.map((item: any, index: number) => (
                                     editRow !== index ? (
                                         <tr key={index}>
-                                            <td className="text-[13px] font-bold w-[16%]">{index + 1}</td>
-                                            <td className="text-[13px] font-bold w-[16%]">{item.id}</td>
-                                            <td className="text-[13px] w-[16%]">{item.title}</td>
-                                            <td className="text-[13px] w-[16%]">{item.profit}</td>
-                                            <td className="text-[13px] w-[16%]">{item.link}</td>
-                                            <td className="text-[13px] w-[16%] space-x-4">
+                                            <td className="hidden md:flex text-[13px] font-bold w-[16%]">{index + 1}</td>
+                                            <td className="text-[12px] md:text-[13px] font-bold w-[16%]">{item.id}</td>
+                                            <td className="text-[12px] md:text-[13px] w-[16%]">{item.title}</td>
+                                            <td className="text-[12px] md:text-[13px] w-[16%]">{item.profit}</td>
+                                            <td className="text-[12px] md:text-[13px] w-[16%]">{item.link}</td>
+                                            <td className="text-[12px] md:text-[13px] w-[16%] space-x-4">
                                                 <button onClick={
                                                     () => {
                                                         setEditRow(index);
@@ -223,8 +235,8 @@ const TaskSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
                                                         })
                                                     }
                                                 } className="actionBtn">
-                                                    <FontAwesomeIcon icon={faPencil} className="mr-1" />
-                                                    Edit
+                                                    <FontAwesomeIcon icon={faPencil} className="md:mr-1" />
+                                                    {/* Edit */}
                                                 </button>
                                                 <button onClick={
                                                     () => {
@@ -232,18 +244,18 @@ const TaskSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
                                                         handleDelete(index);
                                                     }
                                                 } className="actionBtn">
-                                                    <FontAwesomeIcon icon={faTrashCan} className="mr-1" />
-                                                    Delete
+                                                    <FontAwesomeIcon icon={faTrashCan} className="md:mr-1" />
+                                                    {/* Delete */}
                                                 </button>
                                             </td>
                                         </tr>
                                     ) : (
                                         <tr key={index} className="">
-                                            <td className="text-[13px] font-bold w-[16%]">{index + 1}</td>
+                                            <td className="hidden md:flex text-[13px] font-bold w-[16%]">{index + 1}</td>
 
                                             <td className="text-[13px] font-bold w-[16%]">
                                                 <input
-                                                    type="text" className="h-[30px] w-[150px]"
+                                                    type="text" className="h-[30px] w-[40px]"
                                                     placeholder="ID"
                                                     name="id"
                                                     value={settingItem.id}
@@ -252,7 +264,7 @@ const TaskSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
                                             </td>
                                             <td className="text-[13px] font-bold w-[16%]">
                                                 <input
-                                                    type="text" className="h-[30px] w-[150px]"
+                                                    type="text" className="h-[30px] w-[40px]"
                                                     placeholder="Title"
                                                     name="title"
                                                     value={settingItem.title}
@@ -261,7 +273,7 @@ const TaskSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
                                             </td>
                                             <td className="text-[13px] font-bold w-[16%]">
                                                 <input
-                                                    type="text" className="h-[30px] w-[150px]"
+                                                    type="text" className="h-[30px] w-[40px]"
                                                     placeholder="Profit"
                                                     name="profit"
                                                     value={settingItem.profit}
@@ -270,7 +282,7 @@ const TaskSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
                                             </td>
                                             <td className="text-[13px] font-bold w-[16%]">
                                                 <input
-                                                    type="text" className="h-[30px] w-[150px]"
+                                                    type="text" className="h-[30px] w-[40px]"
                                                     placeholder="Link"
                                                     name="link"
                                                     value={settingItem.link}
@@ -279,12 +291,12 @@ const TaskSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
                                             </td>
                                             <td className="text-[13px] w-[16%] space-x-4">
                                                 <button onClick={submitSetting} className="actionBtn">
-                                                    <FontAwesomeIcon icon={faSave} className="mr-1" />
-                                                    Save
+                                                    <FontAwesomeIcon icon={faSave} className="md:mr-1" />
+                                                    {/* Save */}
                                                 </button>
                                                 <button onClick={() => setEditRow(-1)} className="actionBtn">
-                                                    <FontAwesomeIcon icon={faXmark} className="mr-1" />
-                                                    Cancel
+                                                    <FontAwesomeIcon icon={faXmark} className="md:mr-1" />
+                                                    {/* Cancel */}
                                                 </button>
                                             </td>
                                         </tr>
@@ -294,10 +306,10 @@ const TaskSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
                             {
                                 addMode && (
                                     <tr className="">
-                                        <td className="text-[13px] font-bold w-[16%]">{setting?.taskList.length + 1}</td>
+                                        <td className="hidden md:flex text-[13px] font-bold w-[16%]">{setting?.taskList.length + 1}</td>
                                         <td className="text-[13px] font-bold w-[16%]">
                                             <input
-                                                type="text" className="h-[30px] w-[60px]"
+                                                type="text" className="h-[30px] w-[40px]"
                                                 placeholder="ID"
                                                 name="id"
                                                 value={settingItem.id}
@@ -306,7 +318,7 @@ const TaskSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
                                         </td>
                                         <td className="text-[13px] font-bold w-[16%]">
                                             <input
-                                                type="text" className="h-[30px] w-[60px]"
+                                                type="text" className="h-[30px] w-[40px]"
                                                 placeholder="Title"
                                                 name="title"
                                                 value={settingItem.title}
@@ -315,7 +327,7 @@ const TaskSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
                                         </td>
                                         <td className="text-[13px] font-bold w-[16%]">
                                             <input
-                                                type="text" className="h-[30px] w-[60px]"
+                                                type="text" className="h-[30px] w-[40px]"
                                                 placeholder="Profit"
                                                 name="profit"
                                                 value={settingItem.profit}
@@ -324,7 +336,7 @@ const TaskSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
                                         </td>
                                         <td className="text-[13px] font-bold w-[16%]">
                                             <input
-                                                type="text" className="h-[30px] w-[60px]"
+                                                type="text" className="h-[30px] w-[40px]"
                                                 placeholder="Link"
                                                 name="link"
                                                 value={settingItem.link}
@@ -333,12 +345,12 @@ const TaskSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
                                         </td>
                                         <td className="text-[13px] space-x-4">
                                             <button onClick={() => { setAddMode(false), submitSetting(); }} className="actionBtn">
-                                                <FontAwesomeIcon icon={faSave} className="mr-1" />
-                                                Save
+                                                <FontAwesomeIcon icon={faSave} className="md:mr-1" />
+                                                {/* Save */}
                                             </button>
                                             <button onClick={() => { setAddMode(false) }} className="actionBtn">
-                                                <FontAwesomeIcon icon={faXmark} className="mr-1" />
-                                                Cancel
+                                                <FontAwesomeIcon icon={faXmark} className="md:mr-1" />
+                                                {/* Cancel */}
                                             </button>
                                         </td>
                                     </tr>

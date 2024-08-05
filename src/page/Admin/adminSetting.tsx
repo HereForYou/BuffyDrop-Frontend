@@ -60,7 +60,7 @@ const AdminSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
                         <thead>
                             <tr>
                                 <td className="text-[15px] font-bold">No</td>
-                                <td className="text-[15px] font-bold">Telegram User Name</td>
+                                <td className="text-[15px] font-bold">User Name</td>
                                 <td className="text-[15px] font-bold">Action</td>
                             </tr>
                         </thead>
@@ -69,7 +69,7 @@ const AdminSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
                                 setting?.admin.map((item: any, index: number) => (
                                     editRow !== index ? (
                                         <tr key={index}>
-                                            <td className="text-[13px] font-bold w-[30%]">{index + 1}</td>
+                                            <td className="text-[13px] font-bold w-[10%] md:w-[30%]">{index + 1}</td>
                                             <td className="text-[13px] w-[30%]">{item.username}</td>
                                             <td className="text-[13px] w-[30%] space-x-4">
                                                 <button onClick={
@@ -83,7 +83,7 @@ const AdminSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
                                                     }
                                                 } className="actionBtn">
                                                     <FontAwesomeIcon icon={faPencil} className="mr-1" />
-                                                    Edit
+                                                    {/* Edit */}
                                                 </button>
                                                 <button onClick={
                                                     () => {
@@ -92,16 +92,16 @@ const AdminSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
                                                     }
                                                 } className="actionBtn">
                                                     <FontAwesomeIcon icon={faTrashCan} className="mr-1" />
-                                                    Delete
+                                                    {/* Delete */}
                                                 </button>
                                             </td>
                                         </tr>
                                     ) : (
                                         <tr key={index} className="">
-                                            <td className="text-[13px] font-bold w-[30%]">{index + 1}</td>
+                                            <td className="text-[13px] font-bold w-[10%] md:w-[30%]">{index + 1}</td>
                                             <td className="text-[13px] font-bold w-[30%]">
                                                 <input
-                                                    type="text" className="h-[30px] w-[100px]"
+                                                    type="text" className="h-[30px] w-[60px]"
                                                     placeholder="User Name"
                                                     name="username"
                                                     value={settingItem.username}
@@ -111,11 +111,11 @@ const AdminSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
                                             <td className="text-[13px] w-[30%] space-x-4">
                                                 <button onClick={submitSetting} className="actionBtn">
                                                     <FontAwesomeIcon icon={faSave} className="mr-1" />
-                                                    Save
+                                                    {/* Save */}
                                                 </button>
                                                 <button onClick={() => setEditRow(-1)} className="actionBtn">
                                                     <FontAwesomeIcon icon={faXmark} className="mr-1" />
-                                                    Cancel
+                                                    {/* Cancel */}
                                                 </button>
                                             </td>
                                         </tr>
@@ -128,7 +128,7 @@ const AdminSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
                                         <td className="text-[13px] font-bold">{setting?.admin.length + 1}</td>
                                         <td className="text-[13px] font-bold">
                                             <input
-                                                type="text" className="h-[30px] w-[100px]"
+                                                type="text" className="h-[30px] w-[60px]"
                                                 placeholder="LevelUp"
                                                 name="coinsToLevelUp"
                                                 value={settingItem.coinsToLevelUp}
@@ -138,11 +138,11 @@ const AdminSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
                                         <td className="text-[13px] space-x-4">
                                             <button onClick={() => { setAddMode(false), submitSetting(); }} className="actionBtn">
                                                 <FontAwesomeIcon icon={faSave} className="mr-1" />
-                                                Save
+                                                {/* Save */}
                                             </button>
                                             <button onClick={() => { setAddMode(false) }} className="actionBtn">
                                                 <FontAwesomeIcon icon={faXmark} className="mr-1" />
-                                                Cancel
+                                                {/* Cancel */}
                                             </button>
                                         </td>
                                     </tr>

@@ -72,7 +72,7 @@ const PowerSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
                                 setting?.powerList.map((item: any, index: number) => (
                                     editRow !== index ? (
                                         <tr key={index}>
-                                            <td className="text-[13px] font-bold w-[25%]">{index + 1}</td>
+                                            <td className="text-[13px] font-bold w-[10%] md:w-[25%]">{index + 1}</td>
                                             <td className="text-[13px] font-bold w-[25%]">{item.value}</td>
                                             <td className="text-[13px] w-[25%]">{item.coinsToBoost}</td>
                                             <td className="text-[13px] w-[25%] space-x-4">
@@ -87,7 +87,7 @@ const PowerSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
                                                     }
                                                 } className="actionBtn">
                                                     <FontAwesomeIcon icon={faPencil} className="mr-1" />
-                                                    Edit
+                                                    {/* Edit */}
                                                 </button>
                                                 <button onClick={
                                                     () => {
@@ -96,16 +96,16 @@ const PowerSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
                                                     }
                                                 } className="actionBtn">
                                                     <FontAwesomeIcon icon={faTrashCan} className="mr-1" />
-                                                    Delete
+                                                    {/* Delete */}
                                                 </button>
                                             </td>
                                         </tr>
                                     ) : (
                                         <tr key={index} className="">
-                                            <td className="text-[13px] font-bold w-[25%]">{index + 1}</td>
+                                            <td className="text-[13px] font-bold w-[10%] md:w-[25%]">{index + 1}</td>
                                             <td className="text-[13px] font-bold w-[25%]">
                                                 <input
-                                                    type="text" className="h-[30px] w-[100px]"
+                                                    type="text" className="h-[30px] w-[60px]"
                                                     placeholder="Minute"
                                                     name="value"
                                                     value={settingItem.value}
@@ -114,7 +114,7 @@ const PowerSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
                                             </td>
                                             <td className="text-[13px] font-bold w-[25%]">
                                                 <input
-                                                    type="text" className="h-[30px] w-[100px]"
+                                                    type="text" className="h-[30px] w-[60px]"
                                                     placeholder="Coins To Boost"
                                                     name="coinsToBoost"
                                                     value={settingItem.coinsToBoost}
@@ -124,11 +124,11 @@ const PowerSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
                                             <td className="text-[13px] w-[25%] space-x-4">
                                                 <button onClick={submitSetting} className="actionBtn">
                                                     <FontAwesomeIcon icon={faSave} className="mr-1" />
-                                                    Save
+                                                    {/* Save */}
                                                 </button>
                                                 <button onClick={() => setEditRow(-1)} className="actionBtn">
                                                     <FontAwesomeIcon icon={faXmark} className="mr-1" />
-                                                    Cancel
+                                                    {/* Cancel */}
                                                 </button>
                                             </td>
                                         </tr>
@@ -141,7 +141,7 @@ const PowerSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
                                         <td className="text-[13px] font-bold">{setting?.powerList.length + 1}</td>
                                         <td className="text-[13px] font-bold">
                                             <input
-                                                type="text" className="h-[30px] w-[100px]"
+                                                type="text" className="h-[30px] w-[60px]"
                                                 placeholder="Power"
                                                 name="value"
                                                 value={settingItem.value}
@@ -150,7 +150,7 @@ const PowerSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
                                         </td>
                                         <td className="text-[13px] font-bold">
                                             <input
-                                                type="text" className="h-[30px] w-[100px]"
+                                                type="text" className="h-[30px] w-[60px]"
                                                 placeholder="Coins To Boost"
                                                 name="coinsToBoost"
                                                 value={settingItem.coinsToBoost}
@@ -160,11 +160,11 @@ const PowerSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
                                         <td className="text-[13px] space-x-4">
                                             <button onClick={() => { setAddMode(false), submitSetting(); }} className="actionBtn">
                                                 <FontAwesomeIcon icon={faSave} className="mr-1" />
-                                                Save
+                                                {/* Save */}
                                             </button>
                                             <button onClick={() => { setAddMode(false) }} className="actionBtn">
                                                 <FontAwesomeIcon icon={faXmark} className="mr-1" />
-                                                Cancel
+                                                {/* Cancel */}
                                             </button>
                                         </td>
                                     </tr>

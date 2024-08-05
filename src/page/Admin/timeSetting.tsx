@@ -8,11 +8,11 @@ import { ENDPOINT } from "../../data";
 const timeSetting = ({ setting, setSetting }: { setting: any, setSetting: (value: any) => void }) => {
     const [editRow, setEditRow] = useState<number>(-1);
     const [addMode, setAddMode] = useState<boolean>(false);
-    
+
     const [settingItem, setSettingItem] = useState<any>({
-        id:1,
+        id: 1,
         value: 0,
-        coinsToBoost: 0 
+        coinsToBoost: 0
     })
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
@@ -72,7 +72,7 @@ const timeSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
                                 setting?.dailyTimeLimitList.map((item: any, index: number) => (
                                     editRow !== index ? (
                                         <tr key={index}>
-                                            <td className="text-[13px] font-bold w-[25%]">{index + 1}</td>
+                                            <td className="text-[13px] font-bold w-[10%] md:w-[25%]">{index + 1}</td>
                                             <td className="text-[13px] font-bold w-[25%]">{item.value}</td>
                                             <td className="text-[13px] w-[25%]">{item.coinsToBoost}</td>
                                             <td className="text-[13px] w-[25%] space-x-4">
@@ -87,7 +87,9 @@ const timeSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
                                                     }
                                                 } className="actionBtn">
                                                     <FontAwesomeIcon icon={faPencil} className="mr-1" />
-                                                    Edit
+                                                    {/* <h3 className="hidden md:flex">
+                                                        Edit
+                                                    </h3> */}
                                                 </button>
                                                 <button onClick={
                                                     () => {
@@ -96,16 +98,18 @@ const timeSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
                                                     }
                                                 } className="actionBtn">
                                                     <FontAwesomeIcon icon={faTrashCan} className="mr-1" />
-                                                    Delete
+                                                    {/* <h3 className="hidden md:flex">
+                                                        Delete
+                                                    </h3> */}
                                                 </button>
                                             </td>
                                         </tr>
                                     ) : (
                                         <tr key={index} className="">
-                                            <td className="text-[13px] font-bold w-[25%]">{index + 1}</td>
+                                            <td className="text-[13px] font-bold w-[10%] md:w-[25%]">{index + 1}</td>
                                             <td className="text-[13px] font-bold w-[25%]">
                                                 <input
-                                                    type="text" className="h-[30px] w-[100px]"
+                                                    type="text" className="h-[30px] w-[60px]"
                                                     placeholder="Minute"
                                                     name="value"
                                                     value={settingItem.value}
@@ -114,7 +118,7 @@ const timeSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
                                             </td>
                                             <td className="text-[13px] font-bold w-[25%]">
                                                 <input
-                                                    type="text" className="h-[30px] w-[100px]"
+                                                    type="text" className="h-[30px] w-[60px]"
                                                     placeholder="Coins To Boost"
                                                     name="coinsToBoost"
                                                     value={settingItem.coinsToBoost}
@@ -124,11 +128,15 @@ const timeSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
                                             <td className="text-[13px] w-[25%] space-x-4">
                                                 <button onClick={submitSetting} className="actionBtn">
                                                     <FontAwesomeIcon icon={faSave} className="mr-1" />
-                                                    Save
+                                                    {/* <h3 className="hidden md:flex">
+                                                        Save
+                                                    </h3> */}
                                                 </button>
                                                 <button onClick={() => setEditRow(-1)} className="actionBtn">
                                                     <FontAwesomeIcon icon={faXmark} className="mr-1" />
-                                                    Cancel
+                                                    {/* <h3 className="hidden md:flex">
+                                                        Cancel
+                                                    </h3> */}
                                                 </button>
                                             </td>
                                         </tr>
@@ -141,7 +149,7 @@ const timeSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
                                         <td className="text-[13px] font-bold">{setting?.dailyTimeLimitList.length + 1}</td>
                                         <td className="text-[13px] font-bold">
                                             <input
-                                                type="text" className="h-[30px] w-[100px]"
+                                                type="text" className="h-[30px] w-[60px]"
                                                 placeholder="Minute"
                                                 name="value"
                                                 value={settingItem.value}
@@ -150,7 +158,7 @@ const timeSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
                                         </td>
                                         <td className="text-[13px] font-bold">
                                             <input
-                                                type="text" className="h-[30px] w-[100px]"
+                                                type="text" className="h-[30px] w-[60px]"
                                                 placeholder="Coins To Boost"
                                                 name="coinsToBoost"
                                                 value={settingItem.coinsToBoost}
@@ -160,11 +168,15 @@ const timeSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
                                         <td className="text-[13px] space-x-4">
                                             <button onClick={() => { setAddMode(false), submitSetting(); }} className="actionBtn">
                                                 <FontAwesomeIcon icon={faSave} className="mr-1" />
-                                                Save
+                                                {/* <h3 className="hidden md:flex">
+                                                    Save
+                                                </h3> */}
                                             </button>
                                             <button onClick={() => { setAddMode(false) }} className="actionBtn">
                                                 <FontAwesomeIcon icon={faXmark} className="mr-1" />
-                                                Cancel
+                                                {/* <h3 className="hidden md:flex">
+                                                    Cancel
+                                                </h3> */}
                                             </button>
                                         </td>
                                     </tr>
