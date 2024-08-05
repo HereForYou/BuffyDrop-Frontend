@@ -72,7 +72,7 @@ const Task: React.FC<ITaskProps> = ({ user, totalPoint, setTotalPoint, task, set
             console.error("er", err);
           }
           )
-      }, 5000);
+      }, 300);
     }
   }
 

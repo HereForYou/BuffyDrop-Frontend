@@ -28,7 +28,7 @@ interface IHomeProps {
 const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining, handleStopMining, claimShow, reachDailyLimit, setReachDailyLimit, setTotalPoint, setClaimShow, start, hour, min, sec, timeLimit, power, level, nextLevel, loading }) => {
   const handleClaim = () => {
     if (user) {
-      axios.put(`${ENDPOINT}/api/user/${user?.id}`, { points: point, countDown: 0, status: 'Waiting' })
+      axios.put(`${ENDPOINT}/api/user/${user?.id}`, { points: point, countDown: 0 })
         .then(response => {
           console.log("response", response.data);
           let newpoint = point + totalPoint;

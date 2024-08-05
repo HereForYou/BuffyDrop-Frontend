@@ -28,16 +28,19 @@ const Mine: React.FC<IMineProps> = ({ user, power, setPower, timeLimit, setTimeL
   const handleBoost = () => {
     if (tab == 'time' && setting.dailyTimeLimitList[timeLimit.id]) {
       if (totalPoint >= setting.dailyTimeLimitList[timeLimit.id].coinsToBoost) {
-        axios.put(`${ENDPOINT}/api/user/timeLimit/${user?.id}`, { newTimeLimit: setting.dailyTimeLimitList[timeLimit.id], fee: setting.dailyTimeLimitList[timeLimit.id].coinsToBoost })
+        let newTimeLimit = setting.dailyTimeLimitList[timeLimit.id];
+        let fee = setting.dailyTimeLimitList[timeLimit.id].coinsToBoost;
+        let plusCountDown = (setting.dailyTimeLimitList[timeLimit.id].value - setting.dailyTimeLimitList[timeLimit.id - 1].value) * 60;
+        axios.put(`${ENDPOINT}/api/user/timeLimit/${user?.id}`, { newTimeLimit, fee, plusCountDown })
           .then(res => {
-            if (res.data) toast.success("Boosted successfully!");
-            let newPoint = totalPoint - setting.dailyTimeLimitList[timeLimit.id].coinsToBoost;
-            setTotalPoint(newPoint);
-            // let newCounts = currentCount + (setting.dailyTimeLimitList[timeLimit.id].value - timeLimit.value) * 60;
-            console.log('', currentCount);
-            let newCounts = setting.dailyTimeLimitList[timeLimit.id].value * 60;
-            setCurrentCount(newCounts);
-            setTimeLimit(setting.dailyTimeLimitList[timeLimit.id]);
+            if (res.data) {
+              toast.success("Boosted successfully!");
+              let newPoint = totalPoint - setting.dailyTimeLimitList[timeLimit.id].coinsToBoost;
+              setTotalPoint(newPoint);
+              let newCounts = currentCount + plusCountDown;
+              setCurrentCount(newCounts);
+              setTimeLimit(setting.dailyTimeLimitList[timeLimit.id]);
+            }
           })
           .catch(err => {
             console.error(err);
@@ -51,10 +54,12 @@ const Mine: React.FC<IMineProps> = ({ user, power, setPower, timeLimit, setTimeL
       if (totalPoint >= setting.powerList[power.id].coinsToBoost) {
         axios.put(`${ENDPOINT}/api/user/power/${user?.id}`, { newPower: setting.powerList[power.id], fee: setting.powerList[power.id].coinsToBoost })
           .then(res => {
-            if (res.data) toast.success("Boosted successfully!");
-            let newPoint = totalPoint - setting.powerList[power.id].coinsToBoost;
-            setTotalPoint(newPoint);
-            setPower(setting.powerList[power.id]);
+            if (res.data) {
+              toast.success("Boosted successfully!");
+              let newPoint = totalPoint - setting.powerList[power.id].coinsToBoost;
+              setTotalPoint(newPoint);
+              setPower(setting.powerList[power.id]);
+            }
           })
           .catch(err => {
             console.error(err);

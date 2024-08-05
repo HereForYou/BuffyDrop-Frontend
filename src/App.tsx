@@ -25,8 +25,6 @@ import Admin from "./page/Admin";
 
 function App() {
   let countdownTime = 1;
-  let points = 0;
-  let saveIntervalId = false;
   const hasShownWarningRef = useRef(false);
   const { user, start_param } = useTelegram();
 
@@ -34,12 +32,10 @@ function App() {
   const [task, setTask] = useState<string[]>([]);
   const [setting, setSetting] = useState<any>({});
   const [loading, setLoading] = useState(true);
-  // const [tab, setTab] = useState<string>('Admin');
   const [tab, setTab] = useState<string>('Splash');
   const [start, setStart] = useState<boolean>(false);
   const [reachDailyLimit, setReachDailyLimit] = useState<boolean>(false);
   const [claimShow, setClaimShow] = useState<boolean>(false);
-  const [intervalId, setIntervalId] = useState<number>(0);
   const [point, setPoint] = useState<number>(0.000);
   const [referral, setReferral] = useState<number>(0);
   const [currentCount, setCurrentCount] = useState<number>(0);
@@ -80,67 +76,11 @@ function App() {
     }
   }, [setting, totalPoint]);
 
-  const handleMining = () => {
-    if (user) {
-      countdownTime = currentCount;
-      setStart(true);
-      let interval_Id = setInterval(async () => {
-        clearInterval(interval_Id - 2);
-        clearInterval(interval_Id - 1);
-        setIntervalId(interval_Id);
-        if (!saveIntervalId) {
-          try {
-            await axios.put(`${ENDPOINT}/api/user/count/${user?.id}`, {
-              id: interval_Id,
-              status: 'Mining'
-            });
-            saveIntervalId = true;
-          }
-          catch (err) {
-            console.error('Error occurred during PUT request:', err);
-          }
-        }
-        if (countdownTime > 0) {
-          let hours = Math.floor(countdownTime / 3600);
-          let minutes = Math.floor((countdownTime % 3600) / 60);
-          let seconds = countdownTime % 60;
-          setHour(hours);
-          setMin(minutes);
-          setSec(seconds);
-          points += power.value;
-          setPoint(points);
-          countdownTime--;
-          setCurrentCount(countdownTime);
-        }
-        else {
-          clearInterval(interval_Id);
-          setStart(false);
-          setClaimShow(true);
-          points = 0;
-        }
-      }, 1000);
-    }
-  };
   useEffect(() => {
     if (point === 0) {
       setStart(false);
     }
   }, [point]);
-
-  const handleStopMining = () => {
-    clearInterval(intervalId);
-    axios.put(`${ENDPOINT}/api/user/${user?.id}`, { points: point, countDown: currentCount, status: 'Waiting' })
-      .then(response => {
-        console.log('response', response.data);
-        let newpoint = point + totalPoint;
-        setTotalPoint(newpoint);
-        setPoint(0);
-      })
-      .catch(err => {
-        console.error(err);
-        // toast("Something Went Wrong!");
-      })
-  }
 
   useEffect(() => {
     if (!user) {
@@ -179,21 +119,11 @@ function App() {
           setTimeLimit(userData.dailyTimeLimit);
           setTask(userData.task);
           setReferral((userData.friends).length);
-          clearInterval(userData.intervalId);
-          points = userData.curPoints;
+          // clearInterval(userData.intervalId);
+          // points = userData.curPoints;
           countdownTime = userData.countDown;
           if (countdownTime == 0) setReachDailyLimit(true);
           setCurrentCount(countdownTime);
-          if (userData.status == 'Waiting to Claim' && tab == "Exchange") {
-            setClaimShow(true);
-            setStart(false);
-            setPoint(points);
-          }
-          else if (userData.status == 'Mining' && tab == "Exchange") {
-            setStart(true);
-            setClaimShow(false);
-            handleMining();
-          }
           if (start_param && !inviteMsg && start_param != userData.inviteLink) {
             toast.success("You are invited!");
             setInviteMsg(true);
@@ -201,18 +131,56 @@ function App() {
           setLoading(false);
         })
         .catch(error => {
-          // toast.error("error", error);
           console.error('Error occurred during PUT request:', error);
         });
     }
   }, [tab]);
+
+  useEffect(() => {
+    let interval = 0;
+    if (start && currentCount > 0) {
+      interval = setInterval(() => {
+
+        let hours = Math.floor(currentCount / 3600);
+        let minutes = Math.floor((currentCount % 3600) / 60);
+        let seconds = currentCount % 60;
+        setHour(hours);
+        setMin(minutes);
+        setSec(seconds);
+        setPoint((prevPoints) => prevPoints + power.value);
+        setCurrentCount((prevSeconds) => prevSeconds - 1);
+
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [start, currentCount]);
+
+  const handleMining = () => {
+    if (user) {
+      setStart(true);
+    }
+  };
+
+  const handleStopMining = () => {
+    setStart(false);
+    axios.put(`${ENDPOINT}/api/user/${user?.id}`, { points: point, countDown: currentCount })
+      .then(res => {
+        if (res.data) {
+          setTotalPoint((prevPoints) => prevPoints + point);
+          setPoint(0);
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      })
+  }
 
   return (
     <Router>
       <div className={`h-full max-h-screen overflow-hidden w-full`}>
         <div className={`relative h-screen overflow-hidden pb-[64px] px-[20px]`}>
           {
-            (user && tab == 'Splash') && <Splash power={power} level={level} totalPoint={totalPoint}
+            (user && tab == 'Splash') && <Splash power={power} totalPoint={totalPoint}
               referral={referral} setTab={setTab} />
           }
           {

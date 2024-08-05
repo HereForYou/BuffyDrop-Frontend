@@ -50,7 +50,7 @@ const Friends = ({ user, inviteRevenue }: { user: any, inviteRevenue: number }) 
   }
   const handleClipBoardCopy = async () => {
     legacyCopy(`
-https://t.me/Bleggs_bot/Bleggs?startapp=${inviteLink}
+https://t.me/Bleggesminer_bot/Bleggs?startapp=${inviteLink}
 ${desText}`);
     toast.success("Successfully Copied!");
   }
@@ -102,7 +102,7 @@ ${desText}`);
         <div className="h-[5px] rounded-full w-[80px] bg-black opacity-80 self-center"></div>
         <h2 className="text-[32px]">Invite Friends</h2>
         <h4 className="text-[16px] text-gray opacity-70">You have <span className="text-red-600 font-bold">Unlimited</span> invitations available</h4>
-        <a href={`https://t.me/share/url?url=https://t.me/Bleggs_bot/Bleggs?startapp=${inviteLink}&text=${desText}`} target="blank" className="customCard-container p-[4px] rounded-full text-white hover:text-white">
+        <a href={`https://t.me/share/url?url=https://t.me/Bleggesminer_bot/Bleggs?startapp=${inviteLink}&text=${desText}`} target="blank" className="customCard-container p-[4px] rounded-full text-white hover:text-white">
           <div className="customCard cursor-pointer py-2 hover:bg-inherit rounded-full">
             <FontAwesomeIcon icon={faPaperPlane} className="mr-5" />
             Send
