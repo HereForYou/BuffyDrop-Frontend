@@ -139,16 +139,16 @@ const Mine: React.FC<IMineProps> = ({ user, power, setPower, timeLimit, setTimeL
           <div onClick={handleBoost} className="customCard bg-[#023744] group w-full py-2 transition relative duration-300 cursor-pointer hover:translate-y-[3px] hover:bg-inherit hover:shadow-[0 -8px 0px 0px #2196f3]">
             {
               tab == 'time' && (
-                <div className="flex flex-row items-center justify-between py-2 px-4">
-                  <h2 className="text-[16px] font-bold text-white">Mining Time</h2>
+                <div className="flex flex-row items-center justify-between py-2 px-2">
+                  <h2 className="text-[14px] font-bold text-white">Mining Time</h2>
                   <h2 className="text-[13px] text-[#FFF8E1]">Upgrade your daily mining Time</h2>
                 </div>
               )
             }
             {
               tab == 'power' && (
-                <div className="flex flex-row items-center justify-between py-2 px-4">
-                  <h2 className="text-[16px] font-bold text-white">Miner Power</h2>
+                <div className="flex flex-row items-center justify-between py-2 px-2">
+                  <h2 className="text-[14px] font-bold text-white">Miner Power</h2>
                   <h2 className="text-[13px] text-[#FFF8E1]">Upgrade your Miner</h2>
                 </div>
               )

@@ -15,12 +15,12 @@ const Splash: React.FC<ISplashProps> = ({ power, totalPoint, referral, setTab })
     return number.toString();
   }
   return (
-    <div className="flex flex-col justify-between h-full pt-8">
+    <div className="flex flex-col justify-between h-full pt-4">
       {/* <a href='https://app.bleggs.com' target='blank' className="flex flex-row-reverse items-end w-full py-2 cursor-pointer">
         <img src="setting.svg" alt="setting" className="h-[30px]" />
       </a> */}
       <div className="flex flex-col w-full gap-2 text-white">
-        <h6 className='lilita text-center text-[12px] font-bold bg-[#e6c12e] w-16 rounded-full'>Beta V 1.0</h6>
+        {/* <h6 className='lilita text-center text-[12px] font-bold bg-[#e6c12e] w-16 rounded-full'>Beta V 1.0</h6> */}
         <h1 className="lilita text-[40px] font-bold">
           Welcome to the
         </h1>
@@ -37,7 +37,7 @@ const Splash: React.FC<ISplashProps> = ({ power, totalPoint, referral, setTab })
           </div>
         </div>
       </div>
-      <h6 className='self-center lilita text-center text-[12px] font-bold bg-[#e6c12e] w-16 rounded-full text-white'>Beta V 1.0</h6>
+      {/* <h6 className='self-center lilita text-center text-[12px] font-bold bg-[#e6c12e] w-16 rounded-full text-white mt-1'>Beta V 1.0</h6> */}
       <div className="flex flex-col">
         <section className="flex flex-row w-full badge items-baseline justify-around">
           <img src="badge 1.png" alt="badge" className="h-[60px] aspect-square" />
@@ -82,7 +82,7 @@ const Splash: React.FC<ISplashProps> = ({ power, totalPoint, referral, setTab })
           </div>
         </section>
       </div>
-      <h6 className='lilita text-center text-[12px] font-bold bg-[#e6c12e] w-16 rounded-full text-white'>Beta V 1.0</h6>
+      <h6 className='lilita text-center text-[12px] font-bold bg-[#e6c12e] w-16 rounded-full text-white mt-1'>Beta V 1.0</h6>
     </div>
   );
 };
