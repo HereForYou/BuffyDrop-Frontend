@@ -33,8 +33,7 @@ function App() {
   const [task, setTask] = useState<string[]>([]);
   const [setting, setSetting] = useState<any>({});
   const [loading, setLoading] = useState(true);
-  // const [tab, setTab] = useState<string>('Splash');
-  const [tab, setTab] = useState<string>('Mine');
+  const [tab, setTab] = useState<string>('Splash');
   const [start, setStart] = useState<boolean>(false);
   const [reachDailyLimit, setReachDailyLimit] = useState<boolean>(false);
   const [claimShow, setClaimShow] = useState<boolean>(false);
