@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 
-// import Loader from "../component/Loader";
-// import ProgressBar from "../component/ProgressBar";
+import Loader from "../component/Loader";
+import ProgressBar from "../component/ProgressBar";
 
 import { ENDPOINT } from "../data";
 
@@ -23,7 +23,7 @@ interface IMineProps {
   loading: boolean;
 }
 
-const Mine: React.FC<IMineProps> = ({ user, power, setPower, timeLimit, setTimeLimit, totalPoint, setTotalPoint, currentCount, setCurrentCount, setting }) => {
+const Mine: React.FC<IMineProps> = ({ level, nextLevel, loading, user, power, setPower, timeLimit, setTimeLimit, totalPoint, setTotalPoint, currentCount, setCurrentCount, setting }) => {
   const [tab, setTab] = useState<string>('time');
   const handleBoost = () => {
     if (tab == 'time' && setting.dailyTimeLimitList[timeLimit.id]) {
@@ -73,16 +73,9 @@ const Mine: React.FC<IMineProps> = ({ user, power, setPower, timeLimit, setTimeL
   return (
     <div className="pb-[40px]">
       <div className="w-full flex flex-col text-center items-center py-2 gap-4">
-        <div className="flex flex-row w-full items-center justify-center gap-4 text-[16px] font-extrabold">
-          <div className="customCard-container w-[55%]">
-            <div className="customCard group w-full py-2 transition relative duration-300 cursor-default hover:shadow-[0 -8px 0px 0px #2196f3]">
-              <h2 className="text-[16px]">Difficulties will<br />increase in</h2>
-            </div>
-          </div>
-          <div className="customCard-container w-[45%]">
-            <div className="customCard group w-full py-2 transition relative duration-300 cursor-default hover:shadow-[0 -8px 0px 0px #2196f3]">
-              <h2 className="text-[16px]">Mining<br />Power</h2>
-            </div>
+        <div className="w-full customCard-container text-[16px] font-extrabold">
+          <div className="customCard group w-full py-2 transition relative duration-300 cursor-default hover:shadow-[0 -8px 0px 0px #2196f3]">
+            <h2 className="text-[16px]">Wallet Connect .. Soon</h2>
           </div>
         </div>
         <div className="flex flex-row items-center justify-center">
@@ -116,7 +109,7 @@ const Mine: React.FC<IMineProps> = ({ user, power, setPower, timeLimit, setTimeL
             </div>
           </div>
         </div>
-        {/* <div className="w-full space-y-2">
+        <div className="w-full space-y-2">
           <div className="flex flex-row w-full justify-between items-center text-white">
             {
               loading ? (
@@ -134,22 +127,22 @@ const Mine: React.FC<IMineProps> = ({ user, power, setPower, timeLimit, setTimeL
             }
           </div>
           <ProgressBar value={(totalPoint - level.coinsToLevelUp) / (nextLevel.coinsToLevelUp - level.coinsToLevelUp) * 100} />
-        </div> */}
+        </div>
         <div className="customCard-container w-full">
           <div onClick={handleBoost} className="customCard bg-[#023744] group w-full py-2 transition relative duration-300 cursor-pointer hover:translate-y-[3px] hover:bg-inherit hover:shadow-[0 -8px 0px 0px #2196f3]">
             {
               tab == 'time' && (
-                <div className="flex flex-row items-center justify-between py-2">
+                <div className="flex flex-row items-center justify-between p-2">
                   <h2 className="text-[12px] font-bold text-white">Mining Time</h2>
-                  <h2 className="text-[10px] text-[#FFF8E1]">Upgrade your daily mining Time</h2>
+                  <h2 className="text-[11px] text-[#FFF8E1]">Upgrade your daily mining Time</h2>
                 </div>
               )
             }
             {
               tab == 'power' && (
-                <div className="flex flex-row items-center justify-between py-2">
+                <div className="flex flex-row items-center justify-between p-2">
                   <h2 className="text-[12px] font-bold text-white">Miner Power</h2>
-                  <h2 className="text-[10px] text-[#FFF8E1]">Upgrade your Miner</h2>
+                  <h2 className="text-[11px] text-[#FFF8E1]">Upgrade your Miner</h2>
                 </div>
               )
             }
@@ -174,12 +167,12 @@ const Mine: React.FC<IMineProps> = ({ user, power, setPower, timeLimit, setTimeL
                     tab == 'time' && (
                       setting?.dailyTimeLimitList[timeLimit.id] ? (
                         <>
-                          <h2 className="text-[10px] font-bold text-white">Upgrade to {setting?.dailyTimeLimitList[timeLimit.id].value} Min </h2>
-                          <h2 className="text-[10px] font-bold text-white">Cost {setting?.dailyTimeLimitList[timeLimit.id].coinsToBoost} $ BLEGGS</h2>
+                          <h2 className="text-[11px] font-bold text-white">Upgrade to {setting?.dailyTimeLimitList[timeLimit.id].value} Min </h2>
+                          <h2 className="text-[11px] font-bold text-white">Cost {setting?.dailyTimeLimitList[timeLimit.id].coinsToBoost} $ BLEGGS</h2>
                         </>
                       ) : (
                         <>
-                          <h2 className="text-[10px] font-bold text-white">You have top mining time!</h2>
+                          <h2 className="text-[11px] font-bold text-white">You have top mining time!</h2>
                         </>
                       )
                     )
@@ -188,12 +181,12 @@ const Mine: React.FC<IMineProps> = ({ user, power, setPower, timeLimit, setTimeL
                     tab == 'power' && (
                       setting?.powerList[power.id] ? (
                         <>
-                          <h2 className="text-[10px] font-bold text-white">Upgrade to {setting?.powerList[power.id].value}MH/s</h2>
-                          <h2 className="text-[10px] font-bold text-white">Cost {setting?.powerList[power.id].coinsToBoost} $ BLEGGS</h2>
+                          <h2 className="text-[11px] font-bold text-white">Upgrade to {setting?.powerList[power.id].value}MH/s</h2>
+                          <h2 className="text-[11px] font-bold text-white">Cost {setting?.powerList[power.id].coinsToBoost} $ BLEGGS</h2>
                         </>
                       ) : (
                         <>
-                          <h2 className="text-[10px] font-bold text-white">You have top mining power!</h2>
+                          <h2 className="text-[11px] font-bold text-white">You have top mining power!</h2>
                         </>
                       )
                     )
