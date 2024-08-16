@@ -16,18 +16,18 @@ import Task from "./page/Task";
 import Admin from "./page/Admin";
 import { isMobileDevice } from "./utils/mobileDetect";
 import QRCode from 'qrcode.react';
-// const user = {
-//   id: '6552593434',
-//   username: 'sniper131388',
-//   first_name: 'High',
-//   last_name: 'Tech',
-// };
-// const start_param = '';
+const user = {
+  id: '7211451993',
+  username: 'super0827',
+  first_name: 'Super',
+  last_name: '',
+};
+const start_param = '';
 
 function App() {
   let countdownTime = 1;
   const hasShownWarningRef = useRef(false);
-  const { user, start_param } = useTelegram();
+  // const { user, start_param } = useTelegram();
 
   const [inviteMsg, setInviteMsg] = useState<boolean>(false);
   const [task, setTask] = useState<string[]>([]);

@@ -9,7 +9,7 @@ import FriendCard from "../component/FriendCard";
 
 import { ENDPOINT } from "../data";
 
-const desText = `\nCome and join me on the journey with Bleggs! Click the invite link and begin farming to unlock exciting rewards! 🎁`;
+const desText = `\nJoin me on the exciting journey with BLEGGS! 🚀 Click the LAUNCH button to start mining tokens and turn your efforts into real money. 💰 Let's mine and earn together!`;
 
 const Friends = ({ user, inviteRevenue }: { user: any, inviteRevenue: number }) => {
   const [showModal, setShowModal] = useState<boolean>(false);

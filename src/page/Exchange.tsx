@@ -43,7 +43,7 @@ const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining,
     }
   }
   return (
-    <div className="h-full flex flex-col text-center items-center justify-between py-2 px-4">
+    <div className="h-full flex flex-col text-center items-center justify-between py-2">
       {
         start ? (
           <div className="flex flex-col w-full">

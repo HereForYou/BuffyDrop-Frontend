@@ -9,8 +9,11 @@ interface ISplashProps {
 
 const Splash: React.FC<ISplashProps> = ({ power, totalPoint, referral, setTab }) => {
   function convertToShorthand(number: number) {
-    if (number >= 1000) {
-      return Math.floor(number / 1000) + 'k';
+    if (number >= 1000000) {
+      return Math.floor(number / 1000000) + 'M';
+    }
+    else if (number >= 1000) {
+      return Math.floor(number / 1000) + 'K';
     }
     return number.toString();
   }
@@ -44,7 +47,7 @@ const Splash: React.FC<ISplashProps> = ({ power, totalPoint, referral, setTab })
           <div className='relative h-[100px] aspect-auto'>
             <img src="badge 2.png" alt="badge" className="h-[100px] aspect-auto" />
             <div className='absolute flex items-center justify-center top-0 left-0 h-[100px] w-full text-center'>
-              <h1 className='text-[32px] text-[#FFD798] font-bold'>{convertToShorthand(totalPoint)}</h1>
+              <h1 className='text-[14px] text-[#FFD798] font-bold'>{convertToShorthand(totalPoint)}</h1>
             </div>
           </div>
           <img src="badge 3.png" alt="badge" className="h-[60px] aspect-square" />

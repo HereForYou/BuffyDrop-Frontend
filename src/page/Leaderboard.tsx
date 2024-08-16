@@ -40,7 +40,7 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
   }
 
   return (
-    <div className="h-full flex flex-col text-center items-center justify-between py-2 px-4">
+    <div className="h-full flex flex-col text-center items-center justify-between py-2">
       <div className="customCard-container w-full">
         <div className="customCard group py-4 transition relative duration-300 cursor-default hover:shadow-[0 -8px 0px 0px #2196f3]">
           <h2 className="text-[24px] font-extrabold">{users.length} $BLEGGS Miners</h2>
