@@ -19,7 +19,8 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
   useEffect(() => {
     if (!hasShownWarningRef.current && user) {
       setLoading(true);
-      axios.get(`${ENDPOINT}/api/user/all/${user.id}`)
+      // axios.get(`${ENDPOINT}/api/user/all/${user.id}`)
+      axios.get(`${ENDPOINT}/api/user/top/${user.id}?num=100`)
         .then((res) => {
           let userInfo = res.data;
           setUsers(userInfo.allUsers);

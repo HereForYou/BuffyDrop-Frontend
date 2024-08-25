@@ -1,31 +1,32 @@
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { faPlus, faXmark, faPencil, faTrashCan, faSave } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ENDPOINT } from "../../data";
 
-const AdminSetting = ({ setting, setSetting }: { setting: any, setSetting: (value: any) => void }) => {
+const DexSetting = ({ setting, setSetting }: { setting: any, setSetting: (value: any) => void }) => {
     const [editRow, setEditRow] = useState<number>(-1);
     const [addMode, setAddMode] = useState<boolean>(false);
 
     const [settingItem, setSettingItem] = useState<any>({
         id: 1,
-        username: ""
+        name: "",
+        img: null
     })
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
         setSettingItem({
             ...settingItem,
             id: index + 1,
-            username: e.target.value
+            name: e.target.value
         });
     }
 
     const handleDelete = (index: number) => {
         let isSure = window.confirm('You really want to delete this one?');
         if (isSure) {
-            axios.delete(`${ENDPOINT}/api/setting/delete/admin/${index}`)
+            axios.delete(`${ENDPOINT}/api/setting/delete/dex/${index}`)
                 .then(res => {
                     setSetting(res.data);
                     setEditRow(-1);
@@ -38,11 +39,17 @@ const AdminSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
     }
 
     const submitSetting = () => {
-        let data = {
-            id: settingItem.id,
-            username: settingItem.username,
+        const formData = new FormData();
+        formData.append("id", settingItem.id.toString());
+        formData.append("name", settingItem.name);
+        if (settingItem.img) {
+            formData.append("img", settingItem.img);
         }
-        axios.put(`${ENDPOINT}/api/setting/update/admin/${editRow}`, data)
+        axios.put(`${ENDPOINT}/api/setting/update/dex/img`, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        })
             .then(res => {
                 setSetting(res.data);
                 setEditRow(-1);
@@ -50,8 +57,26 @@ const AdminSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
             })
             .catch(err => {
                 console.error("Something went wrong.", err);
-            })
-    }
+            });
+    };
+
+    const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            const file = e.target.files[0];
+            setSettingItem({
+                ...settingItem,
+                img: file
+            });
+        }
+    };
+
+    useEffect(() => {
+        if (settingItem.img && settingItem.name) {
+            submitSetting();
+            setAddMode(false);
+        }
+    }, [settingItem.img]);
+
     return (
         <>
             <div className="overflow-y-auto text-white py-[30px] w-full">
@@ -60,17 +85,25 @@ const AdminSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
                         <thead>
                             <tr>
                                 <td className="text-[15px] font-bold">No</td>
-                                <td className="text-[15px] font-bold">User Name</td>
+                                <td className="text-[15px] font-bold">Dex Name</td>
+                                <td className="text-[15px] font-bold">Image</td>
                                 <td className="text-[15px] font-bold">Action</td>
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                setting?.admin.map((item: any, index: number) => (
+                                setting?.dexList.map((item: any, index: number) => (
                                     editRow !== index ? (
                                         <tr key={index}>
                                             <td className="text-[13px] font-bold w-[10%] md:w-[30%]">{index + 1}</td>
-                                            <td className="text-[13px] w-[30%]">{item.username}</td>
+                                            <td className="text-[13px] w-[30%]">{item.name}</td>
+                                            <td className="text-[13px] w-[30%]">
+                                                <div className="w-full flex items-center justify-center">
+                                                    <img
+                                                        src={`${item?.img ? `${ENDPOINT}/${item?.img}` : 'exchange.svg'}`} className={`rounded-full overflow-hidden w-8 h-8`}
+                                                    />
+                                                </div>
+                                            </td>
                                             <td className="text-[13px] w-[30%] space-x-4">
                                                 <button onClick={
                                                     () => {
@@ -78,7 +111,7 @@ const AdminSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
                                                         setAddMode(false);
                                                         setSettingItem({
                                                             id: index + 1,
-                                                            username: `${item.username}`,
+                                                            name: `${item.name}`,
                                                         })
                                                     }
                                                 } className="actionBtn">
@@ -102,11 +135,26 @@ const AdminSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
                                             <td className="text-[13px] font-bold w-[30%]">
                                                 <input
                                                     type="text" className="h-[30px] w-[60px]"
-                                                    placeholder="User Name"
-                                                    name="username"
-                                                    value={settingItem.username}
+                                                    placeholder="Dex Name"
+                                                    name="name"
+                                                    value={settingItem.name}
                                                     onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, index)}
                                                 />
+                                            </td>
+                                            <td className="text-[13px] w-[30%]">
+                                                <div className="w-full flex items-center justify-center">
+                                                    <img
+                                                        src={`${item?.img ? `${ENDPOINT}/${item?.img}` : 'exchange.svg'}`} className={`rounded-full overflow-hidden w-8 h-8 cursor-pointer hover:opacity-30`}
+                                                        onClick={() => document.getElementById(`file-input-${index}`)?.click()}
+                                                    />
+                                                    <input
+                                                        id={`file-input-${index}`}
+                                                        type="file"
+                                                        accept="image/*"
+                                                        className="hidden"
+                                                        onChange={handleImageChange}
+                                                    />
+                                                </div>
                                             </td>
                                             <td className="text-[13px] w-[30%] space-x-4">
                                                 <button onClick={submitSetting} className="actionBtn">
@@ -125,15 +173,31 @@ const AdminSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
                             {
                                 addMode && (
                                     <tr className="">
-                                        <td className="text-[13px] font-bold">{setting?.admin.length + 1}</td>
+                                        <td className="text-[13px] font-bold">{setting?.dexList.length + 1}</td>
                                         <td className="text-[13px] font-bold">
                                             <input
-                                                type="text" className="h-[30px] w-[60px]"
-                                                placeholder="User Name"
-                                                name="username"
-                                                value={settingItem.username}
-                                                onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, setting?.admin.length)}
+                                                type="text" className="h-[30px] w-[100px]"
+                                                placeholder="Dex Name"
+                                                name="name"
+                                                value={settingItem.name}
+                                                onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e, setting?.dexList.length)}
                                             />
+                                        </td>
+                                        <td className="text-[13px] w-[30%]">
+                                            <div className="w-full flex items-center justify-center">
+                                                <img
+                                                    src={`${settingItem?.img ? `${ENDPOINT}/${settingItem?.img}` : 'exchange.svg'}`} className={`rounded-full overflow-hidden w-8 h-8 cursor-pointer hover:opacity-30`}
+                                                    onClick={() => document.getElementById(`file-input-${setting?.dexList.length}`)?.click()}
+                                                />
+                                                <input
+                                                    id={`file-input-${setting?.dexList.length}`}
+                                                    type="file"
+                                                    accept="image/*"
+                                                    className="hidden"
+                                                    onChange={handleImageChange}
+                                                />
+
+                                            </div>
                                         </td>
                                         <td className="text-[13px] space-x-4">
                                             <button onClick={() => { setAddMode(false), submitSetting(); }} className="actionBtn">
@@ -152,9 +216,9 @@ const AdminSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
                     </table>
                     <button onClick={() => {
                         setAddMode(true);
-                        setEditRow(setting?.admin.length);
+                        setEditRow(setting?.dexList.length);
                         setSettingItem({
-                            id: setting?.admin.length + 1,
+                            id: setting?.dexList.length + 1,
                             username: "",
                         })
                     }} className="actionBtn mt-8">
@@ -167,4 +231,4 @@ const AdminSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
     )
 }
 
-export default AdminSetting;
+export default DexSetting;

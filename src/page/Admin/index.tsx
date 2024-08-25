@@ -4,8 +4,8 @@ import TabBar from "./tabBar";
 import LevelSetting from "./levelSetting";
 import TaskSetting from "./taskSetting";
 import PowerSetting from "./powerSetting";
+import DexSetting from "./dexSetting";
 import AdminSetting from "./adminSetting";
-
 
 export default function ({ setting, setSetting }: { setting: any, setSetting: (value: any) => void }) {
     const [tab, setTab] = useState<string>('default');
@@ -41,6 +41,7 @@ export default function ({ setting, setSetting }: { setting: any, setSetting: (v
                         {tab == 'Level' && <LevelSetting setting={setting} setSetting={setSetting} />}
                         {tab == 'Task' && <TaskSetting setting={setting} setSetting={setSetting} />}
                         {tab == 'Power' && <PowerSetting setting={setting} setSetting={setSetting} />}
+                        {tab == 'Dex' && <DexSetting setting={setting} setSetting={setSetting} />}
                         {tab == 'Admin' && <AdminSetting setting={setting} setSetting={setSetting} />}
                     </>
                 )

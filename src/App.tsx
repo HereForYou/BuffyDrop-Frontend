@@ -16,22 +16,24 @@ import Task from "./page/Task";
 import Admin from "./page/Admin";
 import { isMobileDevice } from "./utils/mobileDetect";
 import QRCode from 'qrcode.react';
-const user = {
-  id: '7211451993',
-  username: 'super0827',
-  first_name: 'Super',
-  last_name: '',
-};
-const start_param = '';
+// const user = {
+//   id: '7211451993',
+//   username: 'super0827',
+//   first_name: 'Super',
+//   last_name: '',
+// };
+// const start_param = '';
 
 function App() {
+  console.log("Telegram WebApp====>", (window as any).Telegram?.WebApp);
   let countdownTime = 1;
   const hasShownWarningRef = useRef(false);
-  // const { user, start_param } = useTelegram();
+  const { user, start_param } = useTelegram();
 
   const [inviteMsg, setInviteMsg] = useState<boolean>(false);
   const [task, setTask] = useState<string[]>([]);
   const [setting, setSetting] = useState<any>({});
+  const [exchange, setExchange] = useState<any>({});
   const [loading, setLoading] = useState(true);
   const [tab, setTab] = useState<string>('Splash');
   const [start, setStart] = useState<boolean>(false);
@@ -117,13 +119,12 @@ function App() {
       axios.post(`${ENDPOINT}/api/user/${user?.id}`, data)
         .then(response => {
           const userData = response.data.user;
+          setExchange(userData.dex);
           setTotalPoint(userData.totalPoints);
           setPower(userData.power);
           setTimeLimit(userData.dailyTimeLimit);
           setTask(userData.task);
           setReferral((userData.friends).length);
-          // clearInterval(userData.intervalId);
-          // points = userData.curPoints;
           countdownTime = userData.countDown;
           if (countdownTime == 0) setReachDailyLimit(true);
           setCurrentCount(countdownTime);
@@ -201,7 +202,10 @@ function App() {
                   start={start} hour={hour} min={min} sec={sec}
                   timeLimit={timeLimit} power={power}
                   level={level} nextLevel={nextLevel}
-                  loading={loading} />
+                  loading={loading}
+                  setting={setting}
+                  exchange={exchange}
+                />
               }
               {
                 (tab == 'Mine') && <Mine power={power} setPower={setPower} timeLimit={timeLimit} setTimeLimit={setTimeLimit}

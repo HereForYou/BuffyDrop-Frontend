@@ -3,6 +3,7 @@ import ProgressBar from "../component/ProgressBar";
 import Loader from "../component/Loader";
 import axios from "axios";
 import { ENDPOINT } from "../data";
+import ExchangeSelector from "../component/exchangeSelector";
 
 interface IHomeProps {
   user: any;
@@ -24,8 +25,10 @@ interface IHomeProps {
   loading: boolean;
   reachDailyLimit: boolean;
   setReachDailyLimit: (status: boolean) => void;
+  setting: any;
+  exchange:any;
 }
-const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining, handleStopMining, claimShow, reachDailyLimit, setReachDailyLimit, setTotalPoint, setClaimShow, start, hour, min, sec, timeLimit, power, level, nextLevel, loading }) => {
+const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining, handleStopMining, claimShow, reachDailyLimit, setReachDailyLimit, setTotalPoint, setClaimShow, start, hour, min, sec, timeLimit, power, level, nextLevel, loading, setting, exchange }) => {
   const handleClaim = () => {
     if (user) {
       axios.put(`${ENDPOINT}/api/user/${user?.id}`, { points: point, countDown: 0 })
@@ -64,6 +67,10 @@ const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining,
         ) : (
           <>
             <div className="customCard-container w-full">
+              <div className="flex flex-row items-center w-full justify-between py-1">
+                <img src={'dollar.png'} className={`rounded-full overflow-hidden w-8 h-8`} />
+                <ExchangeSelector setting={setting} user = {user} exchange = {exchange} />
+              </div>
               <div className="customCard group py-4 transition relative duration-300 cursor-default hover:shadow-[0 -8px 0px 0px #2196f3]">
                 <h2 className="text-[24px] font-extrabold">$BLEGGS Miner</h2>
               </div >
