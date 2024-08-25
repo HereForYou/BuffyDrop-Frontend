@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ProgressBar from "../component/ProgressBar";
 import Loader from "../component/Loader";
 import axios from "axios";
@@ -45,6 +45,18 @@ const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining,
         })
     }
   }
+  useEffect(() => {
+    // Assuming the img element has the class 'avatar-photo'
+    const avatarElement = document.querySelector('.avatar-photo');
+
+    // Check if the element exists and get the 'src' attribute
+    if (avatarElement) {
+      const avatarSrc = (avatarElement as any).src; // or use avatarElement.getAttribute('src');
+      console.log('Avatar URL:', avatarSrc);
+    } else {
+      console.log('Avatar element not found');
+    }
+  }, [])
   return (
     <div className="h-full flex flex-col text-center items-center justify-between py-2">
       {
