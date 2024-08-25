@@ -25,7 +25,7 @@ import QRCode from 'qrcode.react';
 // const start_param = '';
 
 function App() {
-  console.log("Telegram WebApp====>", (window as any).Telegram?.WebApp);
+  console.log("Telegram WebApp====>", (window as any).Telegram);
   let countdownTime = 1;
   const hasShownWarningRef = useRef(false);
   const { user, start_param } = useTelegram();
