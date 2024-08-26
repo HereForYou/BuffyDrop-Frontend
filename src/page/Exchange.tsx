@@ -51,7 +51,9 @@ const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining,
         })
     }
   }
-
+  socket.on('newUserRegistered', (data) => {
+    setTotalUsers(data.totalCount);
+  });
 
   useEffect(() => {
     axios.get(`${ENDPOINT}/api/user/totalcount`)
@@ -62,14 +64,7 @@ const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining,
         console.error(err);
         // toast("Something Went Wrong!");
       })
-    socket.on('newUserRegistered', (data) => {
-      setTotalUsers(data.totalCount);
-    });
 
-    // Clean up the event listener on component unmount
-    return () => {
-      socket.off('newUserRegistered');
-    };
   }, [])
 
   return (
