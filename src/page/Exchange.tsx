@@ -1,9 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ProgressBar from "../component/ProgressBar";
 import Loader from "../component/Loader";
 import axios from "axios";
 import { ENDPOINT } from "../data";
 import ExchangeSelector from "../component/exchangeSelector";
+import io from 'socket.io-client';
+
+const socket = io(ENDPOINT); // Replace with your server's URL
 
 interface IHomeProps {
   user: any;
@@ -29,6 +32,9 @@ interface IHomeProps {
   exchange: any;
 }
 const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining, handleStopMining, claimShow, reachDailyLimit, setReachDailyLimit, setTotalPoint, setClaimShow, start, hour, min, sec, timeLimit, power, level, nextLevel, loading, setting, exchange }) => {
+
+  const [totalUsers, setTotalUsers] = useState<number>(0);
+
   const handleClaim = () => {
     if (user) {
       axios.put(`${ENDPOINT}/api/user/${user?.id}`, { points: point, countDown: 0 })
@@ -45,6 +51,26 @@ const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining,
         })
     }
   }
+
+
+  useEffect(() => {
+    axios.get(`${ENDPOINT}/api/user/totalcount`)
+      .then(res => {
+        setTotalUsers(res.data.totalCount);
+      })
+      .catch(err => {
+        console.error(err);
+        // toast("Something Went Wrong!");
+      })
+    socket.on('newUserRegistered', (data) => {
+      setTotalUsers(data.totalCount);
+    });
+
+    // Clean up the event listener on component unmount
+    return () => {
+      socket.off('newUserRegistered');
+    };
+  }, [])
 
   return (
     <div className="h-full flex flex-col text-center items-center justify-between py-2">
@@ -67,14 +93,18 @@ const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining,
           </div>
         ) : (
           <>
-            <div className="customCard-container w-full">
+            <div className="w-full">
               <div className="flex flex-row items-center w-full justify-between py-1">
-                <img src={`${user?.photo_url}`} className={`rounded-full overflow-hidden w-8 h-8`} />
+                <div className="customCard-container flex flex-row text-[14px] font-bold items-center gap-2 rounded-full border border-[#D18729] p-1">
+                  <img src={'user.svg'} className={`rounded-full overflow-hidden w-6 h-6`} />
+                  <h4>{user?.username}{user?.last_name}</h4>
+                </div>
                 <ExchangeSelector setting={setting} user={user} exchange={exchange} />
               </div>
-              <div className="customCard group py-4 transition relative duration-300 cursor-default hover:shadow-[0 -8px 0px 0px #2196f3]">
+              <h4 className="text-white text-[16px] font-bold">Active Workers = {totalUsers}</h4>
+              {/* <div className="customCard group py-4 transition relative duration-300 cursor-default hover:shadow-[0 -8px 0px 0px #2196f3]">
                 <h2 className="text-[24px] font-extrabold">$BLEGGS Miner</h2>
-              </div >
+              </div > */}
             </div >
             <div className="flex flex-col items-center justify-center w-full gap-2">
               <img className="logo h-[60px] w-[60px] rounded-full" src="dollar.png" alt="logo" />

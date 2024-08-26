@@ -23,7 +23,7 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
       axios.get(`${ENDPOINT}/api/user/top/${user.id}?num=100`)
         .then((res) => {
           let userInfo = res.data;
-          setUsers(userInfo.allUsers);
+          setUsers(userInfo.topUsers);
           setCurUser(userInfo.curUser);
           setRaking(userInfo.ranking);
           setLoading(false);
@@ -42,47 +42,48 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
 
   return (
     <div className="h-full flex flex-col text-center items-center justify-between py-2">
-      <div className="customCard-container w-full">
-        <div className="customCard group py-4 transition relative duration-300 cursor-default hover:shadow-[0 -8px 0px 0px #2196f3]">
-          <h2 className="text-[24px] font-extrabold">{users.length} $BLEGGS Miners</h2>
+      <div className="w-full">
+        <div className="customCard-container w-full">
+          <div className="group py-1 transition relative duration-300 cursor-default hover:shadow-[0 -8px 0px 0px #2196f3]">
+            <h2 className="text-[24px] font-extrabold">Top {users.length} $BLEGGS Miners</h2>
+          </div >
         </div >
-      </div >
-      <div className="flex px-3 text-lg w-full text-[#2ea6d9f0] items-center justify-between">
-        <div className="text-center w-[20%]">Rank</div>
-        <div className="text-center w-[60%]">User</div>
-        <div className="text-center w-[30%]">$BLEGGS</div>
-      </div>
-      {
-        loading ? (
-          <div className="w-full flex items-center justify-center">
-            <Loader width="30" />
-          </div>
-        ) : (
-          <div className="h-[65vh] overflow-auto w-full">
-            {users.map((iUser: any, index) => (
-              <div
-                key={index}
-                className={`flex px-3 py-1 items-center bg-[#FFD798] w-full`}
-              >
-                <div className="text-lg text-center pl-2 w-[20%]">{index + 1}</div>
-                <div className="relative h-10 overflow-hidden w-[60%] flex items-center">
-                  <img
-                    src="/logo.png"
-                    alt="avatar"
-                    className="w-10 h-10 rounded-full"
-                  />
-                  <p className="text-medium text-start pl-2">{iUser.userName}</p>
-                </div>
-
-                <p className="text-medium pl-2 w-[30%] text-center">
-                  {formatNumberWithCommas(iUser.totalPoints)}
-                </p>
+        {
+          loading ? (
+            <div className="w-full flex items-center justify-center">
+              <Loader width="30" />
+            </div>
+          ) : (
+            <div className="h-[65vh] overflow-auto w-full">
+              <div className="flex px-3 text-lg w-full text-[#2ea6d9f0] items-center justify-between">
+                <div className="text-center w-[20%]">Rank</div>
+                <div className="text-center w-[60%]">User</div>
+                <div className="text-center w-[30%]">$BLEGGS</div>
               </div>
-            ))}
-          </div>
+              {users.map((iUser: any, index) => (
+                <div
+                  key={index}
+                  className={`flex px-3 py-1 items-center bg-[#FFD798] w-full`}
+                >
+                  <div className="text-lg text-center pl-2 w-[20%]">{index + 1}</div>
+                  <div className="relative h-10 overflow-hidden w-[60%] flex items-center">
+                    <img
+                      src="/logo.png"
+                      alt="avatar"
+                      className="w-10 h-10 rounded-full"
+                    />
+                    <p className="text-medium text-start pl-2">{iUser.userName}</p>
+                  </div>
 
-        )
-      }
+                  <p className="text-medium pl-2 w-[30%] text-center">
+                    {formatNumberWithCommas(iUser.totalPoints)}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )
+        }
+      </div>
       {loading ? (
         <div className="w-full flex items-center justify-center">
           <Loader width="30" />

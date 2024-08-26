@@ -100,7 +100,7 @@ const DexSetting = ({ setting, setSetting }: { setting: any, setSetting: (value:
                                             <td className="text-[13px] w-[30%]">
                                                 <div className="w-full flex items-center justify-center">
                                                     <img
-                                                        src={`${item?.img ? `${ENDPOINT}/${item?.img}` : 'exchange.svg'}`} className={`rounded-full overflow-hidden w-8 h-8`}
+                                                        src={`${item?.img ? `${ENDPOINT}/${item?.img}` : 'unknown.svg'}`} className={`rounded-full overflow-hidden w-8 h-8`}
                                                     />
                                                 </div>
                                             </td>
@@ -144,7 +144,7 @@ const DexSetting = ({ setting, setSetting }: { setting: any, setSetting: (value:
                                             <td className="text-[13px] w-[30%]">
                                                 <div className="w-full flex items-center justify-center">
                                                     <img
-                                                        src={`${item?.img ? `${ENDPOINT}/${item?.img}` : 'exchange.svg'}`} className={`rounded-full overflow-hidden w-8 h-8 cursor-pointer hover:opacity-30`}
+                                                        src={`${item?.img ? `${ENDPOINT}/${item?.img}` : 'unknown.svg'}`} className={`rounded-full overflow-hidden w-8 h-8 cursor-pointer hover:opacity-30`}
                                                         onClick={() => document.getElementById(`file-input-${index}`)?.click()}
                                                     />
                                                     <input
@@ -186,7 +186,7 @@ const DexSetting = ({ setting, setSetting }: { setting: any, setSetting: (value:
                                         <td className="text-[13px] w-[30%]">
                                             <div className="w-full flex items-center justify-center">
                                                 <img
-                                                    src={`${settingItem?.img ? `${ENDPOINT}/${settingItem?.img}` : 'exchange.svg'}`} className={`rounded-full overflow-hidden w-8 h-8 cursor-pointer hover:opacity-30`}
+                                                    src={`${settingItem?.img ? `${ENDPOINT}/${settingItem?.img}` : 'unknown.svg'}`} className={`rounded-full overflow-hidden w-8 h-8 cursor-pointer hover:opacity-30`}
                                                     onClick={() => document.getElementById(`file-input-${setting?.dexList.length}`)?.click()}
                                                 />
                                                 <input
