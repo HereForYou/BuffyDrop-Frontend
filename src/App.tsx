@@ -38,7 +38,7 @@ function App() {
   const [start, setStart] = useState<boolean>(false);
   const [reachDailyLimit, setReachDailyLimit] = useState<boolean>(false);
   const [claimShow, setClaimShow] = useState<boolean>(false);
-  const [point, setPoint] = useState<number>(0.000);
+  const [point, setPoint] = useState<number>(0.0);
   const [referral, setReferral] = useState<number>(0);
   const [currentCount, setCurrentCount] = useState<number>(0);
   const [totalPoint, setTotalPoint] = useState<number>(0.000);
@@ -67,8 +67,8 @@ function App() {
             axios.put(`${ENDPOINT}/api/user/level/${user?.id}`, {
               newLevel: i
             })
-              .then(response => {
-                console.log('response', response.data);
+              .then(res => {
+                console.log('response', res.data);
               })
               .catch(error => {
                 console.error('Error occurred during PUT request:', error);
@@ -111,31 +111,31 @@ function App() {
       axios.get(`${ENDPOINT}/api/setting/all`)
         .then(res => {
           setSetting(res.data);
+          axios.post(`${ENDPOINT}/api/user/${user?.id}`, data)
+            .then(response => {
+              const userData = response.data.user;
+              setExchange(userData.dex);
+              setTotalPoint(userData.totalPoints);
+              setPower(res.data.powerList[userData.power.id - 1]);
+              setTimeLimit(userData.dailyTimeLimit);
+              setTask(userData.task);
+              setReferral((userData.friends).length);
+              countdownTime = userData.countDown;
+              if (countdownTime == 0) setReachDailyLimit(true);
+              setCurrentCount(countdownTime);
+              if (start_param && !inviteMsg && start_param != userData.inviteLink) {
+                toast.success("You are invited!");
+                setInviteMsg(true);
+              }
+              setLoading(false);
+            })
+            .catch(error => {
+              console.error('Error occurred during PUT request:', error);
+            });
         })
         .catch(err => {
           console.error(err);
         })
-      axios.post(`${ENDPOINT}/api/user/${user?.id}`, data)
-        .then(response => {
-          const userData = response.data.user;
-          setExchange(userData.dex);
-          setTotalPoint(userData.totalPoints);
-          setPower(userData.power);
-          setTimeLimit(userData.dailyTimeLimit);
-          setTask(userData.task);
-          setReferral((userData.friends).length);
-          countdownTime = userData.countDown;
-          if (countdownTime == 0) setReachDailyLimit(true);
-          setCurrentCount(countdownTime);
-          if (start_param && !inviteMsg && start_param != userData.inviteLink) {
-            toast.success("You are invited!");
-            setInviteMsg(true);
-          }
-          setLoading(false);
-        })
-        .catch(error => {
-          console.error('Error occurred during PUT request:', error);
-        });
     }
   }, [tab]);
 
@@ -159,7 +159,7 @@ function App() {
   }, [start, currentCount]);
 
   useEffect(() => {
-    setIsMobile(!isMobileDevice());
+    setIsMobile(isMobileDevice());
   }, []);
 
   const handleMining = () => {
@@ -204,6 +204,7 @@ function App() {
                   loading={loading}
                   setting={setting}
                   exchange={exchange}
+                  setExchange={setExchange}
                 />
               }
               {

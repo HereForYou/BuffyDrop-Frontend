@@ -40,8 +40,8 @@ const LevelSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
     const submitSetting = () => {
         let data = {
             level: settingItem.level,
-            earnPerSecond: parseInt(settingItem.earnPerSecond, 10),
-            coinsToLevelUp: parseInt(settingItem.coinsToLevelUp, 10)
+            earnPerSecond: parseFloat(settingItem.earnPerSecond),
+            coinsToLevelUp: parseFloat(settingItem.coinsToLevelUp)
         }
         axios.put(`${ENDPOINT}/api/setting/update/levelStandard`, data)
             .then(res => {

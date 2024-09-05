@@ -3,6 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { toast } from "react-hot-toast";
 import Loader from "../component/Loader";
 import { ENDPOINT } from "../data";
+import { formatNumberWithCommas } from "../utils/functions";
 
 interface ILeaderboardProps {
   user: any;
@@ -36,10 +37,6 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
     }
   }, [])
 
-  function formatNumberWithCommas(number: number, locale = "en-US") {
-    return new Intl.NumberFormat(locale).format(number);
-  }
-
   return (
     <div className="h-full flex flex-col text-center items-center justify-between py-2">
       <div className="w-full">
@@ -60,7 +57,7 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
                 <div className="text-center w-[60%]">User</div>
                 <div className="text-center w-[30%]">$BLEGGS</div>
               </div>
-              {users.map((iUser: any, index) => (
+              {users?.map((iUser: any, index) => (
                 <div
                   key={index}
                   className={`flex px-3 py-1 items-center bg-[#FFD798] w-full`}
@@ -72,11 +69,11 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
                       alt="avatar"
                       className="w-10 h-10 rounded-full"
                     />
-                    <p className="text-medium text-start pl-2">{iUser.userName}</p>
+                    <p className="text-medium text-start pl-2">{iUser?.userName}</p>
                   </div>
 
                   <p className="text-medium pl-2 w-[30%] text-center">
-                    {formatNumberWithCommas(iUser.totalPoints)}
+                    {formatNumberWithCommas(iUser?.totalPoints.toFixed(2))}
                   </p>
                 </div>
               ))}
@@ -93,10 +90,10 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
           <div className="text-lg text-center pl-2 w-[20%]">{ranking + 1}</div>
           <div className="relative h-10 overflow-hidden w-[60%] flex items-center">
             <img src="/logo.png" alt="avatar" className="w-10 h-10 rounded-full" />
-            <p className="text-lg text-start pl-2">{curUser.userName}</p>
+            <p className="text-lg text-start pl-2">{curUser?.userName}</p>
           </div>
           <p className="text-lg text-center pl-2 w-[30%]">
-            {formatNumberWithCommas(curUser.totalPoints)}
+            {formatNumberWithCommas(curUser?.totalPoints.toFixed(2))}
           </p>
         </div>
       )}

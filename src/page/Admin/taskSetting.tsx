@@ -47,7 +47,7 @@ const TaskSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
         let data = {
             id: settingItem.id,
             title: settingItem.title,
-            profit: parseInt(settingItem.profit, 10),
+            profit: parseFloat(settingItem.profit),
             link: settingItem.link,
         }
         axios.put(`${ENDPOINT}/api/setting/update/task/${editRow}`, data)
@@ -63,7 +63,7 @@ const TaskSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
 
     const handleDailyRevenueSave = () => {
         let data = {
-            newRevenue: parseInt(dailyRevenue, 10),
+            newRevenue: parseFloat(dailyRevenue),
         }
         axios.put(`${ENDPOINT}/api/setting/update/dailyRevenue`, data)
             .then(res => {
@@ -76,7 +76,7 @@ const TaskSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
     }
     const handleInviteRevenueSave = () => {
         let data = {
-            newRevenue: parseInt(inviteRevenue, 10),
+            newRevenue: parseFloat(inviteRevenue),
         }
         axios.put(`${ENDPOINT}/api/setting/update/inviteRevenue`, data)
             .then(res => {

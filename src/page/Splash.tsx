@@ -1,4 +1,5 @@
 import React from 'react';
+import { convertToShorthand } from '../utils/functions';
 
 interface ISplashProps {
   power: any;
@@ -8,15 +9,7 @@ interface ISplashProps {
 }
 
 const Splash: React.FC<ISplashProps> = ({ power, totalPoint, referral, setTab }) => {
-  function convertToShorthand(number: number) {
-    if (number >= 1000000) {
-      return Math.floor(number / 1000000) + 'M';
-    }
-    else if (number >= 1000) {
-      return Math.floor(number / 1000) + 'K';
-    }
-    return number.toString();
-  }
+
   return (
     <div className="flex flex-col justify-between h-full pt-4">
       {/* <a href='https://app.bleggs.com' target='blank' className="flex flex-row-reverse items-end w-full py-2 cursor-pointer">
@@ -68,7 +61,7 @@ const Splash: React.FC<ISplashProps> = ({ power, totalPoint, referral, setTab })
             <div className="customCard-container p-[3px]">
               <div className="customCard text-center flex cursor-default items-center justify-center h-[70px]">
                 <h3 className="text-[12px] font-bold">
-                  You Earned<br />{totalPoint} BLEGGS
+                  You Earned<br />{totalPoint.toFixed(2)} BLEGGS
                 </h3>
               </div>
             </div>

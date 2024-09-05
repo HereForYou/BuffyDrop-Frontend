@@ -81,7 +81,7 @@ const Mine: React.FC<IMineProps> = ({ level, nextLevel, loading, user, power, se
         <div className="flex flex-row items-center justify-center">
           <img className="logo h-[50px] aspect-square rounded-full" src="dollar.png" alt="logo" />
           <div className="flex flex-col balance gap-2 w-full">
-            <h1 className="font-bold text-[30px] text-white">&nbsp;{totalPoint}</h1>
+            <h1 className="font-bold text-[30px] text-white">&nbsp;{totalPoint.toFixed(2)}</h1>
           </div>
         </div>
         <div className="customCard-container w-full">

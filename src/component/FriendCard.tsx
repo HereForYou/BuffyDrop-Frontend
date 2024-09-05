@@ -2,7 +2,7 @@ interface FriendCardProps {
   name: string;
   role: string;
   level: number;
-  value: string;
+  value: number;
 }
 const FriendCard: React.FC<FriendCardProps> = ({
   name,
@@ -37,7 +37,7 @@ const FriendCard: React.FC<FriendCardProps> = ({
           </div>
           <div className="flex flex-col items-center">
             <img src="dollar.png" alt="" className="w-8 aspect-square" />
-            <h3 className="text-[12px] font-bold">{value}</h3>
+            <h3 className="text-[12px] font-bold">{value.toFixed(2)}</h3>
           </div>
         </div>
       </div>

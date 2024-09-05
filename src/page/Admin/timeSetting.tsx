@@ -41,8 +41,8 @@ const timeSetting = ({ setting, setSetting }: { setting: any, setSetting: (value
     const submitSetting = () => {
         let data = {
             id: parseInt(settingItem.id, 10),
-            value: parseInt(settingItem.value, 10),
-            coinsToBoost: parseInt(settingItem.coinsToBoost, 10)
+            value: parseFloat(settingItem.value),
+            coinsToBoost: parseFloat(settingItem.coinsToBoost)
         }
         axios.put(`${ENDPOINT}/api/setting/update/timeLimit/${editRow}`, data)
             .then(res => {
