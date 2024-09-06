@@ -16,6 +16,7 @@ import Task from "./page/Task";
 import Admin from "./page/Admin";
 import { isMobileDevice } from "./utils/mobileDetect";
 import QRCode from 'qrcode.react';
+import { getUserAvatarUrl } from "./utils/functions";
 const user = {
   id: '7211451993',
   username: 'super0827',
@@ -28,7 +29,7 @@ function App() {
   let countdownTime = 1;
   const hasShownWarningRef = useRef(false);
   // const { user, start_param } = useTelegram();
-  const [photo_url, setPhotoUrl] = useState<string>('');
+  const [photo_url, setPhotoUrl] = useState<string | null>(null);
   const [inviteMsg, setInviteMsg] = useState<boolean>(false);
   const [task, setTask] = useState<string[]>([]);
   const [setting, setSetting] = useState<any>({});
@@ -108,12 +109,12 @@ function App() {
         lastName: user?.last_name,
         start_param: start_param
       };
+      getUserAvatarUrl(user?.id).then((url) => setPhotoUrl(url));
       axios.get(`${ENDPOINT}/api/setting/all`)
         .then(res => {
           setSetting(res.data);
           axios.post(`${ENDPOINT}/api/user/${user?.id}`, data)
             .then(response => {
-              setPhotoUrl(response.data.photo_url);
               const userData = response.data.user;
               setExchange(userData.dex);
               setTotalPoint(userData.totalPoints);

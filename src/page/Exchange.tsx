@@ -12,7 +12,7 @@ const socket = io(ENDPOINT); // Replace with your server's URL
 
 interface IHomeProps {
   user: any;
-  photo_url: string;
+  photo_url: string | null;
   point: number;
   totalPoint: number;
   handleMining: () => void;
