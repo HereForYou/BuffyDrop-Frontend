@@ -2,7 +2,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import { useState, useEffect, useRef } from "react";
 import Exchange from "./page/Exchange";
-// import { useTelegram } from "./hooks/useTelegram";
+import { useTelegram } from "./hooks/useTelegram";
 import axios from "axios";
 import { toast } from 'react-hot-toast';
 import { ToastContainer } from "react-toastify";
@@ -17,18 +17,18 @@ import Admin from "./page/Admin";
 import { isMobileDevice } from "./utils/mobileDetect";
 import QRCode from 'qrcode.react';
 import { getUserAvatarUrl } from "./utils/functions";
-const user = {
-  id: '7211451993',
-  username: 'super0827',
-  first_name: 'Super',
-  last_name: '',
-};
-const start_param = '';
+// const user = {
+//   id: '7211451993',
+//   username: 'super0827',
+//   first_name: 'Super',
+//   last_name: '',
+// };
+// const start_param = '';
 
 function App() {
   let countdownTime = 1;
   const hasShownWarningRef = useRef(false);
-  // const { user, start_param } = useTelegram();
+  const { user, start_param } = useTelegram();
   const [photo_url, setPhotoUrl] = useState<string | null>(null);
   const [inviteMsg, setInviteMsg] = useState<boolean>(false);
   const [task, setTask] = useState<string[]>([]);
@@ -109,7 +109,7 @@ function App() {
         lastName: user?.last_name,
         start_param: start_param
       };
-      getUserAvatarUrl(user?.id).then((url) => setPhotoUrl(url));
+      getUserAvatarUrl((user?.id).toString()).then((url) => setPhotoUrl(url));
       axios.get(`${ENDPOINT}/api/setting/all`)
         .then(res => {
           setSetting(res.data);
