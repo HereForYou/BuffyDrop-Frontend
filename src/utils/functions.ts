@@ -16,4 +16,5 @@ const convertToShorthand = (number: number) => {
 const formatNumberWithCommas = (number: number, locale = "en-US") => {
     return new Intl.NumberFormat(locale).format(number);
 }
+
 export { slicFunc, convertToShorthand, formatNumberWithCommas };

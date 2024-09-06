@@ -2,7 +2,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import { useState, useEffect, useRef } from "react";
 import Exchange from "./page/Exchange";
-import { useTelegram } from "./hooks/useTelegram";
+// import { useTelegram } from "./hooks/useTelegram";
 import axios from "axios";
 import { toast } from 'react-hot-toast';
 import { ToastContainer } from "react-toastify";
@@ -16,19 +16,19 @@ import Task from "./page/Task";
 import Admin from "./page/Admin";
 import { isMobileDevice } from "./utils/mobileDetect";
 import QRCode from 'qrcode.react';
-// const user = {
-//   id: '7211451993',
-//   username: 'super0827',
-//   first_name: 'Super',
-//   last_name: '',
-// };
-// const start_param = '';
+const user = {
+  id: '7211451993',
+  username: 'super0827',
+  first_name: 'Super',
+  last_name: '',
+};
+const start_param = '';
 
 function App() {
   let countdownTime = 1;
   const hasShownWarningRef = useRef(false);
-  const { user, start_param } = useTelegram();
-
+  // const { user, start_param } = useTelegram();
+  const [photo_url, setPhotoUrl] = useState<string>('');
   const [inviteMsg, setInviteMsg] = useState<boolean>(false);
   const [task, setTask] = useState<string[]>([]);
   const [setting, setSetting] = useState<any>({});
@@ -113,6 +113,7 @@ function App() {
           setSetting(res.data);
           axios.post(`${ENDPOINT}/api/user/${user?.id}`, data)
             .then(response => {
+              setPhotoUrl(response.data.photo_url);
               const userData = response.data.user;
               setExchange(userData.dex);
               setTotalPoint(userData.totalPoints);
@@ -193,7 +194,7 @@ function App() {
                   referral={referral} setTab={setTab} />
               }
               {
-                (tab == 'Exchange') && <Exchange user={user} point={point} totalPoint={totalPoint}
+                (tab == 'Exchange') && <Exchange user={user} photo_url={photo_url} point={point} totalPoint={totalPoint}
                   handleMining={handleMining} handleStopMining={handleStopMining} claimShow={claimShow}
                   setTotalPoint={setTotalPoint} setClaimShow={setClaimShow}
                   reachDailyLimit={reachDailyLimit}

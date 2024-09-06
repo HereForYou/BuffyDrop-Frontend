@@ -12,6 +12,7 @@ const socket = io(ENDPOINT); // Replace with your server's URL
 
 interface IHomeProps {
   user: any;
+  photo_url: string;
   point: number;
   totalPoint: number;
   handleMining: () => void;
@@ -34,7 +35,7 @@ interface IHomeProps {
   exchange: any;
   setExchange: (status: any) => void;
 }
-const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining, handleStopMining, claimShow, reachDailyLimit, setReachDailyLimit, setTotalPoint, setClaimShow, start, hour, min, sec, timeLimit, power, level, nextLevel, loading, setting, exchange, setExchange }) => {
+const Exchange: React.FC<IHomeProps> = ({ user, photo_url, point, totalPoint, handleMining, handleStopMining, claimShow, reachDailyLimit, setReachDailyLimit, setTotalPoint, setClaimShow, start, hour, min, sec, timeLimit, power, level, nextLevel, loading, setting, exchange, setExchange }) => {
 
   const [totalUsers, setTotalUsers] = useState<number>(0);
   const [showSetting, setShowSetting] = useState<boolean>(false);
@@ -72,7 +73,6 @@ const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining,
     return () => {
       socket.off('newUserRegistered'); // Remove the listener to prevent memory leaks
     };
-
   }, [])
 
   return (
@@ -102,7 +102,7 @@ const Exchange: React.FC<IHomeProps> = ({ user, point, totalPoint, handleMining,
               <div className="w-full">
                 <div className="flex flex-row items-center w-full justify-between py-1">
                   <div className="customCard-container flex flex-row text-[14px] font-bold items-center gap-1 rounded-full border border-[#D18729] p-1">
-                    <img src={'user.svg'} className={`rounded-full overflow-hidden w-6 h-6`} />
+                    <img src={photo_url || 'user.svg'} className={`rounded-full overflow-hidden w-6 h-6`} />
                     <h4>{slicFunc(user?.username + user?.last_name)}</h4>
                   </div>
                   <ExchangeSelector exchange={exchange} setShowSetting={setShowSetting} />
