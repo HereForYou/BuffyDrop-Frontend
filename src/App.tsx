@@ -161,7 +161,7 @@ function App() {
   }, [start, currentCount]);
 
   useEffect(() => {
-    setIsMobile(isMobileDevice());
+    setIsMobile(!isMobileDevice());
   }, []);
 
   const handleMining = () => {
