@@ -1,5 +1,5 @@
 // const ENDPOINT = 'http://localhost:5000';
 const ENDPOINT = 'https://app.bleggs.com';
-const BOT_TOKEN = '5859581801:AAE9IA-R3EbNsiI1YMkYQeSPZAiahHM1q4o';
+const BOT_TOKEN = '7233907096:AAFXzUYCRmFFN9jJmnNE-gL56awzOh9heCs';
 
 export { ENDPOINT, BOT_TOKEN };
