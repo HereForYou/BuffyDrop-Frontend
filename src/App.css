@@ -68,6 +68,7 @@
   text-align: center;
   color: white;
   font-family: 'Inter';
+  background-color: #000;
 }
 
 .lilita {
@@ -155,7 +156,7 @@
 }
 
 .footer {
-  background-color: #000;
+  background-color: #141313;
 }
 
 input {
