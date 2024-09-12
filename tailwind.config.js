@@ -20,7 +20,7 @@ export default {
         'splash-back': "url('/splash-back.png')",
         'home-back': "url('/home-back.png')",
         'mine-back': "url('/miner-back.png')",
-        'friend-back': "url('/referral-back.png')",
+        'friend-back': "url('/friend-back.png')",
         'task-back': "url('/task-back.png')",
         'airdrop-back': "url('/airdrop-back.png')",
       }

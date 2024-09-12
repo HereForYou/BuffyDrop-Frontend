@@ -66,7 +66,7 @@
   justify-content: center;
   margin: 0 auto;
   text-align: center;
-  color: #012335;
+  color: white;
   font-family: 'Inter';
 }
 
@@ -155,7 +155,7 @@
 }
 
 .footer {
-  background-color: #FFD798;
+  background-color: #000;
 }
 
 input {
