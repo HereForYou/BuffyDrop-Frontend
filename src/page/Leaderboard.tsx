@@ -38,7 +38,7 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
   }, [])
 
   return (
-    <div className="h-full flex flex-col text-center items-center justify-between py-2">
+    <div className="h-full flex flex-col text-center items-center justify-between py-2 px-6">
       <div className="w-full">
         {/* <div className="customCard-container w-full"> */}
           <div className="group pt-6 transition relative duration-300 cursor-default hover:shadow-[0 -8px 0px 0px #2196f3]">
@@ -51,7 +51,7 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
             <Loader width="30" />
           </div>
         ) : (
-          <div className={`flex my-3 px-3 py-1 items-center text-white bg-[#1b1f52] rounded-lg w-full`}>
+          <div className={`flex my-3 px-3 py-1 items-center text-white bg-[#110d33] rounded-lg w-full`}>
             <div className="relative h-10 w-10 overflow-hidden flex items-center">
               <img src="/logo.png" alt="avatar" className="w-7 h-7 rounded-full bg-white" />
             </div>
@@ -85,7 +85,7 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
                 <div className="text-center pl-2">46M</div>
                 <div className="text-center pl-2">holders</div>
               </div>
-              <div className="h-[65vh] overflow-auto w-full">
+              <div className="h-[62vh] overflow-auto w-full">
                 {users?.map((iUser: any, index) => (
                   <div
                     key={index}
