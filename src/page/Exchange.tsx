@@ -142,14 +142,14 @@ const Exchange: React.FC<IHomeProps> = ({
       setExchange={setExchange}
     />
   ) : (
-    <div className='flex flex-col h-full justify-between pt-[2.5rem] pb-[1rem] px-[20px] gap-2'>
+    <div className='flex flex-col h-full justify-between pt-[2.5rem] pb-[1rem] px-[20px] gap-2 overflow-auto'>
       <p>You’re user #100,000 to join the BuffyDrop!</p>
       <img src='/coat.png' className='mx-[40px] h-60'></img>
       <div>
         <p className='text-[34px]'>16, 588</p>
         <p className='text-[20px]'>$BUFFY</p>
       </div>
-      <div className='flex flex-row gap-2 overflow-auto w-full '>
+      <div className='flex flex-row gap-2 overflow-auto w-full min-h-32 '>
         {/* <Carousel indicators={true}> */}
         {ChannelData.map((idx, key) => (
           <Channel
