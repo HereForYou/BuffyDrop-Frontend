@@ -13,7 +13,7 @@ const Channel: React.FC<ChannelProps> = ({
   heading,
   comment,
   src,
-  tab,
+  // tab,
   id,
   setTab,
   title,
