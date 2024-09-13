@@ -8,6 +8,7 @@ import io from 'socket.io-client'
 import { slicFunc } from '../utils/functions'
 import Setting from './Setting'
 import Channel from '../component/Channel'
+import { Carousel } from 'flowbite-react'
 
 const socket = io(ENDPOINT) // Replace with your server's URL
 
@@ -120,13 +121,15 @@ const Exchange: React.FC<IHomeProps> = ({
         <p className='text-[34px]'>16, 588</p>
         <p className='text-[20px]'>$BUFFY</p>
       </div>
-      <div className='flex flex-row gap-2 overflow-auto'>
+      <div className='flex flex-row gap-2 overflow-auto w-full '>
+        {/* <Carousel indicators={true}> */}
         <Channel title='BUFFY COMMUNITY' comment={'Lepurm'} src='src' />
         <Channel title='BUFFY COMMUNITY' comment={'Lepurm'} src='src' />
         <Channel title='BUFFY COMMUNITY' comment={'Lepurm'} src='src' />
+        {/* </Carousel> */}
       </div>
 
-      <button className='bg-[#4b37dd] w-full h-[2.5rem] leading-none'>
+      <button className='bg-[#4b37dd] w-full h-[2.5rem] leading-none mt-4'>
         Claim hint
       </button>
     </div>
