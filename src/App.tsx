@@ -259,7 +259,8 @@ function App () {
               />
             )}
             {tab == 'Friends' && (
-              <BuffyCommunity user={user} inviteRevenue={setting.inviteRevenue} />
+              // <BuffyCommunity user={user} inviteRevenue={setting.inviteRevenue} />
+              <Friends user={user} inviteRevenue={setting.inviteRevenue}/>
             )}
             {tab == 'Task' && (
               <Task
