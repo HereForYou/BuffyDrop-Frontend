@@ -56,19 +56,17 @@ ${desText}`);
   }
   return (
     <div className="pb-[40px]">
-      <h1 className="lilita text-4xl font-bold text-white pb-[30px]">Invite Friends!</h1>
-      <div className="space-y-2 py-3">
-        <InviteCard title="Invite a friend" profit={inviteRevenue} setShowModal={setShowModal} />
+      <h1 className="text-xl font-bold text-white pt-10">Invite friends</h1>
+      <h1 className="text-xl font-bold text-white pb-2">and get more BUFFYS</h1>
+      <div className="w-full flex justify-center">
+        <img src="/friends_bg.png" alt="friends_bg" className="h-full px-10 py-2 "/>
       </div>
-      <div className="flex flex-col justify-between items-start text-white">
-        <h3 className="lilita text-left text-[20px] font-bold">
-          Friends Invited
-        </h3>
-        <h3 className="text-left text-[15px] font-semibold opacity-80">
-          List of your friends<span>({friends.length})</span>
+      <div className="flex flex-col justify-between items-start px-6 text-white">
+        <h3 className="text-left text-xl font-bold">
+        <span>{friends.length}</span> friends
         </h3>
       </div>
-      <div className="mt-3 space-y-2 overflow-auto h-[45vh]">
+      <div className="mt-3 space-y-2 overflow-auto h-[40vh]">
         {
           loading ? (
             <div className="flex items-center justify-center w-full">
@@ -77,12 +75,10 @@ ${desText}`);
           ) : (
             friends.length > 0 ? (
               friends.map((friend: any) => {
-                return (
+                return (                  
                   <FriendCard
                     key={friend.userName}
                     name={friend.userName}
-                    role="Friend"
-                    level={friend.level}
                     value={friend.totalPoints}
                   />
                 )
@@ -98,24 +94,27 @@ ${desText}`);
         }
 
       </div>
-      <div className={`absolute customCard-container flex flex-col w-full right-0 text-white px-4 py-2 pb-8 gap-4 transition-all duration-500 ease-out transform ${showModal ? 'bottom-[40px]' : 'bottom-[-400px]'}`}>
+      <div className="absolute bottom-[10vh] w-full px-8">
+        <InviteCard title="Invite Friends" profit={inviteRevenue} setShowModal={setShowModal} />
+      </div>
+      <div className={`absolute bg-[#4b37dd] rounded-3xl flex flex-col w-full right-0 text-white px-4 py-2 pb-8 gap-4 transition-all duration-500 ease-out transform ${showModal ? 'bottom-[40px]' : 'bottom-[-400px]'}`}>
         <div className="h-[5px] rounded-full w-[80px] bg-black opacity-80 self-center"></div>
         <h2 className="text-[32px]">Invite Friends</h2>
-        <h4 className="text-[16px] text-gray opacity-70">You have <span className="text-red-600 font-bold">Unlimited</span> invitations available</h4>
-        <a href={`https://t.me/share/url?url=https://t.me/Bleggesminer_bot/Bleggs?startapp=${inviteLink}&text=${desText}`} target="blank" className="customCard-container p-[4px] rounded-full text-white hover:text-white">
-          <div className="customCard cursor-pointer py-2 hover:bg-inherit rounded-full">
+        <h4 className="text-[16px] text-gray opacity-70">You have <span className="text-yellow-400 font-bold">Unlimited</span> invitations available</h4>
+        <a href={`https://t.me/share/url?url=https://t.me/Bleggesminer_bot/Bleggs?startapp=${inviteLink}&text=${desText}`} target="blank" className="bg-indigo-800 p-[4px] rounded-full text-white hover:text-white">
+          <div className="bg-inherit cursor-pointer py-2 hover:bg-indigo-900 rounded-full">
             <FontAwesomeIcon icon={faPaperPlane} className="mr-5" />
             Send
           </div>
         </a>
-        <div className="customCard-container p-[4px] rounded-full">
-          <div onClick={handleClipBoardCopy} className="customCard cursor-pointer hover:bg-inherit py-2 rounded-full">
+        <div className="bg-indigo-800 p-[4px] rounded-full">
+          <div onClick={handleClipBoardCopy} className="bg-inherit cursor-pointer hover:bg-indigo-900 py-2 rounded-full">
             <FontAwesomeIcon icon={faClone} className="mr-5" />
             Copy Link
           </div>
         </div>
-        <div className="customCard-container p-[4px] rounded-full">
-          <div onClick={() => setShowModal(false)} className="customCard cursor-pointer hover:bg-inherit py-2 rounded-full">
+        <div className="bg-indigo-800 p-[4px] rounded-full">
+          <div onClick={() => setShowModal(false)} className="bg-inherit cursor-pointer hover:bg-indigo-900 py-2 rounded-full">
             Cancel
           </div>
         </div>
