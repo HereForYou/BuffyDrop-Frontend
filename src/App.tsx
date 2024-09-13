@@ -239,6 +239,8 @@ function App () {
                 setting={setting}
                 exchange={exchange}
                 setExchange={setExchange}
+                tab={tab}
+                setTab={setTab}
               />
             )}
             {tab == 'Mine' && (
@@ -260,7 +262,14 @@ function App () {
             )}
             {tab == 'Friends' && (
               // <BuffyCommunity user={user} inviteRevenue={setting.inviteRevenue} />
-              <Friends user={user} inviteRevenue={setting.inviteRevenue}/>
+              <Friends user={user} inviteRevenue={setting.inviteRevenue} />
+            )}
+            {tab == 'Channel' && (
+              // <BuffyCommunity user={user} inviteRevenue={setting.inviteRevenue} />
+              <BuffyCommunity
+              // user={user}
+              // inviteRevenue={setting.inviteRevenue}
+              />
             )}
             {tab == 'Task' && (
               <Task
