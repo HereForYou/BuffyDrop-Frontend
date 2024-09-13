@@ -11,16 +11,19 @@ import Channel from '../component/Channel'
 import { Carousel } from 'flowbite-react'
 const ChannelData = [
   {
+    id: 'Channel',
     title: 'DAILY TASK',
     comment: 'Lorem Ipsum',
     src: '/task_check.png'
   },
   {
+    id: 'Channel',
     title: 'INVITE FRIENDS',
     comment: 'Lorem Ipsum',
     src: '/Invite_friend.png'
   },
   {
+    id: 'Channel',
     title: 'BUFFY COMMUNITY',
     comment: 'Lorem Ipsum',
     src: '/Invite_friends.png'
@@ -53,6 +56,8 @@ interface IHomeProps {
   setting: any
   exchange: any
   setExchange: (status: any) => void
+  tab: string
+  setTab: (status: string) => void
 }
 const Exchange: React.FC<IHomeProps> = ({
   user,
@@ -77,7 +82,9 @@ const Exchange: React.FC<IHomeProps> = ({
   loading,
   setting,
   exchange,
-  setExchange
+  setExchange,
+  tab,
+  setTab
 }) => {
   const [totalUsers, setTotalUsers] = useState<number>(0)
   const [showSetting, setShowSetting] = useState<boolean>(false)
@@ -142,10 +149,13 @@ const Exchange: React.FC<IHomeProps> = ({
         {/* <Carousel indicators={true}> */}
         {ChannelData.map((idx, key) => (
           <Channel
+            id={idx.id}
             title={idx.title}
             comment={idx.comment}
             src={idx.src}
             key={key}
+            tab={tab}
+            setTab={setTab}
           />
         ))}
         {/* <Channel title='BUFFY COMMUNITY' comment={'Lepurm'} src='src' />
@@ -158,156 +168,6 @@ const Exchange: React.FC<IHomeProps> = ({
         Claim hint
       </button>
     </div>
-    // <div className="h-full flex flex-col text-center items-center justify-between py-2">
-    //   {
-    //     start ? (
-    //       <div className="flex flex-col w-full">
-    //         <div className="flex flex-row w-full justify-between items-baseline">
-    //           <img src="logo.png" alt="logo" className="h-[60px]" />
-    //           {
-    //             loading ? (
-    //               <Loader width="15" />
-    //             ) : (
-    //               <h1 className="font-bold text-[22px] text-white">
-    //                 {totalPoint.toFixed(2)}&nbsp;$BLEGGS
-    //               </h1>
-    //             )
-    //           }
-    //         </div>
-    //         <div className="customCard w-full py-[2px]"></div>
-    //       </div>
-    //     ) : (
-    //       <>
-    //         <div className="w-full">
-    //           <div className="flex flex-row items-center w-full justify-between py-1">
-    //             <div className="customCard-container flex flex-row text-[14px] font-bold items-center gap-1 rounded-full border border-[#D18729] p-1">
-    //               <img src={photo_url || 'user.svg'} className={`rounded-full overflow-hidden w-6 h-6`} />
-    //               <h4>{slicFunc(user?.username + user?.last_name)}</h4>
-    //             </div>
-    //             <ExchangeSelector exchange={exchange} setShowSetting={setShowSetting} />
-    //           </div>
-
-    //           {/* <div className="customCard group py-4 transition relative duration-300 cursor-default hover:shadow-[0 -8px 0px 0px #2196f3]">
-    //                 <h2 className="text-[24px] font-extrabold">$BLEGGS Miner</h2>
-    //               </div > */}
-    //         </div >
-    //         <div className="flex flex-col items-center justify-center w-full gap-2">
-    //           <img className="logo h-[60px] w-[60px] rounded-full" src="dollar.png" alt="logo" />
-    //           <div className="flex flex-col balance gap-2 w-full">
-    //             {
-    //               loading ? (
-    //                 <Loader width="15" />
-    //               ) : (
-    //                 <h1 className="font-bold text-[24px] text-white">
-    //                   {totalPoint.toFixed(2)}$BLEGGS
-    //                 </h1>
-    //               )
-    //             }
-    //             <div className="flex flex-row w-full justify-between items-center text-white">
-    //               {
-    //                 loading ? (
-    //                   <Loader width="15" />
-    //                 ) : (
-    //                   <h3 className="text-[13px] font-bold">Level{level.level}</h3>
-    //                 )
-    //               }
-    //               {
-    //                 loading ? (
-    //                   <Loader width="15" />
-    //                 ) : (
-    //                   <h3 className="text-[13px] font-bold">Level{nextLevel.level}</h3>
-    //                 )
-    //               }
-    //             </div>
-    //             <ProgressBar value={(totalPoint - level.coinsToLevelUp) / (nextLevel.coinsToLevelUp - level.coinsToLevelUp) * 100} />
-    //           </div>
-    //         </div>
-    //       </>
-    //     )
-    //   }
-    //   {
-    //     !start ? (
-    //       claimShow ? (
-    //         <div className="bg-white p-[10px] rounded-full">
-    //           <button onClick={handleClaim} className="customBtn startBt aspect-square rounded-full py-2 px-4">
-    //             <h2 className="text-[30px] font-bold">CLAIM</h2>
-    //           </button>
-    //         </div>
-    //       ) : (
-    //         reachDailyLimit ? (
-    //           <h2 className="text-[16px] text-white" > You reached out the timeLimit</h2>
-    //         ) : (
-    //           <div className="bg-white p-[10px] rounded-full">
-    //             <button onClick={handleMining} className="customBtn startBt aspect-square rounded-full py-2 px-4">
-    //               <h2 className="text-[30px] font-bold">START<br />MINING</h2>
-    //             </button>
-    //           </div>
-    //         )
-    //       )
-    //     ) : (
-    //       <>
-    //         <div className="bg-white p-[10px] rounded-full">
-    //           <button onClick={handleStopMining} className="customBtn stopBtn aspect-square rounded-full py-2 px-4">
-    //             <h2 className="text-[30px] font-bold">STOP<br /> MINING</h2>
-    //           </button>
-    //         </div>
-    //         <div className="flex flex-col gap-2 w-full">
-    //           <div className="customCard-container font-bold">
-    //             <div className="customCard flex flex-row w-full  justify-between items-center">
-    //               <h2 className="earning text-[24px]">{point.toFixed(3)}</h2>
-    //               <section className="flex flex-row gap-4">
-    //                 {loading ? (
-    //                   <>
-    //                     <div className="flex flex-col text-center">
-    //                       <Loader width="15" />
-    //                       <h4 className="text-[12px]">Hours</h4>
-    //                     </div>
-    //                     <div className="flex flex-col text-center">
-    //                       <Loader width="15" />
-    //                       <h4 className="text-[12px]">Mins</h4>
-    //                     </div>
-    //                     <div className="flex flex-col text-center">
-    //                       <Loader width="15" />
-    //                       <h4 className="text-[12px]">Secs</h4>
-    //                     </div>
-    //                   </>
-    //                 ) : (
-    //                   <>
-    //                     <div className="flex flex-col text-center">
-    //                       <h3 className="text-[16px]">{hour}</h3>
-    //                       <h4 className="text-[12px]">Hours</h4>
-    //                     </div>
-    //                     <div className="flex flex-col text-center">
-    //                       <h3 className="text-[16px]">{min}</h3>
-    //                       <h4 className="text-[12px]">Mins</h4>
-    //                     </div>
-    //                     <div className="flex flex-col text-center">
-    //                       <h3 className="text-[16px]">{sec}</h3>
-    //                       <h4 className="text-[12px]">Secs</h4>
-    //                     </div>
-    //                   </>
-    //                 )}
-    //               </section>
-    //             </div >
-    //           </div>
-    //         </div>
-    //       </>
-    //     )
-    //   }
-    //   <div className="flex flex-row items-center justify-between w-full text-[20px] text-white lilita">
-    //     <div className="flex flex-row gap-1 items-center">
-    //       <img src="boost.png" alt="boost" className="h-[30px] aspect-square" />
-    //       {
-    //         loading ? (
-    //           <Loader width="20" />
-    //         ) : (
-    //           <h3 className="text-[18px]">{power.value} <span className="text-[16px]">MH</span> /&nbsp;<span>{timeLimit.value} <span className="text-[16px]">Min</span></span></h3>
-    //         )
-    //       }
-    //     </div>
-    //     <h4 className="text-white text-[14px]">Active Workers = <span className="text-[16px] font-bold">{totalUsers}</span></h4>
-    //   </div>
-    // </div >
   )
 }
 export default Exchange
