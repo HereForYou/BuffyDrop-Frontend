@@ -19,7 +19,7 @@ const BuffyCommunity: React.FC<BuffyCommunityProps> = ({ title }) => {
         status={false}
       />
       <CommunityCard
-        key={'CommunityCard'}
+        // key={'CommunityCard'}
         link={`https://twitter.com/BuffyDrops`}
         avatar={'/twitter_icon.png'}
         title={'Follow our X account'}

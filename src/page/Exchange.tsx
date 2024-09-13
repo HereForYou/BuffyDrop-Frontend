@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import ProgressBar from '../component/ProgressBar'
-import Loader from '../component/Loader'
-import axios from 'axios'
-import { ENDPOINT } from '../data'
-import ExchangeSelector from '../component/exchangeSelector'
-import io from 'socket.io-client'
-import { slicFunc } from '../utils/functions'
+import React, { useState } from 'react'
+// import ProgressBar from '../component/ProgressBar'
+// import Loader from '../component/Loader'
+// import axios from 'axios'
+// import { ENDPOINT } from '../data'
+// import ExchangeSelector from '../component/exchangeSelector'
+// import io from 'socket.io-client'
+// import { slicFunc } from '../utils/functions'
 import Setting from './Setting'
 import Channel from '../component/Channel'
-import { Carousel } from 'flowbite-react'
+// import { Carousel } from 'flowbite-react'
 const ChannelData = [
   {
     id: 'Channel',
@@ -30,7 +30,7 @@ const ChannelData = [
   }
 ]
 
-const socket = io(ENDPOINT) // Replace with your server's URL
+// const socket = io(ENDPOINT) // Replace with your server's URL
 
 interface IHomeProps {
   user: any
@@ -63,25 +63,25 @@ interface IHomeProps {
 }
 const Exchange: React.FC<IHomeProps> = ({
   user,
-  photo_url,
-  point,
-  totalPoint,
-  handleMining,
-  handleStopMining,
-  claimShow,
-  reachDailyLimit,
-  setReachDailyLimit,
-  setTotalPoint,
-  setClaimShow,
-  start,
-  hour,
-  min,
-  sec,
-  timeLimit,
-  power,
-  level,
-  nextLevel,
-  loading,
+  // photo_url,
+  // point,
+  // totalPoint,
+  // handleMining,
+  // handleStopMining,
+  // claimShow,
+  // reachDailyLimit,
+  // setReachDailyLimit,
+  // setTotalPoint,
+  // setClaimShow,
+  // start,
+  // hour,
+  // min,
+  // sec,
+  // timeLimit,
+  // power,
+  // level,
+  // nextLevel,
+  // loading,
   setting,
   exchange,
   setExchange,
@@ -90,48 +90,48 @@ const Exchange: React.FC<IHomeProps> = ({
   title,
   setTitle
 }) => {
-  const [totalUsers, setTotalUsers] = useState<number>(0)
+  // const [totalUsers, setTotalUsers] = useState<number>(0)
   const [showSetting, setShowSetting] = useState<boolean>(false)
 
-  const handleClaim = () => {
-    if (user) {
-      axios
-        .put(`${ENDPOINT}/api/user/${user?.id}`, {
-          points: point,
-          countDown: 0
-        })
-        .then(res => {
-          console.log('res', res.data)
-          let newpoint = point + totalPoint
-          setTotalPoint(newpoint)
-          setClaimShow(false)
-          setReachDailyLimit(true)
-        })
-        .catch(err => {
-          console.error(err)
-          // toast("Something Went Wrong!");
-        })
-    }
-  }
+  // const handleClaim = () => {
+  //   if (user) {
+  //     axios
+  //       .put(`${ENDPOINT}/api/user/${user?.id}`, {
+  //         points: point,
+  //         countDown: 0
+  //       })
+  //       .then(res => {
+  //         console.log('res', res.data)
+  //         let newpoint = point + totalPoint
+  //         setTotalPoint(newpoint)
+  //         setClaimShow(false)
+  //         setReachDailyLimit(true)
+  //       })
+  //       .catch(err => {
+  //         console.error(err)
+  //         // toast("Something Went Wrong!");
+  //       })
+  //   }
+  // }
 
-  useEffect(() => {
-    axios
-      .get(`${ENDPOINT}/api/user/totalcount`)
-      .then(res => {
-        setTotalUsers(res.data.totalCount)
-      })
-      .catch(err => {
-        console.error(err)
-        // toast("Something Went Wrong!");
-      })
-    socket.on('newUserRegistered', data => {
-      setTotalUsers(data.totalCount)
-    })
+  // useEffect(() => {
+  //   axios
+  //     .get(`${ENDPOINT}/api/user/totalcount`)
+  //     .then(res => {
+  //       setTotalUsers(res.data.totalCount)
+  //     })
+  //     .catch(err => {
+  //       console.error(err)
+  //       // toast("Something Went Wrong!");
+  //     })
+  //   socket.on('newUserRegistered', data => {
+  //     setTotalUsers(data.totalCount)
+  //   })
 
-    return () => {
-      socket.off('newUserRegistered') // Remove the listener to prevent memory leaks
-    }
-  }, [])
+  //   return () => {
+  //     socket.off('newUserRegistered') // Remove the listener to prevent memory leaks
+  //   }
+  // }, [])
 
   return showSetting ? (
     <Setting

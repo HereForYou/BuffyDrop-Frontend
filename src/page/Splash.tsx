@@ -1,5 +1,5 @@
 import React from 'react'
-import { convertToShorthand } from '../utils/functions'
+// import { convertToShorthand } from '../utils/functions'
 
 interface ISplashProps {
   power: any
@@ -9,9 +9,9 @@ interface ISplashProps {
 }
 
 const Splash: React.FC<ISplashProps> = ({
-  power,
-  totalPoint,
-  referral,
+  // power,
+  // totalPoint,
+  // referral,
   setTab
 }) => {
   return (
