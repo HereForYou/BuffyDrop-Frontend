@@ -16,7 +16,7 @@ const Channel: React.FC<ChannelProps> = ({
   // tab,
   id,
   setTab,
-  title,
+  // title,
   setTitle
 }) => {
   const handleClick = (tab: string, title: string) => {
