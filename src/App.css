@@ -213,3 +213,20 @@ input:focus {
 .carousel .control-dots .dot.selected {
     background: #acacac;
 }
+
+.closeBtn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    position: absolute;
+    right: var(--safe-area-left);
+    top: 16px;
+    right: 16px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAAKlBMVEUAAACAgJ+Pj4+Hh5ePj4+KipWPj4+Pj5WLi5OOjpSPj5KOjpOPj5KOjpO5Wa1OAAAADXRSTlMAEBAgIDAwMEDf3+/v4pyyzwAAAHNJREFUKM+9kbsSgCAMBM/wMEHu/3/XAnEkpDblbnEzGwDlgLtDAcBoaeXJaAIlnUlG8oRcziQj2TNQVjN4BZz58MUs/GMcf83Gp9n5YwI+zc7H7lZnckbdyH7F3Xotcbf6d7fx2qCbQlrUrQEQFZ8hq+AGNeYKiIOT1bEAAAAASUVORK5CYII=);
+    user-select: none;
+    cursor: pointer;
+    z-index: 100;
+}
