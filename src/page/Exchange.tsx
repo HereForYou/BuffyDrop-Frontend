@@ -1,14 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 // import ProgressBar from '../component/ProgressBar'
 // import Loader from '../component/Loader'
-// import axios from 'axios'
-// import { ENDPOINT } from '../data'
+import axios from 'axios'
+import { ENDPOINT } from '../data'
 // import ExchangeSelector from '../component/exchangeSelector'
-// import io from 'socket.io-client'
+import io from 'socket.io-client'
 // import { slicFunc } from '../utils/functions'
 import Setting from './Setting'
 import Channel from '../component/Channel'
-// import { Carousel } from 'flowbite-react'
+import 'react-responsive-carousel/lib/styles/carousel.min.css'
+import { Carousel } from 'react-responsive-carousel'
+import '../App.css'
+
 const ChannelData = [
   {
     id: 'Channel',
@@ -30,7 +33,7 @@ const ChannelData = [
   }
 ]
 
-// const socket = io(ENDPOINT) // Replace with your server's URL
+const socket = io(ENDPOINT) // Replace with your server's URL
 
 interface IHomeProps {
   user: any
@@ -90,48 +93,48 @@ const Exchange: React.FC<IHomeProps> = ({
   title,
   setTitle
 }) => {
-  // const [totalUsers, setTotalUsers] = useState<number>(0)
+  const [totalUsers, setTotalUsers] = useState<number>(0)
   const [showSetting, setShowSetting] = useState<boolean>(false)
 
-  // const handleClaim = () => {
-  //   if (user) {
-  //     axios
-  //       .put(`${ENDPOINT}/api/user/${user?.id}`, {
-  //         points: point,
-  //         countDown: 0
-  //       })
-  //       .then(res => {
-  //         console.log('res', res.data)
-  //         let newpoint = point + totalPoint
-  //         setTotalPoint(newpoint)
-  //         setClaimShow(false)
-  //         setReachDailyLimit(true)
-  //       })
-  //       .catch(err => {
-  //         console.error(err)
-  //         // toast("Something Went Wrong!");
-  //       })
-  //   }
-  // }
+  const handleClaim = () => {
+    if (user) {
+      axios
+        .put(`${ENDPOINT}/api/user/${user?.id}`, {
+          points: point,
+          countDown: 0
+        })
+        .then(res => {
+          console.log('res', res.data)
+          let newpoint = point + totalPoint
+          setTotalPoint(newpoint)
+          setClaimShow(false)
+          setReachDailyLimit(true)
+        })
+        .catch(err => {
+          console.error(err)
+          // toast("Something Went Wrong!");
+        })
+    }
+  }
 
-  // useEffect(() => {
-  //   axios
-  //     .get(`${ENDPOINT}/api/user/totalcount`)
-  //     .then(res => {
-  //       setTotalUsers(res.data.totalCount)
-  //     })
-  //     .catch(err => {
-  //       console.error(err)
-  //       // toast("Something Went Wrong!");
-  //     })
-  //   socket.on('newUserRegistered', data => {
-  //     setTotalUsers(data.totalCount)
-  //   })
+  useEffect(() => {
+    axios
+      .get(`${ENDPOINT}/api/user/totalcount`)
+      .then(res => {
+        setTotalUsers(res.data.totalCount)
+      })
+      .catch(err => {
+        console.error(err)
+        // toast("Something Went Wrong!");
+      })
+    socket.on('newUserRegistered', data => {
+      setTotalUsers(data.totalCount)
+    })
 
-  //   return () => {
-  //     socket.off('newUserRegistered') // Remove the listener to prevent memory leaks
-  //   }
-  // }, [])
+    return () => {
+      socket.off('newUserRegistered') // Remove the listener to prevent memory leaks
+    }
+  }, [])
 
   return showSetting ? (
     <Setting
@@ -149,24 +152,40 @@ const Exchange: React.FC<IHomeProps> = ({
         <p className='text-[34px]'>16, 588</p>
         <p className='text-[20px]'>$BUFFY</p>
       </div>
-      <div className='flex flex-row gap-2  w-full min-h-24 overflow-x-auto'>
-        {/* <Carousel indicators={true}> */}
-        {ChannelData.map((idx, key) => (
-          <Channel
-            id={idx.id}
-            heading={idx.title}
-            comment={idx.comment}
-            src={idx.src}
-            key={key}
-            tab={tab}
-            setTab={setTab}
-            title={title}
-            setTitle={setTitle}
-          />
-        ))}
+      <div className='flex flex-row gap-2 w-full'>
+        <Carousel
+          infiniteLoop={false}
+          showArrows={false}
+          showIndicators={true}
+          showStatus={false}
+          showThumbs={false}
+          useKeyboardArrows={false}
+          autoPlay={false}
+          stopOnHover={false}
+          swipeable={true}
+          dynamicHeight={false}
+          emulateTouch={true}
+          autoFocus={false}
+        >
+          {ChannelData.map((idx, key) => (
+            <Channel
+              id={idx.id}
+              heading={idx.title}
+              comment={idx.comment}
+              src={idx.src}
+              key={key}
+              tab={tab}
+              setTab={setTab}
+              title={title}
+              setTitle={setTitle}
+            />
+          ))}
+          {/* <Channel title='BUFFY COMMUNITY' comment={'Lepurm'} src='src' />
+        <Channel title='BUFFY COMMUNITY' comment={'Lepurm'} src='src' />
+        <Channel title='BUFFY COMMUNITY' comment={'Lepurm'} src='src' /> */}
+        </Carousel>
       </div>
-
-      <button className='bg-[#4b37dd] w-full h-[2.5rem] leading-none mt-4'>
+      <button className='bg-[#110d33] w-full h-[2.5rem] leading-none mt-1'>
         Claim hint
       </button>
     </div>
