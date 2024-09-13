@@ -56,12 +56,12 @@ ${desText}`);
   }
   return (
     <div className="pb-[40px]">
-      <h1 className="text-xl font-bold text-white pt-10">Invite friends</h1>
-      <h1 className="text-xl font-bold text-white pb-2">and get more BUFFYS</h1>
+      <h1 className="text-xl font-bold text-[#acacac] pt-10">Invite friends</h1>
+      <h1 className="text-xl font-bold text-[#acacac] pb-2">and get more BUFFYS</h1>
       <div className="w-full flex justify-center">
         <img src="/friends_bg.png" alt="friends_bg" className="h-full px-10 py-2 "/>
       </div>
-      <div className="flex flex-col justify-between items-start px-6 text-white">
+      <div className="flex flex-col justify-between items-start px-6 text-[#acacac]">
         <h3 className="text-left text-xl font-bold">
         <span>{friends.length}</span> friends
         </h3>
@@ -85,7 +85,7 @@ ${desText}`);
               })
             ) : (
               <div>
-                <h4 className="opacity-30 pt-10 text-white">
+                <h4 className="opacity-30 pt-10 text-[#acacac]">
                   No Friends yet
                 </h4>
               </div>
@@ -97,23 +97,23 @@ ${desText}`);
       <div className="absolute bottom-[10vh] w-full px-8">
         <InviteCard title="Invite Friends" profit={inviteRevenue} setShowModal={setShowModal} />
       </div>
-      <div className={`absolute bg-[#4b37dd] rounded-3xl flex flex-col w-full right-0 text-white px-4 py-2 pb-8 gap-4 transition-all duration-500 ease-out transform ${showModal ? 'bottom-[40px]' : 'bottom-[-400px]'}`}>
+      <div className={`absolute bg-[#4b37dd] rounded-3xl flex flex-col w-full right-0 text-[#acacac] px-4 py-2 pb-8 gap-4 transition-all duration-500 ease-out transform ${showModal ? 'bottom-[40px]' : 'bottom-[-400px]'}`}>
         <div className="h-[5px] rounded-full w-[80px] bg-black opacity-80 self-center"></div>
         <h2 className="text-[32px]">Invite Friends</h2>
         <h4 className="text-[16px] text-gray opacity-70">You have <span className="text-yellow-400 font-bold">Unlimited</span> invitations available</h4>
-        <a href={`https://t.me/share/url?url=https://t.me/Bleggesminer_bot/Bleggs?startapp=${inviteLink}&text=${desText}`} target="blank" className="bg-indigo-800 p-[4px] rounded-full text-white hover:text-white">
+        <a href={`https://t.me/share/url?url=https://t.me/Bleggesminer_bot/Bleggs?startapp=${inviteLink}&text=${desText}`} target="blank" className="bg-[#110d33] p-[4px] rounded-full text-[#acacac] hover:text-[#acacac]">
           <div className="bg-inherit cursor-pointer py-2 hover:bg-indigo-900 rounded-full">
             <FontAwesomeIcon icon={faPaperPlane} className="mr-5" />
             Send
           </div>
         </a>
-        <div className="bg-indigo-800 p-[4px] rounded-full">
+        <div className="bg-[#110d33] p-[4px] rounded-full">
           <div onClick={handleClipBoardCopy} className="bg-inherit cursor-pointer hover:bg-indigo-900 py-2 rounded-full">
             <FontAwesomeIcon icon={faClone} className="mr-5" />
             Copy Link
           </div>
         </div>
-        <div className="bg-indigo-800 p-[4px] rounded-full">
+        <div className="bg-[#110d33] p-[4px] rounded-full">
           <div onClick={() => setShowModal(false)} className="bg-inherit cursor-pointer hover:bg-indigo-900 py-2 rounded-full">
             Cancel
           </div>
