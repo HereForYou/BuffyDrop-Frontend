@@ -176,3 +176,7 @@ input:focus {
   font-weight: bold;
   padding: 2px 10px;
 }
+.carousel-control-prev,
+.carousel-control-next {
+  display: none !important; /* Hides the control buttons */
+}

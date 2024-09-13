@@ -200,7 +200,7 @@ function App () {
   return (
     <Router>
       {user && isMobile && (
-        <div className={`h-full max-h-screen overflow-hidden w-full`}>
+        <div className={`h-full max-h-screen overflow-hidden w-full max-w-2xl`}>
           <div
             className={`relative h-screen overflow-hidden pb-[64px] px-[0px]`}
           >
