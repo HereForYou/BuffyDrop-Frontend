@@ -63,7 +63,7 @@ ${desText}`);
       </div>
       <div className="flex flex-col justify-between items-start px-6 text-[#acacac]">
         <h3 className="text-left text-xl font-bold">
-        <span>{friends.length}</span> friends
+        <span>{friends.length+2}</span> friends
         </h3>
       </div>
       <div className="mt-3 space-y-2 overflow-auto h-[40vh]">
@@ -85,8 +85,18 @@ ${desText}`);
               })
             ) : (
               <div>
-                <h4 className="opacity-30 pt-10 text-[#acacac]">
-                  No Friends yet
+                <h4 className="pt-1 text-[#acacac]">
+                  {/* No Friends yet */}
+                  <FriendCard
+                    key={"super123"}
+                    name={"super123"}
+                    value={312542}
+                  />
+                  <FriendCard
+                    key={"submit333"}
+                    name={"submit333"}
+                    value={222542}
+                  />
                 </h4>
               </div>
             )
@@ -101,20 +111,20 @@ ${desText}`);
         <div className="h-[5px] rounded-full w-[80px] bg-black opacity-80 self-center"></div>
         <h2 className="text-[32px]">Invite Friends</h2>
         <h4 className="text-[16px] text-gray opacity-70">You have <span className="text-yellow-400 font-bold">Unlimited</span> invitations available</h4>
-        <a href={`https://t.me/share/url?url=https://t.me/Bleggesminer_bot/Bleggs?startapp=${inviteLink}&text=${desText}`} target="blank" className="bg-[#110d33] p-[4px] rounded-full text-[#acacac] hover:text-[#acacac]">
-          <div className="bg-inherit cursor-pointer py-2 hover:bg-indigo-900 rounded-full">
+        <a href={`https://t.me/share/url?url=https://t.me/Bleggesminer_bot/Bleggs?startapp=${inviteLink}&text=${desText}`} target="blank" className="bg-[#110d33] p-[4px] rounded-full text-[#acacac]  transition relative duration-200 hover:translate-y-[2px]">
+          <div className=" cursor-pointer py-2 hover:bg-indigo-[#110d33] rounded-full">
             <FontAwesomeIcon icon={faPaperPlane} className="mr-5" />
             Send
           </div>
         </a>
-        <div className="bg-[#110d33] p-[4px] rounded-full">
-          <div onClick={handleClipBoardCopy} className="bg-inherit cursor-pointer hover:bg-indigo-900 py-2 rounded-full">
+        <div className="bg-[#110d33] p-[4px] rounded-full transition relative duration-200 hover:translate-y-[2px]">
+          <div onClick={handleClipBoardCopy} className=" cursor-pointer hover:bg-indigo-[#110d33] py-2 rounded-full ">
             <FontAwesomeIcon icon={faClone} className="mr-5" />
             Copy Link
           </div>
         </div>
-        <div className="bg-[#110d33] p-[4px] rounded-full">
-          <div onClick={() => setShowModal(false)} className="bg-inherit cursor-pointer hover:bg-indigo-900 py-2 rounded-full">
+        <div className="bg-[#110d33] p-[4px] rounded-full transition relative duration-200 hover:translate-y-[2px]">
+          <div onClick={() => setShowModal(false)} className=" cursor-pointer hover:bg-indigo-[#110d33] py-2 rounded-full ">
             Cancel
           </div>
         </div>

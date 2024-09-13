@@ -1,15 +1,14 @@
 import CommunityCard from './CommunityCard'
 interface BuffyCommunityProps {
-  link: any
   title: string
 }
-const BuffyCommunity: React.FC<BuffyCommunityProps> = ({ link, title }) => {
+const BuffyCommunity: React.FC<BuffyCommunityProps> = ({ title }) => {
   return (
     <>
       <div className='flex flex-col justify-center items-center text-xl text-[#acacac] font-bold pt-16 pb-6'>
         <img src='/buffy_community_img.png' alt='' className='w-[25vw] pb-4' />
         {/* <div>{title}</div> */}
-        <div>BUFFY COMMUNITY</div>
+        <div>{title}</div>
       </div>
       <CommunityCard
         key={'CommunityCard'}
