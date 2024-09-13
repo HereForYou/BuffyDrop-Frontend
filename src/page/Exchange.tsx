@@ -145,7 +145,7 @@ const Exchange: React.FC<IHomeProps> = ({
       setExchange={setExchange}
     />
   ) : (
-    <div className="flex flex-col h-full justify-between pt-[2.5rem] pb-[1rem] px-[20px] gap-2">
+    <div className="flex flex-col h-full justify-between pt-[2.5rem] pb-[2rem] px-[20px] gap-2">
       <p>You’re user #100,000 to join the BuffyDrop!</p>
       <img src="/coat.png" className="mx-[40px] h-60"></img>
       <div>
