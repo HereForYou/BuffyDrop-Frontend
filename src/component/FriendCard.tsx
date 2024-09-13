@@ -7,7 +7,7 @@ const FriendCard: React.FC<FriendCardProps> = ({
   value,
 }) => {
   return (
-    <div className="flex flex-row items-center justify-between w-full px-6">
+    <div className="flex flex-row items-center justify-between w-full px-6 text-[#acacac] my-2">
       <div className="flex flex-row items-center">
         <img
           src="friend-icon.svg"
