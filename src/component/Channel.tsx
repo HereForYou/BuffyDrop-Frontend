@@ -24,15 +24,15 @@ const Channel: React.FC<ChannelProps> = ({
     setTitle(title)
   }
   return (
-    <div className='bg-[#4b37dd] rounded-[1rem] w-full min-w-[18rem] flex flex-col py-2 px-[20px] justify-between'>
+    <div className='bg-[#4b37dd] rounded-[1rem] w-full min-w-[18rem] flex flex-col pt-4 py-2 px-[20px] justify-between'>
       <div className='flex flex-col justify-between'>
         <p className='text-[20px] text-left leading-none'>{heading}</p>
-        <p className='text-[16px] text-left'>{comment}</p>
+        <p className='text-[12px] text-left'>{comment}</p>
       </div>
 
-      <div className='flex flex-row w-full h-12 justify-between align-baseline py-2'>
+      <div className='flex flex-row w-full h-12 justify-between align-baseline py-1'>
         <button
-          className='bg-white rounded-3xl text-[#4b37dd] w-[100px] h-8 p-0'
+          className='bg-white rounded-3xl text-[#4b37dd] w-[70px] h-6 p-0'
           onClick={() => handleClick(id, heading)}
         >
           Join
