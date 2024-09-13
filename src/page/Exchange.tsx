@@ -149,7 +149,7 @@ const Exchange: React.FC<IHomeProps> = ({
         <p className='text-[34px]'>16, 588</p>
         <p className='text-[20px]'>$BUFFY</p>
       </div>
-      <div className='flex flex-row gap-2 overflow-auto w-full min-h-32 '>
+      <div className='flex flex-row gap-2 overflow-auto w-full min-h-36 '>
         {/* <Carousel indicators={true}> */}
         {ChannelData.map((idx, key) => (
           <Channel
