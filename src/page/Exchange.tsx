@@ -9,6 +9,23 @@ import { slicFunc } from '../utils/functions'
 import Setting from './Setting'
 import Channel from '../component/Channel'
 import { Carousel } from 'flowbite-react'
+const ChannelData = [
+  {
+    title: 'DAILY TASK',
+    comment: 'Lorem Ipsum',
+    src: '/task_check.png'
+  },
+  {
+    title: 'INVITE FRIENDS',
+    comment: 'Lorem Ipsum',
+    src: '/Invite_friend.png'
+  },
+  {
+    title: 'BUFFY COMMUNITY',
+    comment: 'Lorem Ipsum',
+    src: '/Invite_friends.png'
+  }
+]
 
 const socket = io(ENDPOINT) // Replace with your server's URL
 
@@ -123,9 +140,17 @@ const Exchange: React.FC<IHomeProps> = ({
       </div>
       <div className='flex flex-row gap-2 overflow-auto w-full '>
         {/* <Carousel indicators={true}> */}
+        {ChannelData.map((idx, key) => (
+          <Channel
+            title={idx.title}
+            comment={idx.comment}
+            src={idx.src}
+            key={key}
+          />
+        ))}
+        {/* <Channel title='BUFFY COMMUNITY' comment={'Lepurm'} src='src' />
         <Channel title='BUFFY COMMUNITY' comment={'Lepurm'} src='src' />
-        <Channel title='BUFFY COMMUNITY' comment={'Lepurm'} src='src' />
-        <Channel title='BUFFY COMMUNITY' comment={'Lepurm'} src='src' />
+        <Channel title='BUFFY COMMUNITY' comment={'Lepurm'} src='src' /> */}
         {/* </Carousel> */}
       </div>
 
