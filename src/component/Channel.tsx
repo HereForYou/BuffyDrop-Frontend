@@ -1,15 +1,23 @@
 import React from 'react'
 interface ChannelProps {
   title: string
+  comment: String
+  src: any
 }
-const Channel: React.FC<ChannelProps> = () => {
+const Channel: React.FC<ChannelProps> = ({ title, comment }) => {
   return (
-    <div className='bg-blue-700 rounded-[1rem] flex flex-col gap-1 justify-between items-center p-2'>
-      <p className='text-[32px]'>BUFFY COMMUNITY</p>
-      <p className='text-[18px]'>Join Buffy community channel</p>
-      <button className='bg-white rounded-3xl text-blue-700 w-[140px]'>
-        Join
-      </button>
+    <div className='bg-[#4b37dd] rounded-[1rem] w-[80%] min-w-[18rem] flex flex-col py-2 px-[20px] justify-between'>
+      <div className='flex flex-col justify-between'>
+        <p className='text-[20px] text-left leading-none'>{title}</p>
+        <p className='text-[16px] text-left'>{comment}</p>
+      </div>
+
+      <div className='flex flex-row w-full h-12 justify-between align-baseline py-2'>
+        <button className='bg-white rounded-3xl text-[#4b37dd] w-[100px] h-8 p-0'>
+          Join
+        </button>
+        <img src='/Invite_friend.png'></img>
+      </div>
     </div>
   )
 }
