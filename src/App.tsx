@@ -25,7 +25,7 @@ import { getUserAvatarUrl } from './utils/functions'
 //   first_name: 'Super',
 //   last_name: ''
 // }
-const start_param = ''
+// const start_param = ''
 
 function App () {
   let countdownTime = 1
