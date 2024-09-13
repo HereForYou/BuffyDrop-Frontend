@@ -8,6 +8,7 @@ interface ChannelProps {
   setTab: (status: string) => void
   title: string
   setTitle: (status: string) => void
+  btnTitle:string
 }
 const Channel: React.FC<ChannelProps> = ({
   heading,
@@ -17,7 +18,8 @@ const Channel: React.FC<ChannelProps> = ({
   id,
   setTab,
   // title,
-  setTitle
+  setTitle,
+  btnTitle
 }) => {
   const handleClick = (tab: string, title: string) => {
     setTab(tab)
@@ -36,7 +38,7 @@ const Channel: React.FC<ChannelProps> = ({
               className='bg-white rounded-3xl text-[#4b37dd] w-20 h-6 p-2 flex justify-center items-center'
               onClick={() => handleClick(id, heading)}
             >
-              Join
+              {btnTitle}
             </button>
           </div>
           <div>

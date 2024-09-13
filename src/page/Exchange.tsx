@@ -17,19 +17,22 @@ const ChannelData = [
     id: 'Channel',
     title: 'DAILY TASK',
     comment: 'Lorem Ipsum',
-    src: '/task_check.png'
+    src: '/task_check.png',
+    btnTitle:"Go",
   },
   {
     id: 'Channel',
     title: 'INVITE FRIENDS',
     comment: 'Lorem Ipsum',
-    src: '/Invite_friend.png'
+    src: '/Invite_friend.png',
+    btnTitle:"Invite",
   },
   {
     id: 'Channel',
     title: 'BUFFY COMMUNITY',
     comment: 'Lorem Ipsum',
-    src: '/Invite_friends.png'
+    src: '/Invite_friends.png',
+    btnTitle:"Join",
   }
 ]
 
@@ -145,7 +148,7 @@ const Exchange: React.FC<IHomeProps> = ({
       setExchange={setExchange}
     />
   ) : (
-    <div className='flex flex-col h-full justify-between pt-[2.5rem] pb-[1rem] px-[20px] gap-2'>
+    <div className="flex flex-col h-full justify-between pt-[2.5rem] pb-[2rem] px-[20px] gap-2">
       <p>You’re user #100,000 to join the BuffyDrop!</p>
       <img src='/coat.png' className='mx-[40px] h-60'></img>
       <div>
@@ -178,6 +181,7 @@ const Exchange: React.FC<IHomeProps> = ({
               setTab={setTab}
               title={title}
               setTitle={setTitle}
+              btnTitle={idx.btnTitle}
             />
           ))}
           {/* <Channel title='BUFFY COMMUNITY' comment={'Lepurm'} src='src' />
