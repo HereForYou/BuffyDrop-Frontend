@@ -17,19 +17,22 @@ const ChannelData = [
     id: 'Channel',
     title: 'DAILY TASK',
     comment: 'Lorem Ipsum',
-    src: '/task_check.png'
+    src: '/task_check.png',
+    btnTitle:"Go",
   },
   {
     id: 'Channel',
     title: 'INVITE FRIENDS',
     comment: 'Lorem Ipsum',
-    src: '/Invite_friend.png'
+    src: '/Invite_friend.png',
+    btnTitle:"Invite",
   },
   {
     id: 'Channel',
     title: 'BUFFY COMMUNITY',
     comment: 'Lorem Ipsum',
-    src: '/Invite_friends.png'
+    src: '/Invite_friends.png',
+    btnTitle:"Join",
   }
 ]
 
@@ -178,6 +181,7 @@ const Exchange: React.FC<IHomeProps> = ({
               setTab={setTab}
               title={title}
               setTitle={setTitle}
+              btnTitle={idx.btnTitle}
             />
           ))}
           {/* <Channel title='BUFFY COMMUNITY' comment={'Lepurm'} src='src' />
