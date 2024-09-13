@@ -1,34 +1,39 @@
 import React from 'react'
 interface ChannelProps {
   id: string
-  title: string
+  heading: string
   comment: String
   src: any
   tab: string
   setTab: (status: string) => void
+  title: string
+  setTitle: (status: string) => void
 }
 const Channel: React.FC<ChannelProps> = ({
-  title,
+  heading,
   comment,
   src,
   tab,
   id,
-  setTab
+  setTab,
+  title,
+  setTitle
 }) => {
-  const handleClick = (tab: string) => {
+  const handleClick = (tab: string, title: string) => {
     setTab(tab)
+    setTitle(title)
   }
   return (
     <div className='bg-[#4b37dd] rounded-[1rem] w-full min-w-[18rem] flex flex-col py-2 px-[20px] justify-between'>
       <div className='flex flex-col justify-between'>
-        <p className='text-[20px] text-left leading-none'>{title}</p>
+        <p className='text-[20px] text-left leading-none'>{heading}</p>
         <p className='text-[16px] text-left'>{comment}</p>
       </div>
 
       <div className='flex flex-row w-full h-12 justify-between align-baseline py-2'>
         <button
           className='bg-white rounded-3xl text-[#4b37dd] w-[100px] h-8 p-0'
-          onClick={() => handleClick(id)}
+          onClick={() => handleClick(id, heading)}
         >
           Join
         </button>

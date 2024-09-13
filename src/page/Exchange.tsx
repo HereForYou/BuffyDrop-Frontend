@@ -58,6 +58,8 @@ interface IHomeProps {
   setExchange: (status: any) => void
   tab: string
   setTab: (status: string) => void
+  title: string
+  setTitle: (status: string) => void
 }
 const Exchange: React.FC<IHomeProps> = ({
   user,
@@ -84,7 +86,9 @@ const Exchange: React.FC<IHomeProps> = ({
   exchange,
   setExchange,
   tab,
-  setTab
+  setTab,
+  title,
+  setTitle
 }) => {
   const [totalUsers, setTotalUsers] = useState<number>(0)
   const [showSetting, setShowSetting] = useState<boolean>(false)
@@ -150,12 +154,14 @@ const Exchange: React.FC<IHomeProps> = ({
         {ChannelData.map((idx, key) => (
           <Channel
             id={idx.id}
-            title={idx.title}
+            heading={idx.title}
             comment={idx.comment}
             src={idx.src}
             key={key}
             tab={tab}
             setTab={setTab}
+            title={title}
+            setTitle={setTitle}
           />
         ))}
         {/* <Channel title='BUFFY COMMUNITY' comment={'Lepurm'} src='src' />

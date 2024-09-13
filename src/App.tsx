@@ -38,6 +38,7 @@ function App () {
   const [exchange, setExchange] = useState<any>({})
   const [loading, setLoading] = useState(true)
   const [tab, setTab] = useState<string>('Splash')
+  const [title, setTitle] = useState<string>('')
   const [start, setStart] = useState<boolean>(false)
   const [reachDailyLimit, setReachDailyLimit] = useState<boolean>(false)
   const [claimShow, setClaimShow] = useState<boolean>(false)
@@ -241,6 +242,8 @@ function App () {
                 setExchange={setExchange}
                 tab={tab}
                 setTab={setTab}
+                title={title}
+                setTitle={setTitle}
               />
             )}
             {tab == 'Mine' && (
@@ -267,8 +270,9 @@ function App () {
             {tab == 'Channel' && (
               // <BuffyCommunity user={user} inviteRevenue={setting.inviteRevenue} />
               <BuffyCommunity
-              // user={user}
-              // inviteRevenue={setting.inviteRevenue}
+                title={title}
+                // user={user}
+                // inviteRevenue={setting.inviteRevenue}
               />
             )}
             {tab == 'Task' && (
