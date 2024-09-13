@@ -1,4 +1,4 @@
-const ENDPOINT = 'http://localhost:5000';
+const ENDPOINT = 'http://192.168.142.158:5000';
 // const ENDPOINT = 'https://app.bleggs.com';
 const BOT_TOKEN = '7233907096:AAFXzUYCRmFFN9jJmnNE-gL56awzOh9heCs';
 

@@ -5,16 +5,16 @@ import Exchange from './page/Exchange'
 // import { useTelegram } from './hooks/useTelegram'
 import axios from 'axios'
 import { toast } from 'react-hot-toast'
-import { ToastContainer } from 'react-toastify'
+// import { ToastContainer } from 'react-toastify'
 import Footer from './component/Footer'
-import Mine from './page/Mine'
+// import Mine from './page/Mine'
 import Friends from './page/Friends'
 import BuffyCommunity from './component/BuffyCommunity'
 
 import Leaderboard from './page/Leaderboard'
 import { ENDPOINT } from './data'
 import Splash from './page/Splash'
-import Task from './page/Task'
+// import Task from './page/Task'
 import Admin from './page/Admin'
 import { isMobileDevice } from './utils/mobileDetect'
 import QRCode from 'qrcode.react'
@@ -33,7 +33,7 @@ function App () {
   // const { user, start_param } = useTelegram()
   const [photo_url, setPhotoUrl] = useState<string | null>(null)
   const [inviteMsg, setInviteMsg] = useState<boolean>(false)
-  const [task, setTask] = useState<string[]>([])
+  // const [task, setTask] = useState<string[]>([])
   const [setting, setSetting] = useState<any>({})
   const [exchange, setExchange] = useState<any>({})
   const [loading, setLoading] = useState(true)
@@ -130,7 +130,7 @@ function App () {
               setTotalPoint(userData.totalPoints)
               setPower(res.data.powerList[userData.power.id - 1])
               setTimeLimit(userData.dailyTimeLimit)
-              setTask(userData.task)
+              // setTask(userData.task)
               setReferral(userData.friends.length)
               countdownTime = userData.countDown
               if (countdownTime == 0) setReachDailyLimit(true)
@@ -246,7 +246,7 @@ function App () {
                 setTitle={setTitle}
               />
             )}
-            {tab == 'Mine' && (
+            {/* {tab == 'Mine' && (
               <Mine
                 power={power}
                 setPower={setPower}
@@ -262,7 +262,7 @@ function App () {
                 nextLevel={nextLevel}
                 loading={loading}
               />
-            )}
+            )} */}
             {tab == 'Friends' && (
               // <BuffyCommunity user={user} inviteRevenue={setting.inviteRevenue} />
               <Friends user={user} inviteRevenue={setting.inviteRevenue} />
@@ -275,7 +275,7 @@ function App () {
                 // inviteRevenue={setting.inviteRevenue}
               />
             )}
-            {tab == 'Task' && (
+            {/* {tab == 'Task' && (
               <Task
                 user={user}
                 totalPoint={totalPoint}
@@ -284,9 +284,9 @@ function App () {
                 task={task}
                 setTask={setTask}
               />
-            )}
+            )} */}
             {tab == 'Leaderboard' && <Leaderboard user={user} />}
-            <ToastContainer />
+            {/* <ToastContainer /> */}
           </div>
           {tab !== 'Splash' && tab !== 'Admin' && (
             <Footer tab={tab} setTab={setTab} />
