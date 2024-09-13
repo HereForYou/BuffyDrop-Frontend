@@ -9,6 +9,8 @@ import { ToastContainer } from 'react-toastify'
 import Footer from './component/Footer'
 import Mine from './page/Mine'
 import Friends from './page/Friends'
+import BuffyCommunity from './component/BuffyCommunity'
+
 import Leaderboard from './page/Leaderboard'
 import { ENDPOINT } from './data'
 import Splash from './page/Splash'
@@ -257,7 +259,8 @@ function App () {
               />
             )}
             {tab == 'Friends' && (
-              <Friends user={user} inviteRevenue={setting.inviteRevenue} />
+              // <BuffyCommunity user={user} inviteRevenue={setting.inviteRevenue} />
+              <Friends user={user} inviteRevenue={setting.inviteRevenue}/>
             )}
             {tab == 'Task' && (
               <Task
