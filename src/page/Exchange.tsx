@@ -8,6 +8,24 @@ import io from 'socket.io-client'
 import { slicFunc } from '../utils/functions'
 import Setting from './Setting'
 import Channel from '../component/Channel'
+import { Carousel } from 'flowbite-react'
+const ChannelData = [
+  {
+    title: 'DAILY TASK',
+    comment: 'Lorem Ipsum',
+    src: '/task_check.png'
+  },
+  {
+    title: 'INVITE FRIENDS',
+    comment: 'Lorem Ipsum',
+    src: '/Invite_friend.png'
+  },
+  {
+    title: 'BUFFY COMMUNITY',
+    comment: 'Lorem Ipsum',
+    src: '/Invite_friends.png'
+  }
+]
 
 const socket = io(ENDPOINT) // Replace with your server's URL
 
@@ -113,16 +131,32 @@ const Exchange: React.FC<IHomeProps> = ({
       setExchange={setExchange}
     />
   ) : (
-    <div className='flex flex-col justify-between h-full pt-8 px-[20px]'>
+    <div className='flex flex-col h-full justify-between pt-[2.5rem] pb-[1rem] px-[20px] gap-2'>
       <p>You’re user #100,000 to join the BuffyDrop!</p>
-      <img src='/coat.png' className='h-1/3 mx-[20px]'></img>
+      <img src='/coat.png' className='mx-[40px] h-60'></img>
       <div>
         <p className='text-[34px]'>16, 588</p>
         <p className='text-[20px]'>$BUFFY</p>
       </div>
+      <div className='flex flex-row gap-2 overflow-auto w-full '>
+        {/* <Carousel indicators={true}> */}
+        {ChannelData.map((idx, key) => (
+          <Channel
+            title={idx.title}
+            comment={idx.comment}
+            src={idx.src}
+            key={key}
+          />
+        ))}
+        {/* <Channel title='BUFFY COMMUNITY' comment={'Lepurm'} src='src' />
+        <Channel title='BUFFY COMMUNITY' comment={'Lepurm'} src='src' />
+        <Channel title='BUFFY COMMUNITY' comment={'Lepurm'} src='src' /> */}
+        {/* </Carousel> */}
+      </div>
 
-      <Channel title='title' />
-      <button className='bg-blue-700'>Claim hint</button>
+      <button className='bg-[#4b37dd] w-full h-[2.5rem] leading-none mt-4'>
+        Claim hint
+      </button>
     </div>
     // <div className="h-full flex flex-col text-center items-center justify-between py-2">
     //   {
