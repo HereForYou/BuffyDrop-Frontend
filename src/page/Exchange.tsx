@@ -175,11 +175,11 @@ const Exchange: React.FC<IHomeProps> = ({
       setExchange={setExchange}
     />
   ) : (
-    <div className='flex flex-col h-full justify-between pt-[2.5rem] pb-[2rem] px-[20px] gap-2'>
+    <div className='flex flex-col h-full justify-between pt-[2.5rem] pb-[2rem] px-[20px] gap-2 overflow-y-auto overflow-x-hidden hiddenScrollBar'>
       {claim && <ClaimCard handleClose={() => setClaim(false)} />}
       <WalletConnect />
       <p>You’re user #100,000 to join the BuffyDrop!</p>
-      <img src='/coat.png' className='mx-[40px] h-60'></img>
+      <img src='/coat.png' className='mx-[56px] h-48'></img>
       <div>
         <p className='text-[34px]'>
           {formatNumberWithCommas(curUser?.totalPoints)}
