@@ -193,9 +193,6 @@ const Exchange: React.FC<IHomeProps> = ({
               btnTitle={idx.btnTitle}
             />
           ))}
-          {/* <Channel title='BUFFY COMMUNITY' comment={'Lepurm'} src='src' />
-        <Channel title='BUFFY COMMUNITY' comment={'Lepurm'} src='src' />
-        <Channel title='BUFFY COMMUNITY' comment={'Lepurm'} src='src' /> */}
         </Carousel>
       </div>
       <button className="bg-[#110d33] w-full h-[2.5rem] leading-none mt-1">
