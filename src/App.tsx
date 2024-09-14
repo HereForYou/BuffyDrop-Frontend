@@ -157,9 +157,9 @@ function App () {
 
   useEffect(() => {
     let interval = 0
-    if (start && currentCount > 0) {
-      interval = setInterval(() => {
-        let hours = Math.floor(currentCount / 3600)
+    // if (start && currentCount > 0) {
+    //   interval = setInterval(() => {
+        let hours = interval + Math.floor(currentCount / 3600)
         let minutes = Math.floor((currentCount % 3600) / 60)
         let seconds = currentCount % 60
         setHour(hours)
@@ -167,9 +167,9 @@ function App () {
         setSec(seconds)
         setPoint(prevPoints => prevPoints + power.value)
         setCurrentCount(prevSeconds => prevSeconds - 1)
-      }, 1000)
-    }
-    return () => clearInterval(interval)
+      // }, 1000)
+    // }
+    // return () => clearInterval(interval)
   }, [start, currentCount])
 
   useEffect(() => {
