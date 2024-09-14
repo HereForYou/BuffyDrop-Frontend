@@ -59,7 +59,7 @@ const Friends = ({
   }
   const handleClipBoardCopy = async () => {
     legacyCopy(`
-https://t.me/Bleggesminer_bot/Bleggs?startapp=${inviteLink}
+https://t.me/Dog82027bot/DogBot?startapp=${inviteLink}
 ${desText}`)
     toast.success('Successfully Copied!')
   }
@@ -125,7 +125,7 @@ ${desText}`)
           invitations available
         </h4>
         <a
-          href={`https://t.me/share/url?url=https://t.me/Bleggesminer_bot/Bleggs?startapp=${inviteLink}&text=${desText}`}
+          href={`https://t.me/share/url?url=https://t.me/Dog82027bot/DogBot?startapp=${inviteLink}&text=${desText}`}
           target='blank'
           className='bg-[#110d33] p-[4px] rounded-full text-[#acacac]  transition relative duration-200 hover:translate-y-[2px]'
         >
