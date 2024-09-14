@@ -280,13 +280,19 @@ function App () {
               />
             )}
             {tab == 'Channel' && (
-              // <BuffyCommunity user={user} inviteRevenue={setting.inviteRevenue} />
-              // <BuffyCommunity
-              //   title={title}
-              // user={user}
-              // inviteRevenue={setting.inviteRevenue}
-              // />
               <Task
+                title={title}
+                user={user}
+                totalPoint={totalPoint}
+                setTotalPoint={setTotalPoint}
+                setting={setting}
+                task={task}
+                setTask={setTask}
+              />
+            )}
+            {tab == 'Buffy' && (
+              <Task
+                title={title}
                 user={user}
                 totalPoint={totalPoint}
                 setTotalPoint={setTotalPoint}

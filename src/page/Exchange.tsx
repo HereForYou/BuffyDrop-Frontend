@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 // import ProgressBar from '../component/ProgressBar'
 // import Loader from '../component/Loader'
-// import axios from 'axios'
-// import { ENDPOINT } from '../data'
+import axios from 'axios'
+import { ENDPOINT } from '../data'
+import { toast } from 'react-hot-toast'
+
 // import ExchangeSelector from '../component/exchangeSelector'
 // import io from 'socket.io-client'
 // import { slicFunc } from '../utils/functions'
@@ -13,6 +15,8 @@ import { Carousel } from 'react-responsive-carousel'
 import '../App.css'
 import WalletConnect from '../component/WalletConnect'
 import ClaimCard from '../component/ClaimCard'
+import { formatNumberWithCommas } from '../utils/functions'
+
 const ChannelData = [
   {
     id: 'Channel',
@@ -29,7 +33,7 @@ const ChannelData = [
     btnTitle: 'Invite'
   },
   {
-    id: 'Channel',
+    id: 'Buffy',
     title: 'BUFFY COMMUNITY',
     comment: 'Lorem Ipsum',
     src: '/Invite_friends.png',
@@ -100,6 +104,7 @@ const Exchange: React.FC<IHomeProps> = ({
   // const [totalUsers, setTotalUsers] = useState<number>(0)
   const [showSetting, setShowSetting] = useState<boolean>(false)
   const [claim, setClaim] = useState(false)
+  const [curUser, setCurUser] = useState<any>({})
 
   // const handleClaim = () => {
   //   if (user) {
@@ -140,7 +145,27 @@ const Exchange: React.FC<IHomeProps> = ({
   //     socket.off('newUserRegistered') // Remove the listener to prevent memory leaks
   //   }
   // }, [])
+  useEffect(() => {
+    // if (!hasShownWarningRef.current && user) {
+    // setLoading(true)
+    // axios.get(`${ENDPOINT}/api/user/all/${user.id}`)
+    axios
+      .get(`${ENDPOINT}/api/user/top/${user.id}?num=100`)
+      .then(res => {
+        let userInfo = res.data
 
+        // setUsers(userInfo.topUsers)
+        setCurUser(userInfo.curUser)
+        // setRaking(userInfo.ranking)
+        // setLoading(false)
+      })
+      .catch(err => {
+        console.error(err)
+        toast.error('Something Went Wrong!')
+      })
+    // hasShownWarningRef.current = true
+    // }
+  }, [])
   return showSetting ? (
     <Setting
       user={user}
@@ -156,7 +181,10 @@ const Exchange: React.FC<IHomeProps> = ({
       <p>You’re user #100,000 to join the BuffyDrop!</p>
       <img src='/coat.png' className='mx-[40px] h-60'></img>
       <div>
-        <p className='text-[34px]'>16, 588</p>
+        <p className='text-[34px]'>
+          {formatNumberWithCommas(curUser?.totalPoints)}
+          {/* 1234 */}
+        </p>
         <p className='text-[20px]'>$BUFFY</p>
       </div>
       {/* <TonConnectButton /> */}
