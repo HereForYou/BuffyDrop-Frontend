@@ -170,7 +170,8 @@ function App () {
       // }, 1000)
     // }
     // return () => clearInterval(interval)
-  }, [start, currentCount])
+  }, [])
+// }, [start, currentCount])
 
   useEffect(() => {
     setIsMobile(!isMobileDevice())
