@@ -11,6 +11,7 @@ import Channel from '../component/Channel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Carousel } from 'react-responsive-carousel'
 import '../App.css'
+import ClaimCard from '../component/ClaimCard'
 
 const ChannelData = [
   {
@@ -18,21 +19,21 @@ const ChannelData = [
     title: 'DAILY TASK',
     comment: 'Lorem Ipsum',
     src: '/task_check.png',
-    btnTitle:"Go",
+    btnTitle: 'Go'
   },
   {
     id: 'Channel',
     title: 'INVITE FRIENDS',
     comment: 'Lorem Ipsum',
     src: '/Invite_friend.png',
-    btnTitle:"Invite",
+    btnTitle: 'Invite'
   },
   {
     id: 'Channel',
     title: 'BUFFY COMMUNITY',
     comment: 'Lorem Ipsum',
     src: '/Invite_friends.png',
-    btnTitle:"Join",
+    btnTitle: 'Join'
   }
 ]
 
@@ -98,6 +99,7 @@ const Exchange: React.FC<IHomeProps> = ({
 }) => {
   // const [totalUsers, setTotalUsers] = useState<number>(0)
   const [showSetting, setShowSetting] = useState<boolean>(false)
+  const [claim, setClaim] = useState(false)
 
   // const handleClaim = () => {
   //   if (user) {
@@ -148,7 +150,8 @@ const Exchange: React.FC<IHomeProps> = ({
       setExchange={setExchange}
     />
   ) : (
-    <div className="flex flex-col h-full justify-between pt-[2.5rem] pb-[2rem] px-[20px] gap-2">
+    <div className='flex flex-col h-full justify-between pt-[2.5rem] pb-[2rem] px-[20px] gap-2'>
+      {claim && <ClaimCard handleClose={() => setClaim(false)} />}
       <p>You’re user #100,000 to join the BuffyDrop!</p>
       <img src='/coat.png' className='mx-[40px] h-60'></img>
       <div>
@@ -189,7 +192,10 @@ const Exchange: React.FC<IHomeProps> = ({
         <Channel title='BUFFY COMMUNITY' comment={'Lepurm'} src='src' /> */}
         </Carousel>
       </div>
-      <button className='bg-[#110d33] w-full h-[2.5rem] leading-none mt-1'>
+      <button
+        className='bg-[#110d33] w-full h-[2.5rem] leading-none mt-1'
+        onClick={() => setClaim(true)}
+      >
         Claim hint
       </button>
     </div>
