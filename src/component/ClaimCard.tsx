@@ -1,5 +1,3 @@
-import React from 'react'
-import { useState } from 'react'
 import '../App.css'
 import TGImg from '../assets/tg.svg'
 import XImg from '../assets/x.svg'
