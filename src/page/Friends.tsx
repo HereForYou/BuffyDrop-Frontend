@@ -9,7 +9,7 @@ import FriendCard from '../component/FriendCard'
 
 import { ENDPOINT } from '../data'
 
-const desText = `\nJoin me on the exciting journey with BLEGGS! 🚀 Click the LAUNCH button to start mining tokens and turn your efforts into real money. 💰 Let's mine and earn together!`
+const desText = `\nJoin me on the exciting journey with Dogs! 🚀 Click the LAUNCH button to start mining tokens and turn your efforts into real money. 💰 Let's mine and earn together!`
 
 const Friends = ({
   user,
