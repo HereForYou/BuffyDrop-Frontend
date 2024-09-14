@@ -230,3 +230,14 @@ input:focus {
     cursor: pointer;
     z-index: 100;
 }
+
+.go3974562317.go3162878564 {
+    position: absolute;
+    top: -35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    left: 20%;
+    /* transform: translate(-50%); */
+}

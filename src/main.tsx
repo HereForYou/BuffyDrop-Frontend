@@ -3,12 +3,16 @@ import App from "./App.tsx";
 import WebApp from "@twa-dev/sdk";
 
 import "./index.css";
-import ToastrProvider from "./providers/toastrProvider.tsx";
+// import ToastrProvider from "./providers/toastrProvider.tsx";
+import { TonConnectUIProvider } from "@tonconnect/ui-react";
 
 WebApp.ready();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <ToastrProvider position="top-center">
+  <TonConnectUIProvider manifestUrl="https://dog82027.vercel.app/tonconnect-manifest.json">
     <App />
-  </ToastrProvider>
+  </TonConnectUIProvider>
 );
+
+{/* <TonConnectUIProvider manifestUrl="https://dog82027.vercel.app/tonconnect-manifest.json">
+</TonConnectUIProvider> */}

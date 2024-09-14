@@ -27,7 +27,7 @@ const Channel: React.FC<ChannelProps> = ({
   }
   return (
     <div className='pb-4'>
-      <div className='bg-[#4b37dd] rounded-[1rem] w-[90vw] min-w-[18rem] flex flex-col pt-4 py-2 px-[20px] justify-between'>
+      <div className='bg-[#4b37dd] rounded-[1rem] w-[90vw] min-w-[18rem] flex flex-col py-2 px-[20px] justify-between'>
         <div className='flex flex-col justify-between'>
           <p className='text-[20px] text-left leading-none'>{heading}</p>
           <p className='text-[12px] text-left'>{comment}</p>
