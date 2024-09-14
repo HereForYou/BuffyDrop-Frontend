@@ -33,7 +33,7 @@ const Friends = ({
         .get(`${ENDPOINT}/api/user/friend/${user?.id}`)
         .then(res => {
           let userInfo = res.data
-          console.log('userInfo', userInfo)
+          console.log('userInfo', userInfo.inviteLink)
 
           setInviteLink(userInfo.inviteLink)
           setFriends(userInfo.friendsInfo)
