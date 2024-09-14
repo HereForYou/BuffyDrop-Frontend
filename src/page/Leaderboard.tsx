@@ -88,7 +88,7 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
         ) : (
           <div>
             <div className='flex pt-3 pb-1 text-base w-full text-[#acacac] items-center'>
-              <div className='text-center pl-2'>46M</div>
+              <div className='text-center pl-2'>{users.length}</div>
               <div className='text-center pl-2'>holders</div>
             </div>
             <div className='h-[62vh] overflow-auto w-full'>
