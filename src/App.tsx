@@ -2,7 +2,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import './App.css'
 import { useState, useEffect, useRef } from 'react'
 import Exchange from './page/Exchange'
-import { useTelegram } from './hooks/useTelegram'
+// import { useTelegram } from './hooks/useTelegram'
 import axios from 'axios'
 import { toast } from 'react-hot-toast'
 // import { ToastContainer } from 'react-toastify'
@@ -19,18 +19,18 @@ import Admin from './page/Admin'
 import { isMobileDevice } from './utils/mobileDetect'
 import QRCode from 'qrcode.react'
 import { getUserAvatarUrl } from './utils/functions'
-// const user = {
-//   id: '7211451993',
-//   username: 'super0827',
-//   first_name: 'Super',
-//   last_name: ''
-// }
-// const start_param = ''
+const user = {
+  id: '7211451993',
+  username: 'super0827',
+  first_name: 'Super',
+  last_name: ''
+}
+const start_param = ''
 
 function App () {
   let countdownTime = 1
   const hasShownWarningRef = useRef(false)
-  const { user, start_param } = useTelegram()
+  // const { user, start_param } = useTelegram()
   const [photo_url, setPhotoUrl] = useState<string | null>(null)
   const [inviteMsg, setInviteMsg] = useState<boolean>(false)
   // const [task, setTask] = useState<string[]>([])
@@ -159,19 +159,19 @@ function App () {
     let interval = 0
     // if (start && currentCount > 0) {
     //   interval = setInterval(() => {
-        let hours = interval + Math.floor(currentCount / 3600)
-        let minutes = Math.floor((currentCount % 3600) / 60)
-        let seconds = currentCount % 60
-        setHour(hours)
-        setMin(minutes)
-        setSec(seconds)
-        setPoint(prevPoints => prevPoints + power.value)
-        setCurrentCount(prevSeconds => prevSeconds - 1)
-      // }, 1000)
+    let hours = interval + Math.floor(currentCount / 3600)
+    let minutes = Math.floor((currentCount % 3600) / 60)
+    let seconds = currentCount % 60
+    setHour(hours)
+    setMin(minutes)
+    setSec(seconds)
+    setPoint(prevPoints => prevPoints + power.value)
+    setCurrentCount(prevSeconds => prevSeconds - 1)
+    // }, 1000)
     // }
     // return () => clearInterval(interval)
   }, [])
-// }, [start, currentCount])
+  // }, [start, currentCount])
 
   useEffect(() => {
     setIsMobile(!isMobileDevice())
