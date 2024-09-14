@@ -12,6 +12,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import "../App.css";
 import WalletConnect from "../component/WalletConnect";
+import ClaimCard from '../component/ClaimCard'
 
 const ChannelData = [
   {
@@ -99,6 +100,7 @@ const Exchange: React.FC<IHomeProps> = ({
 }) => {
   // const [totalUsers, setTotalUsers] = useState<number>(0)
   const [showSetting, setShowSetting] = useState<boolean>(false);
+  const [claim, setClaim] = useState(false)
 
   // const handleClaim = () => {
   //   if (user) {
@@ -151,7 +153,8 @@ const Exchange: React.FC<IHomeProps> = ({
       setExchange={setExchange}
     />
   ) : (
-    <div className="flex flex-col h-full justify-between pt-[2.5rem] pb-[2rem] px-[20px] gap-2 overflow-x-hidden overflow-y-auto hiddenScrollBar">
+    <div className='flex flex-col h-full justify-between pt-[2.5rem] pb-[2rem] px-[20px] gap-2 overflow-x-hidden overflow-y-auto hiddenScrollBar'>
+      {claim && <ClaimCard handleClose={() => setClaim(false)} />}
       <WalletConnect />
       <p>You’re user #100,000 to join the BuffyDrop!</p>
       <img src="/coat.png" className="mx-[40px] h-60"></img>

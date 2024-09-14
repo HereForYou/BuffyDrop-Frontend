@@ -1,5 +1,3 @@
-import React from 'react'
-import { useState } from 'react'
 import '../App.css'
 import TGImg from '../assets/tg.svg'
 import XImg from '../assets/x.svg'
@@ -38,25 +36,21 @@ const WalletLink = [
 ]
 
 interface ClaimCardProps {
-  flag: boolean
+  handleClose: () => void
 }
 
-const ClaimCard: React.FC<ClaimCardProps> = () => {
-  const [showModal, setShowModal] = useState<boolean>(false)
-
+const ClaimCard = ({ handleClose }: ClaimCardProps) => {
   return (
     <div
-      className={`absolute bg-[#161616] rounded-xl flex flex-col w-full right-0 text-[#acacac] px-4 py-2 pb-8 gap-4 transition-all duration-500 ease-out transform ${
-        showModal ? 'top-[100vh]' : 'h-[100vh] top-[100px]'
-      }`}
+      className={`absolute bg-[#161616] rounded-xl flex flex-col left-0 right-0 bottom-0 z-50 text-[#acacac] px-4 py-2 pb-8 gap-4 transition-all duration-500 ease-out transform`}
     >
-      <div onClick={() => setShowModal(true)} className='closeBtn'></div>
+      <div onClick={handleClose} className='closeBtn'></div>
       <div className='text-xl pt-3'>Token claim hints</div>
       <div className='p-2'>
         <div className='text-xl text-left py-2'>Follow official channels</div>
         <div>
           {ChannelLink.map((data, index) => (
-            <a href={data.link} className='text-[#acacac]'>
+            <a key={index} href={data.link} className='text-[#acacac]'>
               <div
                 key={index}
                 className='flex flex-row py-3 items-center text-base'
