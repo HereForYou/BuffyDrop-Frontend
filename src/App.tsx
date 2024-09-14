@@ -159,19 +159,19 @@ function App () {
     let interval = 0
     // if (start && currentCount > 0) {
     //   interval = setInterval(() => {
-        let hours = interval + Math.floor(currentCount / 3600)
-        let minutes = Math.floor((currentCount % 3600) / 60)
-        let seconds = currentCount % 60
-        setHour(hours)
-        setMin(minutes)
-        setSec(seconds)
-        setPoint(prevPoints => prevPoints + power.value)
-        setCurrentCount(prevSeconds => prevSeconds - 1)
-      // }, 1000)
+    let hours = interval + Math.floor(currentCount / 3600)
+    let minutes = Math.floor((currentCount % 3600) / 60)
+    let seconds = currentCount % 60
+    setHour(hours)
+    setMin(minutes)
+    setSec(seconds)
+    setPoint(prevPoints => prevPoints + power.value)
+    setCurrentCount(prevSeconds => prevSeconds - 1)
+    // }, 1000)
     // }
     // return () => clearInterval(interval)
   }, [])
-// }, [start, currentCount])
+  // }, [start, currentCount])
 
   useEffect(() => {
     setIsMobile(!isMobileDevice())
