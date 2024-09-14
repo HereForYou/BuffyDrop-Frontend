@@ -33,7 +33,7 @@ const Friends = ({
         .get(`${ENDPOINT}/api/user/friend/${user?.id}`)
         .then(res => {
           let userInfo = res.data
-          console.log('userInfo', userInfo.inviteLink)
+          console.log('userInfo', userInfo)
 
           setInviteLink(userInfo.inviteLink)
           setFriends(userInfo.friendsInfo)
@@ -78,7 +78,7 @@ ${desText}`)
       </div>
       <div className='flex flex-col justify-between items-start px-6 text-[#acacac]'>
         <h3 className='text-left text-xl font-bold'>
-          <span>{friends.length + 2}</span> friends
+          <span>{friends.length}</span> friends
         </h3>
       </div>
       <div className='mt-3 space-y-2 overflow-auto h-[40vh]'>
@@ -100,8 +100,8 @@ ${desText}`)
           <div>
             <h4 className='pt-1 text-[#acacac]'>
               {/* No Friends yet */}
-              <FriendCard key={'super123'} name={'super123'} value={312542} />
-              <FriendCard key={'submit333'} name={'submit333'} value={222542} />
+              {/* <FriendCard key={'super123'} name={'super123'} value={312542} />
+              <FriendCard key={'submit333'} name={'submit333'} value={222542} /> */}
             </h4>
           </div>
         )}
