@@ -13,7 +13,7 @@ const BuffyCommunity: React.FC<BuffyCommunityProps> = ({ title }) => {
       <CommunityCard
         key={'CommunityCard'}
         link={`https://t.me/BuffyDrops`}
-        avatar={'/tg_icon.png'}
+        avatar={'tg_icon.png'}
         title={'Join our TG channel'}
         buffy={100000}
         status={false}
