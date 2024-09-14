@@ -22,7 +22,7 @@ const ChannelData = [
     btnTitle: 'Go'
   },
   {
-    id: 'Channel',
+    id: 'INVITE',
     title: 'INVITE FRIENDS',
     comment: 'Lorem Ipsum',
     src: '/Invite_friend.png',

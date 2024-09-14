@@ -13,12 +13,14 @@ const desText = `\nJoin me on the exciting journey with Dogs! 🚀 Click the LAU
 
 const Friends = ({
   user,
-  inviteRevenue
+  inviteRevenue,
+  modal
 }: {
   user: any
   inviteRevenue: number
+  modal: boolean
 }) => {
-  const [showModal, setShowModal] = useState<boolean>(false)
+  const [showModal, setShowModal] = useState<boolean>(modal)
   const [inviteLink, setInviteLink] = useState<string>('')
   const [friends, setFriends] = useState<object[]>([])
   // const [totalFriendPoints, setTotalFriendPoints] = useState<number>(0.0);

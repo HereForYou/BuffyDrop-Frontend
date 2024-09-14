@@ -9,15 +9,15 @@ import { toast } from 'react-hot-toast'
 import Footer from './component/Footer'
 // import Mine from './page/Mine'
 import Friends from './page/Friends'
-import BuffyCommunity from './component/BuffyCommunity'
+// import BuffyCommunity from './component/BuffyCommunity'
 
 import Leaderboard from './page/Leaderboard'
 import { ENDPOINT } from './data'
 import Splash from './page/Splash'
-// import Task from './page/Task'
+import Task from './page/Task'
 import Admin from './page/Admin'
 import { isMobileDevice } from './utils/mobileDetect'
-import QRCode from 'qrcode.react'
+// import QRCode from 'qrcode.react'
 import { getUserAvatarUrl } from './utils/functions'
 // const user = {
 //   id: '7211451993',
@@ -33,7 +33,7 @@ function App () {
   const { user, start_param } = useTelegram()
   const [photo_url, setPhotoUrl] = useState<string | null>(null)
   const [inviteMsg, setInviteMsg] = useState<boolean>(false)
-  // const [task, setTask] = useState<string[]>([])
+  const [task, setTask] = useState<string[]>([])
   const [setting, setSetting] = useState<any>({})
   const [exchange, setExchange] = useState<any>({})
   const [loading, setLoading] = useState(true)
@@ -266,17 +266,26 @@ function App () {
             )} */}
             {tab == 'Friends' && (
               // <BuffyCommunity user={user} inviteRevenue={setting.inviteRevenue} />
-              <Friends user={user} inviteRevenue={setting.inviteRevenue} />
+              <Friends
+                user={user}
+                inviteRevenue={setting.inviteRevenue}
+                modal={false}
+              />
+            )}
+            {tab == 'INVITE' && (
+              <Friends
+                user={user}
+                inviteRevenue={setting.inviteRevenue}
+                modal={true}
+              />
             )}
             {tab == 'Channel' && (
               // <BuffyCommunity user={user} inviteRevenue={setting.inviteRevenue} />
-              <BuffyCommunity
-                title={title}
-                // user={user}
-                // inviteRevenue={setting.inviteRevenue}
-              />
-            )}
-            {/* {tab == 'Task' && (
+              // <BuffyCommunity
+              //   title={title}
+              // user={user}
+              // inviteRevenue={setting.inviteRevenue}
+              // />
               <Task
                 user={user}
                 totalPoint={totalPoint}
@@ -285,7 +294,7 @@ function App () {
                 task={task}
                 setTask={setTask}
               />
-            )} */}
+            )}
             {tab == 'Leaderboard' && <Leaderboard user={user} />}
             {/* <ToastContainer /> */}
           </div>
@@ -303,7 +312,7 @@ function App () {
           </div>
         </div>
       )}
-      {!isMobile && user && (
+      {/* {!isMobile && user && (
         <div className='flex flex-col justify-center items-center gap-2'>
           <h2 className='text-[24px] text-white font-bold'>
             Play on your mobile
@@ -316,7 +325,7 @@ function App () {
             @Bleggesminer_bot
           </a>
         </div>
-      )}
+      )} */}
     </Router>
   )
 }
