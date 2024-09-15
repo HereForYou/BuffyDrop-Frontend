@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from 'react'
-// import ProgressBar from '../component/ProgressBar'
-// import Loader from '../component/Loader'
 import axios from 'axios'
 import { ENDPOINT } from '../data'
 import { toast } from 'react-hot-toast'
-
-// import ExchangeSelector from '../component/exchangeSelector'
-// import io from 'socket.io-client'
-// import { slicFunc } from '../utils/functions'
 import Setting from './Setting'
 import Channel from '../component/Channel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
@@ -42,8 +36,6 @@ const ChannelData = [
   }
 ]
 
-// const socket = io(ENDPOINT) // Replace with your server's URL
-
 interface IHomeProps {
   user: any
   photo_url: string | null
@@ -74,25 +66,6 @@ interface IHomeProps {
 }
 const Exchange: React.FC<IHomeProps> = ({
   user,
-  // photo_url,
-  // point,
-  // totalPoint,
-  // handleMining,
-  // handleStopMining,
-  // claimShow,
-  // reachDailyLimit,
-  // setReachDailyLimit,
-  // setTotalPoint,
-  // setClaimShow,
-  // start,
-  // hour,
-  // min,
-  // sec,
-  // timeLimit,
-  // power,
-  // level,
-  // nextLevel,
-  // loading,
   setting,
   exchange,
   setExchange,
@@ -101,15 +74,11 @@ const Exchange: React.FC<IHomeProps> = ({
   title,
   setTitle
 }) => {
-  // const [totalUsers, setTotalUsers] = useState<number>(0)
   const [showSetting, setShowSetting] = useState<boolean>(false)
   const [claim, setClaim] = useState(false)
   const [curUser, setCurUser] = useState<any>({})
   const [rank, setRank] = useState(0);
   useEffect(() => {
-    // if (!hasShownWarningRef.current && user) {
-    // setLoading(true)
-    // axios.get(`${ENDPOINT}/api/user/all/${user.id}`)
     axios
       .get(`${ENDPOINT}/api/user/top/${user.id}?num=100`,{
         headers: {
@@ -119,19 +88,13 @@ const Exchange: React.FC<IHomeProps> = ({
       .then(res => {
         let userInfo = res.data
         console.log("userInfo", userInfo)
-
-        // setUsers(userInfo.topUsers)
         setCurUser(userInfo.curUser)
-        setRank(userInfo.joinrank)
-        // setRaking(userInfo.ranking)
-        // setLoading(false)
+        setRank(userInfo.curUser.joinRank)
       })
       .catch(err => {
         console.error(err)
         toast.error('Something Went Wrong!')
       })
-    // hasShownWarningRef.current = true
-    // }
   }, [])
   return showSetting ? (
     <Setting
@@ -146,7 +109,7 @@ const Exchange: React.FC<IHomeProps> = ({
       {claim && <ClaimCard handleClose={() => setClaim(false)} />}
       <WalletConnect />
       <p>You’re user {rank} to join the BuffyDrop!</p>
-      <img src='/coat.png' className='w-1/2'></img>
+      <img src='/dogAvatar.png' className='w-1/2'></img>
       <div>
         <p className="text-[34px]">
           {(!curUser || formatNumberWithCommas(curUser?.totalPoints) == 'NaN') ? (
@@ -159,8 +122,6 @@ const Exchange: React.FC<IHomeProps> = ({
         </p>
         <p className='text-[20px]'>$BUFFY</p>
       </div>
-      {/* <TonConnectButton /> */}
-      {/* className="absolute bg-[#110d33] text-[#acacac] p-2" */}
       <div className='flex flex-row gap-2 w-full'>
         <Carousel
           className='w-full'
