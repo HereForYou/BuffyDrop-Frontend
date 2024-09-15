@@ -44,8 +44,8 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
   }, [])
 
   return (
-    <div className='h-full flex flex-col text-center items-center justify-between py-2 px-6'>
-      <div className='w-full'>
+    <div className='h-full w-full flex flex-col text-center items-center justify-between py-2 px-6 overflow-x-hidden overflow-y-hidden hiddenScrollBar'>
+      <div className='w-full hiddenScrollBar'>
         {/* <div className="customCard-container w-full"> */}
         <div className='group pt-6 transition relative duration-300 cursor-default hover:shadow-[0 -8px 0px 0px #2196f3]'>
           {/* <h2 className="text-[24px] font-extrabold">Top {users.length} $BLEGGS Miners</h2> */}

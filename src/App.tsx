@@ -212,9 +212,9 @@ function App () {
   return (
     <Router>
       {user && isMobile && (
-        <div className={`h-full relative max-h-screen overflow-hidden max-w-[500px]`}>
+        <div className={`h-full relative max-h-screen overflow-hidden max-w-[500px] w-full`}>
           <div
-            className={`relative h-screen overflow-hidden pb-[64px] w-full max-w-[500px]`}
+            className={`flex h-screen overflow-hidden pb-[64px] w-full`}
           >
             {tab == 'Splash' && (
               <Splash
