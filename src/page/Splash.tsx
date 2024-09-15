@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Confetti from "react-confetti";
 // import { convertToShorthand } from '../utils/functions'
 
@@ -15,8 +15,12 @@ const Splash: React.FC<ISplashProps> = ({
   // referral,
   setTab
 }) => {
+  useEffect(() => {
+    console.log("window size", window.innerHeight)
+  }, [window.innerWidth])
+  
   return (
-    <div className='flex flex-col justify-between h-full pt-4 bg-cover bg-center'>
+    window.innerHeight > 768 ? <div className='flex flex-col justify-between h-full pt-4 bg-cover bg-center'>
       <div className='flex flex-col relative items-center justify-center'>
         <img src='homeImg.png' className='absolute w-52 top-36' />
         <img src='homeImg2.png' className='absolute top-10 w-full' />
@@ -42,7 +46,34 @@ const Splash: React.FC<ISplashProps> = ({
         </button>
       </div>
       <Confetti/>
-    </div>
+    </div> : 
+    <div className='flex flex-col justify-between h-full pt-4 bg-cover bg-center'>
+      <div className='flex flex-col relative items-center justify-center'>
+        <img src='homeImg.png' className='absolute w-28 top-24' />
+        <img src='homeImg2.png' className='absolute top-10 w-full' />
+      </div>
+      <div className='flex flex-col px-[20px] justify-between pt-0.5 gap-5 text-center'>
+        <div className='flex flex-col gap-3'>
+          <div className='leading-none flex flex-col gap-1 text-center'>
+            <p className='text-[30px] font-bold'>Buff Buff!</p>
+            <p className='text-[22px] font-bold text-nowrap text-center'>
+              Claim your 100,000 $Buffy
+            </p>
+          </div>
+          <p className='text-[16px] text-center'>
+            You're our 100,000th member! Bring your friends onboard and unlock
+            even more rewards from their success!
+          </p>
+        </div>
+        <button
+          className='bg-[#4b37dd] w-full h-[2.5rem] leading-none'
+          onClick={() => setTab('Exchange')}
+        >
+          Claim Buffy
+        </button>
+      </div>
+      <Confetti/>
+  </div>
   )
 }
 export default Splash
