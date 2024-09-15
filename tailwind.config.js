@@ -17,7 +17,7 @@ export default {
                 fadeouttopright: "fade-out-top-right 1s ease-in-out 0.25s 1",
             },
             backgroundImage: {
-                'splash-back': "url('/splash-back.png')",
+                'splash-back': "url('/splash-back2.png')",
                 'home-back': "url('/home-back.png')",
                 'mine-back': "url('/miner-back.png')",
                 'friend-back': "url('/friend-back.png')",
