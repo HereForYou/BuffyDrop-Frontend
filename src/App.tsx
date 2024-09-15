@@ -212,9 +212,9 @@ function App () {
   return (
     <Router>
       {user && isMobile && (
-        <div className={`h-full relative max-h-screen overflow-hidden max-w-2xl`}>
+        <div className={`h-full relative max-h-screen overflow-hidden max-w-[500px]`}>
           <div
-            className={`relative h-screen overflow-hidden pb-[64px]`}
+            className={`relative h-screen overflow-hidden pb-[64px] w-full max-w-[500px]`}
           >
             {tab == 'Splash' && (
               <Splash
@@ -255,23 +255,6 @@ function App () {
                 setTitle={setTitle}
               />
             )}
-            {/* {tab == 'Mine' && (
-              <Mine
-                power={power}
-                setPower={setPower}
-                timeLimit={timeLimit}
-                setTimeLimit={setTimeLimit}
-                setCurrentCount={setCurrentCount}
-                currentCount={currentCount}
-                user={user}
-                setting={setting}
-                totalPoint={totalPoint}
-                setTotalPoint={setTotalPoint}
-                level={level}
-                nextLevel={nextLevel}
-                loading={loading}
-              />
-            )} */}
             {tab == 'Friends' && (
               // <BuffyCommunity user={user} inviteRevenue={setting.inviteRevenue} />
               <Friends
