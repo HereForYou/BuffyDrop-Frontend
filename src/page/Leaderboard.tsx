@@ -22,7 +22,11 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
       setLoading(true)
       // axios.get(`${ENDPOINT}/api/user/all/${user.id}`)
       axios
-        .get(`${ENDPOINT}/api/user/top/${user.id}?num=100`)
+        .get(`${ENDPOINT}/api/user/top/${user.id}?num=100`,{
+          headers: {
+            'ngrok-skip-browser-warning': 'true' // or any value you prefer
+          }
+        })
         .then(res => {
           let userInfo = res.data
 

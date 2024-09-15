@@ -25,7 +25,7 @@ const Footer: React.FC<IFooterProps> = ({ tab, setTab }) => {
     setTab(tab)
   }
   return (
-    <div className='footer grid grid-cols-3 justify-between absolute z-10 h-[60px] w-full bottom-0 items-center px-4 rounded-2xl'>
+    <div className='footer absolute grid grid-cols-3 justify-between z-10 h-[60px] w-full bottom-0 items-center px-4 rounded-2xl'>
       {tabs.map((item, index) => (
         <div
           key={index}

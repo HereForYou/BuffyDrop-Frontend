@@ -32,7 +32,11 @@ const Friends = ({
       //https:reques
       setLoading(true)
       axios
-        .get(`${ENDPOINT}/api/user/friend/${user?.id}`)
+        .get(`${ENDPOINT}/api/user/friend/${user?.id}`,{
+          headers: {
+            'ngrok-skip-browser-warning': 'true' // or any value you prefer
+          }
+        })
         .then(res => {
           let userInfo = res.data
           console.log('userInfo', userInfo)
