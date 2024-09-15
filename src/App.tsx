@@ -144,6 +144,7 @@ function App () {
               // setPower(res.data.powerList[userData.power.id - 1])
               console.log("============>", response.data)
               setRanking(res.data.joinRank)
+              setTask(userData.task)
               setTimeLimit(userData.dailyTimeLimit)
               setReferral(userData.friends.length)
               countdownTime = userData.countDown
