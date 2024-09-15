@@ -9,7 +9,7 @@ import FriendCard from '../component/FriendCard'
 import LimiteModal from '../component/LimiteModal'
 import { ENDPOINT } from '../data'
 
-const desText = `\nJoin me on the exciting journey with Dogs! 🚀 Click the LAUNCH button to start mining tokens and turn your efforts into real money. 💰 Let's mine and earn together!`
+const desText = `\nJoin me because there’s a reason for spreading the BUFFY buzz. It’s now or never for the BUFFY drop!🍖`
 
 const Friends = ({
   user,
@@ -83,15 +83,19 @@ ${desText}`)
           className='h-full px-10 py-2 '
         />
       </div>
-      <div className='flex flex-col justify-between items-start px-6 text-[#acacac]'>
-        <h3 className='text-left text-xl font-bold'>
-          <span>{friends.length}</span> friends
-        </h3>
+      <div className="flex flex-col justify-between items-start px-6 text-[#acacac]">
+        {friends.length != 0 ? (
+          <h3 className="text-left text-xl font-bold">
+            <span>{friends.length}</span> friends
+          </h3>
+        ) : (
+          <></>
+        )}
       </div>
-      <div className='mt-3 space-y-2 overflow-auto h-[40vh]'>
+      <div className="mt-3 space-y-2 overflow-auto h-[40vh]">
         {loading ? (
-          <div className='flex items-center justify-center w-full'>
-            <Loader width='30' />
+          <div className="flex items-center justify-center w-full">
+            <Loader width="30" />
           </div>
         ) : friends.length > 0 ? (
           friends.map((friend: any) => {
@@ -101,14 +105,12 @@ ${desText}`)
                 name={friend.userName}
                 value={friend.totalPoints}
               />
-            )
+            );
           })
         ) : (
           <div>
-            <h4 className='pt-1 text-[#acacac]'>
-              {/* No Friends yet */}
-              {/* <FriendCard key={'super123'} name={'super123'} value={312542} />
-              <FriendCard key={'submit333'} name={'submit333'} value={222542} /> */}
+            <h4 className="pt-4 text-[#acacac]">
+              Tap on the button to invite your friends
             </h4>
           </div>
         )}

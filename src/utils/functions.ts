@@ -21,12 +21,40 @@ const convertToShorthand = (number: number) => {
 //     return new Intl.NumberFormat(locale).format(number);
 // }
 
-const formatNumberWithCommas = (number: number, locale = "en-US") => {
-    return new Intl.NumberFormat(locale, {
-        minimumFractionDigits: 4, // Minimum number of decimal places
-        maximumFractionDigits: 4  // Maximum number of decimal places
-    }).format(number);
-}
+// const formatNumberWithCommas = (number: number, locale = "en-US") => {
+//     return new Intl.NumberFormat(locale, {
+//         minimumFractionDigits: 4, // Minimum number of decimal places
+//         maximumFractionDigits: 4  // Maximum number of decimal places
+//     }).format(number);
+// }
+
+function formatNumberWithCommas(number: number) {
+    if (number === undefined || number === null) {
+        return "Invalid number"; // Handle undefined or null input
+    }
+
+    // Check if the input is a valid number
+    if (typeof number !== 'number' || isNaN(number)) {
+        return "Invalid number"; // Handle non-number types
+    }
+
+    // Check if the number is an integer
+    if (Number.isInteger(number)) {
+        // If the number is an integer, format with commas
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    } else {
+        // If the number is a float, check the decimal places
+        const decimalPlaces = (number.toString().split('.')[1] || '').length;
+
+        if (decimalPlaces < 4) {
+            // If there are less than four decimal places, return it as is
+            return number.toString();
+        } else {
+            // If there are four or more decimal places, round it to four decimal places and format with commas
+            return Number(number.toFixed(4)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+    }
+  }
 
 async function getUserAvatarUrl(userId: string) {
     try {
