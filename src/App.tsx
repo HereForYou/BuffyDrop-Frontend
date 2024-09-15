@@ -58,6 +58,7 @@ function App () {
 
   const [isMobile, setIsMobile] = useState<boolean>(false)
   console.log("user----------------",user)
+  
   useEffect(() => {
     if (setting.levelStandard) {
       if (totalPoint <= 0) {
