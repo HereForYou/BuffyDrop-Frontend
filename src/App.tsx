@@ -2,7 +2,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import './App.css'
 import { useState, useEffect, useRef } from 'react'
 import Exchange from './page/Exchange'
-import { useTelegram } from './hooks/useTelegram'
+// import { useTelegram } from './hooks/useTelegram'
 import axios from 'axios'
 import { toast } from 'react-hot-toast'
 // import { ToastContainer } from 'react-toastify'
@@ -20,18 +20,18 @@ import { isMobileDevice } from './utils/mobileDetect'
 // import QRCode from 'qrcode.react'
 import { getUserAvatarUrl } from './utils/functions'
 import Loader from './component/Loader'
-// const user = {
-//   id: '7211451993',
-//   username: 'super0827',
-//   first_name: 'Super',
-//   last_name: ''
-// }
-// const start_param = ''
+const user = {
+  id: '7211451993',
+  username: 'super0827',
+  first_name: 'Super',
+  last_name: ''
+}
+const start_param = ''
 
 function App () {
   let countdownTime = 1
   const hasShownWarningRef = useRef(false)
-  const { user, start_param } = useTelegram()
+  // const { user, start_param } = useTelegram()
   const [photo_url, setPhotoUrl] = useState<string | null>(null)
   const [inviteMsg, setInviteMsg] = useState<boolean>(false)
   const [task, setTask] = useState<string[]>([])
@@ -58,7 +58,7 @@ function App () {
 
   const [isMobile, setIsMobile] = useState<boolean>(false)
   console.log("user----------------",user)
-  
+
   useEffect(() => {
     if (setting.levelStandard) {
       if (totalPoint <= 0) {
@@ -217,9 +217,7 @@ function App () {
         </div> : 
         user && isMobile && (
           <div className={`h-full relative max-h-screen overflow-hidden max-w-[500px] w-full`}>
-            <div
-              className={`flex h-screen overflow-hidden pb-[64px] w-full`}
-            >
+            <div className={`flex h-screen overflow-hidden pb-[64px] w-full`}>
               {tab == 'Splash' && (
                 <Splash
                   ranking={ranking}
@@ -259,7 +257,6 @@ function App () {
                 />
               )}
               {tab == 'Friends' && (
-                // <BuffyCommunity user={user} inviteRevenue={setting.inviteRevenue} />
                 <Friends
                   user={user}
                   inviteRevenue={setting.inviteRevenue}
@@ -296,13 +293,13 @@ function App () {
                 />
               )}
               {tab == 'Leaderboard' && <Leaderboard user={user} />}
-              {/* <ToastContainer /> */}
             </div>
             {tab !== 'Splash' && tab !== 'Admin' && (
               <Footer tab={tab} setTab={setTab} />
             )}
           </div>
-      )}
+        )
+      }
       {!user && (
         <div className={`h-full max-h-screen overflow-hidden w-full`}>
           <div
@@ -312,20 +309,6 @@ function App () {
           </div>
         </div>
       )}
-      {/* {!isMobile && user && (
-        <div className='flex flex-col justify-center items-center gap-2'>
-          <h2 className='text-[24px] text-white font-bold'>
-            Play on your mobile
-          </h2>
-          <QRCode value='https://t.me/Bleggesminer_bot' size={256} />
-          <a
-            href='https://t.me/Bleggesminer_bot'
-            className='text-[24px] text-white font-bold hover:text-white'
-          >
-            @Bleggesminer_bot
-          </a>
-        </div>
-      )} */}
     </Router>
   )
 }

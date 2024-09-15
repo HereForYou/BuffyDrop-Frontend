@@ -187,14 +187,14 @@ input:focus {
 
 .carousel.carousel-slider .control-dots {
     position: absolute;
-    bottom: -15px;
+    bottom: 0;
     justify-content: center;
     align-items: center;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
     width: 100px;
-    z-index: 1;
+    z-index: 50;
 }
 
 .carousel .control-dots .dot {
@@ -233,12 +233,32 @@ input:focus {
 }
 
 .go3974562317.go3162878564 {
-    position: absolute;
-    top: -35px;
+    /* position: absolute; */
+    /* top: -35px; */
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 60%;
-    left: 20%;
+    width: fit-content;
+    margin-top: 10px;
+    left: 35%;
+    border-radius: 7px;
+    height: 30px;
+    background-color: white;
     /* transform: translate(-50%); */
+}
+
+.go3974562317.go3162878564 svg {
+    filter: invert(1);
+}
+
+.go3974562317.go3162878564 .go1487791704 {
+    color: black;
+    padding: 0;
+    margin: 0;
+    font-size: 12px;
+}
+
+.carousel-card {
+    width: calc(100% + 20px);
 }
