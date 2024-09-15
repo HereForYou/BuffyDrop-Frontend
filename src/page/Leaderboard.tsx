@@ -29,7 +29,7 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
         })
         .then((res) => {
           let userInfo = res.data;
-
+          console.log('userInfo-----------', userInfo);
           setUsers(userInfo.topUsers);
           setCurUser(userInfo.curUser);
           setRaking(userInfo.ranking);
