@@ -17,8 +17,15 @@ const convertToShorthand = (number: number) => {
     }
 }
 
+// const formatNumberWithCommas = (number: number, locale = "en-US") => {
+//     return new Intl.NumberFormat(locale).format(number);
+// }
+
 const formatNumberWithCommas = (number: number, locale = "en-US") => {
-    return new Intl.NumberFormat(locale).format(number);
+    return new Intl.NumberFormat(locale, {
+        minimumFractionDigits: 4, // Minimum number of decimal places
+        maximumFractionDigits: 4  // Maximum number of decimal places
+    }).format(number);
 }
 
 async function getUserAvatarUrl(userId: string) {

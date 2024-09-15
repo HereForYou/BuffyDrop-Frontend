@@ -16,6 +16,7 @@ import '../App.css'
 import WalletConnect from '../component/WalletConnect'
 import ClaimCard from '../component/ClaimCard'
 import { formatNumberWithCommas } from '../utils/functions'
+import Loader from '../component/Loader'
 
 const ChannelData = [
   {
@@ -185,9 +186,14 @@ const Exchange: React.FC<IHomeProps> = ({
       <p>You’re user #100,000 to join the BuffyDrop!</p>
       <img src='/coat.png' className='mx-[56px] h-48'></img>
       <div>
-        <p className='text-[34px]'>
-          {formatNumberWithCommas(curUser?.totalPoints)}
-          {/* 1234 */}
+        <p className="text-[34px]">
+          {(!curUser || formatNumberWithCommas(curUser?.totalPoints) == 'NaN') ? (
+            <div className="flex items-center justify-center w-full">
+              <Loader width="30" />
+            </div>
+          ) : (
+            <p>{formatNumberWithCommas(curUser?.totalPoints)}</p>
+          )}
         </p>
         <p className='text-[20px]'>$BUFFY</p>
       </div>

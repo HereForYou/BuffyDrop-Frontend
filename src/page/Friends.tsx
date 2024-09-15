@@ -70,7 +70,7 @@ ${desText}`)
     toast.success('Successfully Copied!')
   }
   return (
-    <div className='pb-[40px]'>
+    <div className='flex flex-col pb-[40px] w-full px-5 justify-between'>
       <h1 className='text-xl font-bold text-[#acacac] pt-10'>Invite friends</h1>
       <h1 className='text-xl font-bold text-[#acacac] pb-2'>
         and get more BUFFYS
