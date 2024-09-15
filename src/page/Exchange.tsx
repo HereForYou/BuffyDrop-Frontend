@@ -150,7 +150,11 @@ const Exchange: React.FC<IHomeProps> = ({
     // setLoading(true)
     // axios.get(`${ENDPOINT}/api/user/all/${user.id}`)
     axios
-      .get(`${ENDPOINT}/api/user/top/${user.id}?num=100`)
+      .get(`${ENDPOINT}/api/user/top/${user.id}?num=100`,{
+        headers: {
+          'ngrok-skip-browser-warning': 'true' // or any value you prefer
+        }
+      })
       .then(res => {
         let userInfo = res.data
 
@@ -191,6 +195,7 @@ const Exchange: React.FC<IHomeProps> = ({
       {/* className="absolute bg-[#110d33] text-[#acacac] p-2" */}
       <div className='flex flex-row gap-2 w-full'>
         <Carousel
+          className='w-full'
           infiniteLoop={false}
           showArrows={false}
           showIndicators={true}

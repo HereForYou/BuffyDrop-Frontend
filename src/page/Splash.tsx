@@ -1,4 +1,5 @@
 import React from 'react'
+import Confetti from "react-confetti";
 // import { convertToShorthand } from '../utils/functions'
 
 interface ISplashProps {
@@ -34,6 +35,7 @@ const Splash: React.FC<ISplashProps> = ({
           Claim Buffy
         </button>
       </div>
+      <Confetti/>
     </div>
   )
 }
