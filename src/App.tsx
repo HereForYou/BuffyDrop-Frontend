@@ -19,6 +19,7 @@ import Admin from './page/Admin'
 import { isMobileDevice } from './utils/mobileDetect'
 // import QRCode from 'qrcode.react'
 import { getUserAvatarUrl } from './utils/functions'
+import Loader from './component/Loader'
 // const user = {
 //   id: '7211451993',
 //   username: 'super0827',
@@ -53,7 +54,7 @@ function App () {
   const [level, setLevel] = useState<any>({})
   const [nextLevel, setNextLevel] = useState<any>({})
   const [timeLimit, setTimeLimit] = useState<any>({})
-  const [power, setPower] = useState<any>({})
+  const [ranking, setRanking] = useState<number>()
 
   const [isMobile, setIsMobile] = useState<boolean>(false)
 
@@ -73,6 +74,7 @@ function App () {
               })
               .then(res => {
                 console.log('response', res.data)
+                setRanking(res.data.joinRank)
               })
               .catch(error => {
                 console.error('Error occurred during PUT request:', error)
@@ -91,7 +93,9 @@ function App () {
   }, [point])
 
   useEffect(() => {
+    console.log("useEffect tag")
     if (!user) {
+      console.log("useEffect tag user is not set")
       hasShownWarningRef.current = true
       axios
         .get(`${ENDPOINT}/api/setting/all`,{
@@ -134,11 +138,13 @@ function App () {
             .post(`${ENDPOINT}/api/user/${user?.id}`, data)
             .then(response => {
               const userData = response.data.user
+              if(response.data.signIn) setTab("Exchange")
               setExchange(userData.dex)
               setTotalPoint(userData.totalPoints)
-              setPower(res.data.powerList[userData.power.id - 1])
+              // setPower(res.data.powerList[userData.power.id - 1])
+              console.log("============>", response.data)
+              setRanking(res.data.joinRank)
               setTimeLimit(userData.dailyTimeLimit)
-              // setTask(userData.task)
               setReferral(userData.friends.length)
               countdownTime = userData.countDown
               if (countdownTime == 0) setReachDailyLimit(true)
@@ -165,23 +171,14 @@ function App () {
 
   useEffect(() => {
     let interval = 0
-    // if (start && currentCount > 0) {
-    //   interval = setInterval(() => {
     let hours = interval + Math.floor(currentCount / 3600)
     let minutes = Math.floor((currentCount % 3600) / 60)
     let seconds = currentCount % 60
     setHour(hours)
     setMin(minutes)
     setSec(seconds)
-    setPoint(prevPoints => prevPoints + power.value)
+    setPoint(prevPoints => prevPoints)
     setCurrentCount(prevSeconds => prevSeconds - 1)
-    // }, 1000)
-    // }
-    // return () => clearInterval(interval)
-  }, [])
-  // }, [start, currentCount])
-
-  useEffect(() => {
     setIsMobile(!isMobileDevice())
   }, [])
 
@@ -211,14 +208,14 @@ function App () {
 
   return (
     <Router>
-      {user && isMobile && (
+      {loading ? <Loader width='40'/> : user && isMobile && (
         <div className={`h-full relative max-h-screen overflow-hidden max-w-[500px] w-full`}>
           <div
             className={`flex h-screen overflow-hidden pb-[64px] w-full`}
           >
             {tab == 'Splash' && (
               <Splash
-                power={power}
+                ranking={ranking}
                 totalPoint={totalPoint}
                 referral={referral}
                 setTab={setTab}
@@ -242,7 +239,6 @@ function App () {
                 min={min}
                 sec={sec}
                 timeLimit={timeLimit}
-                power={power}
                 level={level}
                 nextLevel={nextLevel}
                 loading={loading}

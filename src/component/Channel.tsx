@@ -27,12 +27,12 @@ const Channel: React.FC<ChannelProps> = ({
   }
   return (
     <div className='pb-4'>
-      <div className='bg-[#4b37dd] rounded-[1rem] w-full min-w-[18rem] flex flex-col py-5 px-5 justify-between'>
+      <div className='bg-[#4b37dd] rounded-[1rem] w-11/12 min-w-[18rem] flex flex-col py-5 px-5 justify-between'>
         <div className='flex flex-col gap-2 justify-between'>
           <p className='text-[20px] text-left leading-none'>{heading}</p>
           <p className='text-[12px] text-left'>{comment}</p>
         </div>
-        <div className='flex flex-row justify-between items-center'>
+        <div className='flex flex-row justify-between pt-2'>
           <div>
             <button
               className='bg-white rounded-3xl text-[#4b37dd] w-20 h-6 p-2 flex justify-center items-center'
@@ -41,8 +41,8 @@ const Channel: React.FC<ChannelProps> = ({
               {btnTitle}
             </button>
           </div>
-          <div>
-            <img src={src} className='h-10'></img>
+          <div className='flex h-10 w-12'>
+            <img src={src}></img>
           </div>
         </div>
       </div>

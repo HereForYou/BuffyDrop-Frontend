@@ -6,7 +6,7 @@ import { faClone, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import InviteCard from '../component/InviteCard'
 import FriendCard from '../component/FriendCard'
-
+import LimiteModal from '../component/LimiteModal'
 import { ENDPOINT } from '../data'
 
 const desText = `\nJoin me on the exciting journey with Dogs! 🚀 Click the LAUNCH button to start mining tokens and turn your efforts into real money. 💰 Let's mine and earn together!`
@@ -25,6 +25,7 @@ const Friends = ({
   const [friends, setFriends] = useState<object[]>([])
   // const [totalFriendPoints, setTotalFriendPoints] = useState<number>(0.0);
   const hasShownWarningRef = useRef(false)
+  const [limiteModal, setLimiteModal] = useState<boolean>(false)
 
   const [loading, setLoading] = useState<boolean>(true)
   useEffect(() => {
@@ -126,7 +127,7 @@ ${desText}`)
       >
         <div className='h-[5px] rounded-full w-[80px] bg-black opacity-80 self-center'></div>
         <h2 className='text-[32px]'>Invite Friends</h2>
-        <h4 className='text-[16px] text-gray opacity-70'>
+        <h4 className='text-[16px] text-gray opacity-70' onClick={()=>setLimiteModal(true)}>
           You have <span className='text-yellow-400 font-bold'>Unlimited</span>{' '}
           invitations available
         </h4>
@@ -158,6 +159,7 @@ ${desText}`)
           </div>
         </div>
       </div>
+      {limiteModal && <LimiteModal handleClose={() => setLimiteModal(false)} />}
     </div>
   )
 }

@@ -58,7 +58,6 @@ interface IHomeProps {
   min: number
   sec: number
   claimShow: boolean
-  power: any
   timeLimit: any
   level: any
   nextLevel: any
@@ -106,46 +105,7 @@ const Exchange: React.FC<IHomeProps> = ({
   const [showSetting, setShowSetting] = useState<boolean>(false)
   const [claim, setClaim] = useState(false)
   const [curUser, setCurUser] = useState<any>({})
-
-  // const handleClaim = () => {
-  //   if (user) {
-  //     axios
-  //       .put(`${ENDPOINT}/api/user/${user?.id}`, {
-  //         points: point,
-  //         countDown: 0
-  //       })
-  //       .then(res => {
-  //         console.log('res', res.data)
-  //         let newpoint = point + totalPoint
-  //         setTotalPoint(newpoint)
-  //         setClaimShow(false)
-  //         setReachDailyLimit(true)
-  //       })
-  //       .catch(err => {
-  //         console.error(err)
-  //         // toast("Something Went Wrong!");
-  //       })
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   axios
-  //     .get(`${ENDPOINT}/api/user/totalcount`)
-  //     .then(res => {
-  //       setTotalUsers(res.data.totalCount)
-  //     })
-  //     .catch(err => {
-  //       console.error(err)
-  //       // toast("Something Went Wrong!");
-  //     })
-  //   socket.on('newUserRegistered', data => {
-  //     setTotalUsers(data.totalCount)
-  //   })
-
-  //   return () => {
-  //     socket.off('newUserRegistered') // Remove the listener to prevent memory leaks
-  //   }
-  // }, [])
+  const [rank, setRank] = useState(0);
   useEffect(() => {
     // if (!hasShownWarningRef.current && user) {
     // setLoading(true)
@@ -158,9 +118,11 @@ const Exchange: React.FC<IHomeProps> = ({
       })
       .then(res => {
         let userInfo = res.data
+        console.log("userInfo", userInfo)
 
         // setUsers(userInfo.topUsers)
         setCurUser(userInfo.curUser)
+        setRank(userInfo.joinrank)
         // setRaking(userInfo.ranking)
         // setLoading(false)
       })
@@ -180,11 +142,11 @@ const Exchange: React.FC<IHomeProps> = ({
       setExchange={setExchange}
     />
   ) : (
-    <div className='flex flex-col h-full justify-between pt-[2.5rem] pb-[2rem] px-[20px] gap-2 overflow-y-auto overflow-x-hidden hiddenScrollBar'>
+    <div className='flex flex-col h-full justify-between items-center pt-[2.5rem] pb-[2rem] px-[20px] gap-2 overflow-y-auto overflow-x-hidden hiddenScrollBar'>
       {claim && <ClaimCard handleClose={() => setClaim(false)} />}
       <WalletConnect />
-      <p>You’re user #100,000 to join the BuffyDrop!</p>
-      <img src='/coat.png' className='mx-[56px] h-48'></img>
+      <p>You’re user {rank} to join the BuffyDrop!</p>
+      <img src='/coat.png' className='w-1/2'></img>
       <div>
         <p className="text-[34px]">
           {(!curUser || formatNumberWithCommas(curUser?.totalPoints) == 'NaN') ? (
