@@ -80,7 +80,7 @@ ${desText}`)
         <img
           src='/friends_bg.png'
           alt='friends_bg'
-          className='h-full px-10 py-2 '
+          className='h-full px-12 py-2'
         />
       </div>
       <div className="flex flex-col justify-between items-start px-6 text-[#acacac]">
@@ -115,7 +115,7 @@ ${desText}`)
           </div>
         )}
       </div>
-      <div className='bottom-[10vh] w-full px-8'>
+      <div className='bottom-[10vh] w-full'>
         <InviteCard
           title='Invite Friends'
           profit={inviteRevenue}

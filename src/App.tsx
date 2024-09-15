@@ -216,7 +216,7 @@ function App () {
           <Loader width='80'/>
         </div> : 
         user && isMobile && (
-          <div className={`h-full relative max-h-screen overflow-hidden max-w-[500px] w-full`}>
+          <div className={`h-full relative max-h-screen overflow-hidden max-w-[560px] w-full`}>
             <div className={`flex h-screen overflow-hidden pb-[64px] w-full`}>
               {tab == 'Splash' && (
                 <Splash
