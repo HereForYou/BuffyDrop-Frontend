@@ -73,7 +73,7 @@ ${desText}`)
       <div>
         <h1 className='text-[28px] font-bold text-white pt-20'>Invite friends</h1>
         <h1 className='text-[28px] font-bold text-white pb-2'>
-          and get more BUFFYS
+          and get more BUFFY
         </h1>
       </div>
       <div className='w-full flex justify-center'>

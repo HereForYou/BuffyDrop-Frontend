@@ -1,4 +1,4 @@
-
+import { formatNumberWithCommas } from '../utils/functions'
 interface FriendCardProps {
   name: string;
   value: number;
@@ -15,7 +15,7 @@ const FriendCard: React.FC<FriendCardProps> = ({ name, value }) => {
         </div> */}
         <div className='text-sm px-4 w-full'>{name}</div>
       </div>
-      <div className='text-xs'>{"+" + value.toFixed(2) + " BUFFYS"}</div>
+      <div className='text-xs'>{"+" + formatNumberWithCommas(value) + " BUFFY"}</div>
     </div>
   );
 };
