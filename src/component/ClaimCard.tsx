@@ -42,7 +42,7 @@ interface ClaimCardProps {
 const ClaimCard = ({ handleClose }: ClaimCardProps) => {
   return (
     <div
-      className={`absolute bg-[#161616] rounded-xl flex flex-col left-0 right-0 bottom-0 z-50 text-[#acacac] px-4 py-2 pb-8 gap-4 transition-all duration-500 ease-out transform`}
+      className={`absolute bg-[#161616] rounded-xl flex flex-col left-0 right-0 -bottom-1 z-50 text-[#acacac] px-4 py-2 pb-8 gap-4 transition-all duration-500 ease-out transform`}
     >
       <div onClick={handleClose} className='closeBtn'></div>
       <div className='text-xl pt-3'>Token claim hints</div>

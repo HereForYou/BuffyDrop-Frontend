@@ -194,7 +194,7 @@ input:focus {
     transform: translateX(-50%);
     text-align: center;
     width: 100px;
-    z-index: 50;
+    z-index: 1;
 }
 
 .carousel .control-dots .dot {
@@ -261,4 +261,7 @@ input:focus {
 
 .carousel-card {
     width: calc(100% + 20px);
+}
+.invertSVG{
+    filter: invert(1);
 }
