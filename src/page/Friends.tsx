@@ -121,45 +121,48 @@ ${desText}`)
         />
       </div>
       <div
-        className={`absolute bg-[#4b37dd] rounded-3xl flex flex-col w-full right-0 text-[#acacac] px-4 py-2 pb-8 gap-4 transition-all duration-500 ease-out transform ${
-          showModal ? 'bottom-[40px]' : 'bottom-[-400px]'
+        className={`absolute bg-[#4b37dd] z-50 rounded-xl flex flex-col w-full right-0 text-[#acacac] px-4 py-2 pb-8 gap-2 transition-all duration-500 ease-out transform ${
+          showModal ? 'bottom-[60px]' : 'bottom-[-400px]'
         }`}
       >
-        <div className='h-[5px] rounded-full w-[80px] bg-black opacity-80 self-center'></div>
-        <h2 className='text-[32px]'>Invite Friends</h2>
-        <h4 className='text-[16px] text-gray opacity-70' onClick={()=>setLimiteModal(true)}>
+        <div className='w-full flex flex-col gap-2'>
+          <div className='h-[5px] rounded-full w-[80px] bg-black opacity-80 self-center'/>
+          <h2 className='text-2xl text-white font-bold'>Invite Friends</h2>
+        </div>
+        <h4 className='text-[16px] text-gray opacity-70'>
           You have <span className='text-yellow-400 font-bold'>Unlimited</span>{' '}
           invitations available
         </h4>
         <a
           href={`https://t.me/share/url?url=https://t.me/Dog82027bot/DogBot?startapp=${inviteLink}&text=${desText}`}
           target='blank'
-          className='bg-[#110d33] p-[4px] rounded-full text-[#acacac]  transition relative duration-200 hover:translate-y-[2px]'
+          className='bg-[#110d33] p-[4px] rounded-xl text-white font-semibold transition relative duration-200 hover:translate-y-[2px]'
         >
-          <div className=' cursor-pointer py-2 hover:bg-indigo-[#110d33] rounded-full'>
-            <FontAwesomeIcon icon={faPaperPlane} className='mr-5' />
+          <div className=' cursor-pointer py-2 hover:text-[#4b37dd] rounded-xl'>
+            {/* <FontAwesomeIcon icon={faPaperPlane} className='mr-5' /> */}
             Send
           </div>
         </a>
-        <div className='bg-[#110d33] p-[4px] rounded-full transition relative duration-200 hover:translate-y-[2px]'>
-          <div
+        <div className='bg-[#110d33] p-[4px] text-white font-semibold rounded-xl transition relative duration-200 hover:translate-y-[2px]'>
+          <p
             onClick={handleClipBoardCopy}
-            className=' cursor-pointer hover:bg-indigo-[#110d33] py-2 rounded-full '
+            className=' cursor-pointer hover:text-[#4b37dd] py-2 rounded-xl '
           >
-            <FontAwesomeIcon icon={faClone} className='mr-5' />
+            {/* <FontAwesomeIcon icon={faClone} className='mr-5' /> */}
             Copy Link
-          </div>
+          </p>
         </div>
-        <div className='bg-[#110d33] p-[4px] rounded-full transition relative duration-200 hover:translate-y-[2px]'>
-          <div
+        <div className='bg-[#110d33] p-[4px] text-white font-semibold rounded-xl transition relative duration-200 hover:translate-y-[2px]'>
+          <p
             onClick={() => setShowModal(false)}
-            className=' cursor-pointer hover:bg-indigo-[#110d33] py-2 rounded-full '
+            className=' cursor-pointer hover:text-[#4b37dd] py-2 rounded-xl '
           >
             Cancel
-          </div>
+          </p>
         </div>
+        <p className='text-left pl-1 cursor-pointer underline hover:text-white  transition-all duration-200' onClick={()=>setLimiteModal(true)}>How is the referral reward calculated?</p>
       </div>
-      {limiteModal && <LimiteModal handleClose={() => setLimiteModal(false)} />}
+      <LimiteModal limitModal={limiteModal} handleClose={() => setLimiteModal(false)} />
     </div>
   )
 }

@@ -98,7 +98,7 @@ const Task: React.FC<ITaskProps> = ({
             <div
               onClick={() => handleVisit(item.link)}
               key={item.id}
-              className='flex flex-row justify-between items-center rounded-lg px-3 py-4 my-2 text-sm bg-[#4b37dd]'
+              className='flex flex-row justify-between items-center rounded-lg px-3 py-2 cursor-pointer my-2 text-sm bg-[#4b37dd]'
             >
               <div className='flex flex-row gap-1 items-center text-[#acacac]'>
                 <img
@@ -124,7 +124,7 @@ const Task: React.FC<ITaskProps> = ({
             <div
               onClick={() => handleFollow(item.link, item.id, item.profit)}
               key={item.id}
-              className='flex flex-row justify-between items-center rounded-lg px-3 py-4 my-2 text-sm bg-[#110d33]'
+              className='flex flex-row justify-between items-center rounded-lg px-3 py-2 cursor-pointer my-2 text-sm bg-[#110d33]'
             >
               <div className='flex flex-row gap-1 items-center text-[#acacac]'>
                 <img
