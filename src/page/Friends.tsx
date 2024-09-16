@@ -33,7 +33,7 @@ const Friends = ({
       //https:reques
       setLoading(true)
       axios
-        .get(`${ENDPOINT}/api/user/friend/${user?.id}`,{
+        .get(`${ENDPOINT}/api/user/friend/${user?.id}`, {
           headers: {
             'ngrok-skip-browser-warning': 'true' // or any value you prefer
           }
@@ -94,8 +94,8 @@ ${desText}`)
       </div>
       <div className="flex flex-col overflow-auto h-full">
         {loading ? (
-          <div className="flex items-center justify-center w-full">
-            <Loader width="30" />
+          <div className='flex items-center justify-center w-full'>
+            <Loader width='30' />
           </div>
         ) : friends.length > 0 ? (
           friends.map((friend: any) => {
@@ -105,7 +105,7 @@ ${desText}`)
                 name={friend.userName}
                 value={friend.totalPoints}
               />
-            );
+            )
           })
         ) : (
           <div>
@@ -128,7 +128,7 @@ ${desText}`)
         }`}
       >
         <div className='w-full flex flex-col gap-2'>
-          <div className='h-[5px] rounded-full w-[80px] bg-black opacity-80 self-center'/>
+          <div className='h-[5px] rounded-full w-[80px] bg-black opacity-80 self-center' />
           <h2 className='text-2xl text-white font-bold'>Invite Friends</h2>
         </div>
         <h4 className='text-[16px] text-gray opacity-70'>
@@ -162,9 +162,17 @@ ${desText}`)
             Cancel
           </p>
         </div>
-        <p className='text-left pl-1 cursor-pointer underline hover:text-white  transition-all duration-200' onClick={()=>setLimiteModal(true)}>How is the referral reward calculated?</p>
+        <p
+          className='text-left pl-1 cursor-pointer underline hover:text-white  transition-all duration-200'
+          onClick={() => setLimiteModal(true)}
+        >
+          How is the referral reward calculated?
+        </p>
       </div>
-      <LimiteModal limitModal={limiteModal} handleClose={() => setLimiteModal(false)} />
+      <LimiteModal
+        limitModal={limiteModal}
+        handleClose={() => setLimiteModal(false)}
+      />
     </div>
   )
 }
