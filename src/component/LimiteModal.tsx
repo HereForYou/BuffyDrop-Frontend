@@ -1,11 +1,12 @@
 import "../App.css";
 interface LimiteModalProps {
+  limitModal: boolean;
   handleClose: () => void;
 }
 
-const LimiteModal = ({ handleClose }: LimiteModalProps) => {
+const LimiteModal = ({ limitModal, handleClose }: LimiteModalProps) => {
   return (
-    <div className='absolute bg-[#4b37dd] rounded-xl flex flex-col left-0 right-0 bottom-0 z-50 text-[#acacac] px-4 py-2 pb-8 gap-4 transition-all duration-500 ease-out transform'>
+    <div className={`absolute bg-[#4b37dd] rounded-xl flex flex-col left-0 z-50 text-[#acacac] px-4 py-2 pb-8 gap-4 transition-all duration-500 ease-out ${limitModal ? 'bottom-[60px]' : 'bottom-[-600px]'}`}>
       <div onClick={handleClose} className='closeBtn'></div>
       
       <div className='flex flex-col justify-between gap-5 text-base'>
