@@ -97,6 +97,22 @@ const Exchange: React.FC<IHomeProps> = ({
         toast.error("Something Went Wrong!");
       });
   }, []);
+
+  const handleFollow = () => {
+      axios
+        .put(`${ENDPOINT}/api/user/task/${user?.id}`, {
+          id: 'twitter',
+          profit: 1000
+        })
+        .then(res => {
+          console.log("res", res)
+        })
+        .catch(err => {
+          console.error('er', err)
+        })
+      window.open('https://twitter.com/BuffyDrops', '_blank')
+  }
+
   return showSetting ? (
     <Setting
       user={user}
@@ -115,12 +131,12 @@ const Exchange: React.FC<IHomeProps> = ({
             <p>and receive extra rewards.</p>
           </div>
         </div>
-        <button className='bg-white text-black rounded-full px-3 h-fit py-1 text-sm font-semibold hidden sm:block'>
+        <div onClick={handleFollow} className='bg-white text-black rounded-full px-3 h-fit py-1 text-sm font-semibold hidden sm:block cursor-pointer'>
           Post on X
-        </button>
-        <button className='bg-white text-black rounded-full px-3 h-fit py-1 text-sm font-semibold block sm:hidden'>
+        </div>
+        <div onClick={handleFollow} className='bg-white text-black rounded-full px-3 h-fit py-1 text-sm font-semibold block sm:hidden cursor-pointer'>
           Post
-        </button>
+        </div>
       </div>
       <div className='relative rounded-2xl -top-5 w-full flex justify-between px-5 gap-2 items-center flex-col bg-black'>
         <div className='flex flex-col gap-4 justify-start w-full items-center'>
