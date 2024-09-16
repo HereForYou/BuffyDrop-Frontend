@@ -16,7 +16,7 @@ import { ENDPOINT } from './data'
 import Splash from './page/Splash'
 import Task from './page/Task'
 import Admin from './page/Admin'
-import { isMobileDevice } from './utils/mobileDetect'
+// import { isMobileDevice } from './utils/mobileDetect'
 // import QRCode from 'qrcode.react'
 import { getUserAvatarUrl } from './utils/functions'
 import Loader from './component/Loader'
@@ -56,8 +56,8 @@ function App () {
   const [timeLimit, setTimeLimit] = useState<any>({})
   const [ranking, setRanking] = useState<number>()
 
-  const [isMobile, setIsMobile] = useState<boolean>(false)
-  console.log("user----------------",user)
+  // const [isMobile, setIsMobile] = useState<boolean>(false)
+  console.log('user----------------', user)
 
   useEffect(() => {
     if (setting.levelStandard) {
@@ -94,12 +94,12 @@ function App () {
   }, [point])
 
   useEffect(() => {
-    console.log("useEffect tag")
+    console.log('useEffect tag')
     if (!user) {
-      console.log("useEffect tag user is not set")
+      console.log('useEffect tag user is not set')
       hasShownWarningRef.current = true
       axios
-        .get(`${ENDPOINT}/api/setting/all`,{
+        .get(`${ENDPOINT}/api/setting/all`, {
           headers: {
             'ngrok-skip-browser-warning': 'true' // or any value you prefer
           }
@@ -128,7 +128,7 @@ function App () {
       }
       getUserAvatarUrl((user?.id).toString()).then(url => setPhotoUrl(url))
       axios
-        .get(`${ENDPOINT}/api/setting/all`,{
+        .get(`${ENDPOINT}/api/setting/all`, {
           headers: {
             'ngrok-skip-browser-warning': 'true' // or any value you prefer
           }
@@ -139,11 +139,11 @@ function App () {
             .post(`${ENDPOINT}/api/user/${user?.id}`, data)
             .then(response => {
               const userData = response.data.user
-              // if(response.data.signIn) setTab("Exchange")
+              if (response.data.signIn) setTab('Exchange')
               setExchange(userData.dex)
               setTotalPoint(userData.totalPoints)
               // setPower(res.data.powerList[userData.power.id - 1])
-              console.log("============>", response.data)
+              console.log('============>', response.data)
               setRanking(res.data.joinRank)
               setTask(userData.task)
               setTimeLimit(userData.dailyTimeLimit)
@@ -181,7 +181,7 @@ function App () {
     setSec(seconds)
     setPoint(prevPoints => prevPoints)
     setCurrentCount(prevSeconds => prevSeconds - 1)
-    setIsMobile(!isMobileDevice())
+    // setIsMobile(isMobileDevice())
   }, [])
 
   const handleMining = () => {
@@ -210,13 +210,16 @@ function App () {
 
   return (
     <Router>
-      {loading ? 
+      {loading ? (
         <div className='flex flex-col relative pt-32 justify-center items-center gap-20 h-screen w-full'>
-          <img src='/dogAvatar.png' className='absolute w-32 top-1/4'/>
-          <Loader width='80'/>
-        </div> : 
-        user && isMobile && (
-          <div className={`h-full relative max-h-screen overflow-hidden max-w-[560px] w-full`}>
+          <img src='/dogAvatar.png' className='absolute w-32 top-1/4' />
+          <Loader width='80' />
+        </div>
+      ) : (
+        user && (
+          <div
+            className={`h-full relative max-h-screen overflow-hidden max-w-[560px] w-full`}
+          >
             <div className={`flex h-screen overflow-hidden pb-[64px] w-full`}>
               {tab == 'Splash' && (
                 <Splash
@@ -299,7 +302,7 @@ function App () {
             )}
           </div>
         )
-      }
+      )}
       {!user && (
         <div className={`h-full max-h-screen overflow-hidden w-full`}>
           <div
