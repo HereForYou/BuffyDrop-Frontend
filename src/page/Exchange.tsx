@@ -139,7 +139,7 @@ const Exchange: React.FC<IHomeProps> = ({
       </div>
       <div className='relative rounded-2xl -top-5 w-full flex justify-between px-5 gap-2 items-center flex-col bg-black'>
         <div className='flex flex-col gap-4 justify-start w-full items-center'>
-          {claim && <ClaimCard handleClose={() => setClaim(false)} />}
+          {claim && <ClaimCard userId={user?.id} handleClose={() => setClaim(false)} />}
           <div className='mt-5'>
             <WalletConnect />
           </div>
