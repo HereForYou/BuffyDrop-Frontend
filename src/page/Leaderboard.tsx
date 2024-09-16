@@ -69,7 +69,7 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
                   <p className='text-xs text-white text-start pl-2'>{curUser?.userName}</p>
                   <p className='text-[8px] text-start pl-2'>
                     {formatNumberWithCommas(curUser?.totalPoints) +
-                      " BUFFYS"}
+                      " BUFFY"}
                   </p>
                 </div>
               </div>
@@ -105,7 +105,7 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
                         <p className='text-[8px]'>
                           {formatNumberWithCommas(
                             iUser?.totalPoints
-                          ) + " BUFFYS"}
+                          ) + " BUFFY"}
                         </p>
                       </div>
                     </div>
