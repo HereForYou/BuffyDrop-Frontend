@@ -28,33 +28,34 @@ const convertToShorthand = (number: number) => {
 //     }).format(number);
 // }
 
-function formatNumberWithCommas(number: number) {
-    if (number === undefined || number === null) {
-        return "Invalid number"; // Handle undefined or null input
+function formatNumberWithCommas(number: number): string {
+    // Handle undefined or null input
+    if (number === undefined || number === null || typeof number !== 'number' || isNaN(number)) {
+        return "NaN"; // Return "NaN" for invalid inputs
     }
 
-    // Check if the input is a valid number
-    if (typeof number !== 'number' || isNaN(number)) {
-        return "Invalid number"; // Handle non-number types
+    // Split the number into integer and decimal parts
+    const [integerPart, decimalPart] = number.toString().split('.');
+
+    // Format the integer part with commas
+    const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    // If there's no decimal part, return the formatted integer
+    if (!decimalPart) {
+        return formattedInteger;
     }
 
-    // Check if the number is an integer
-    if (Number.isInteger(number)) {
-        // If the number is an integer, format with commas
-        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    // Check the number of decimal places
+    if (decimalPart.length < 4) {
+        // Return the number with the original decimal part
+        return `${formattedInteger}.${decimalPart}`;
     } else {
-        // If the number is a float, check the decimal places
-        const decimalPlaces = (number.toString().split('.')[1] || '').length;
-
-        if (decimalPlaces < 4) {
-            // If there are less than four decimal places, return it as is
-            return number.toString();
-        } else {
-            // If there are four or more decimal places, round it to four decimal places and format with commas
-            return Number(number.toFixed(4)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }
+        // Round to four decimal places
+        const roundedNumber = Number(number.toFixed(4));
+        const [roundedInteger, roundedDecimal] = roundedNumber.toString().split('.');
+        return `${roundedInteger.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}.${roundedDecimal}`;
     }
-  }
+}
 
 async function getUserAvatarUrl(userId: string) {
     try {

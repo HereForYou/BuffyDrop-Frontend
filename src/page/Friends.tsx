@@ -2,8 +2,8 @@ import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import Loader from '../component/Loader'
 import { toast } from 'react-hot-toast'
-import { faClone, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faClone, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import InviteCard from '../component/InviteCard'
 import FriendCard from '../component/FriendCard'
 import LimiteModal from '../component/LimiteModal'
@@ -33,7 +33,7 @@ const Friends = ({
       //https:reques
       setLoading(true)
       axios
-        .get(`${ENDPOINT}/api/user/friend/${user?.id}`,{
+        .get(`${ENDPOINT}/api/user/friend/${user?.id}`, {
           headers: {
             'ngrok-skip-browser-warning': 'true' // or any value you prefer
           }
@@ -71,11 +71,13 @@ ${desText}`)
     toast.success('Successfully Copied!')
   }
   return (
-    <div className='flex-1 flex flex-col h-full w-full justify-between pt-[2.5rem] pb-[2rem] px-[20px] gap-2 overflow-y-auto overflow-x-hidden hiddenScrollBar'>
-      <h1 className='text-xl font-bold text-[#acacac] pt-10'>Invite friends</h1>
-      <h1 className='text-xl font-bold text-[#acacac] pb-2'>
-        and get more BUFFYS
-      </h1>
+    <div className='flex flex-col h-full w-full justify-start px-[20px] gap-2 overflow-y-auto overflow-x-hidden hiddenScrollBar'>
+      <div>
+        <h1 className='text-[28px] font-bold text-white pt-20'>Invite friends</h1>
+        <h1 className='text-[28px] font-bold text-white pb-2'>
+          and get more BUFFYS
+        </h1>
+      </div>
       <div className='w-full flex justify-center'>
         <img
           src='/friends_bg.png'
@@ -83,19 +85,17 @@ ${desText}`)
           className='h-full px-12 py-2'
         />
       </div>
-      <div className="flex flex-col justify-between items-start px-6 text-[#acacac]">
-        {friends.length != 0 ? (
-          <h3 className="text-left text-xl font-bold">
+      <div className="flex flex-col justify-between items-start px-6 text-white">
+        {friends.length != 0 && (
+          <h3 className="text-left text-2xl font-bold">
             <span>{friends.length}</span> friends
           </h3>
-        ) : (
-          <></>
         )}
       </div>
-      <div className="mt-3 space-y-2 overflow-auto h-[40vh]">
+      <div className="flex flex-col overflow-auto h-full">
         {loading ? (
-          <div className="flex items-center justify-center w-full">
-            <Loader width="30" />
+          <div className='flex items-center justify-center w-full'>
+            <Loader width='30' />
           </div>
         ) : friends.length > 0 ? (
           friends.map((friend: any) => {
@@ -105,17 +105,17 @@ ${desText}`)
                 name={friend.userName}
                 value={friend.totalPoints}
               />
-            );
+            )
           })
         ) : (
           <div>
-            <h4 className="pt-4 text-[#acacac]">
+            <h4 className="pt-14 text-white">
               Tap on the button to invite your friends
             </h4>
           </div>
         )}
       </div>
-      <div className='bottom-[10vh] w-full'>
+      <div className='bottom-[10vh] w-full relative'>
         <InviteCard
           title='Invite Friends'
           profit={inviteRevenue}
@@ -123,45 +123,56 @@ ${desText}`)
         />
       </div>
       <div
-        className={`absolute bg-[#4b37dd] rounded-3xl flex flex-col w-full right-0 text-[#acacac] px-4 py-2 pb-8 gap-4 transition-all duration-500 ease-out transform ${
-          showModal ? 'bottom-[40px]' : 'bottom-[-400px]'
+        className={`absolute bg-[#4b37dd] z-50 rounded-xl flex flex-col w-full right-0 text-white px-4 py-2 pb-8 gap-2 transition-all duration-500 ease-out transform ${
+          showModal ? 'bottom-[60px]' : 'bottom-[-400px]'
         }`}
       >
-        <div className='h-[5px] rounded-full w-[80px] bg-black opacity-80 self-center'></div>
-        <h2 className='text-[32px]'>Invite Friends</h2>
-        <h4 className='text-[16px] text-gray opacity-70' onClick={()=>setLimiteModal(true)}>
+        <div className='w-full flex flex-col gap-2'>
+          <div className='h-[5px] rounded-full w-[80px] bg-black opacity-80 self-center' />
+          <h2 className='text-2xl text-white font-bold'>Invite Friends</h2>
+        </div>
+        <h4 className='text-[16px] text-gray opacity-70'>
           You have <span className='text-yellow-400 font-bold'>Unlimited</span>{' '}
           invitations available
         </h4>
         <a
           href={`https://t.me/share/url?url=https://t.me/Dog82027bot/DogBot?startapp=${inviteLink}&text=${desText}`}
           target='blank'
-          className='bg-[#110d33] p-[4px] rounded-full text-[#acacac]  transition relative duration-200 hover:translate-y-[2px]'
+          className='bg-[#110d33] p-[4px] rounded-xl text-white font-semibold transition relative duration-200 hover:translate-y-[2px]'
         >
-          <div className=' cursor-pointer py-2 hover:bg-indigo-[#110d33] rounded-full'>
-            <FontAwesomeIcon icon={faPaperPlane} className='mr-5' />
+          <div className=' cursor-pointer py-2 hover:text-[#4b37dd] rounded-xl'>
+            {/* <FontAwesomeIcon icon={faPaperPlane} className='mr-5' /> */}
             Send
           </div>
         </a>
-        <div className='bg-[#110d33] p-[4px] rounded-full transition relative duration-200 hover:translate-y-[2px]'>
-          <div
+        <div className='bg-[#110d33] p-[4px] text-white font-semibold rounded-xl transition relative duration-200 hover:translate-y-[2px]'>
+          <p
             onClick={handleClipBoardCopy}
-            className=' cursor-pointer hover:bg-indigo-[#110d33] py-2 rounded-full '
+            className=' cursor-pointer hover:text-[#4b37dd] py-2 rounded-xl '
           >
-            <FontAwesomeIcon icon={faClone} className='mr-5' />
+            {/* <FontAwesomeIcon icon={faClone} className='mr-5' /> */}
             Copy Link
-          </div>
+          </p>
         </div>
-        <div className='bg-[#110d33] p-[4px] rounded-full transition relative duration-200 hover:translate-y-[2px]'>
-          <div
+        <div className='bg-[#110d33] p-[4px] text-white font-semibold rounded-xl transition relative duration-200 hover:translate-y-[2px]'>
+          <p
             onClick={() => setShowModal(false)}
-            className=' cursor-pointer hover:bg-indigo-[#110d33] py-2 rounded-full '
+            className=' cursor-pointer hover:text-[#4b37dd] py-2 rounded-xl '
           >
             Cancel
-          </div>
+          </p>
         </div>
+        <p
+          className='text-left pl-1 cursor-pointer underline hover:text-white  transition-all duration-200'
+          onClick={() => setLimiteModal(true)}
+        >
+          How is the referral reward calculated?
+        </p>
       </div>
-      {limiteModal && <LimiteModal handleClose={() => setLimiteModal(false)} />}
+      <LimiteModal
+        limitModal={limiteModal}
+        handleClose={() => setLimiteModal(false)}
+      />
     </div>
   )
 }

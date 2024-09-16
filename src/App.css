@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 @keyframes fadeInMoveUp {
     0% {
         opacity: 0;
@@ -187,14 +189,15 @@ input:focus {
 
 .carousel.carousel-slider .control-dots {
     position: absolute;
+    display: flex;
     bottom: 0;
     justify-content: center;
     align-items: center;
     left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
+    transform: translateX(-25%);
+    /* text-align: center; */
     width: 100px;
-    z-index: 50;
+    z-index: 1;
 }
 
 .carousel .control-dots .dot {
@@ -207,12 +210,11 @@ input:focus {
     width: 4px;
     height: 4px;
     cursor: pointer;
-    display: inline-block;
-    margin: 0 8px;
+    /* display: inline-block; */
 }
 
 .carousel .control-dots .dot.selected {
-    background: #acacac;
+    background: white;
 }
 
 .closeBtn {
@@ -260,5 +262,8 @@ input:focus {
 }
 
 .carousel-card {
-    width: calc(100% + 20px);
+    width: calc(100% + 11%);
+}
+.invertSVG{
+    filter: invert(1);
 }
