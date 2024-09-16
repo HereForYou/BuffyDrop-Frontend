@@ -217,7 +217,7 @@ function App () {
         </div>
       ) : (
         user && (
-          <div className={`h-full relative max-h-screen overflow-hidden max-w-[560px] w-full`}>
+          <div className={`h-full relative max-h-screen overflow-hidden max-w-[560px] w-full font-roboto`}>
             <div className={`flex h-screen overflow-hidden pb-4 w-full`}>
               {tab == 'Splash' && (
                 <Splash

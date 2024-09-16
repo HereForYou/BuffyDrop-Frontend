@@ -24,7 +24,7 @@ const ChannelData = [
     id: "INVITE",
     title: "INVITE YOUR FIRST FRIEND",
     comment:
-      "Invite your first friend and earn a percentage of their Buffies as a bonus.",
+      "Invite a friend and earn from their Buffies",
     src: "/Invite_friend.png",
     btnTitle: "Invite",
   },
@@ -122,7 +122,7 @@ const Exchange: React.FC<IHomeProps> = ({
       setExchange={setExchange}
     />
   ) : (
-    <div className='h-full justify-between items-center pt-[2.5rem] gap-2 overflow-y-auto overflow-x-hidden hiddenScrollBar relative -top-10'>
+    <div className='h-full justify-between items-center pt-[2.5rem] gap-2 overflow-y-auto w-full overflow-x-hidden hiddenScrollBar relative -top-10'>
       <div className='bg-[#046ae2] flex gap-1 px-6 pt-5 pb-10 w-full justify-between items-center'>
         <div className='flex gap-2'>
           <img src='/x.svg' className='w-10' />
@@ -144,10 +144,10 @@ const Exchange: React.FC<IHomeProps> = ({
           <div className='mt-5'>
             <WalletConnect />
           </div>
-          <p>You’re user {rank} to join the BuffyDrop!</p>
+          <p className="text-2xl text-[#acacac] font-semibold bg-gradient-to-t from-[#444444] to-[#bdbdbd] bg-clip-text text-transparent">You’re user {rank} to join the BuffyDrop!</p>
           <img src='/dogAvatar.png' className='w-1/3'></img>
           <div>
-            <p className='text-[34px]'>
+            <p className='text-[34px] font-semibold'>
               {!curUser ||
               formatNumberWithCommas(curUser?.totalPoints) == "NaN" ? (
                 <div className='flex items-center justify-center w-full'>
@@ -157,17 +157,17 @@ const Exchange: React.FC<IHomeProps> = ({
                 <p>{formatNumberWithCommas(curUser?.totalPoints)}</p>
               )}
             </p>
-            <p className='text-[20px]'>$BUFFY</p>
+            <p className='text-[20px] text-[#acacac]'>$BUFFY</p>
           </div>
           <div className='flex flex-row gap-2 w-full'>
             <Carousel
-              className='carousel-card relative -left-5'
+              className='carousel-card relative flex -left-[11%] overflow-visible'
               infiniteLoop={true}
               showArrows={false}
               showIndicators={true}
               showStatus={false}
               centerMode
-              centerSlidePercentage={90}
+              centerSlidePercentage={80}
               showThumbs={false}
               useKeyboardArrows={false}
               autoPlay={false}
@@ -194,9 +194,9 @@ const Exchange: React.FC<IHomeProps> = ({
           </div>
         </div>
         <button
-          className='bg-[#110d33] w-full h-[2.5rem] leading-none mt-4'
+          className='bg-[#110d33] w-full py-4 leading-none mt-4'
           onClick={() => setClaim(true)}>
-          Claim hint
+          Claim hints
         </button>
       </div>
     </div>

@@ -6,17 +6,17 @@ import TonImg from '../assets/tonkeeper.svg'
 import GasImg from '../assets/gas.svg'
 const ChannelLink = [
   {
-    link: '#',
+    link: 'https://t.me/BuffyDrops',
     img: TGImg,
     title: 'DOGS Community'
   },
   {
-    link: '#',
+    link: 'https://twitter.com/BuffyDrops',
     img: XImg,
     title: 'DOGS on X.COM'
   },
   {
-    link: '#',
+    link: 'https://t.me/dogs_community',
     img: DOGImg,
     title: 'Boost DOGS'
   }

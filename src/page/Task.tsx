@@ -89,7 +89,7 @@ const Task: React.FC<ITaskProps> = ({
   return (
     <div className='w-full overflow-x-hidden overflow-y-auto hiddenScrollBar'>
       <div className='flex flex-col justify-center items-center text-xl text-[#acacac] font-bold pt-16 pb-6'>
-        <img src='/buffy_community_img.png' alt='' className='min-w-24 w-[15vw] pb-4' />
+        <img src={`${title != 'DAILY REWARD' ? '/comm.png' : '/daily.png'}`} alt='' className='min-w-24 w-[15vw] pb-4' />
         <div className='text-3xl text-white'>{title}</div>
       </div>
       <div className='px-6'>
