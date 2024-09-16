@@ -84,15 +84,13 @@ ${desText}`)
         />
       </div>
       <div className="flex flex-col justify-between items-start px-6 text-[#acacac]">
-        {friends.length != 0 ? (
+        {friends.length != 0 && (
           <h3 className="text-left text-xl font-bold">
             <span>{friends.length}</span> friends
           </h3>
-        ) : (
-          ''
         )}
       </div>
-      <div className="mt-3 space-y-2 overflow-auto h-[40vh]">
+      <div className="mt-3 space-y-2 overflow-auto h-full">
         {loading ? (
           <div className="flex items-center justify-center w-full">
             <Loader width="30" />
@@ -115,7 +113,7 @@ ${desText}`)
           </div>
         )}
       </div>
-      <div className='bottom-[10vh] w-full'>
+      <div className='bottom-[10vh] w-full relative'>
         <InviteCard
           title='Invite Friends'
           profit={inviteRevenue}
