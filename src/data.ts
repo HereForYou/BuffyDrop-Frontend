@@ -1,4 +1,3 @@
-// const ENDPOINT = 'http://localhost:5000';
 const ENDPOINT = 'https://filly-quiet-officially.ngrok-free.app';
 // const ENDPOINT = 'https://app.bleggs.com';
 // const ENDPOINT ='https://BuffyDrop.com';

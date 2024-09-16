@@ -88,7 +88,6 @@ const Exchange: React.FC<IHomeProps> = ({
       })
       .then((res) => {
         let userInfo = res.data;
-        console.log("userInfo", userInfo);
         setCurUser(userInfo.curUser);
         setRank(userInfo.curUser.joinRank);
       })
