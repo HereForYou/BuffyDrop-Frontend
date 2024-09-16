@@ -23,7 +23,10 @@ export default {
                 'friend-back': "url('/friend-back.png')",
                 'task-back': "url('/task-back.png')",
                 'airdrop-back': "url('/airdrop-back.png')",
-            }
+            },
+            fontFamily: {
+                roboto: ['Roboto', 'sans-serif'],
+            },
         },
     },
     plugins: [],

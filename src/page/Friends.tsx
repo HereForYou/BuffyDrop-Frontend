@@ -71,11 +71,13 @@ ${desText}`)
     toast.success('Successfully Copied!')
   }
   return (
-    <div className='flex flex-col h-full w-full justify-start px-[20px] gap-4 overflow-y-auto overflow-x-hidden hiddenScrollBar'>
-      <h1 className='text-xl font-bold text-[#acacac] pt-10'>Invite friends</h1>
-      <h1 className='text-xl font-bold text-[#acacac] pb-2'>
-        and get more BUFFYS
-      </h1>
+    <div className='flex flex-col h-full w-full justify-start px-[20px] gap-2 overflow-y-auto overflow-x-hidden hiddenScrollBar'>
+      <div>
+        <h1 className='text-[28px] font-bold text-white pt-10'>Invite friends</h1>
+        <h1 className='text-[28px] font-bold text-white pb-2'>
+          and get more BUFFYS
+        </h1>
+      </div>
       <div className='w-full flex justify-center'>
         <img
           src='/friends_bg.png'
@@ -83,14 +85,14 @@ ${desText}`)
           className='h-full px-12 py-2'
         />
       </div>
-      <div className="flex flex-col justify-between items-start px-6 text-[#acacac]">
+      <div className="flex flex-col justify-between items-start px-6 text-white">
         {friends.length != 0 && (
-          <h3 className="text-left text-xl font-bold">
+          <h3 className="text-left text-2xl font-bold">
             <span>{friends.length}</span> friends
           </h3>
         )}
       </div>
-      <div className="mt-3 space-y-2 overflow-auto h-full">
+      <div className="flex flex-col overflow-auto h-full">
         {loading ? (
           <div className="flex items-center justify-center w-full">
             <Loader width="30" />
@@ -107,7 +109,7 @@ ${desText}`)
           })
         ) : (
           <div>
-            <h4 className="pt-4 text-[#acacac]">
+            <h4 className="pt-4 text-white">
               Tap on the button to invite your friends
             </h4>
           </div>
@@ -121,7 +123,7 @@ ${desText}`)
         />
       </div>
       <div
-        className={`absolute bg-[#4b37dd] z-50 rounded-xl flex flex-col w-full right-0 text-[#acacac] px-4 py-2 pb-8 gap-2 transition-all duration-500 ease-out transform ${
+        className={`absolute bg-[#4b37dd] z-50 rounded-xl flex flex-col w-full right-0 text-white px-4 py-2 pb-8 gap-2 transition-all duration-500 ease-out transform ${
           showModal ? 'bottom-[60px]' : 'bottom-[-400px]'
         }`}
       >

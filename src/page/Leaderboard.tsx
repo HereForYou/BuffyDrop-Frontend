@@ -44,12 +44,12 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
   }, []);
 
   return (
-    <div className='h-full w-full flex flex-col text-center items-center justify-between py-2 px-6 overflow-x-hidden overflow-y-auto hiddenScrollBar'>
+    <div className='h-full w-full flex flex-col text-center items-center justify-between py-2 px-6 overflow-x-hidden overflow-y-auto hiddenScrollBar text-white'>
       <div className='w-full'>
         {/* <div className="customCard-container w-full"> */}
         <div className='group pt-6 transition relative duration-300 cursor-default hover:shadow-[0 -8px 0px 0px #2196f3]'>
           {/* <h2 className="text-[24px] font-extrabold">Top {users.length} $BLEGGS Miners</h2> */}
-          <h2 className='text-2xl text-[#acacac] font-extrabold'>
+          <h2 className='text-3xl font-extrabold pt-4'>
             Telegram Wall of Fame
           </h2>
         </div>
@@ -60,17 +60,18 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
           </div>
         ) : (
           <div>
-            <div
-              className={`flex my-3 px-3 py-2 items-center text-[#acacac] bg-[#110d33] rounded-lg w-full`}>
-              <div className='w-full flex flex-row items-center'>
+            <div className={`flex my-3 px-3 py-2 items-center text-[#acacac] bg-[#110d33] rounded-lg w-full`}>
+              <div className='w-full flex flex-row gap-1 items-center'>
                 <div className='h-8 w-8 rounded-full bg-white text-center flex justify-center items-center '>
                   {curUser?.userName.substring(0, 2).toUpperCase()}
                 </div>
-                <p className='text-xs text-start pl-2'>{curUser?.userName}</p>
-                <p className='text-[8px] text-start pl-2'>
-                  {formatNumberWithCommas(curUser?.totalPoints) +
-                    " BUFFYS"}
-                </p>
+                <div className="flex flex-col">
+                  <p className='text-xs text-white text-start pl-2'>{curUser?.userName}</p>
+                  <p className='text-[8px] text-start pl-2'>
+                    {formatNumberWithCommas(curUser?.totalPoints) +
+                      " BUFFYS"}
+                  </p>
+                </div>
               </div>
               <div className='text-xs text-center flex justify-center w-[15%]'>
                 {ranking + 1 == 1 || ranking + 1 == 2 || ranking + 1 == 3 ? (
@@ -86,8 +87,8 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
             </div>
 
             <div>
-              <div className='flex pt-3 pb-1 text-base w-full text-[#acacac] items-center'>
-                <div className='text-center pl-2'>{users.length}</div>
+              <div className='flex pt-3 pb-1 text-2xl font-bold w-full items-center'>
+                <div className='text-center pl-2'>{users.length > 1000000 ? Math.round(users.length / 1000000) + 'M' : users.length > 1000 ? Math.round(users.length / 1000) + 'K' : users.length}</div>
                 <div className='text-center pl-2'>holders</div>
               </div>
               <div className='h-[62vh] overflow-auto w-full'>
@@ -100,7 +101,7 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
                         {iUser?.userName.substring(0, 2).toUpperCase()}
                       </div>
                       <div className='pl-4 text-start'>
-                        <p className='text-xs'>{iUser?.userName}</p>
+                        <p className='text-xs text-white'>{iUser?.userName}</p>
                         <p className='text-[8px]'>
                           {formatNumberWithCommas(
                             iUser?.totalPoints
