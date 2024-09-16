@@ -9,7 +9,7 @@ import { toast } from 'react-hot-toast'
 import Footer from './component/Footer'
 // import Mine from './page/Mine'
 import Friends from './page/Friends'
-// import BuffyCommunity from './component/BuffyCommunity'
+import BuffyCommunity from './component/BuffyCommunity'
 
 import Leaderboard from './page/Leaderboard'
 import { ENDPOINT } from './data'
@@ -20,18 +20,18 @@ import { isMobileDevice } from './utils/mobileDetect'
 // import QRCode from 'qrcode.react'
 import { getUserAvatarUrl } from './utils/functions'
 import Loader from './component/Loader'
-const user = {
-  id: '7211451993',
-  username: 'super0827',
-  first_name: 'Super',
-  last_name: ''
-}
-const start_param = ''
+// const user = {
+//   id: '7211451993',
+//   username: 'super0827',
+//   first_name: 'Super',
+//   last_name: ''
+// }
+// const start_param = ''
 
 function App () {
   let countdownTime = 1
   const hasShownWarningRef = useRef(false)
-  // const { user, start_param } = useTelegram()
+  const { user, start_param } = useTelegram()
   const [photo_url, setPhotoUrl] = useState<string | null>(null)
   const [inviteMsg, setInviteMsg] = useState<boolean>(false)
   const [task, setTask] = useState<string[]>([])
