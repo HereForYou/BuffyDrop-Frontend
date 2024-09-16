@@ -18,7 +18,6 @@ const Splash: React.FC<ISplashProps> = ({
 
 
   const handleResize = () => {
-    console.log("window size", window.innerHeight)
   }
   window.addEventListener('resize', handleResize);
   

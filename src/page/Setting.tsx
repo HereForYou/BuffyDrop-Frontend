@@ -24,7 +24,7 @@ const Setting: React.FC<ISettingProps> = ({ setting, setShowSetting, exchange, u
             .then(response => {
                 setExchange(dex);
                 toast.success("Changed successfully!")
-                console.log('response', response.data);
+                console.log(response)
             })
             .catch(error => {
                 console.error('Error occurred during PUT request:', error);

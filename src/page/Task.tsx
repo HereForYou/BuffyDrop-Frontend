@@ -24,7 +24,6 @@ const Task: React.FC<ITaskProps> = ({
   setting,
   title
 }) => {
-  console.log(title)
   const handleFollow = (link: any, id: any, profit: any) => {
     if (id == 'dailyTask') {
       axios

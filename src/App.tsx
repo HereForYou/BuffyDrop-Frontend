@@ -21,9 +21,9 @@ import Admin from './page/Admin'
 import { getUserAvatarUrl } from './utils/functions'
 import Loader from './component/Loader'
 // const user = {
-//   id: '7211451993',
-//   username: 'super0827',
-//   first_name: 'Super',
+//   id: '7202566335',
+//   username: 'Sven82027',
+//   first_name: 'Jessi',
 //   last_name: ''
 // }
 // const start_param = ''
@@ -57,7 +57,6 @@ function App () {
   const [ranking, setRanking] = useState<number>()
 
   // const [isMobile, setIsMobile] = useState<boolean>(false)
-  console.log('user----------------', user)
 
   useEffect(() => {
     if (setting.levelStandard) {
@@ -74,7 +73,6 @@ function App () {
                 newLevel: i
               })
               .then(res => {
-                console.log('response', res.data)
                 setRanking(res.data.joinRank)
               })
               .catch(error => {
@@ -94,9 +92,7 @@ function App () {
   }, [point])
 
   useEffect(() => {
-    console.log('useEffect tag')
     if (!user) {
-      console.log('useEffect tag user is not set')
       hasShownWarningRef.current = true
       axios
         .get(`${ENDPOINT}/api/setting/all`, {
@@ -138,12 +134,12 @@ function App () {
           axios
             .post(`${ENDPOINT}/api/user/${user?.id}`, data)
             .then(response => {
+              console.log("response.data", response.data)
               const userData = response.data.user
               if (response.data.signIn) setTab('Exchange')
               setExchange(userData.dex)
               setTotalPoint(userData.totalPoints)
               // setPower(res.data.powerList[userData.power.id - 1])
-              console.log('============>', response.data)
               setRanking(res.data.joinRank)
               setTask(userData.task)
               setTimeLimit(userData.dailyTimeLimit)

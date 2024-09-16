@@ -39,11 +39,9 @@ const Friends = ({
           }
         })
         .then(res => {
-          let userInfo = res.data
-          console.log('userInfo', userInfo)
-
-          setInviteLink(userInfo.inviteLink)
-          setFriends(userInfo.friendsInfo)
+          console.log("friends > res.data", res.data)
+          setInviteLink(res.data.inviteLink)
+          setFriends(res.data.friendsInfo)
           setLoading(false)
         })
         .catch(err => {
@@ -101,9 +99,9 @@ ${desText}`)
           friends.map((friend: any) => {
             return (
               <FriendCard
-                key={friend.userName}
-                name={friend.userName}
-                value={friend.totalPoints}
+                key={friend.Info.userName}
+                name={friend.Info.userName}
+                value={friend.revenue}
               />
             )
           })
