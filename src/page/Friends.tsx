@@ -71,7 +71,7 @@ ${desText}`)
     toast.success('Successfully Copied!')
   }
   return (
-    <div className='flex-1 flex flex-col h-full w-full justify-between pt-[2.5rem] pb-[2rem] px-[20px] gap-2 overflow-y-auto overflow-x-hidden hiddenScrollBar'>
+    <div className='flex flex-col h-full w-full justify-start px-[20px] gap-4 overflow-y-auto overflow-x-hidden hiddenScrollBar'>
       <h1 className='text-xl font-bold text-[#acacac] pt-10'>Invite friends</h1>
       <h1 className='text-xl font-bold text-[#acacac] pb-2'>
         and get more BUFFYS
@@ -89,7 +89,7 @@ ${desText}`)
             <span>{friends.length}</span> friends
           </h3>
         ) : (
-          <></>
+          ''
         )}
       </div>
       <div className="mt-3 space-y-2 overflow-auto h-[40vh]">
