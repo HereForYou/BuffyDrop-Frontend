@@ -30,12 +30,12 @@ const convertToShorthand = (number: number) => {
 
 function formatNumberWithCommas(number: number) {
     if (number === undefined || number === null) {
-        return "Invalid number"; // Handle undefined or null input
+        return "NaN"; // Handle undefined or null input
     }
 
     // Check if the input is a valid number
     if (typeof number !== 'number' || isNaN(number)) {
-        return "Invalid number"; // Handle non-number types
+        return "NaN"; // Handle non-number types
     }
 
     // Check if the number is an integer

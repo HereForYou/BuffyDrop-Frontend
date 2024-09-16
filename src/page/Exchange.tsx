@@ -106,7 +106,7 @@ const Exchange: React.FC<IHomeProps> = ({
       setExchange={setExchange}
     />
   ) : (
-    <div className='h-full justify-between items-center pt-[2.5rem] pb-[2rem] gap-2 overflow-y-auto overflow-x-hidden hiddenScrollBar relative -top-10'>
+    <div className='h-full justify-between items-center pt-[2.5rem] gap-2 overflow-y-auto overflow-x-hidden hiddenScrollBar relative -top-10'>
       <div className='bg-[#046ae2] flex gap-1 px-6 pt-5 pb-10 w-full justify-between items-center'>
         <div className='flex gap-2'>
           <img src='/x.svg' className='w-10' />
