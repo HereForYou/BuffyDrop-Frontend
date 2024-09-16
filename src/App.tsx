@@ -181,7 +181,7 @@ function App () {
     setSec(seconds)
     setPoint(prevPoints => prevPoints)
     setCurrentCount(prevSeconds => prevSeconds - 1)
-    setIsMobile(!isMobileDevice())
+    setIsMobile(isMobileDevice())
   }, [])
 
   const handleMining = () => {
