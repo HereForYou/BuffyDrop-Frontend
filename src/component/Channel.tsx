@@ -42,7 +42,7 @@ const Channel: React.FC<ChannelProps> = ({
             </button>
           </div>
           <div className='flex h-10 w-12'>
-            <img src={src}></img>
+            {src}
           </div>
         </div>
       </div>
