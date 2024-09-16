@@ -2,7 +2,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import './App.css'
 import { useState, useEffect, useRef } from 'react'
 import Exchange from './page/Exchange'
-import { useTelegram } from './hooks/useTelegram'
+import { useTelegram } from './hooks/useTelegram'/
 import axios from 'axios'
 import { toast } from 'react-hot-toast'
 // import { ToastContainer } from 'react-toastify'
@@ -217,7 +217,9 @@ function App () {
         </div>
       ) : (
         user && (
-          <div className={`h-full relative max-h-screen overflow-hidden max-w-[560px] w-full font-roboto`}>
+          <div
+            className={`h-full relative max-h-screen overflow-hidden max-w-[560px] w-full font-roboto`}
+          >
             <div className={`flex h-screen overflow-hidden pb-4 w-full`}>
               {tab == 'Splash' && (
                 <Splash
