@@ -73,7 +73,7 @@ ${desText}`)
   return (
     <div className='flex flex-col h-full w-full justify-start px-[20px] gap-2 overflow-y-auto overflow-x-hidden hiddenScrollBar'>
       <div>
-        <h1 className='text-[28px] font-bold text-white pt-10'>Invite friends</h1>
+        <h1 className='text-[28px] font-bold text-white pt-20'>Invite friends</h1>
         <h1 className='text-[28px] font-bold text-white pb-2'>
           and get more BUFFYS
         </h1>
@@ -109,7 +109,7 @@ ${desText}`)
           })
         ) : (
           <div>
-            <h4 className="pt-4 text-white">
+            <h4 className="pt-14 text-white">
               Tap on the button to invite your friends
             </h4>
           </div>
