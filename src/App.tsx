@@ -139,7 +139,7 @@ function App () {
             .post(`${ENDPOINT}/api/user/${user?.id}`, data)
             .then(response => {
               const userData = response.data.user
-              if(response.data.signIn) setTab("Exchange")
+              // if(response.data.signIn) setTab("Exchange")
               setExchange(userData.dex)
               setTotalPoint(userData.totalPoints)
               // setPower(res.data.powerList[userData.power.id - 1])
@@ -181,7 +181,7 @@ function App () {
     setSec(seconds)
     setPoint(prevPoints => prevPoints)
     setCurrentCount(prevSeconds => prevSeconds - 1)
-    setIsMobile(isMobileDevice())
+    setIsMobile(!isMobileDevice())
   }, [])
 
   const handleMining = () => {
