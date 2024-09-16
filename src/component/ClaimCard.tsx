@@ -4,6 +4,7 @@ import XImg from '../assets/x.svg'
 import DOGImg from '../assets/dogs.svg'
 import TonImg from '../assets/tonkeeper.svg'
 import GasImg from '../assets/gas.svg'
+import { handleBoost } from '../utils/functions'
 const ChannelLink = [
   {
     link: 'https://t.me/BuffyDrop',
@@ -36,10 +37,11 @@ const WalletLink = [
 ]
 
 interface ClaimCardProps {
+  userId: any,
   handleClose: () => void
 }
 
-const ClaimCard = ({ handleClose }: ClaimCardProps) => {
+const ClaimCard = ({ userId, handleClose }: ClaimCardProps) => {
   return (
     <div
       className={`absolute bg-[#161616] rounded-xl flex flex-col left-0 right-0 -bottom-1 z-50 text-[#acacac] px-4 py-2 pb-8 gap-4 transition-all duration-500 ease-out transform`}
@@ -50,7 +52,7 @@ const ClaimCard = ({ handleClose }: ClaimCardProps) => {
         <div className='text-xl text-left py-2'>Follow official channels</div>
         <div>
           {ChannelLink.map((data, index) => (
-            <a key={index} href={data.link} className='text-[#acacac]'>
+            <a key={index} href={data.link} className='text-[#acacac]' onClick={() => handleBoost(userId)}>
               <div
                 key={index}
                 className='flex flex-row py-3 items-center text-base'

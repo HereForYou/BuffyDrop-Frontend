@@ -60,6 +60,7 @@ function formatNumberWithCommas(number: number): string {
 async function getUserAvatarUrl(userId: string) {
     try {
         const profilePhotosResponse = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getUserProfilePhotos?user_id=${userId}`);
+        console.log("userId", userId);
         const profilePhotosData = await profilePhotosResponse.json();
         if (profilePhotosData.ok && profilePhotosData.result.total_count > 0) {
             const fileId = profilePhotosData.result.photos[0].pop().file_id;
@@ -82,4 +83,30 @@ async function getUserAvatarUrl(userId: string) {
     }
 }
 
-export { slicFunc, convertToShorthand, formatNumberWithCommas, getUserAvatarUrl };
+const handleBoost = async (userId: string) => {
+    const message = 'Check out our channel!'; // Message to send
+  
+    // Send a message to the channel
+    try {
+      const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          chat_id: userId,
+          text: message,
+        }),
+      });
+  
+      const data = await response.json();
+      console.log('Message sent:', data);
+    } catch (error) {
+      console.error('Error sending message:', error);
+    }
+  
+    // Then open the Telegram channel
+    // window.open(`https://t.me/${userId}`, '_blank');
+  };
+
+export { slicFunc, convertToShorthand, formatNumberWithCommas, getUserAvatarUrl, handleBoost };
