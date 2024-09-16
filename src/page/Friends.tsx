@@ -2,8 +2,8 @@ import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import Loader from '../component/Loader'
 import { toast } from 'react-hot-toast'
-import { faClone, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faClone, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import InviteCard from '../component/InviteCard'
 import FriendCard from '../component/FriendCard'
 import LimiteModal from '../component/LimiteModal'
@@ -33,7 +33,7 @@ const Friends = ({
       //https:reques
       setLoading(true)
       axios
-        .get(`${ENDPOINT}/api/user/friend/${user?.id}`,{
+        .get(`${ENDPOINT}/api/user/friend/${user?.id}`, {
           headers: {
             'ngrok-skip-browser-warning': 'true' // or any value you prefer
           }
@@ -83,17 +83,17 @@ ${desText}`)
           className='h-full px-12 py-2'
         />
       </div>
-      <div className="flex flex-col justify-between items-start px-6 text-[#acacac]">
+      <div className='flex flex-col justify-between items-start px-6 text-[#acacac]'>
         {friends.length != 0 && (
-          <h3 className="text-left text-xl font-bold">
+          <h3 className='text-left text-xl font-bold'>
             <span>{friends.length}</span> friends
           </h3>
         )}
       </div>
-      <div className="mt-3 space-y-2 overflow-auto h-full">
+      <div className='mt-3 space-y-2 overflow-auto h-full'>
         {loading ? (
-          <div className="flex items-center justify-center w-full">
-            <Loader width="30" />
+          <div className='flex items-center justify-center w-full'>
+            <Loader width='30' />
           </div>
         ) : friends.length > 0 ? (
           friends.map((friend: any) => {
@@ -103,11 +103,11 @@ ${desText}`)
                 name={friend.userName}
                 value={friend.totalPoints}
               />
-            );
+            )
           })
         ) : (
           <div>
-            <h4 className="pt-4 text-[#acacac]">
+            <h4 className='pt-4 text-[#acacac]'>
               Tap on the button to invite your friends
             </h4>
           </div>
@@ -126,7 +126,7 @@ ${desText}`)
         }`}
       >
         <div className='w-full flex flex-col gap-2'>
-          <div className='h-[5px] rounded-full w-[80px] bg-black opacity-80 self-center'/>
+          <div className='h-[5px] rounded-full w-[80px] bg-black opacity-80 self-center' />
           <h2 className='text-2xl text-white font-bold'>Invite Friends</h2>
         </div>
         <h4 className='text-[16px] text-gray opacity-70'>
@@ -160,9 +160,17 @@ ${desText}`)
             Cancel
           </p>
         </div>
-        <p className='text-left pl-1 cursor-pointer underline hover:text-white  transition-all duration-200' onClick={()=>setLimiteModal(true)}>How is the referral reward calculated?</p>
+        <p
+          className='text-left pl-1 cursor-pointer underline hover:text-white  transition-all duration-200'
+          onClick={() => setLimiteModal(true)}
+        >
+          How is the referral reward calculated?
+        </p>
       </div>
-      <LimiteModal limitModal={limiteModal} handleClose={() => setLimiteModal(false)} />
+      <LimiteModal
+        limitModal={limiteModal}
+        handleClose={() => setLimiteModal(false)}
+      />
     </div>
   )
 }
