@@ -109,7 +109,7 @@ const Exchange: React.FC<IHomeProps> = ({
         .catch(err => {
           console.error('er', err)
         })
-      window.open('https://twitter.com/BuffyDrops', '_blank')
+      window.open('https://twitter.com/BuffyDrop', '_blank')
   }
 
   return showSetting ? (

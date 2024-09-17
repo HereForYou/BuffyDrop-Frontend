@@ -12,7 +12,7 @@ const ChannelLink = [
     title: 'Buffy community'
   },
   {
-    link: 'https://twitter.com/BuffyDrops',
+    link: 'https://twitter.com/BuffyDrop',
     img: XImg,
     title: 'Buffy on X.COM'
   },
@@ -25,12 +25,12 @@ const ChannelLink = [
 
 const WalletLink = [
   {
-    link: '#',
+    link: 'https://app.tonkeeper.com',
     img: TonImg,
     title: 'Install Tonkeeper'
   },
   {
-    link: '#',
+    link: 'https://web.telegram.org/a/#7535345811',
     img: GasImg,
     title: 'Get Toncoin for gas'
   }
@@ -52,7 +52,7 @@ const ClaimCard = ({ handleClose }: ClaimCardProps) => {
         <div className='text-xl text-left py-2'>Follow official channels</div>
         <div>
           {ChannelLink.map((data, index) => (
-            <a key={index} href={data.link} className='text-[#acacac]'>
+            <a key={index} href={data.link} className='text-[#acacac]' target='_blank'>
               <div
                 key={index}
                 className='flex flex-row py-3 items-center text-base'
@@ -70,7 +70,7 @@ const ClaimCard = ({ handleClose }: ClaimCardProps) => {
         <div className='text-xl text-left py-2'>Prepare your wallet</div>
         <div>
           {WalletLink.map((data, index) => (
-            <a href={data.link} className='text-[#acacac]'>
+            <a href={data.link} className='text-[#acacac]' target={`${data.title == 'Install Tonkeeper' ? '_blank' : '_parent'}`}>
               <div
                 key={index}
                 className='flex flex-row py-3 items-center text-base'
