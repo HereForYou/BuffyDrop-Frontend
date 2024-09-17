@@ -13,13 +13,13 @@ import { formatNumberWithCommas } from "../utils/functions";
 import Loader from "../component/Loader";
 
 const ChannelData = [
-  {
-    id: "Channel",
-    title: "DAILY REWARD",
-    comment: "Complete your daily tasks and earn rewards!",
-    src: <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-camera"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>,
-    btnTitle: "Go",
-  },
+  // {
+  //   id: "Channel",
+  //   title: "DAILY REWARD",
+  //   comment: "Complete your daily tasks and earn rewards!",
+  //   src: <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-camera"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>,
+  //   btnTitle: "Go",
+  // },
   {
     id: "INVITE",
     title: "INVITE YOUR FIRST FRIEND",
@@ -174,6 +174,7 @@ const Exchange: React.FC<IHomeProps> = ({
               swipeable={true}
               dynamicHeight={false}
               emulateTouch={true}
+              transitionTime={700}
               autoFocus={false}>
               {ChannelData.map((idx, key) => (
                 <Channel
