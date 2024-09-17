@@ -20,7 +20,7 @@ const BuffyCommunity: React.FC<BuffyCommunityProps> = ({ title }) => {
       />
       <CommunityCard
         // key={'CommunityCard'}
-        link={`https://twitter.com/BuffyDrops`}
+        link={`https://twitter.com/BuffyDrop`}
         avatar={'/twitter_icon.png'}
         title={'Follow our X account'}
         buffy={100000}
@@ -28,7 +28,7 @@ const BuffyCommunity: React.FC<BuffyCommunityProps> = ({ title }) => {
       />
       <CommunityCard
         key={'CommunityCard'}
-        link={`https://www.instagram.com/BuffyDrops`}
+        link={`https://www.instagram.com/BuffyDrop`}
         avatar={'/instagram_icon.png'}
         title={'Follow us on Instagram'}
         buffy={100000}
@@ -36,7 +36,7 @@ const BuffyCommunity: React.FC<BuffyCommunityProps> = ({ title }) => {
       />
       <CommunityCard
         key={'CommunityCard'}
-        link={`https://www.youtube.com/c/BuffyDrops`}
+        link={` https://www.youtube.com/c/BuffyDrop`}
         avatar={'/youtube_icon.png'}
         title={'Follow our YouTube Channel'}
         buffy={100000}
@@ -44,7 +44,7 @@ const BuffyCommunity: React.FC<BuffyCommunityProps> = ({ title }) => {
       />
       <CommunityCard
         key={'CommunityCard'}
-        link={`https://www.tiktok.com/@BuffyDrops`}
+        link={`https://www.tiktok.com/@BuffyDrop`}
         avatar={'/tt_icon.png'}
         title={'Join our TT channel'}
         buffy={100000}
