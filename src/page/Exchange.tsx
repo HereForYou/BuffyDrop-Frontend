@@ -7,7 +7,7 @@ import Channel from "../component/Channel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import "../App.css";
-import WalletConnect from "../component/WalletConnect";
+// import WalletConnect from "../component/WalletConnect";
 import ClaimCard from "../component/ClaimCard";
 import { formatNumberWithCommas } from "../utils/functions";
 import Loader from "../component/Loader";
@@ -137,12 +137,12 @@ const Exchange: React.FC<IHomeProps> = ({
           Post
         </div>
       </div>
-      <div className='relative rounded-2xl -top-5 w-full flex justify-between px-5 gap-2 items-center flex-col bg-black'>
-        <div className='flex flex-col gap-4 justify-start w-full items-center'>
+      <div className='relative rounded-2xl -top-5 w-full flex justify-between px-5 gap-2 items-center flex-col bg-black exchange-content'>
+        <div className='flex flex-col gap-4 justify-evenly w-full items-center mt-5 h-full'>
           {claim && <ClaimCard userId={user?.id} handleClose={() => setClaim(false)} />}
-          <div className='mt-5'>
+          {/* <div>
             <WalletConnect />
-          </div>
+          </div> */}
           <p className="text-2xl text-[#acacac] font-semibold bg-gradient-to-t from-[#444444] to-[#bdbdbd] bg-clip-text text-transparent">You’re user {rank} to join the BuffyDrop!</p>
           <img src='/dogAvatar.png' className='w-1/3'></img>
           <div>
@@ -174,7 +174,7 @@ const Exchange: React.FC<IHomeProps> = ({
               swipeable={true}
               dynamicHeight={false}
               emulateTouch={true}
-              transitionTime={700}
+              transitionTime={900}
               autoFocus={false}>
               {ChannelData.map((idx, key) => (
                 <Channel
@@ -193,11 +193,11 @@ const Exchange: React.FC<IHomeProps> = ({
             </Carousel>
           </div>
         </div>
-        <button
+        {/* <button
           className='bg-[#110d33] w-full py-4 leading-none mt-4'
           onClick={() => setClaim(true)}>
           Claim hints
-        </button>
+        </button> */}
       </div>
     </div>
   );
