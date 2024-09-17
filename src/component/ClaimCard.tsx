@@ -3,7 +3,7 @@ import TGImg from '../assets/tg.svg'
 import XImg from '../assets/x.svg'
 import DOGImg from '../assets/dogs.svg'
 import TonImg from '../assets/tonkeeper.svg'
-import GasImg from '../assets/gas.svg'
+// import GasImg from '../assets/gas.svg'
 
 const ChannelLink = [
   {
@@ -29,11 +29,6 @@ const WalletLink = [
     img: TonImg,
     title: 'Install Tonkeeper'
   },
-  {
-    link: 'https://web.telegram.org/a/#7535345811',
-    img: GasImg,
-    title: 'Get Toncoin for gas'
-  }
 ]
 
 interface ClaimCardProps {

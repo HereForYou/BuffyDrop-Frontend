@@ -234,7 +234,7 @@ input:focus {
     z-index: 100;
 }
 
-.go3974562317.go3162878564 {
+.go3974562317 {
     /* position: absolute; */
     /* top: -35px; */
     display: flex;
@@ -245,16 +245,16 @@ input:focus {
     margin-top: 10px;
     left: 35%;
     border-radius: 7px;
-    height: 30px;
-    background-color: white;
+    height: 30px !important;
+    background-color: white !important;
     /* transform: translate(-50%); */
 }
 
-.go3974562317.go3162878564 svg {
+.go3974562317 svg {
     filter: invert(1);
 }
 
-.go3974562317.go3162878564 .go1487791704 {
+.go3974562317 .go1487791704 {
     color: black;
     padding: 0;
     margin: 0;
