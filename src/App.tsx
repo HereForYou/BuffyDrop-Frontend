@@ -206,111 +206,114 @@ function App () {
   }
 
   return (
-    <Router>
+    <>
       <SpeedInsights />
-      {loading ? (
-        <div className='flex flex-col relative pt-32 justify-center items-center gap-20 h-screen w-full'>
-          <img src='/dogAvatar.png' className='absolute w-32 top-1/4' />
-          <Loader width='80' />
-        </div>
-      ) : (
-        user && (
-          <div
-            className={`h-full relative max-h-screen overflow-hidden max-w-[560px] w-full font-roboto`}
-          >
-            <div className={`flex h-screen overflow-hidden pb-4 w-full`}>
-              {tab == 'Splash' && (
-                <Splash
-                  ranking={ranking}
-                  totalPoint={totalPoint}
-                  referral={referral}
-                  setTab={setTab}
-                />
+      <Router>
+        {/* <SpeedInsights /> */}
+        {loading ? (
+          <div className='flex flex-col relative pt-32 justify-center items-center gap-20 h-screen w-full'>
+            <img src='/dogAvatar.png' className='absolute w-32 top-1/4' />
+            <Loader width='80' />
+          </div>
+        ) : (
+          user && (
+            <div
+              className={`h-full relative max-h-screen overflow-hidden max-w-[560px] w-full font-roboto`}
+            >
+              <div className={`flex h-screen overflow-hidden pb-4 w-full`}>
+                {tab == 'Splash' && (
+                  <Splash
+                    ranking={ranking}
+                    totalPoint={totalPoint}
+                    referral={referral}
+                    setTab={setTab}
+                  />
+                )}
+                {tab == 'Exchange' && (
+                  <Exchange
+                    user={user}
+                    photo_url={photo_url}
+                    point={point}
+                    totalPoint={totalPoint}
+                    handleMining={handleMining}
+                    handleStopMining={handleStopMining}
+                    claimShow={claimShow}
+                    setTotalPoint={setTotalPoint}
+                    setClaimShow={setClaimShow}
+                    reachDailyLimit={reachDailyLimit}
+                    setReachDailyLimit={setReachDailyLimit}
+                    start={start}
+                    hour={hour}
+                    min={min}
+                    sec={sec}
+                    timeLimit={timeLimit}
+                    level={level}
+                    nextLevel={nextLevel}
+                    loading={loading}
+                    setting={setting}
+                    exchange={exchange}
+                    setExchange={setExchange}
+                    tab={tab}
+                    setTab={setTab}
+                    title={title}
+                    setTitle={setTitle}
+                  />
+                )}
+                {tab == 'Friends' && (
+                  <Friends
+                    user={user}
+                    inviteRevenue={setting.inviteRevenue}
+                    modal={false}
+                  />
+                )}
+                {tab == 'INVITE' && (
+                  <Friends
+                    user={user}
+                    inviteRevenue={setting.inviteRevenue}
+                    modal={true}
+                  />
+                )}
+                {tab == 'Channel' && (
+                  <Task
+                    title={title}
+                    user={user}
+                    totalPoint={totalPoint}
+                    setTotalPoint={setTotalPoint}
+                    setting={setting}
+                    task={task}
+                    setTask={setTask}
+                  />
+                )}
+                {tab == 'Buffy' && (
+                  <Task
+                    title={title}
+                    user={user}
+                    totalPoint={totalPoint}
+                    setTotalPoint={setTotalPoint}
+                    setting={setting}
+                    task={task}
+                    setTask={setTask}
+                  />
+                )}
+                {tab == 'Leaderboard' && <Leaderboard user={user} />}
+              </div>
+              {tab !== 'Splash' && tab !== 'Admin' && (
+                <Footer tab={tab} setTab={setTab} />
               )}
-              {tab == 'Exchange' && (
-                <Exchange
-                  user={user}
-                  photo_url={photo_url}
-                  point={point}
-                  totalPoint={totalPoint}
-                  handleMining={handleMining}
-                  handleStopMining={handleStopMining}
-                  claimShow={claimShow}
-                  setTotalPoint={setTotalPoint}
-                  setClaimShow={setClaimShow}
-                  reachDailyLimit={reachDailyLimit}
-                  setReachDailyLimit={setReachDailyLimit}
-                  start={start}
-                  hour={hour}
-                  min={min}
-                  sec={sec}
-                  timeLimit={timeLimit}
-                  level={level}
-                  nextLevel={nextLevel}
-                  loading={loading}
-                  setting={setting}
-                  exchange={exchange}
-                  setExchange={setExchange}
-                  tab={tab}
-                  setTab={setTab}
-                  title={title}
-                  setTitle={setTitle}
-                />
-              )}
-              {tab == 'Friends' && (
-                <Friends
-                  user={user}
-                  inviteRevenue={setting.inviteRevenue}
-                  modal={false}
-                />
-              )}
-              {tab == 'INVITE' && (
-                <Friends
-                  user={user}
-                  inviteRevenue={setting.inviteRevenue}
-                  modal={true}
-                />
-              )}
-              {tab == 'Channel' && (
-                <Task
-                  title={title}
-                  user={user}
-                  totalPoint={totalPoint}
-                  setTotalPoint={setTotalPoint}
-                  setting={setting}
-                  task={task}
-                  setTask={setTask}
-                />
-              )}
-              {tab == 'Buffy' && (
-                <Task
-                  title={title}
-                  user={user}
-                  totalPoint={totalPoint}
-                  setTotalPoint={setTotalPoint}
-                  setting={setting}
-                  task={task}
-                  setTask={setTask}
-                />
-              )}
-              {tab == 'Leaderboard' && <Leaderboard user={user} />}
             </div>
-            {tab !== 'Splash' && tab !== 'Admin' && (
-              <Footer tab={tab} setTab={setTab} />
-            )}
+          )
+        )}
+        {!user && (
+          <div className={`h-full max-h-screen overflow-hidden w-full`}>
+            <div
+              className={`relative h-screen overflow-hidden pb-[64px] px-[20px]`}
+            >
+              <Admin setting={setting} setSetting={setSetting} />
+            </div>
           </div>
-        )
-      )}
-      {!user && (
-        <div className={`h-full max-h-screen overflow-hidden w-full`}>
-          <div
-            className={`relative h-screen overflow-hidden pb-[64px] px-[20px]`}
-          >
-            <Admin setting={setting} setSetting={setSetting} />
-          </div>
-        </div>
-      )}
-    </Router>
+        )}
+      </Router>
+    </>
   )
 }
 
