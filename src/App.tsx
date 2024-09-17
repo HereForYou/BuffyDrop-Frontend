@@ -20,6 +20,7 @@ import Admin from './page/Admin'
 // import QRCode from 'qrcode.react'
 import { getUserAvatarUrl } from './utils/functions'
 import Loader from './component/Loader'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 // const user = {
 //   id: '7202566335',
 //   username: 'Sven82027',
@@ -134,7 +135,7 @@ function App () {
           axios
             .post(`${ENDPOINT}/api/user/${user?.id}`, data)
             .then(response => {
-              console.log("response.data", response.data)
+              console.log('response.data', response.data)
               const userData = response.data.user
               if (response.data.signIn) setTab('Exchange')
               setExchange(userData.dex)
@@ -206,6 +207,7 @@ function App () {
 
   return (
     <Router>
+      <SpeedInsights />
       {loading ? (
         <div className='flex flex-col relative pt-32 justify-center items-center gap-20 h-screen w-full'>
           <img src='/dogAvatar.png' className='absolute w-32 top-1/4' />
