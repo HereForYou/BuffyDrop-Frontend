@@ -26,8 +26,8 @@ const Channel: React.FC<ChannelProps> = ({
     setTitle(title)
   }
   return (
-    <div className='pb-4 h-[190px] flex w-full'>
-      <div className='bg-[#4b37dd]  rounded-[1rem] w-[93%] min-w-[18rem] flex flex-col py-5 px-5 justify-start h-fit'>
+    <div className='pb-4 h-[190px] flex-1 flex w-full'>
+      <div className='bg-[#4b37dd]  rounded-[1rem] w-[93%] min-w-[18rem] flex flex-col py-5 px-5 justify-start h-[150px] xs:h-[130px]'>
         <div className='flex flex-col justify-between gap-1'>
           <p className='text-[20px] text-left leading-none font-bold'>{heading}</p>
           <p className='text-[12px] text-left'>{comment}</p>

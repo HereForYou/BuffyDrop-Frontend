@@ -137,8 +137,8 @@ const Exchange: React.FC<IHomeProps> = ({
           Post
         </div>
       </div>
-      <div className='relative rounded-2xl -top-5 w-full flex justify-between px-5 gap-2 items-center flex-col bg-black'>
-        <div className='flex flex-col gap-4 justify-start w-full items-center mt-5'>
+      <div className='relative rounded-2xl -top-5 w-full flex justify-between px-5 gap-2 items-center flex-col bg-black exchange-content'>
+        <div className='flex flex-col gap-4 justify-between w-full items-center mt-5 h-full'>
           {claim && <ClaimCard userId={user?.id} handleClose={() => setClaim(false)} />}
           {/* <div>
             <WalletConnect />
