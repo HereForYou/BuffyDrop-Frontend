@@ -79,6 +79,7 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
                 {ranking + 1 == 1 || ranking + 1 == 2 || ranking + 1 == 3 ? (
                   <img
                     src={`/rank_${ranking + 1}.png`}
+                    loading='lazy'
                     alt='rank'
                     className='w-4 h-6'
                   />
@@ -122,6 +123,7 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
                         <img
                           src={`/rank_${index + 1}.png`}
                           alt='rank'
+                          loading='lazy'
                           className='w-4 h-6'
                         />
                       ) : (

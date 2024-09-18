@@ -29,8 +29,8 @@ const Channel: React.FC<ChannelProps> = ({
     <div className='pb-4 h-[190px] flex-1 flex w-full'>
       <div className='bg-[#4b37dd]  rounded-[1rem] flex flex-col py-5 px-5 justify-start h-[150px] xs:h-[130px] w-[93%]'>
         <div className='flex flex-col justify-between gap-1'>
-          <p className='text-[20px] text-left leading-none font-bold'>{heading}</p>
-          <p className='text-[12px] text-left'>{comment}</p>
+          <p className='text-xl text-left leading-none font-bold'>{heading}</p>
+          <p className='text-xs text-left'>{comment}</p>
         </div>
         <div className='flex flex-row justify-between pt-2 items-center'>
           <div>

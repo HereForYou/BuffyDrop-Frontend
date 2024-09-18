@@ -6,7 +6,7 @@ const BuffyCommunity: React.FC<BuffyCommunityProps> = ({ title }) => {
   return (
     <>
       <div className='flex flex-col justify-center items-center text-xl text-[#acacac] font-bold pt-16 pb-6'>
-        <img src='/buffy_community_img.png' alt='' className='w-[25vw] pb-4' />
+        <img src='/buffy_community_img.png' alt='buffy_community_img' loading='lazy' className='w-[25vw] pb-4' />
         {/* <div>{title}</div> */}
         <div>{title}</div>
       </div>
