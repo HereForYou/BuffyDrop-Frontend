@@ -39,7 +39,7 @@ const Friends = ({
           }
         })
         .then(res => {
-          console.log("friends > res.data", res.data)
+          console.log('friends > res.data', res.data)
           setInviteLink(res.data.inviteLink)
           setFriends(res.data.friendsInfo)
           setLoading(false)
@@ -64,14 +64,16 @@ const Friends = ({
   }
   const handleClipBoardCopy = async () => {
     legacyCopy(`
-https://t.me/Dog82027bot/DogBot?startapp=${inviteLink}
+https://t.me/BuffyDropbot/Buffy Drop?startapp=${inviteLink}
 ${desText}`)
     toast.success('Successfully Copied!')
   }
   return (
     <div className='flex flex-col h-full w-full justify-start px-[20px] gap-2 overflow-y-auto overflow-x-hidden hiddenScrollBar'>
       <div>
-        <h1 className='text-[28px] font-bold text-white pt-20'>Invite friends</h1>
+        <h1 className='text-[28px] font-bold text-white pt-20'>
+          Invite friends
+        </h1>
         <h1 className='text-[28px] font-bold text-white pb-2'>
           and get more BUFFY
         </h1>
@@ -83,14 +85,14 @@ ${desText}`)
           className='h-full px-12 py-2'
         />
       </div>
-      <div className="flex flex-col justify-between items-start px-6 text-white">
+      <div className='flex flex-col justify-between items-start px-6 text-white'>
         {friends.length != 0 && (
-          <h3 className="text-left text-2xl font-bold">
+          <h3 className='text-left text-2xl font-bold'>
             <span>{friends.length}</span> friends
           </h3>
         )}
       </div>
-      <div className="flex flex-col overflow-auto h-full">
+      <div className='flex flex-col overflow-auto h-full'>
         {loading ? (
           <div className='flex items-center justify-center w-full'>
             <Loader width='30' />
@@ -107,7 +109,7 @@ ${desText}`)
           })
         ) : (
           <div>
-            <h4 className="pt-14 text-white">
+            <h4 className='pt-14 text-white'>
               Tap on the button to invite your friends
             </h4>
           </div>
@@ -134,7 +136,7 @@ ${desText}`)
           invitations available
         </h4>
         <a
-          href={`https://t.me/share/url?url=https://t.me/Dog82027bot/DogBot?startapp=${inviteLink}&text=${desText}`}
+          href={`https://t.me/share/url?url=https://t.me/BuffyDropbot/Buffy Drop?startapp=${inviteLink}&text=${desText}`}
           target='blank'
           className='bg-[#110d33] p-[4px] rounded-xl text-white font-semibold transition relative duration-200 hover:translate-y-[2px]'
         >

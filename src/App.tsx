@@ -137,7 +137,7 @@ function App () {
           axios
             .post(`${ENDPOINT}/api/user/${user?.id}`, data)
             .then(response => {
-              console.log("response.data", response.data)
+              console.log('response.data', response.data)
               const userData = response.data.user
               if (response.data.signIn) setTab('Exchange')
               setExchange(userData.dex)
