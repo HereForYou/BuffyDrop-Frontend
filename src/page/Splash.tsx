@@ -19,9 +19,9 @@ const Splash: React.FC<ISplashProps> = ({
   return window.innerHeight > 768 ? (
     <div className='flex flex-col justify-between h-full w-full pt-4 bg-cover bg-center'>
       <div className='flex flex-col items-center justify-center h-fit'>
-        <img src='homeImg2.png' className='top-10 w-full' loading='lazy' />
+        <img src='homeImg2.webp' className='top-10 w-full' loading='lazy' />
         <img
-          src='homeImg.png'
+          src='homeImg.webp'
           className='w-32 relative top-10'
           loading='lazy'
         />
@@ -50,8 +50,8 @@ const Splash: React.FC<ISplashProps> = ({
   ) : (
     <div className='flex flex-col justify-between h-full w-full pt-4 bg-cover bg-center'>
       <div className='flex flex-col items-center w-full justify-center'>
-        <img src='homeImg2.png' className='top-10 w-full' loading='lazy' />
-        <img src='homeImg.png' className='w-28 relative top-4' loading='lazy' />
+        <img src='homeImg2.webp' className='top-10 w-full' loading='lazy' />
+        <img src='homeImg.webp' className='w-28 relative top-4' loading='lazy' />
       </div>
       <div className='flex flex-col px-5 justify-between pt-0.5 gap-3 text-center'>
         <div className='flex flex-col gap-1'>

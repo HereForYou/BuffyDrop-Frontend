@@ -1,73 +1,74 @@
-import { useState, useEffect, useRef } from 'react'
-import axios from 'axios'
-import Loader from '../component/Loader'
-import { toast } from 'react-hot-toast'
+import { useState, useEffect, useRef } from "react";
+import axios from "axios";
+import Loader from "../component/Loader";
+import { toast } from "react-hot-toast";
 // import { faClone, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import InviteCard from '../component/InviteCard'
-import FriendCard from '../component/FriendCard'
-import LimiteModal from '../component/LimiteModal'
-import { ENDPOINT } from '../data'
+import InviteCard from "../component/InviteCard";
+import FriendCard from "../component/FriendCard";
+import LimiteModal from "../component/LimiteModal";
+import InviteFriendModal from "../component/InviteFriendModal";
+import { ENDPOINT } from "../data";
 
-const desText = `\nJoin me because there’s a reason for spreading the BUFFY buzz. It’s now or never for the BUFFY drop!🍖`
+const desText = `\nJoin me because there’s a reason for spreading the BUFFY buzz. It’s now or never for the BUFFY drop!🍖`;
 
 const Friends = ({
   user,
   inviteRevenue,
-  modal
+  modal,
 }: {
-  user: any
-  inviteRevenue: number
-  modal: boolean
+  user: any;
+  inviteRevenue: number;
+  modal: boolean;
 }) => {
-  const [showModal, setShowModal] = useState<boolean>(modal)
-  const [inviteLink, setInviteLink] = useState<string>('')
-  const [friends, setFriends] = useState<object[]>([])
+  const [showModal, setShowModal] = useState<boolean>(modal);
+  const [inviteLink, setInviteLink] = useState<string>("");
+  const [friends, setFriends] = useState<object[]>([]);
   // const [totalFriendPoints, setTotalFriendPoints] = useState<number>(0.0);
-  const hasShownWarningRef = useRef(false)
-  const [limiteModal, setLimiteModal] = useState<boolean>(false)
+  const hasShownWarningRef = useRef(false);
+  const [limiteModal, setLimiteModal] = useState<boolean>(false);
 
-  const [loading, setLoading] = useState<boolean>(true)
+  const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
     if (!hasShownWarningRef.current && user) {
       //https:reques
-      setLoading(true)
+      setLoading(true);
       axios
         .get(`${ENDPOINT}/api/user/friend/${user?.id}`, {
           headers: {
-            'ngrok-skip-browser-warning': 'true' // or any value you prefer
-          }
+            "ngrok-skip-browser-warning": "true", // or any value you prefer
+          },
         })
-        .then(res => {
-          console.log('friends > res.data', res.data)
-          setInviteLink(res.data.inviteLink)
-          setFriends(res.data.friendsInfo)
-          setLoading(false)
+        .then((res) => {
+          console.log("friends > res.data", res.data);
+          setInviteLink(res.data.inviteLink);
+          setFriends(res.data.friendsInfo);
+          setLoading(false);
         })
-        .catch(err => {
-          console.error(err)
+        .catch((err) => {
+          console.error(err);
           // toast.error("Something Went Wrong!");
-        })
-      hasShownWarningRef.current = true
+        });
+      hasShownWarningRef.current = true;
     }
-  }, [])
+  }, []);
   //clipBoard
-  function legacyCopy (value: string) {
-    const ta = document.createElement('textarea')
-    ta.value = value ?? ''
-    ta.style.position = 'absolute'
-    ta.style.opacity = '0'
-    document.body.appendChild(ta)
-    ta.select()
-    document.execCommand('copy')
-    ta.remove()
+  function legacyCopy(value: string) {
+    const ta = document.createElement("textarea");
+    ta.value = value ?? "";
+    ta.style.position = "absolute";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    ta.remove();
   }
   const handleClipBoardCopy = async () => {
-    legacyCopy(`
-https://t.me/BuffyDropbot/Buffy Drop?startapp=${inviteLink}
-${desText}`)
-    toast.success('Successfully Copied!')
-  }
+    legacyCopy(
+      `https://t.me/BuffyDropbot/Buffy Drop?startapp=${inviteLink}${desText}`
+    );
+    toast.success("Successfully Copied!");
+  };
   return (
     <div className='flex flex-col h-full w-full justify-start px-5 gap-2 overflow-y-auto overflow-x-hidden hiddenScrollBar'>
       <div>
@@ -106,7 +107,7 @@ ${desText}`)
                 name={friend.Info.userName}
                 value={friend.revenue}
               />
-            )
+            );
           })
         ) : (
           <div>
@@ -123,58 +124,19 @@ ${desText}`)
           setShowModal={setShowModal}
         />
       </div>
-      <div
-        className={`absolute bg-[#4b37dd] z-50 rounded-xl flex flex-col w-full right-0 text-white px-4 py-2 pb-8 gap-2 transition-all duration-500 ease-out transform ${
-          showModal ? 'bottom-[60px]' : 'bottom-[-400px]'
-        }`}
-      >
-        <div className='w-full flex flex-col gap-2'>
-          <div className='h-[5px] rounded-full w-[80px] bg-black opacity-80 self-center' />
-          <h2 className='text-2xl text-white font-bold'>Invite Friends</h2>
-        </div>
-        <h4 className='text-base text-gray opacity-70'>
-          You have <span className='text-yellow-400 font-bold'>Unlimited</span>{' '}
-          invitations available
-        </h4>
-        <a
-          href={`https://t.me/share/url?url=https://t.me/BuffyDropbot/Buffy Drop?startapp=${inviteLink}&text=${desText}`}
-          target='blank'
-          className='bg-[#110d33] p-1 rounded-xl text-white font-semibold transition relative duration-200 hover:translate-y-[2px]'
-        >
-          <div className=' cursor-pointer py-2 hover:text-[#4b37dd] rounded-xl'>
-            {/* <FontAwesomeIcon icon={faPaperPlane} className='mr-5' /> */}
-            Send
-          </div>
-        </a>
-        <div className='bg-[#110d33] p-1 text-white font-semibold rounded-xl transition relative duration-200 hover:translate-y-[2px]'>
-          <p
-            onClick={handleClipBoardCopy}
-            className=' cursor-pointer hover:text-[#4b37dd] py-2 rounded-xl '
-          >
-            {/* <FontAwesomeIcon icon={faClone} className='mr-5' /> */}
-            Copy Link
-          </p>
-        </div>
-        <div className='bg-[#110d33] p-1 text-white font-semibold rounded-xl transition relative duration-200 hover:translate-y-[2px]'>
-          <p
-            onClick={() => setShowModal(false)}
-            className=' cursor-pointer hover:text-[#4b37dd] py-2 rounded-xl '
-          >
-            Cancel
-          </p>
-        </div>
-        <p
-          className='text-left pl-1 cursor-pointer underline hover:text-white  transition-all duration-200'
-          onClick={() => setLimiteModal(true)}
-        >
-          How is the referral reward calculated?
-        </p>
-      </div>
+      <InviteFriendModal 
+        showModal={showModal}
+        setShowModal={setShowModal}
+        inviteLink={inviteLink}
+        handleClipBoardCopy={handleClipBoardCopy}
+        setLimiteModal={setLimiteModal}
+        desText={desText}
+      />
       <LimiteModal
         limitModal={limiteModal}
         handleClose={() => setLimiteModal(false)}
       />
     </div>
-  )
-}
-export default Friends
+  );
+};
+export default Friends;
