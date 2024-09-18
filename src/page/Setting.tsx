@@ -37,7 +37,7 @@ const Setting: React.FC<ISettingProps> = ({ setting, setShowSetting, exchange, u
                 !tab ? (
                     <>
                         <div className="flex flex-row-reverse py-2">
-                            <img onClick={() => setShowSetting(false)} src="close.svg" className="w-6 h-6 hover:opacity-80 cursor-pointer"></img>
+                            <img onClick={() => setShowSetting(false)} src="close.svg" className="w-6 h-6 hover:opacity-80 cursor-pointer" loading='lazy'></img>
                         </div>
                         <h4 className="lilita text-white text-[36px] font-bold py-1">Settings</h4>
                         <div onClick={() => setTab('exchange')} className="customCard-container grid grid-col-1 grid-col-1 w-full">
@@ -45,16 +45,16 @@ const Setting: React.FC<ISettingProps> = ({ setting, setShowSetting, exchange, u
                                 <div className="flex grid-cols-2 gap-3 w-full">
                                     <div className="flex flex-row w-full justify-between">
                                         <div className="flex flex-col">
-                                            <h4 className="text-[14px] font-semibold text-left">
+                                            <h4 className="text-sm font-semibold text-left">
                                                 Choose an Exchange
                                             </h4>
-                                            <h4 className="text-[14px] font-semibold text-left opacity-80">
+                                            <h4 className="text-sm font-semibold text-left opacity-80">
                                                 {exchange?.name}
                                             </h4>
                                         </div>
 
                                         <div className="flex items-center">
-                                            <img src="right.svg" alt="" className="w-6 h-6 ml-1" />
+                                            <img src="right.svg" alt="" className="w-6 h-6 ml-1" loading='lazy' />
                                         </div>
                                     </div>
                                 </div>
@@ -65,7 +65,7 @@ const Setting: React.FC<ISettingProps> = ({ setting, setShowSetting, exchange, u
                     tab == 'exchange' && (
                         <div className="max-h-[90%] overflow-y-auto">
                             <div className="flex py-2">
-                                <img onClick={() => setTab('')} src="back.svg" className="w-6 h-6 hover:opacity-80 cursor-pointer"></img>
+                                <img onClick={() => setTab('')} src="back.svg" className="w-6 h-6 hover:opacity-80 cursor-pointer" loading='lazy'></img>
                             </div>
                             <h4 className="lilita text-white text-[28px] font-bold py-1">Choose an Exchange</h4>
                             <div className="flex flex-col gap-2">
@@ -77,16 +77,16 @@ const Setting: React.FC<ISettingProps> = ({ setting, setShowSetting, exchange, u
                                                     <div className="customCard group p-2 transition relative duration-300 cursor-default hover:shadow-[0 -8px 0px 0px #2196f3] flex justify-between">
                                                         <div className="flex grid-cols-2 gap-3 w-full items-center">
                                                             <div className="my-auto w-14">
-                                                                <img src={`${item?.img ? `${ENDPOINT}/${item?.img}` : 'unknown.svg'}`} alt="icon" className="w-8 aspect-square rounded-full" />
+                                                                <img src={`${item?.img ? `${ENDPOINT}/${item?.img}` : 'unknown.svg'}`} loading='lazy' alt="icon" className="w-8 aspect-square rounded-full" />
                                                             </div>
                                                             <div className="flex flex-row w-full justify-between">
                                                                 <div className="space-y-2">
-                                                                    <p className="text-[14px] font-semibold text-left">
+                                                                    <p className="text-sm font-semibold text-left">
                                                                         {item.name}
                                                                     </p>
                                                                 </div>
                                                                 <div className="flex items-center">
-                                                                    <img src="check_n.svg" alt="" className="w-6 h-6 ml-1" />
+                                                                    <img src="check_n.svg" alt="" className="w-6 h-6 ml-1" loading='lazy' />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -95,16 +95,16 @@ const Setting: React.FC<ISettingProps> = ({ setting, setShowSetting, exchange, u
                                                     <div onClick={() => handleChangeDex(item)} className="customCard group p-2 transition relative duration-300 cursor-point hover:bg-inherit hover:shadow-[0 -8px 0px 0px #2196f3] flex justify-between">
                                                         <div className="flex grid-cols-2 gap-3 w-full items-center">
                                                             <div className="my-auto w-14">
-                                                                <img src={`${item?.img ? `${ENDPOINT}/${item?.img}` : 'unknown.svg'}`} alt="icon" className="w-8 aspect-square rounded-full" />
+                                                                <img src={`${item?.img ? `${ENDPOINT}/${item?.img}` : 'unknown.svg'}`} loading='lazy' alt="icon" className="w-8 aspect-square rounded-full" />
                                                             </div>
                                                             <div className="flex flex-row w-full justify-between">
                                                                 <div className="space-y-2">
-                                                                    <p className="text-[14px] font-semibold text-left">
+                                                                    <p className="text-sm font-semibold text-left">
                                                                         {item.name}
                                                                     </p>
                                                                 </div>
                                                                 <div className="flex items-center">
-                                                                    <img src="right.svg" alt="" className="w-6 h-6 ml-1" />
+                                                                    <img src="right.svg" alt="" className="w-6 h-6 ml-1" loading='lazy' />
                                                                 </div>
                                                             </div>
                                                         </div>

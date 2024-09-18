@@ -17,38 +17,38 @@ const LimiteModal = ({ limitModal, handleClose }: LimiteModalProps) => {
           The referral reward changes based on the rank of the user when they
           joined the bot:
         </div>
-        <div className='text-start flex flex-col gap-[2px] text-sm '>
+        <div className='text-start flex flex-col gap-0.5 text-sm '>
           <div className="flex justify-between px-3 py-1">
             <p>Rank</p>
             <p>Reward</p>
           </div>
-          <div className='rounded-lg px-3 py-[2px] flex justify-between items-center bg-black'>
+          <div className='rounded-lg px-3 py-0.5 flex justify-between items-center bg-black'>
             {" "}
             <p> Rank 1 to 10 </p>
             <p> 10.01%</p>{" "}
           </div>
-          <div className='bg-black bg-opacity-90 rounded-lg px-3 py-[2px] flex justify-between items-center'>
+          <div className='bg-black bg-opacity-90 rounded-lg px-3 py-0.5 flex justify-between items-center'>
             {" "}
             <p>Rank 10 to 100</p> <p> 10.00%</p>
           </div>
-          <div className='bg-black bg-opacity-80 rounded-lg px-3 py-[2px] flex justify-between items-center'>
+          <div className='bg-black bg-opacity-80 rounded-lg px-3 py-0.5 flex justify-between items-center'>
             {" "}
             <p>Rank 100 to 1,000</p> <p> 9.96% </p>
           </div>
-          <div className='bg-black bg-opacity-75 rounded-lg px-3 py-[2px] flex justify-between items-center'>
+          <div className='bg-black bg-opacity-75 rounded-lg px-3 py-0.5 flex justify-between items-center'>
             {" "}
             <p>Rank 1,000 to 10,000 </p>
             <p> 9.49% </p>
           </div>
-          <div className='bg-black bg-opacity-70 rounded-lg px-3 py-[2px] flex justify-between items-center'>
+          <div className='bg-black bg-opacity-70 rounded-lg px-3 py-0.5 flex justify-between items-center'>
             {" "}
             <p>Rank 10,000 to 100,000</p> <p> 6.65% </p>
           </div>
-          <div className='bg-black bg-opacity-65 rounded-lg px-3 py-[2px] flex justify-between items-center'>
+          <div className='bg-black bg-opacity-65 rounded-lg px-3 py-0.5 flex justify-between items-center'>
             {" "}
             <p>Rank 100,000 to 1,000,000</p> <p> 1.90% </p>
           </div>
-          <div className='bg-black bg-opacity-60 rounded-lg px-3 py-[2px] flex justify-between items-center'>
+          <div className='bg-black bg-opacity-60 rounded-lg px-3 py-0.5 flex justify-between items-center'>
             {" "}
             <p>Rank 1,000,000 to 10,000,000</p>{" "}
             <p>

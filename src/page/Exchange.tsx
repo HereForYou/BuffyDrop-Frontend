@@ -23,16 +23,49 @@ const ChannelData = [
   {
     id: "INVITE",
     title: "INVITE YOUR FIRST FRIEND",
-    comment:
-      "Invite a friend and earn from their Buffies",
-    src: <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-user-plus"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>,
+    comment: "Invite a friend and earn from their Buffies",
+    src: (
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        width='36'
+        height='36'
+        viewBox='0 0 24 24'
+        fill='none'
+        stroke='currentColor'
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        className='lucide lucide-user-plus'>
+        <path d='M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2' />
+        <circle cx='9' cy='7' r='4' />
+        <line x1='19' x2='19' y1='8' y2='14' />
+        <line x1='22' x2='16' y1='11' y2='11' />
+      </svg>
+    ),
     btnTitle: "Invite",
   },
   {
     id: "Buffy",
     title: "EARN BUFFY",
     comment: "join Buffy community and complete daily tasks",
-    src: <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
+    src: (
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        width='36'
+        height='36'
+        viewBox='0 0 24 24'
+        fill='none'
+        stroke='currentColor'
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        className='lucide lucide-users'>
+        <path d='M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2' />
+        <circle cx='9' cy='7' r='4' />
+        <path d='M22 21v-2a4 4 0 0 0-3-3.87' />
+        <path d='M16 3.13a4 4 0 0 1 0 7.75' />
+      </svg>
+    ),
     btnTitle: "Join",
   },
 ];
@@ -98,19 +131,19 @@ const Exchange: React.FC<IHomeProps> = ({
   }, []);
 
   const handleFollow = () => {
-      axios
-        .put(`${ENDPOINT}/api/user/task/${user?.id}`, {
-          id: 'twitter',
-          profit: 1000
-        })
-        .then(res => {
-          console.log("res", res)
-        })
-        .catch(err => {
-          console.error('er', err)
-        })
-      window.open('https://twitter.com/BuffyDrop', '_blank')
-  }
+    axios
+      .put(`${ENDPOINT}/api/user/task/${user?.id}`, {
+        id: "twitter",
+        profit: 1000,
+      })
+      .then((res) => {
+        console.log("res", res);
+      })
+      .catch((err) => {
+        console.error("er", err);
+      });
+    window.open("https://twitter.com/BuffyDrop", "_blank");
+  };
 
   return showSetting ? (
     <Setting
@@ -121,30 +154,43 @@ const Exchange: React.FC<IHomeProps> = ({
       setExchange={setExchange}
     />
   ) : (
-    <div className='h-full justify-between items-center pt-[2.5rem] gap-2 overflow-y-auto w-full overflow-x-hidden hiddenScrollBar relative -top-10'>
+    <div className='h-full justify-between items-center pt-10 gap-2 overflow-y-auto w-full overflow-x-hidden hiddenScrollBar relative -top-10'>
       <div className='bg-[#046ae2] flex gap-1 px-6 pt-5 pb-10 w-full justify-between items-center'>
         <div className='flex gap-2'>
-          <img src='/x.svg' className='w-10' />
+          <img src='/x.svg' className='w-10' loading='lazy' />
           <div className='flex flex-col text-white text-left justify-center text-xs sm:text-sm'>
             <p>Post a tweet about Buffy on X</p>
             <p>and receive extra rewards.</p>
           </div>
         </div>
-        <div onClick={handleFollow} className='bg-white text-black rounded-full px-3 h-fit py-1 text-sm font-semibold hidden sm:block cursor-pointer'>
+        <div
+          onClick={handleFollow}
+          className='bg-white text-black rounded-full px-3 h-fit py-1 text-sm font-semibold hidden sm:block cursor-pointer'>
           Post on X
         </div>
-        <div onClick={handleFollow} className='bg-white text-black rounded-full px-3 h-fit py-1 text-sm font-semibold block sm:hidden cursor-pointer'>
+        <div
+          onClick={handleFollow}
+          className='bg-white text-black rounded-full px-3 h-fit py-1 text-sm font-semibold block sm:hidden cursor-pointer'>
           Post
         </div>
       </div>
       <div className='relative rounded-2xl -top-5 w-full flex justify-between px-5 gap-2 items-center flex-col bg-black exchange-content'>
         <div className='flex flex-col gap-4 justify-evenly w-full items-center mt-5 h-full'>
-          {claim && <ClaimCard userId={user?.id} handleClose={() => setClaim(false)} />}
+          {claim && (
+            <ClaimCard userId={user?.id} handleClose={() => setClaim(false)} />
+          )}
           {/* <div>
             <WalletConnect />
           </div> */}
-          <p className="text-2xl text-[#acacac] font-semibold bg-gradient-to-t from-[#444444] to-[#bdbdbd] bg-clip-text text-transparent">You’re user {rank} to join the BuffyDrop!</p>
-          <img src='/dogAvatar.png' className='w-1/3'></img>
+          <p className='text-2xl text-[#acacac] font-semibold bg-gradient-to-t from-[#444444] to-[#bdbdbd] bg-clip-text text-transparent'>
+            You’re user {rank} to join the BuffyDrop!
+          </p>
+          <img
+            src='/dogAvatar.png'
+            className='w-1/3'
+            loading='lazy'
+            alt='A cute dog avatar'
+          />
           <div>
             <p className='text-[34px] font-semibold'>
               {!curUser ||
@@ -156,7 +202,7 @@ const Exchange: React.FC<IHomeProps> = ({
                 <p>{formatNumberWithCommas(curUser?.totalPoints)}</p>
               )}
             </p>
-            <p className='text-[20px] text-[#acacac]'>$BUFFY</p>
+            <p className='text-xl text-[#acacac]'>$BUFFY</p>
           </div>
           <div className='flex flex-row gap-2 w-full'>
             <Carousel

@@ -98,11 +98,11 @@ const Mine: React.FC<IMineProps> = ({
     }
   }
   return (
-    <div className='pb-[40px]'>
+    <div className='pb-10'>
       <div className='w-full flex flex-col text-center items-center py-2 gap-4'>
-        <div className='w-full customCard-container text-[16px] font-extrabold'>
+        <div className='w-full customCard-container text-base font-extrabold'>
           <div className='customCard group w-full py-2 transition relative duration-300 cursor-default hover:shadow-[0 -8px 0px 0px #2196f3]'>
-            <h2 className='text-[16px]'>Wallet Connect .. Soon</h2>
+            <h2 className='text-base'>Wallet Connect .. Soon</h2>
           </div>
         </div>
         <div className='flex flex-row items-center justify-center'>
@@ -110,6 +110,7 @@ const Mine: React.FC<IMineProps> = ({
             className='logo h-[50px] aspect-square rounded-full'
             src='dollar.png'
             alt='logo'
+            loading='lazy'
           />
           <div className='flex flex-col balance gap-2 w-full'>
             <h1 className='font-bold text-[30px] text-white'>
@@ -119,12 +120,12 @@ const Mine: React.FC<IMineProps> = ({
         </div>
         <div className='customCard-container w-full'>
           <div className='customCard bg-[#023744] group w-full py-2 transition relative duration-300 cursor-default'>
-            <h2 className='text-[16px] font-bold text-white'>
+            <h2 className='text-base font-bold text-white'>
               Here you can Update your Miner
             </h2>
           </div>
         </div>
-        <div className='flex flex-row w-full items-center justify-between gap-4 text-[16px] font-extrabold'>
+        <div className='flex flex-row w-full items-center justify-between gap-4 text-base font-extrabold'>
           <div
             onClick={() => setTab('time')}
             className='customCard-container w-[30%]'
@@ -134,10 +135,10 @@ const Mine: React.FC<IMineProps> = ({
                 tab == 'time' && 'bg-inherit'
               } hover:shadow-[0 -8px 0px 0px #2196f3]`}
             >
-              <div className='bg-white p-[4px] h-[40px] w-[40px] rounded-full'>
+              <div className='bg-white p-1 h-10 w-10 rounded-full'>
                 <div className='customBtn startBt aspect-square rounded-full'></div>
               </div>
-              <h2 className='text-[16px]'>
+              <h2 className='text-base'>
                 Mining
                 <br />
                 Time
@@ -153,10 +154,10 @@ const Mine: React.FC<IMineProps> = ({
                 tab == 'power' && 'bg-inherit'
               } hover:shadow-[0 -8px 0px 0px #2196f3]`}
             >
-              <div className='bg-white p-[4px] h-[40px] w-[40px] rounded-full'>
+              <div className='bg-white p-1 h-10 w-10 rounded-full'>
                 <div className='customBtn startBt aspect-square rounded-full'></div>
               </div>
-              <h2 className='text-[16px]'>
+              <h2 className='text-base'>
                 Miner
                 <br />
                 Power
@@ -192,7 +193,7 @@ const Mine: React.FC<IMineProps> = ({
           >
             {tab == 'time' && (
               <div className='flex flex-row items-center justify-between p-2'>
-                <h2 className='text-[12px] font-bold text-white'>
+                <h2 className='text-xs font-bold text-white'>
                   Mining Time
                 </h2>
                 <h2 className='text-[11px] text-[#FFF8E1]'>
@@ -202,7 +203,7 @@ const Mine: React.FC<IMineProps> = ({
             )}
             {tab == 'power' && (
               <div className='flex flex-row items-center justify-between p-2'>
-                <h2 className='text-[12px] font-bold text-white'>
+                <h2 className='text-xs font-bold text-white'>
                   Miner Power
                 </h2>
                 <h2 className='text-[11px] text-[#FFF8E1]'>
@@ -211,12 +212,12 @@ const Mine: React.FC<IMineProps> = ({
               </div>
             )}
             {tab == 'time' && (
-              <h2 className='text-[12px] font-bold text-[#FFD798]'>
+              <h2 className='text-xs font-bold text-[#FFD798]'>
                 Your Current Mining Time Limit {timeLimit?.value} Min
               </h2>
             )}
             {tab == 'power' && (
-              <h2 className='text-[12px] font-bold text-[#FFD798]'>
+              <h2 className='text-xs font-bold text-[#FFD798]'>
                 Your Current Miner Power {power?.value}
               </h2>
             )}
@@ -225,7 +226,7 @@ const Mine: React.FC<IMineProps> = ({
             </div>
             <div className='flex flex-row items-center justify-between text-[#FFD798] w-full'>
               <div className='flex flex-row gap-1 w-full'>
-                <img src='dollar.png' alt='dollar' className='h-[20px]' />
+                <img src='dollar.png' alt='dollar' className='h-[20px]' loading='lazy' />
                 <div className='flex flex-row items-center justify-center gap-2'>
                   {tab == 'time' &&
                     (setting?.dailyTimeLimitList[timeLimit.id] ? (

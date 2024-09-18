@@ -22,6 +22,7 @@ const ExchangeSelector: React.FC<ExchangeSelectorProps> = ({
               exchange?.img ? `${ENDPOINT}/${exchange?.img}` : 'unknown.svg'
             }`}
             className={`rounded-full overflow-hidden w-6 h-6`}
+            loading='lazy'
           />
         </div>
       </button>

@@ -105,7 +105,7 @@ const TaskSetting = ({
   }
   return (
     <>
-      <div className='overflow-y-auto text-white py-[30px] w-full'>
+      <div className='overflow-y-auto text-white py-8 w-full'>
         <div className='h-[70vh] w-full overflow-y-auto py-2'>
           <div className='flex flex-col md:flex-row w-full justify-around items-center md:py-8 gap-1'>
             <div className='flex flex-row justify-between items-center gap-8'>
@@ -243,19 +243,19 @@ const TaskSetting = ({
                     <td className='hidden md:flex text-[13px] font-bold w-[16%]'>
                       {index + 1}
                     </td>
-                    <td className='text-[12px] md:text-[13px] font-bold w-[16%]'>
+                    <td className='text-xs md:text-[13px] font-bold w-[16%]'>
                       {item.id}
                     </td>
-                    <td className='text-[12px] md:text-[13px] w-[16%]'>
+                    <td className='text-xs md:text-[13px] w-[16%]'>
                       {item.title}
                     </td>
-                    <td className='text-[12px] md:text-[13px] w-[16%]'>
+                    <td className='text-xs md:text-[13px] w-[16%]'>
                       {item.profit}
                     </td>
-                    <td className='text-[12px] md:text-[13px] w-[16%]'>
+                    <td className='text-xs md:text-[13px] w-[16%]'>
                       {item.link}
                     </td>
-                    <td className='text-[12px] md:text-[13px] w-[16%] space-x-4'>
+                    <td className='text-xs md:text-[13px] w-[16%] space-x-4'>
                       <button
                         onClick={() => {
                           setEditRow(index)

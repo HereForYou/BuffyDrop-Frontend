@@ -50,6 +50,7 @@ const TabBar: React.FC<IFooterProps> = ({ tab, setTab }) => {
                         <div className={`flex flex-col items-center justify-center font-extrabold ${item.id === tab && 'border-b-2 border-[#fff]'} gap-1`}>
                             <img
                                 src={item.img}
+                                loading='lazy'
                                 alt="play"
                                 className="w-5 h-5"
                             />

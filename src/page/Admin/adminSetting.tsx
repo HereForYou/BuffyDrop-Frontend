@@ -54,7 +54,7 @@ const AdminSetting = ({ setting, setSetting }: { setting: any, setSetting: (valu
     }
     return (
         <>
-            <div className="overflow-y-auto text-white py-[30px] w-full">
+            <div className="overflow-y-auto text-white py-8 w-full">
                 <div className="h-[60vh] w-full overflow-y-auto py-2">
                     <table className="text-center w-full">
                         <thead>

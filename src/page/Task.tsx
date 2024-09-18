@@ -170,6 +170,7 @@ const Task: React.FC<ITaskProps> = ({
           src={`${title != 'DAILY REWARD' ? '/comm.png' : '/daily.png'}`}
           alt=''
           className='min-w-24 w-[15vw] pb-4'
+          loading='lazy'
         />
         <div className='text-3xl text-white'>{title}</div>
       </div>
@@ -185,12 +186,13 @@ const Task: React.FC<ITaskProps> = ({
                 <img
                   src={`${item.image ? item.image : 'choose.svg'}`}
                   alt='icon'
+                  loading='lazy'
                   className='w-10 h-10'
                 />
-                <div className='flex flex-col pl-2 gap-[2px]'>
+                <div className='flex flex-col pl-2 gap-0.5'>
                   <div>{item.title}</div>
                   <div className='flex flex-row items-center'>
-                    <img src='buffy_icon.png' alt='' className='w-4 h-4' />
+                    <img src='buffy_icon.png' alt='' className='w-4 h-4' loading='lazy' />
                     <div className='pl-1'>
                       +{formatNumberWithCommas(item.profit)}
                     </div>
@@ -198,7 +200,7 @@ const Task: React.FC<ITaskProps> = ({
                 </div>
               </div>
               <div className='w-[10%] flex justify-center'>
-                <img src='/check_green.png' alt='' className='w-6 h-6' />
+                <img src='/check_green.png' alt='' className='w-6 h-6' loading='lazy' />
               </div>
             </div>
           ) : (
@@ -213,13 +215,14 @@ const Task: React.FC<ITaskProps> = ({
               <div className='flex flex-row gap-1 items-center text-[#acacac]'>
                 <img
                   src={`${item.image ? item.image : 'choose.svg'}`}
+                  loading='lazy'
                   alt='icon'
                   className='w-10 aspect-square'
                 />
-                <div className='flex flex-col pl-2 gap-[2px]'>
+                <div className='flex flex-col pl-2 gap-0.5'>
                   <div className='flex flex-col'>{item.title}</div>
                   <div className='flex flex-row items-center'>
-                    <img src='buffy_icon.png' alt='' className='w-4 h-4' />
+                    <img src='buffy_icon.png' alt='' className='w-4 h-4' loading='lazy' />
                     <div className='pl-1'>
                       +{formatNumberWithCommas(item.profit)}
                     </div>
@@ -227,7 +230,7 @@ const Task: React.FC<ITaskProps> = ({
                 </div>
               </div>
               <div className='w-[10%] flex justify-center'>
-                <img src='/next_icon.png' alt='' className='w-2 h-3' />
+                <img src='/next_icon.png' alt='' className='w-2 h-3' loading='lazy' />
               </div>
             </button>
           )

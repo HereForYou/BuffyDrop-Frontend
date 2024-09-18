@@ -53,7 +53,7 @@ const ClaimCard = ({ handleClose }: ClaimCardProps) => {
                 className='flex flex-row py-3 items-center text-base'
               >
                 <div className='flex items-center justify-center w-10 h-10 rounded-xl bg-[#282828]'>
-                  <img src={data.img} alt={'imgage'} />
+                  <img src={data.img} alt={'imgage'} loading='lazy' />
                 </div>
                 <div className='pl-3'>{data.title}</div>
               </div>
@@ -70,7 +70,7 @@ const ClaimCard = ({ handleClose }: ClaimCardProps) => {
                 key={index}
                 className='flex flex-row py-3 items-center text-base'
               >
-                <img src={data.img} alt={'imgage'} />
+                <img src={data.img} alt={'imgage'} loading='lazy' />
                 <div className='pl-3'>{data.title}</div>
               </div>
             </a>
