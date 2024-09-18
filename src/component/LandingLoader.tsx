@@ -6,7 +6,6 @@ const LandingLoader = () => {
       <img
         src='/dogAvatar-small.webp'
         className='absolute w-32 top-1/4'
-        loading='lazy'
         alt='A cute dog avatar'
       />
       <Loader width='80' />

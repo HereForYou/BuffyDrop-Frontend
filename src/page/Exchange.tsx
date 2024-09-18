@@ -150,7 +150,6 @@ const Exchange: React.FC<IHomeProps> = ({
           <img
             src='/dogAvatar.webp'
             className='w-1/3'
-            loading='lazy'
             alt='A cute dog avatar'
           />
           <div>
