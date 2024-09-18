@@ -78,7 +78,7 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
               <div className='text-xs text-center flex justify-center w-[15%]'>
                 {ranking + 1 == 1 || ranking + 1 == 2 || ranking + 1 == 3 ? (
                   <img
-                    src={`/rank_${ranking + 1}${ranking + 1 == 1 ? '.webp' : '.png'}`}
+                    src={`/rank_${ranking + 1}.webp`}
                     loading='lazy'
                     alt='rank'
                     className='w-4 h-6'
@@ -121,7 +121,7 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
                     <div className='text-xs text-center flex justify-center w-[15%]'>
                       {index + 1 == 1 || index + 1 == 2 || index + 1 == 3 ? (
                         <img
-                          src={`/rank_${index + 1}${index + 1 == 1 ? '.webp' : '.png'}`}
+                          src={`/rank_${index + 1}.webp`}
                           alt='rank'
                           loading='lazy'
                           className='w-4 h-6'

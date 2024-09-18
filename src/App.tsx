@@ -5,7 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import "./App.css";
 import { useState, useEffect, useRef } from "react";
 import Exchange from "./page/Exchange";
-// import { useTelegram } from './hooks/useTelegram'
+import { useTelegram } from './hooks/useTelegram'
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import Footer from "./component/Footer";
@@ -19,18 +19,18 @@ import Admin from "./page/Admin";
 // import { isMobileDevice } from './utils/mobileDetect'
 import { getUserAvatarUrl } from "./utils/functions";
 import LandingLoader from "./component/LandingLoader";
-const user = {
-  id: "7202566335",
-  username: "Sven82027",
-  first_name: "Jessi",
-  last_name: "",
-};
-const start_param = "";
+// const user = {
+//   id: "7202566335",
+//   username: "Sven82027",
+//   first_name: "Jessi",
+//   last_name: "",
+// };
+// const start_param = "";
 
 function App() {
   let countdownTime = 1;
   const hasShownWarningRef = useRef(false);
-  // const { user, start_param } = useTelegram()
+  const { user, start_param } = useTelegram()
   const [photo_url, setPhotoUrl] = useState<string | null>(null);
   const [inviteMsg, setInviteMsg] = useState<boolean>(false);
   const [task, setTask] = useState<string[]>([]);
@@ -148,7 +148,6 @@ function App() {
               if (response.data.signIn) setTab("Exchange");
               setExchange(userData.dex);
               setTotalPoint(userData.totalPoints);
-              // setPower(res.data.powerList[userData.power.id - 1])
               setRanking(res.data.joinRank);
               setTask(userData.task);
               setTimeLimit(userData.dailyTimeLimit);

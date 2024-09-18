@@ -24,9 +24,7 @@ const Task: React.FC<ITaskProps> = ({
   setting,
   title
 }) => {
-  console.log('====================================');
-  console.log(setting);
-  console.log('====================================');
+  console.log("---> setting --->",setting, "---> task --->", task);
   const [count, setCount] = useState<number>(0)
   const [timeRemaining, setTimeRemaining] = useState<number>(5)
   const [tracking, setTracking] = useState<boolean>(false)
