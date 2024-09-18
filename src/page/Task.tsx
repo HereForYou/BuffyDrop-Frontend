@@ -167,7 +167,7 @@ const Task: React.FC<ITaskProps> = ({
     <div className='w-full h-[calc(100%-40px)] overflow-x-hidden overflow-y-auto hiddenScrollBar'>
       <div className='flex flex-col justify-center items-center text-xl text-[#acacac] font-bold pt-16 pb-6'>
         <img
-          src={`${title != 'DAILY REWARD' ? '/comm.png' : '/daily.png'}`}
+          src={`${title != 'DAILY REWARD' ? '/comm.webp' : '/daily.webp'}`}
           alt=''
           className='min-w-24 w-[15vw] pb-4'
           loading='lazy'
@@ -192,7 +192,7 @@ const Task: React.FC<ITaskProps> = ({
                 <div className='flex flex-col pl-2 gap-0.5'>
                   <div>{item.title}</div>
                   <div className='flex flex-row items-center'>
-                    <img src='buffy_icon.png' alt='' className='w-4 h-4' loading='lazy' />
+                    <img src='buffy_icon.webp' alt='' className='w-4 h-4' loading='lazy' />
                     <div className='pl-1'>
                       +{formatNumberWithCommas(item.profit)}
                     </div>
@@ -200,7 +200,7 @@ const Task: React.FC<ITaskProps> = ({
                 </div>
               </div>
               <div className='w-[10%] flex justify-center'>
-                <img src='/check_green.png' alt='' className='w-6 h-6' loading='lazy' />
+                <img src='/check_green.webp' alt='' className='w-6 h-6' loading='lazy' />
               </div>
             </div>
           ) : (
@@ -222,7 +222,7 @@ const Task: React.FC<ITaskProps> = ({
                 <div className='flex flex-col pl-2 gap-0.5'>
                   <div className='flex flex-col'>{item.title}</div>
                   <div className='flex flex-row items-center'>
-                    <img src='buffy_icon.png' alt='' className='w-4 h-4' loading='lazy' />
+                    <img src='buffy_icon.webp' alt='' className='w-4 h-4' loading='lazy' />
                     <div className='pl-1'>
                       +{formatNumberWithCommas(item.profit)}
                     </div>
@@ -230,7 +230,7 @@ const Task: React.FC<ITaskProps> = ({
                 </div>
               </div>
               <div className='w-[10%] flex justify-center'>
-                <img src='/next_icon.png' alt='' className='w-2 h-3' loading='lazy' />
+                <img src='/next_icon.webp' alt='' className='w-2 h-3' loading='lazy' />
               </div>
             </button>
           )
