@@ -4,9 +4,7 @@ interface ChannelProps {
   heading: string
   comment: String
   src: any
-  tab: string
   setTab: (status: string) => void
-  title: string
   setTitle: (status: string) => void
   btnTitle:string
 }
@@ -14,10 +12,8 @@ const Channel: React.FC<ChannelProps> = ({
   heading,
   comment,
   src,
-  // tab,
   id,
   setTab,
-  // title,
   setTitle,
   btnTitle
 }) => {

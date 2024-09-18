@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { ENDPOINT } from "../data";
 import { toast } from "react-hot-toast";
-import Setting from "./Setting";
 import Channel from "../component/Channel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
@@ -71,44 +70,15 @@ const ChannelData = [
 ];
 
 interface IHomeProps {
-  user: any;
-  photo_url: string | null;
-  point: number;
-  totalPoint: number;
-  handleMining: () => void;
-  handleStopMining: () => void;
-  setTotalPoint: (value: number) => void;
-  setClaimShow: (status: boolean) => void;
-  start: boolean;
-  hour: number;
-  min: number;
-  sec: number;
-  claimShow: boolean;
-  timeLimit: any;
-  level: any;
-  nextLevel: any;
-  loading: boolean;
-  reachDailyLimit: boolean;
-  setReachDailyLimit: (status: boolean) => void;
-  setting: any;
-  exchange: any;
-  setExchange: (status: any) => void;
-  tab: string;
   setTab: (status: string) => void;
-  title: string;
   setTitle: (status: string) => void;
+  user: any;
 }
 const Exchange: React.FC<IHomeProps> = ({
-  user,
-  setting,
-  exchange,
-  setExchange,
-  tab,
   setTab,
-  title,
   setTitle,
+  user,
 }) => {
-  const [showSetting, setShowSetting] = useState<boolean>(false);
   const [claim, setClaim] = useState(false);
   const [curUser, setCurUser] = useState<any>({});
   const [rank, setRank] = useState(0);
@@ -145,15 +115,7 @@ const Exchange: React.FC<IHomeProps> = ({
     window.open("https://twitter.com/BuffyDrop", "_blank");
   };
 
-  return showSetting ? (
-    <Setting
-      user={user}
-      setting={setting}
-      setShowSetting={setShowSetting}
-      exchange={exchange}
-      setExchange={setExchange}
-    />
-  ) : (
+  return (
     <div className='h-full justify-between items-center pt-10 gap-2 overflow-y-auto w-full overflow-x-hidden hiddenScrollBar relative -top-10'>
       <div className='bg-[#046ae2] flex gap-1 px-6 pt-5 pb-10 w-full justify-between items-center'>
         <div className='flex gap-2'>
@@ -192,7 +154,7 @@ const Exchange: React.FC<IHomeProps> = ({
             alt='A cute dog avatar'
           />
           <div>
-            <p className='text-[34px] font-semibold'>
+            <div className='text-[34px] font-semibold'>
               {!curUser ||
               formatNumberWithCommas(curUser?.totalPoints) == "NaN" ? (
                 <div className='flex items-center justify-center w-full'>
@@ -201,7 +163,7 @@ const Exchange: React.FC<IHomeProps> = ({
               ) : (
                 <p>{formatNumberWithCommas(curUser?.totalPoints)}</p>
               )}
-            </p>
+            </div>
             <p className='text-xl text-[#acacac]'>$BUFFY</p>
           </div>
           <div className='flex flex-row gap-2 w-full'>
@@ -229,9 +191,7 @@ const Exchange: React.FC<IHomeProps> = ({
                   comment={idx.comment}
                   src={idx.src}
                   key={key}
-                  tab={tab}
                   setTab={setTab}
-                  title={title}
                   setTitle={setTitle}
                   btnTitle={idx.btnTitle}
                 />
