@@ -80,7 +80,7 @@ ${desText}`)
       </div>
       <div className='w-full flex justify-center'>
         <img
-          src='/friends_bg.png'
+          src='/friends_bg.webp'
           alt='friends_bg'
           loading='lazy'
           className='h-full px-12 py-2'

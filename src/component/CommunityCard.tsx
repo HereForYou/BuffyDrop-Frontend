@@ -29,7 +29,7 @@ const CommunityCard: React.FC<CommunityCardProps> = ({
               <div>{title}</div>
               <div className='flex flex-row items-center'>
                 <img
-                  src='buffy_icon.png'
+                  src='buffy_icon.webp'
                   alt=''
                   className='w-4 h-4'
                   loading='lazy'
@@ -40,7 +40,7 @@ const CommunityCard: React.FC<CommunityCardProps> = ({
           </div>
           <div className='w-[10%] flex justify-center'>
             <img
-              src={`${status ? "/check_green.png" : "/next_icon.png"}`}
+              src={`${status ? "/check_green.webp" : "/next_icon.webp"}`}
               className='w-6 h-6'
               loading='lazy'
             />
