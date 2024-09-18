@@ -4,15 +4,11 @@ import Confetti from "react-confetti";
 
 interface ISplashProps {
   ranking: any;
-  totalPoint: number;
-  referral: number;
   setTab: (tab: string) => void;
 }
 
 const Splash: React.FC<ISplashProps> = ({
   ranking,
-  // totalPoint,
-  // referral,
   setTab,
 }) => {
 

@@ -5,7 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import "./App.css";
 import { useState, useEffect, useRef } from "react";
 import Exchange from "./page/Exchange";
-import { useTelegram } from './hooks/useTelegram'
+// import { useTelegram } from './hooks/useTelegram'
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import Footer from "./component/Footer";
@@ -17,87 +17,29 @@ import Splash from "./page/Splash";
 import Task from "./page/Task";
 import Admin from "./page/Admin";
 // import { isMobileDevice } from './utils/mobileDetect'
-import { getUserAvatarUrl } from "./utils/functions";
 import LandingLoader from "./component/LandingLoader";
-// const user = {
-//   id: "7202566335",
-//   username: "Sven82027",
-//   first_name: "Jessi",
-//   last_name: "",
-// };
-// const start_param = "";
+const user = {
+  id: "7202566331",
+  username: "SmartFox",
+  first_name: "Olaf",
+  last_name: "",
+};
+const start_param = "";
 
 function App() {
-  let countdownTime = 1;
   const hasShownWarningRef = useRef(false);
-  const { user, start_param } = useTelegram()
-  const [photo_url, setPhotoUrl] = useState<string | null>(null);
+  // const { user, start_param } = useTelegram()
   const [inviteMsg, setInviteMsg] = useState<boolean>(false);
   const [task, setTask] = useState<string[]>([]);
   const [setting, setSetting] = useState<any>({});
-  const [exchange, setExchange] = useState<any>({});
   const [loading, setLoading] = useState(true);
   const [tab, setTab] = useState<string>("Splash");
   const [title, setTitle] = useState<string>("");
-  const [start, setStart] = useState<boolean>(false);
-  const [reachDailyLimit, setReachDailyLimit] = useState<boolean>(false);
-  const [claimShow, setClaimShow] = useState<boolean>(false);
-  const [point, setPoint] = useState<number>(0.0);
-  const [referral, setReferral] = useState<number>(0);
-  const [currentCount, setCurrentCount] = useState<number>(0);
   const [totalPoint, setTotalPoint] = useState<number>(0.0);
-  const [hour, setHour] = useState<number>(0);
-  const [min, setMin] = useState<number>(0);
-  const [sec, setSec] = useState<number>(0);
-  const [level, setLevel] = useState<any>({});
-  const [nextLevel, setNextLevel] = useState<any>({});
-  const [timeLimit, setTimeLimit] = useState<any>({});
   const [ranking, setRanking] = useState<number>();
   // const [isMobile, setIsMobile] = useState<boolean>(false)
 
   useEffect(() => {
-    if (setting.levelStandard) {
-      if (totalPoint <= 0) {
-        setLevel(setting.levelStandard[0]);
-        setNextLevel(setting.levelStandard[1]);
-      } else {
-        for (let i = 1; i < 10; i++) {
-          if (totalPoint <= setting.levelStandard[i]?.coinsToLevelUp) {
-            setLevel(setting.levelStandard[i - 1]);
-            setNextLevel(setting.levelStandard[i]);
-            axios
-              .put(`${ENDPOINT}/api/user/level/${user?.id}`, {
-                newLevel: i,
-              })
-              .then((res) => {
-                setRanking(res.data.joinRank);
-              })
-              .catch((error) => {
-                console.error("Error occurred during PUT request:", error);
-              });
-            break;
-          }
-        }
-      }
-    }
-  }, [setting, totalPoint]);
-
-  useEffect(() => {
-    if (point === 0) {
-      setStart(false);
-    }
-  }, [point]);
-
-  useEffect(() => {
-    let interval = 0;
-    let hours = interval + Math.floor(currentCount / 3600);
-    let minutes = Math.floor((currentCount % 3600) / 60);
-    let seconds = currentCount % 60;
-    setHour(hours);
-    setMin(minutes);
-    setSec(seconds);
-    setPoint((prevPoints) => prevPoints);
-    setCurrentCount((prevSeconds) => prevSeconds - 1);
     injectSpeedInsights();
     // setIsMobile(isMobileDevice())
     if (!user) {
@@ -130,7 +72,6 @@ function App() {
         lastName: user?.last_name,
         start_param: start_param,
       };
-      getUserAvatarUrl((user?.id).toString()).then((url) => setPhotoUrl(url));
       axios
         .get(`${ENDPOINT}/api/setting/all`, {
           headers: {
@@ -146,15 +87,9 @@ function App() {
               console.log("response.data", response.data);
               const userData = response.data.user;
               if (response.data.signIn) setTab("Exchange");
-              setExchange(userData.dex);
               setTotalPoint(userData.totalPoints);
-              setRanking(res.data.joinRank);
+              setRanking(response?.data?.user?.joinRank);
               setTask(userData.task);
-              setTimeLimit(userData.dailyTimeLimit);
-              setReferral(userData.friends.length);
-              countdownTime = userData.countDown;
-              if (countdownTime == 0) setReachDailyLimit(true);
-              setCurrentCount(countdownTime);
               if (
                 start_param &&
                 !inviteMsg &&
@@ -172,33 +107,8 @@ function App() {
         .catch((err) => {
           console.error(err);
         });
-        
     }
   }, []);
-
-  const handleMining = () => {
-    if (user) {
-      setStart(true);
-    }
-  };
-
-  const handleStopMining = () => {
-    setStart(false);
-    axios
-      .put(`${ENDPOINT}/api/user/${user?.id}`, {
-        points: point,
-        countDown: currentCount,
-      })
-      .then((res) => {
-        if (res.data) {
-          setTotalPoint((prevPoints) => prevPoints + point);
-          setPoint(0);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
 
   return (
     <Router>
@@ -211,39 +121,14 @@ function App() {
             {tab == "Splash" && (
               <Splash
                 ranking={ranking}
-                totalPoint={totalPoint}
-                referral={referral}
                 setTab={setTab}
               />
             )}
             {tab == "Exchange" && (
               <Exchange
-                user={user}
-                photo_url={photo_url}
-                point={point}
-                totalPoint={totalPoint}
-                handleMining={handleMining}
-                handleStopMining={handleStopMining}
-                claimShow={claimShow}
-                setTotalPoint={setTotalPoint}
-                setClaimShow={setClaimShow}
-                reachDailyLimit={reachDailyLimit}
-                setReachDailyLimit={setReachDailyLimit}
-                start={start}
-                hour={hour}
-                min={min}
-                sec={sec}
-                timeLimit={timeLimit}
-                level={level}
-                nextLevel={nextLevel}
-                loading={loading}
-                setting={setting}
-                exchange={exchange}
-                setExchange={setExchange}
-                tab={tab}
                 setTab={setTab}
-                title={title}
                 setTitle={setTitle}
+                user={user}
               />
             )}
             {tab == "Friends" && (
@@ -289,10 +174,7 @@ function App() {
           )}
         </div>
       ) : (
-        <div
-          className={`relative max-h-screen h-screen overflow-hidden w-full pb-16 px-5`}>
-          <Admin setting={setting} setSetting={setSetting} />
-        </div>
+        <Admin setting={setting} setSetting={setSetting} />
       )}
       <Analytics />
       <SpeedInsights />
