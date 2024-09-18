@@ -1,4 +1,7 @@
 import { BrowserRouter as Router } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
+import { injectSpeedInsights } from '@vercel/speed-insights'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import './App.css'
 import { useState, useEffect, useRef } from 'react'
 import Exchange from './page/Exchange'
@@ -177,6 +180,7 @@ function App () {
     setSec(seconds)
     setPoint(prevPoints => prevPoints)
     setCurrentCount(prevSeconds => prevSeconds - 1)
+    injectSpeedInsights();
     // setIsMobile(isMobileDevice())
   }, [])
 
@@ -308,6 +312,8 @@ function App () {
           </div>
         </div>
       )}
+      <Analytics/>
+      <SpeedInsights/>
     </Router>
   )
 }
