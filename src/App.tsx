@@ -1,4 +1,7 @@
 import { BrowserRouter as Router } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
+import { injectSpeedInsights } from '@vercel/speed-insights'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import './App.css'
 import { useState, useEffect, useRef } from 'react'
 import Exchange from './page/Exchange'
@@ -20,7 +23,6 @@ import Admin from './page/Admin'
 // import QRCode from 'qrcode.react'
 import { getUserAvatarUrl } from './utils/functions'
 import Loader from './component/Loader'
-import { SpeedInsights } from '@vercel/speed-insights/react'
 // const user = {
 //   id: '7202566335',
 //   username: 'Sven82027',
@@ -178,6 +180,7 @@ function App () {
     setSec(seconds)
     setPoint(prevPoints => prevPoints)
     setCurrentCount(prevSeconds => prevSeconds - 1)
+    injectSpeedInsights();
     // setIsMobile(isMobileDevice())
   }, [])
 
@@ -206,114 +209,112 @@ function App () {
   }
 
   return (
-    <>
-      <SpeedInsights />
-      <Router>
-        {/* <SpeedInsights /> */}
-        {loading ? (
-          <div className='flex flex-col relative pt-32 justify-center items-center gap-20 h-screen w-full'>
-            <img src='/dogAvatar.png' className='absolute w-32 top-1/4' />
-            <Loader width='80' />
-          </div>
-        ) : (
-          user && (
-            <div
-              className={`h-full relative max-h-screen overflow-hidden max-w-[560px] w-full font-roboto`}
-            >
-              <div className={`flex h-screen overflow-hidden pb-4 w-full`}>
-                {tab == 'Splash' && (
-                  <Splash
-                    ranking={ranking}
-                    totalPoint={totalPoint}
-                    referral={referral}
-                    setTab={setTab}
-                  />
-                )}
-                {tab == 'Exchange' && (
-                  <Exchange
-                    user={user}
-                    photo_url={photo_url}
-                    point={point}
-                    totalPoint={totalPoint}
-                    handleMining={handleMining}
-                    handleStopMining={handleStopMining}
-                    claimShow={claimShow}
-                    setTotalPoint={setTotalPoint}
-                    setClaimShow={setClaimShow}
-                    reachDailyLimit={reachDailyLimit}
-                    setReachDailyLimit={setReachDailyLimit}
-                    start={start}
-                    hour={hour}
-                    min={min}
-                    sec={sec}
-                    timeLimit={timeLimit}
-                    level={level}
-                    nextLevel={nextLevel}
-                    loading={loading}
-                    setting={setting}
-                    exchange={exchange}
-                    setExchange={setExchange}
-                    tab={tab}
-                    setTab={setTab}
-                    title={title}
-                    setTitle={setTitle}
-                  />
-                )}
-                {tab == 'Friends' && (
-                  <Friends
-                    user={user}
-                    inviteRevenue={setting.inviteRevenue}
-                    modal={false}
-                  />
-                )}
-                {tab == 'INVITE' && (
-                  <Friends
-                    user={user}
-                    inviteRevenue={setting.inviteRevenue}
-                    modal={true}
-                  />
-                )}
-                {tab == 'Channel' && (
-                  <Task
-                    title={title}
-                    user={user}
-                    totalPoint={totalPoint}
-                    setTotalPoint={setTotalPoint}
-                    setting={setting}
-                    task={task}
-                    setTask={setTask}
-                  />
-                )}
-                {tab == 'Buffy' && (
-                  <Task
-                    title={title}
-                    user={user}
-                    totalPoint={totalPoint}
-                    setTotalPoint={setTotalPoint}
-                    setting={setting}
-                    task={task}
-                    setTask={setTask}
-                  />
-                )}
-                {tab == 'Leaderboard' && <Leaderboard user={user} />}
-              </div>
-              {tab !== 'Splash' && tab !== 'Admin' && (
-                <Footer tab={tab} setTab={setTab} />
+    <Router>
+      {loading ? (
+        <div className='flex flex-col relative pt-32 justify-center items-center gap-20 h-screen w-full'>
+          <img src='/dogAvatar.png' className='absolute w-32 top-1/4' />
+          <Loader width='80' />
+        </div>
+      ) : (
+        user && (
+          <div
+            className={`h-full relative max-h-screen overflow-hidden max-w-[560px] w-full font-roboto`}
+          >
+            <div className={`flex h-screen overflow-hidden pb-4 w-full`}>
+              {tab == 'Splash' && (
+                <Splash
+                  ranking={ranking}
+                  totalPoint={totalPoint}
+                  referral={referral}
+                  setTab={setTab}
+                />
               )}
+              {tab == 'Exchange' && (
+                <Exchange
+                  user={user}
+                  photo_url={photo_url}
+                  point={point}
+                  totalPoint={totalPoint}
+                  handleMining={handleMining}
+                  handleStopMining={handleStopMining}
+                  claimShow={claimShow}
+                  setTotalPoint={setTotalPoint}
+                  setClaimShow={setClaimShow}
+                  reachDailyLimit={reachDailyLimit}
+                  setReachDailyLimit={setReachDailyLimit}
+                  start={start}
+                  hour={hour}
+                  min={min}
+                  sec={sec}
+                  timeLimit={timeLimit}
+                  level={level}
+                  nextLevel={nextLevel}
+                  loading={loading}
+                  setting={setting}
+                  exchange={exchange}
+                  setExchange={setExchange}
+                  tab={tab}
+                  setTab={setTab}
+                  title={title}
+                  setTitle={setTitle}
+                />
+              )}
+              {tab == 'Friends' && (
+                <Friends
+                  user={user}
+                  inviteRevenue={setting.inviteRevenue}
+                  modal={false}
+                />
+              )}
+              {tab == 'INVITE' && (
+                <Friends
+                  user={user}
+                  inviteRevenue={setting.inviteRevenue}
+                  modal={true}
+                />
+              )}
+              {tab == 'Channel' && (
+                <Task
+                  title={title}
+                  user={user}
+                  totalPoint={totalPoint}
+                  setTotalPoint={setTotalPoint}
+                  setting={setting}
+                  task={task}
+                  setTask={setTask}
+                />
+              )}
+              {tab == 'Buffy' && (
+                <Task
+                  title={title}
+                  user={user}
+                  totalPoint={totalPoint}
+                  setTotalPoint={setTotalPoint}
+                  setting={setting}
+                  task={task}
+                  setTask={setTask}
+                />
+              )}
+              {tab == 'Leaderboard' && <Leaderboard user={user} />}
             </div>
-          )
-        )}
-        {!user && (
-          <div className={`h-full max-h-screen overflow-hidden w-full`}>
-            <div
-              className={`relative h-screen overflow-hidden pb-[64px] px-[20px]`}
-            >
-              <Admin setting={setting} setSetting={setSetting} />
-            </div>
+            {tab !== 'Splash' && tab !== 'Admin' && (
+              <Footer tab={tab} setTab={setTab} />
+            )}
           </div>
-        )}
-      </Router>
-    </>
+        )
+      )}
+      {!user && (
+        <div className={`h-full max-h-screen overflow-hidden w-full`}>
+          <div
+            className={`relative h-screen overflow-hidden pb-[64px] px-[20px]`}
+          >
+            <Admin setting={setting} setSetting={setSetting} />
+          </div>
+        </div>
+      )}
+      <Analytics/>
+      <SpeedInsights/>
+    </Router>
   )
 }
 
