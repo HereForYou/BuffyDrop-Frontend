@@ -161,7 +161,7 @@ const Task: React.FC<ITaskProps> = ({
     window.open(link, '_blank')
   }
   return (
-    <div className='w-full overflow-x-hidden overflow-y-auto hiddenScrollBar'>
+    <div className='w-full h-[calc(100%-40px)] overflow-x-hidden overflow-y-auto hiddenScrollBar'>
       <div className='flex flex-col justify-center items-center text-xl text-[#acacac] font-bold pt-16 pb-6'>
         <img
           src={`${title != 'DAILY REWARD' ? '/comm.png' : '/daily.png'}`}
