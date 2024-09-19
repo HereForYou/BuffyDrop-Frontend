@@ -128,14 +128,12 @@ const Task: React.FC<ITaskProps> = ({
         setTimeRemaining((prevTime) => prevTime - 1);
       }, 1000);
       window.addEventListener("click", handleMouseEvent);
-      window.addEventListener("mousemove", handleMouseEvent);
       window.addEventListener("keydown", handleMouseEvent); // Optional: Count key presses as well
     }
 
     return () => {
       clearInterval(interval);
       window.removeEventListener("click", handleMouseEvent);
-      window.removeEventListener("mousemove", handleMouseEvent);
       window.removeEventListener("keydown", handleMouseEvent);
     };
   }, [tracking]);
