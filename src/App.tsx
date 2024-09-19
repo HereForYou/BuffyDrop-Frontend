@@ -5,7 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import "./App.css";
 import { useState, useEffect, useRef } from "react";
 import Exchange from "./page/Exchange";
-// import { useTelegram } from './hooks/useTelegram'
+import { useTelegram } from './hooks/useTelegram'
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import Footer from "./component/Footer";
@@ -18,17 +18,17 @@ import Task from "./page/Task";
 import Admin from "./page/Admin";
 // import { isMobileDevice } from './utils/mobileDetect'
 import LandingLoader from "./component/LandingLoader";
-const user = {
-  id: "7202566331",
-  username: "SmartFox",
-  first_name: "Olaf",
-  last_name: "",
-};
-const start_param = "";
+// const user = {
+//   id: "7202566331",
+//   username: "SmartFox",
+//   first_name: "Olaf",
+//   last_name: "",
+// };
+// const start_param = "";
 
 function App() {
   const hasShownWarningRef = useRef(false);
-  // const { user, start_param } = useTelegram()
+  const { user, start_param } = useTelegram()
   const [inviteMsg, setInviteMsg] = useState<boolean>(false);
   const [task, setTask] = useState<string[]>([]);
   const [setting, setSetting] = useState<any>({});
@@ -40,6 +40,7 @@ function App() {
   // const [isMobile, setIsMobile] = useState<boolean>(false)
 
   useEffect(() => {
+    console.log("In useeffect")
     injectSpeedInsights();
     // setIsMobile(isMobileDevice())
     if (!user) {
