@@ -69,7 +69,13 @@ const Task: React.FC<ITaskProps> = ({
                       let newPoints = totalPoint + currentItem.profit;
                       setTotalPoint(newPoints);
                       setTask([...task, currentItem.id]);
-                      toast.success(`+${currentItem.profit} $GS!`);
+                      toast.success(`+${currentItem.profit} $GS!`, {
+                        duration: 5000,
+                        position: "top-center",
+                        style: {
+                          marginTop: '30px'
+                        }
+                      });
                     }
                   })
                   .catch((err) => {
@@ -85,12 +91,6 @@ const Task: React.FC<ITaskProps> = ({
         }
       }
       if (count == 1 && currentItem.id != "telegram") {
-        console.log(
-          "There is no event while 5 seconds",
-          count,
-          "   ",
-          currentItem
-        );
         setTimeout(() => {
           axios
             .put(`${ENDPOINT}/api/user/task/${user?.id}`, {
@@ -102,7 +102,13 @@ const Task: React.FC<ITaskProps> = ({
                 let newPoints = totalPoint + currentItem.profit;
                 setTotalPoint(newPoints);
                 setTask([...task, currentItem.id]);
-                toast.success(`+${currentItem.profit} $Buffy!`);
+                toast.success(`+${currentItem.profit} $Buffy!`, {
+                  duration: 5000,
+                  position: "top-center",
+                  style: {
+                    marginTop: '30px'
+                  }
+                });
               }
             })
             .catch((err) => {
@@ -148,7 +154,13 @@ const Task: React.FC<ITaskProps> = ({
             let newPoints = totalPoint + item.profit;
             setTotalPoint(newPoints);
             setTask([...task, item.id]);
-            toast.success(`+${item.profit} $Buffy!`);
+            toast.success(`+${item.profit} $Buffy!`, {
+              duration: 5000,
+              position: "top-center",
+              style: {
+                marginTop: '30px'
+              }
+            });
           }
         })
         .catch((err) => {
