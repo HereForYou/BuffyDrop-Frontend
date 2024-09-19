@@ -116,7 +116,7 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
                     className={`flex px-2 py-1 items-center text-[#acacac] w-full`}
                   >
                     <div className='relative h-10 overflow-hidden w-[100%] flex items-center'>
-                      <div className={`h-8 w-8 rounded-full bg-white text-center flex justify-center items-center ${rankAvatarThemes[index % 8]}`}>
+                      <div className={`h-8 w-8 rounded-full text-center flex justify-center items-center ${rankAvatarThemes[index % 8]}`}>
                         {iUser?.userName.substring(0, 2).toUpperCase()}
                       </div>
                       <div className='pl-4 text-start'>
