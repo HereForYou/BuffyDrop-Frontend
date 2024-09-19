@@ -14,6 +14,16 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
   const [curUser, setCurUser] = useState<any>({})
   const [ranking, setRaking] = useState<number>(0)
   const hasShownWarningRef = useRef(false)
+  const rankAvatarThemes = [
+    'bg-white text-black',
+    'bg-orange-500 text-white',
+    'bg-green-300 text-black',
+    'bg-blue-600 text-black',
+    'bg-purple-700 text-black',
+    'bg-pink-200 text-black',
+    'bg-pink-300 text-black',
+    'bg-gray-300 text-black',
+  ]
 
   const [loading, setLoading] = useState<boolean>(true)
 
@@ -62,7 +72,7 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
               className={`flex my-3 px-3 py-2 items-center text-[#acacac] bg-[#110d33] rounded-lg w-full`}
             >
               <div className='w-full flex flex-row gap-1 items-center'>
-                <div className='h-8 w-8 rounded-full bg-white text-center flex justify-center items-center '>
+                <div className={`h-8 w-8 rounded-full text-center flex justify-center items-center ${rankAvatarThemes[Math.floor(Math.random()*8) % 8]}`}>
                   {curUser?.userName.substring(0, 2).toUpperCase()}
                 </div>
                 <div className='flex flex-col'>
@@ -106,7 +116,7 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
                     className={`flex px-2 py-1 items-center text-[#acacac] w-full`}
                   >
                     <div className='relative h-10 overflow-hidden w-[100%] flex items-center'>
-                      <div className='h-8 w-8 rounded-full bg-white text-center flex justify-center items-center '>
+                      <div className={`h-8 w-8 rounded-full bg-white text-center flex justify-center items-center ${rankAvatarThemes[index % 8]}`}>
                         {iUser?.userName.substring(0, 2).toUpperCase()}
                       </div>
                       <div className='pl-4 text-start'>
