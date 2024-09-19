@@ -148,7 +148,7 @@ const Exchange: React.FC<IHomeProps> = ({
             You’re user {rank} to join the BuffyDrop!
           </p>
           <img
-            src='/dogAvatar.webp'
+            src='/coat.png'
             className='w-1/3'
             alt='A cute dog avatar'
           />
