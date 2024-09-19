@@ -40,6 +40,7 @@ function App() {
   // const [isMobile, setIsMobile] = useState<boolean>(false)
 
   useEffect(() => {
+    console.log("In useeffect")
     injectSpeedInsights();
     // setIsMobile(isMobileDevice())
     if (!user) {
