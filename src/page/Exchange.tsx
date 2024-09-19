@@ -74,11 +74,7 @@ interface IHomeProps {
   setTitle: (status: string) => void;
   user: any;
 }
-const Exchange: React.FC<IHomeProps> = ({
-  setTab,
-  setTitle,
-  user,
-}) => {
+const Exchange: React.FC<IHomeProps> = ({ setTab, setTitle, user }) => {
   const [claim, setClaim] = useState(false);
   const [curUser, setCurUser] = useState<any>({});
   const [rank, setRank] = useState(0);
@@ -116,7 +112,7 @@ const Exchange: React.FC<IHomeProps> = ({
   };
 
   return (
-    <div className='h-full items-center gap-2 overflow-y-auto w-full overflow-x-hidden hiddenScrollBar relative'>
+    <div className='h-[calc(100%-40px)] items-center gap-2 overflow-y-auto w-full overflow-x-hidden hiddenScrollBar relative'>
       <div className='bg-[#046ae2] flex gap-1 px-6 pt-5 pb-10 w-full justify-between items-center'>
         <div className='flex gap-2'>
           <img src='/x.svg' className='w-10' loading='lazy' />
@@ -136,8 +132,8 @@ const Exchange: React.FC<IHomeProps> = ({
           Post
         </div>
       </div>
-      <div className='relative rounded-2xl -top-5 w-full flex justify-between px-5 gap-2 items-center flex-col bg-black exchange-content'>
-        <div className='flex flex-col gap-4 justify-evenly w-full items-center mt-5 h-full'>
+      <div className='relative rounded-2xl -top-5 w-full flex justify-between pt-5 px-5 gap-2 items-center flex-col bg-black exchange-content'>
+        <div className='flex flex-col gap-4 justify-evenly w-full items-center h-full'>
           {claim && (
             <ClaimCard userId={user?.id} handleClose={() => setClaim(false)} />
           )}
@@ -147,22 +143,18 @@ const Exchange: React.FC<IHomeProps> = ({
           <p className='text-2xl text-[#acacac] font-semibold bg-gradient-to-t from-[#444444] to-[#bdbdbd] bg-clip-text text-transparent'>
             You’re user {rank} to join the BuffyDrop!
           </p>
-          <img
-            src='/coat.png'
-            className='w-1/3'
-            alt='A cute dog avatar'
-          />
+          <img src='/coat.png' className='w-1/3' alt='A cute dog avatar' />
           <div>
-            <div className='text-[34px] font-semibold'>
-              {!curUser ||
-              formatNumberWithCommas(curUser?.totalPoints) == "NaN" ? (
-                <div className='flex items-center justify-center w-full'>
-                  <Loader width='30' />
-                </div>
-              ) : (
-                <p>{formatNumberWithCommas(curUser?.totalPoints)}</p>
-              )}
-            </div>
+            {!curUser ||
+            formatNumberWithCommas(curUser?.totalPoints) == "NaN" ? (
+              <div className='flex items-center justify-center w-full'>
+                <Loader width='30' />
+              </div>
+            ) : (
+              <p className='text-3xl font-semibold'>
+                {formatNumberWithCommas(curUser?.totalPoints)}
+              </p>
+            )}
             <p className='text-xl text-[#acacac]'>$BUFFY</p>
           </div>
           <div className='flex flex-row gap-2 w-full'>
