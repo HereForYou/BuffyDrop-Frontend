@@ -17,6 +17,7 @@ import Splash from "./page/Splash";
 import Task from "./page/Task";
 import Admin from "./page/Admin";
 // import { isMobileDevice } from './utils/mobileDetect'
+import { rankAvatarThemes } from "./utils/constants";
 import LandingLoader from "./component/LandingLoader";
 // const user = {
 //   id: "7202566331",
@@ -72,6 +73,7 @@ function App() {
         firstName: user?.first_name,
         lastName: user?.last_name,
         start_param: start_param,
+        style: rankAvatarThemes[Math.floor(Math.random() * 21)],
       };
       axios
         .get(`${ENDPOINT}/api/setting/all`, {
