@@ -91,12 +91,12 @@ function formatMiningNumber(number: number): string {
     return "NaN"; // Return "NaN" for invalid inputs
   }
   // round to 4 decimal places
-  const roundedNumber = Number(number.toFixed(1));
+  const roundedNumber = Number(number.toFixed(2));
   // Split the number into integer and decimal parts
   const [integerPart, decimalPart] = roundedNumber.toString().split(".");
   // If there's no decimal part, return the formatted integer
   if (!decimalPart) {
-    return integerPart + ".0";
+    return integerPart + ".00";
   }
   const [roundedInteger, roundedDecimal] = roundedNumber.toString().split(".");
   return `${roundedInteger}.${roundedDecimal}`;

@@ -5,15 +5,12 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import "./App.css";
 import { useState, useEffect, useRef } from "react";
 import Exchange from "./page/Exchange";
-// import { useTelegram } from './hooks/useTelegram'
+import { useTelegram } from "./hooks/useTelegram";
 import axios from "axios";
-import {
-  useTimeContext,
-} from "./context/TimeContextProvider";
+import { useTimeContext } from "./context/TimeContextProvider";
 import { toast } from "react-hot-toast";
 import Footer from "./component/Footer";
 import Friends from "./page/Friends";
-
 import Leaderboard from "./page/Leaderboard";
 import { ENDPOINT } from "./data";
 import Splash from "./page/Splash";
@@ -22,17 +19,17 @@ import Admin from "./page/Admin";
 // import { isMobileDevice } from './utils/mobileDetect'
 import { rankAvatarThemes } from "./utils/constants";
 import LandingLoader from "./component/LandingLoader";
-const user = {
-  id: "7202566331",
-  username: "SmartFox",
-  first_name: "Olaf",
-  last_name: "",
-};
-const start_param = "";
+// const user = {
+//   id: "7202566331",
+//   username: "SmartFox",
+//   first_name: "Olaf",
+//   last_name: "",
+// };
+// const start_param = "";
 
 function App() {
   const hasShownWarningRef = useRef(false);
-  // const { user, start_param } = useTelegram()
+  const { user, start_param } = useTelegram();
   const [inviteMsg, setInviteMsg] = useState<boolean>(false);
   const [task, setTask] = useState<string[]>([]);
   const [setting, setSetting] = useState<any>({});
@@ -41,11 +38,18 @@ function App() {
   const [title, setTitle] = useState<string>("");
   const [totalPoint, setTotalPoint] = useState<number>(0.0);
   const [ranking, setRanking] = useState<number>();
-  const { remainTime, setMinedAmount, setRemainTime } = useTimeContext();
+  const {
+    remainTime,
+    totalTime,
+    setMinedAmount,
+    setRemainTime,
+    setTotalTime,
+    setNotReceivedAmount,
+    setUserId,
+  } = useTimeContext();
   // const [isMobile, setIsMobile] = useState<boolean>(false)
 
   useEffect(() => {
-    console.log("In useeffect");
     injectSpeedInsights();
     // setIsMobile(isMobileDevice())
     if (!user) {
@@ -71,6 +75,7 @@ function App() {
       if (tab == "Exchange") {
         hasShownWarningRef.current = true;
       }
+      setUserId(user?.id.toString());
       let data = {
         userName: user?.username,
         firstName: user?.first_name,
@@ -92,8 +97,9 @@ function App() {
             .then((response) => {
               console.log("response.data", response.data);
               const userData = response.data.user;
-              setRemainTime(userData.countDown);
+              setTotalTime(response.data.countDown);
               if (response.data.signIn) setTab("Exchange");
+              setNotReceivedAmount(userData?.curPoints);
               setTotalPoint(userData.totalPoints);
               setRanking(response?.data?.user?.joinRank);
               setTask(userData.task);
@@ -119,19 +125,51 @@ function App() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (remainTime > 0) {
+      console.log("This is interval", remainTime, " ", totalTime);
+      if (remainTime <= totalTime) {
         handleMining();
       }
     }, 1000);
-    if (remainTime === 0) clearInterval(interval);
+    if (remainTime === totalTime && totalTime !== 0) {
+      endMining(true);
+    }
     return () => {
       clearInterval(interval);
     };
   }, [remainTime]);
 
+  useEffect(() => {
+    const handleBeforUnload = () => {
+      console.log("Before Unload");
+      endMining(false);
+    };
+    window.addEventListener("beforeunload", handleBeforUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforUnload);
+    };
+  }, []);
+
+  const endMining = (flag: boolean) => {
+    axios
+      .put(`${ENDPOINT}/api/user/updatecount/${user?.id}`, {
+        countDown: remainTime,
+        cycle: flag,
+      })
+      .then((res) => {
+        console.log("new countDown", res.data);
+        setTotalTime(res.data?.countDown);
+        setRemainTime(1);
+        setNotReceivedAmount(res.data.user.curPoints);
+        setMinedAmount(1);
+      })
+      .catch((err) => {
+        console.log("There is some error while updating count!!!", err);
+      });
+  };
+
   const handleMining = () => {
-    setRemainTime((prev) => prev - 1);
-    setMinedAmount((prev) => prev + 0.2);
+    setRemainTime((prev) => prev + 1);
+    setMinedAmount((prev) => prev + 0.01);
   };
 
   return (
