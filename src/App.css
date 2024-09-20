@@ -398,3 +398,14 @@ input:focus {
 .exchange-content {
     height: calc(100% - 100px);
 }
+
+@keyframes float {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+}
