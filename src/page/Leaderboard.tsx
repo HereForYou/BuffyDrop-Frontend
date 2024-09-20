@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import { toast } from "react-hot-toast";
 import Loader from "../component/Loader";
 import { ENDPOINT } from "../data";
@@ -14,8 +14,6 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
   const [curUser, setCurUser] = useState<any>({});
   const [ranking, setRaking] = useState<number>(0);
   const hasShownWarningRef = useRef(false);
-  
-
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -42,6 +40,15 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
     }
   }, []);
   console.log("====>", curUser, "    ", users)
+
+  const formattedUserCount = useMemo(() => {
+    if (users.length > 1000000) {
+      return Math.round(users.length / 1000000) + "M";
+    } else if (users.length > 1000) {
+      return Math.round(users.length / 1000) + "K";
+    }
+    return users.length;
+  }, [users.length]);
 
   return (
     <div className='h-[calc(100%-40px)] w-full flex flex-col text-center items-center justify-between py-2 px-6 overflow-x-hidden overflow-y-auto hiddenScrollBar text-white'>
@@ -93,11 +100,7 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
             <div>
               <div className='flex pt-3 pb-1 text-2xl font-bold w-full items-center'>
                 <div className='text-center pl-2'>
-                  {users.length > 1000000
-                    ? Math.round(users.length / 1000000) + "M"
-                    : users.length > 1000
-                    ? Math.round(users.length / 1000) + "K"
-                    : users.length}
+                  {formattedUserCount}
                 </div>
                 <div className='text-center pl-2'>holders</div>
               </div>
