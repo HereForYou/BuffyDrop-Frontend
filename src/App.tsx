@@ -98,6 +98,7 @@ function App() {
               console.log("response.data", response.data);
               const userData = response.data.user;
               setTotalTime(response.data.countDown);
+              setMinedAmount(userData?.countDown * 0.01)
               if (response.data.signIn) setTab("Exchange");
               setNotReceivedAmount(userData?.curPoints);
               setTotalPoint(userData.totalPoints);
@@ -160,7 +161,7 @@ function App() {
         setTotalTime(res.data?.countDown);
         setRemainTime(1);
         setNotReceivedAmount(res.data.user.curPoints);
-        setMinedAmount(1);
+        setMinedAmount(0);
       })
       .catch((err) => {
         console.log("There is some error while updating count!!!", err);
