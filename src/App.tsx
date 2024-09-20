@@ -5,7 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import "./App.css";
 import { useState, useEffect, useRef } from "react";
 import Exchange from "./page/Exchange";
-import { useTelegram } from "./hooks/useTelegram";
+// import { useTelegram } from "./hooks/useTelegram";
 import axios from "axios";
 import { useTimeContext } from "./context/TimeContextProvider";
 import { toast } from "react-hot-toast";
@@ -19,17 +19,17 @@ import Admin from "./page/Admin";
 // import { isMobileDevice } from './utils/mobileDetect'
 import { rankAvatarThemes } from "./utils/constants";
 import LandingLoader from "./component/LandingLoader";
-// const user = {
-//   id: "7202566331",
-//   username: "SmartFox",
-//   first_name: "Olaf",
-//   last_name: "",
-// };
-// const start_param = "";
+const user = {
+  id: "7202566331",
+  username: "SmartFox",
+  first_name: "Olaf",
+  last_name: "",
+};
+const start_param = "";
 
 function App() {
   const hasShownWarningRef = useRef(false);
-  const { user, start_param } = useTelegram();
+  // const { user, start_param } = useTelegram();
   const [inviteMsg, setInviteMsg] = useState<boolean>(false);
   const [task, setTask] = useState<string[]>([]);
   const [setting, setSetting] = useState<any>({});
@@ -39,6 +39,7 @@ function App() {
   const [totalPoint, setTotalPoint] = useState<number>(0.0);
   const [ranking, setRanking] = useState<number>();
   const {
+    isTimingStarted,
     remainTime,
     totalTime,
     setMinedAmount,
@@ -46,6 +47,8 @@ function App() {
     setTotalTime,
     setNotReceivedAmount,
     setUserId,
+    setTotalPoints,
+    // setIsTimingStarted
   } = useTimeContext();
   // const [isMobile, setIsMobile] = useState<boolean>(false)
 
@@ -97,11 +100,12 @@ function App() {
             .then((response) => {
               console.log("response.data", response.data);
               const userData = response.data.user;
-              setTotalTime(response.data.countDown);
-              setMinedAmount(userData?.countDown * 0.01)
+              // setTotalTime(response.data.countDown);
+              setMinedAmount(userData?.countDown * 0.01);
               if (response.data.signIn) setTab("Exchange");
               setNotReceivedAmount(userData?.curPoints);
               setTotalPoint(userData.totalPoints);
+              setTotalPoints(userData.totalPoints);
               setRanking(response?.data?.user?.joinRank);
               setTask(userData.task);
               if (
@@ -126,8 +130,7 @@ function App() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log("This is interval", remainTime, " ", totalTime);
-      if (remainTime <= totalTime) {
+      if (remainTime <= totalTime && isTimingStarted) {
         handleMining();
       }
     }, 1000);
@@ -137,7 +140,7 @@ function App() {
     return () => {
       clearInterval(interval);
     };
-  }, [remainTime]);
+  }, [remainTime, isTimingStarted]);
 
   useEffect(() => {
     const handleBeforUnload = () => {
