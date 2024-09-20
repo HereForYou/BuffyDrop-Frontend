@@ -1,9 +1,9 @@
 import { useMemo } from "react";
 import axios from "axios";
+import { AnimatedCounter } from "react-animated-counter";
 import {
   getHours,
   getMinutes,
-  getSeconds,
   formatMiningNumber,
 } from "../utils/functions";
 import { useTimeContext } from "../context/TimeContextProvider";
@@ -29,10 +29,6 @@ const TimeCount = () => {
     return getMinutes(totalTime - remainTime);
   }, [remainTime]);
 
-  const miningSecond = useMemo(() => {
-    return getSeconds(totalTime - remainTime);
-  }, [remainTime]);
-
   const receiveMinedAmount = () => {
     axios.get(`${ENDPOINT}/api/user/updatepoints/${userId}`).then((res) => {
       console.log("this is new res", res.data);
@@ -43,30 +39,31 @@ const TimeCount = () => {
   };
 
   return notReceiveAmount === 0 ? (
-    <div className='w-full bg-[#4b37dd] px-4 py-1 rounded-2xl h-14'>
-      <div className='flex justify-between items-center'>
-        <div className='uppercase'>
-          {formatMiningNumber(minedAmount)} earning
+    <div className='w-full bg-gray-500 text-gray-400 px-4 py-1 rounded-lg h-14'>
+      <div className='flex justify-center items-center relative h-full'>
+        <div className='flex h-full justify-center gap-1 items-center font-bold text-xl'>
+          <AnimatedCounter value={Number(formatMiningNumber(minedAmount))} color="text-gray-400" incrementColor="text-gray-400" decrementColor="text-gray-400"/>
+          <p>Farming</p>
         </div>
-        <div className='flex gap-2'>
-          <div>
+        <div className='flex gap-2 absolute right-0 top-0 justify-center text-sm items-center h-full'>
+          <div className='flex'>
             <p>{miningHour}</p>
-            <p className='uppercase'>hours</p>
+            <p>h</p>
           </div>
-          <div>
+          <div className='flex'>
             <p>{miningMinute}</p>
-            <p className='uppercase'>mins</p>
+            <p>m</p>
           </div>
-          <div>
+          {/* <div>
             <p>{miningSecond}</p>
             <p className='uppercase'>secs</p>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
   ) : (
     <div
-      className='flex justify-center items-center w-full bg-orange-600 px-4 py-1 rounded-2xl h-14'
+      className='flex justify-center items-center w-full bg-green-400 px-4 py-1 rounded-lg h-14'
       onClick={() => receiveMinedAmount()}>
       Claim {formatMiningNumber(notReceiveAmount)}
     </div>

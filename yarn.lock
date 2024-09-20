@@ -1241,6 +1241,13 @@
   resolved "https://registry.npmjs.org/@bedrock-layout/use-stateful-ref/-/use-stateful-ref-1.4.1.tgz"
   integrity sha512-4eKO2KdQEXcR5LI4QcxqlJykJUDQJWDeWYAukIn6sRQYoabcfI5kDl61PUi6FR6o8VFgQ8IEP7HleKqWlSe8SQ==
 
+"@emotion/is-prop-valid@^0.8.2":
+  version "0.8.8"
+  resolved "https://registry.npmjs.org/@emotion/is-prop-valid/-/is-prop-valid-0.8.8.tgz"
+  integrity sha512-u5WtneEAr5IDG2Wv65yhunPSMLIpuKsbuOktRojfrEiEvRyC85LgPMZI63cr7NUqT8ZIGdSVg8ZKGxIug4lXcA==
+  dependencies:
+    "@emotion/memoize" "0.7.4"
+
 "@emotion/is-prop-valid@1.2.2":
   version "1.2.2"
   resolved "https://registry.npmjs.org/@emotion/is-prop-valid/-/is-prop-valid-1.2.2.tgz"
@@ -1252,6 +1259,11 @@
   version "0.8.1"
   resolved "https://registry.npmjs.org/@emotion/memoize/-/memoize-0.8.1.tgz"
   integrity sha512-W2P2c/VRW1/1tLox0mVUalvnWXxavmv/Oum2aPsRcoDJuob75FC3Y8FbpfLwUegRcxINtGUMPq0tFCvYNTBXNA==
+
+"@emotion/memoize@0.7.4":
+  version "0.7.4"
+  resolved "https://registry.npmjs.org/@emotion/memoize/-/memoize-0.7.4.tgz"
+  integrity sha512-Ja/Vfqe3HpuzRsG1oBtWTHk2PGZ7GR+2Vz5iYGelAw8dx32K0y7PjVuxK6z1nMpZOqAFsRUPCkK1YjJ56qJlgw==
 
 "@emotion/unitless@0.8.1":
   version "0.8.1"
@@ -2495,6 +2507,51 @@
     invariant "^2.2.4"
     nullthrows "^1.1.1"
 
+"@react-spring/animated@~9.7.4":
+  version "9.7.4"
+  resolved "https://registry.npmjs.org/@react-spring/animated/-/animated-9.7.4.tgz"
+  integrity sha512-7As+8Pty2QlemJ9O5ecsuPKjmO0NKvmVkRR1n6mEotFgWar8FKuQt2xgxz3RTgxcccghpx1YdS1FCdElQNexmQ==
+  dependencies:
+    "@react-spring/shared" "~9.7.4"
+    "@react-spring/types" "~9.7.4"
+
+"@react-spring/core@~9.7.4":
+  version "9.7.4"
+  resolved "https://registry.npmjs.org/@react-spring/core/-/core-9.7.4.tgz"
+  integrity sha512-GzjA44niEJBFUe9jN3zubRDDDP2E4tBlhNlSIkTChiNf9p4ZQlgXBg50qbXfSXHQPHak/ExYxwhipKVsQ/sUTw==
+  dependencies:
+    "@react-spring/animated" "~9.7.4"
+    "@react-spring/shared" "~9.7.4"
+    "@react-spring/types" "~9.7.4"
+
+"@react-spring/rafz@~9.7.4":
+  version "9.7.4"
+  resolved "https://registry.npmjs.org/@react-spring/rafz/-/rafz-9.7.4.tgz"
+  integrity sha512-mqDI6rW0Ca8IdryOMiXRhMtVGiEGLIO89vIOyFQXRIwwIMX30HLya24g9z4olDvFyeDW3+kibiKwtZnA4xhldA==
+
+"@react-spring/shared@~9.7.4":
+  version "9.7.4"
+  resolved "https://registry.npmjs.org/@react-spring/shared/-/shared-9.7.4.tgz"
+  integrity sha512-bEPI7cQp94dOtCFSEYpxvLxj0+xQfB5r9Ru1h8OMycsIq7zFZon1G0sHrBLaLQIWeMCllc4tVDYRTLIRv70C8w==
+  dependencies:
+    "@react-spring/rafz" "~9.7.4"
+    "@react-spring/types" "~9.7.4"
+
+"@react-spring/types@~9.7.4":
+  version "9.7.4"
+  resolved "https://registry.npmjs.org/@react-spring/types/-/types-9.7.4.tgz"
+  integrity sha512-iQVztO09ZVfsletMiY+DpT/JRiBntdsdJ4uqk3UJFhrhS8mIC9ZOZbmfGSRs/kdbNPQkVyzucceDicQ/3Mlj9g==
+
+"@react-spring/web@^9.7.2":
+  version "9.7.4"
+  resolved "https://registry.npmjs.org/@react-spring/web/-/web-9.7.4.tgz"
+  integrity sha512-UMvCZp7I5HCVIleSa4BwbNxynqvj+mJjG2m20VO2yPoi2pnCYANy58flvz9v/YcXTAvsmL655FV3pm5fbr6akA==
+  dependencies:
+    "@react-spring/animated" "~9.7.4"
+    "@react-spring/core" "~9.7.4"
+    "@react-spring/shared" "~9.7.4"
+    "@react-spring/types" "~9.7.4"
+
 "@reduxjs/toolkit@^2.2.5":
   version "2.2.5"
   resolved "https://registry.npmjs.org/@reduxjs/toolkit/-/toolkit-2.2.5.tgz"
@@ -2908,7 +2965,6 @@
     "@urql/core" ">=2.3.1"
     wonka "^4.0.14"
 
-<<<<<<< HEAD
 "@vercel/analytics@^1.3.1":
   version "1.3.1"
   resolved "https://registry.npmjs.org/@vercel/analytics/-/analytics-1.3.1.tgz"
@@ -2916,8 +2972,6 @@
   dependencies:
     server-only "^0.0.1"
 
-=======
->>>>>>> 43314c3a2926185ff8b2acf22002b358cba8930a
 "@vercel/speed-insights@^1.0.12":
   version "1.0.12"
   resolved "https://registry.npmjs.org/@vercel/speed-insights/-/speed-insights-1.0.12.tgz"
@@ -4906,6 +4960,15 @@ fraction.js@^4.3.7:
   version "4.3.7"
   resolved "https://registry.npmjs.org/fraction.js/-/fraction.js-4.3.7.tgz"
   integrity sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==
+
+framer-motion@^10.11.4:
+  version "10.18.0"
+  resolved "https://registry.npmjs.org/framer-motion/-/framer-motion-10.18.0.tgz"
+  integrity sha512-oGlDh1Q1XqYPksuTD/usb0I70hq95OUzmL9+6Zd+Hs4XV0oaISBa/UUMSjYiq6m8EUF32132mOJ8xVZS+I0S6w==
+  dependencies:
+    tslib "^2.4.0"
+  optionalDependencies:
+    "@emotion/is-prop-valid" "^0.8.2"
 
 freeport-async@2.0.0:
   version "2.0.0"
@@ -7313,6 +7376,14 @@ rc@~1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-animated-counter@^1.7.9:
+  version "1.7.9"
+  resolved "https://registry.npmjs.org/react-animated-counter/-/react-animated-counter-1.7.9.tgz"
+  integrity sha512-nHN1iQfIflatkCXuUYEZnKeMt+oo3Awu/dOxBS7hQws7BgEtv9nRGtVJNrn48ZqYoYNgkYhPt6JHMK2Qu6VcRQ==
+  dependencies:
+    framer-motion "^10.11.4"
+    lodash "^4.17.21"
+
 react-confetti@^6.1.0:
   version "6.1.0"
   resolved "https://registry.npmjs.org/react-confetti/-/react-confetti-6.1.0.tgz"
@@ -7328,7 +7399,7 @@ react-devtools-core@^5.3.1:
     shell-quote "^1.6.1"
     ws "^7"
 
-"react-dom@^16.0.0 || ^17.0.0 || ^18.0.0", "react-dom@^16.8.0 || ^17 || ^18", react-dom@^18.2.0, "react-dom@>= 16.8.0", react-dom@>=16, react-dom@>=16.8, react-dom@>=16.8.0, react-dom@>=17.0.0, react-dom@>=18:
+"react-dom@^16.0.0 || ^17.0.0 || ^18.0.0", "react-dom@^16.8.0 || ^17 || ^18", "react-dom@^16.8.0 || ^17.0.0 || ^18.0.0", react-dom@^18.0.0, react-dom@^18.2.0, "react-dom@>= 16.8.0", react-dom@>=16, react-dom@>=16.8, react-dom@>=16.8.0, react-dom@>=17.0.0, react-dom@>=18:
   version "18.3.1"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-18.3.1.tgz"
   integrity sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==
@@ -7489,6 +7560,13 @@ react-slideshow-image@^4.3.1:
     "@tweenjs/tween.js" "^18.6.4"
     resize-observer-polyfill "^1.5.1"
 
+react-text-transition@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.npmjs.org/react-text-transition/-/react-text-transition-3.1.0.tgz"
+  integrity sha512-NtXEVAXvSh78+8JAnrVjpbftzD4kPowacv4GB2Nyq9C/8ko6fSm6M/XvKWQLCaZi68i9F28b++Sp8uVThlzLyg==
+  dependencies:
+    "@react-spring/web" "^9.7.2"
+
 react-toastify@^10.0.5:
   version "10.0.5"
   resolved "https://registry.npmjs.org/react-toastify/-/react-toastify-10.0.5.tgz"
@@ -7496,7 +7574,7 @@ react-toastify@^10.0.5:
   dependencies:
     clsx "^2.1.0"
 
-react@*, "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.3.0 || ^17.0.1 || ^18.0.0", "react@^16.8 || ^17 || ^18", "react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.9.0 || ^17.0.0 || ^18", "react@^18 || ^19", react@^18.0, react@^18.2.0, react@^18.3.1, "react@>= 16.8.0", react@>=15, react@>=16, react@>=16.0.0, react@>=16.3, react@>=16.8, react@>=16.8.0, react@>=17.0.0, react@>=18:
+react@*, "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.3.0 || ^17.0.1 || ^18.0.0", "react@^16.8 || ^17 || ^18", "react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.9.0 || ^17.0.0 || ^18", "react@^18 || ^19", react@^18.0, react@^18.0.0, react@^18.2.0, react@^18.3.1, "react@>= 16.8.0", react@>=15, react@>=16, react@>=16.0.0, react@>=16.3, react@>=16.8, react@>=16.8.0, react@>=17.0.0, react@>=18, react@>=18.0.0:
   version "18.3.1"
   resolved "https://registry.npmjs.org/react/-/react-18.3.1.tgz"
   integrity sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==
