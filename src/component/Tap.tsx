@@ -33,7 +33,7 @@ const Tap: React.FC<ITap> = React.memo(({ points, setPoints }) => {
   console.log("This is Buffy Dog!!!");
 
   return (
-    <div className='flex justify-center'>
+    <div className='flex justify-center pointer-events-none'>
       <div className="relative flex justify-center w-1/3" onClick={handleClick}>
         <img
           src='/coat.png'

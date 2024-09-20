@@ -98,8 +98,17 @@ function formatMiningNumber(number: number): string {
   if (!decimalPart) {
     return integerPart + ".00";
   }
-  const [roundedInteger, roundedDecimal] = roundedNumber.toString().split(".");
-  return `${roundedInteger}.${roundedDecimal}`;
+  if (decimalPart.length === 1) {
+    const [roundedInteger, roundedDecimal] = roundedNumber
+      .toString()
+      .split(".");
+    return `${roundedInteger}.${roundedDecimal}0`;
+  } else {
+    const [roundedInteger, roundedDecimal] = roundedNumber
+      .toString()
+      .split(".");
+    return `${roundedInteger}.${roundedDecimal}`;
+  }
 }
 
 const getHours = (time: number) => {
