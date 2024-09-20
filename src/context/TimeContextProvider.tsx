@@ -1,14 +1,18 @@
 import React, { useState, createContext, ReactNode, useContext } from "react";
 
 interface ITimeContext {
+  isTimingStarted: boolean;
   minedAmount: number;
   notReceiveAmount: number;
   remainTime: number;
+  totalPoints: number;
   setMinedAmount: React.Dispatch<React.SetStateAction<number>>;
   setNotReceivedAmount: React.Dispatch<React.SetStateAction<number>>;
   setRemainTime: React.Dispatch<React.SetStateAction<number>>;
   setTotalTime: React.Dispatch<React.SetStateAction<number>>;
   setUserId: React.Dispatch<React.SetStateAction<string>>;
+  setIsTimingStarted: React.Dispatch<React.SetStateAction<boolean>>;
+  setTotalPoints: React.Dispatch<React.SetStateAction<number>>;
   totalTime: number;
   userId: string;
 }
@@ -23,19 +27,25 @@ export const TimeContextProvider: React.FC<ITimeContextProvider> = ({
   children,
 }) => {
   const [userId, setUserId] = useState("");
-  const [totalTime, setTotalTime] = useState(100000000);
+  const [isTimingStarted, setIsTimingStarted] = useState(false);
+  const [totalTime, setTotalTime] = useState(60);
   const [remainTime, setRemainTime] = useState(1);
+  const [totalPoints, setTotalPoints] = useState(1);
   const [minedAmount, setMinedAmount] = useState(0);
   const [notReceiveAmount, setNotReceivedAmount] = useState(0);
   return (
     <TimeContext.Provider
       value={{
+        isTimingStarted,
         minedAmount,
         notReceiveAmount,
         remainTime,
+        setIsTimingStarted,
+        totalPoints,
         setMinedAmount,
         setNotReceivedAmount,
         setRemainTime,
+        setTotalPoints,
         setTotalTime,
         setUserId,
         totalTime,
