@@ -81,10 +81,10 @@ const Friends = ({
       </div>
       <div className='w-full flex justify-center'>
         <img
-          src='/friends_bg.webp'
+          src='/friend_img.png'
           alt='friends_bg'
           loading='lazy'
-          className='h-full px-12 py-2'
+          className='w-64'
         />
       </div>
       <div className='flex flex-col justify-between items-start px-6 text-white'>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import { ENDPOINT } from "../data";
 import { toast } from "react-hot-toast";
@@ -10,78 +10,20 @@ import "../App.css";
 import ClaimCard from "../component/ClaimCard";
 import { formatNumberWithCommas } from "../utils/functions";
 import Loader from "../component/Loader";
-
-const ChannelData = [
-  // {
-  //   id: "Channel",
-  //   title: "DAILY REWARD",
-  //   comment: "Complete your daily tasks and earn rewards!",
-  //   src: <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-camera"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>,
-  //   btnTitle: "Go",
-  // },
-  {
-    id: "INVITE",
-    title: "INVITE YOUR FIRST FRIEND",
-    comment: "Invite a friend and earn from their Buffies",
-    src: (
-      <svg
-        xmlns='http://www.w3.org/2000/svg'
-        width='36'
-        height='36'
-        viewBox='0 0 24 24'
-        fill='none'
-        stroke='currentColor'
-        strokeWidth='2'
-        strokeLinecap='round'
-        strokeLinejoin='round'
-        className='lucide lucide-user-plus'>
-        <path d='M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2' />
-        <circle cx='9' cy='7' r='4' />
-        <line x1='19' x2='19' y1='8' y2='14' />
-        <line x1='22' x2='16' y1='11' y2='11' />
-      </svg>
-    ),
-    btnTitle: "Invite",
-  },
-  {
-    id: "Buffy",
-    title: "EARN BUFFY",
-    comment: "join Buffy community and complete daily tasks",
-    src: (
-      <svg
-        xmlns='http://www.w3.org/2000/svg'
-        width='36'
-        height='36'
-        viewBox='0 0 24 24'
-        fill='none'
-        stroke='currentColor'
-        strokeWidth='2'
-        strokeLinecap='round'
-        strokeLinejoin='round'
-        className='lucide lucide-users'>
-        <path d='M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2' />
-        <circle cx='9' cy='7' r='4' />
-        <path d='M22 21v-2a4 4 0 0 0-3-3.87' />
-        <path d='M16 3.13a4 4 0 0 1 0 7.75' />
-      </svg>
-    ),
-    btnTitle: "Join",
-  },
-];
+import Tap from "../component/Tap";
+import { ChannelData } from "../utils/constants";
+import TimeCount from "../component/TimeCount";
 
 interface IHomeProps {
   setTab: (status: string) => void;
   setTitle: (status: string) => void;
   user: any;
 }
-const Exchange: React.FC<IHomeProps> = ({
-  setTab,
-  setTitle,
-  user,
-}) => {
+const Exchange: React.FC<IHomeProps> = ({ setTab, setTitle, user }) => {
   const [claim, setClaim] = useState(false);
   const [curUser, setCurUser] = useState<any>({});
   const [rank, setRank] = useState(0);
+  const [points, setPoints] = useState(29857775);
   useEffect(() => {
     axios
       .get(`${ENDPOINT}/api/user/top/${user.id}?num=100`, {
@@ -101,6 +43,7 @@ const Exchange: React.FC<IHomeProps> = ({
   }, []);
 
   const handleFollow = () => {
+    console.log("This is handleFollow function!!!");
     axios
       .put(`${ENDPOINT}/api/user/task/${user?.id}`, {
         id: "twitter",
@@ -115,8 +58,12 @@ const Exchange: React.FC<IHomeProps> = ({
     window.open("https://twitter.com/BuffyDrop", "_blank");
   };
 
+  const formattedTotalPoints = useMemo(() => {
+    return formatNumberWithCommas(curUser?.totalPoints);
+  }, [curUser?.totalPoints]);
+
   return (
-    <div className='h-full justify-between items-center pt-10 gap-2 overflow-y-auto w-full overflow-x-hidden hiddenScrollBar relative -top-10'>
+    <div className='h-[calc(100%-40px)] items-center gap-2 overflow-y-auto w-full overflow-x-hidden hiddenScrollBar relative'>
       <div className='bg-[#046ae2] flex gap-1 px-6 pt-5 pb-10 w-full justify-between items-center'>
         <div className='flex gap-2'>
           <img src='/x.svg' className='w-10' loading='lazy' />
@@ -136,8 +83,9 @@ const Exchange: React.FC<IHomeProps> = ({
           Post
         </div>
       </div>
-      <div className='relative rounded-2xl -top-5 w-full flex justify-between px-5 gap-2 items-center flex-col bg-black exchange-content'>
-        <div className='flex flex-col gap-4 justify-evenly w-full items-center mt-5 h-full'>
+      <div className='relative rounded-2xl -top-5 w-full flex justify-between pt-5 px-5 gap-2 items-center flex-col bg-black exchange-content'>
+        <div className='flex flex-col gap-4 justify-evenly w-full items-center h-full'>
+          <TimeCount />
           {claim && (
             <ClaimCard userId={user?.id} handleClose={() => setClaim(false)} />
           )}
@@ -147,22 +95,16 @@ const Exchange: React.FC<IHomeProps> = ({
           <p className='text-2xl text-[#acacac] font-semibold bg-gradient-to-t from-[#444444] to-[#bdbdbd] bg-clip-text text-transparent'>
             You’re user {rank} to join the BuffyDrop!
           </p>
-          <img
-            src='/dogAvatar.webp'
-            className='w-1/3'
-            alt='A cute dog avatar'
-          />
+          {/* <Tap points={points} setPoints={setPoints}/> */}
+          <Tap points={points} setPoints={setPoints} />
           <div>
-            <div className='text-[34px] font-semibold'>
-              {!curUser ||
-              formatNumberWithCommas(curUser?.totalPoints) == "NaN" ? (
-                <div className='flex items-center justify-center w-full'>
-                  <Loader width='30' />
-                </div>
-              ) : (
-                <p>{formatNumberWithCommas(curUser?.totalPoints)}</p>
-              )}
-            </div>
+            {!curUser || formattedTotalPoints == "NaN" ? (
+              <div className='flex items-center justify-center w-full'>
+                <Loader width='30' />
+              </div>
+            ) : (
+              <p className='text-3xl font-semibold'>{formattedTotalPoints}</p>
+            )}
             <p className='text-xl text-[#acacac]'>$BUFFY</p>
           </div>
           <div className='flex flex-row gap-2 w-full'>

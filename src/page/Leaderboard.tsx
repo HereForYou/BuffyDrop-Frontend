@@ -1,45 +1,54 @@
-import axios from 'axios'
-import React, { useEffect, useState, useRef } from 'react'
-import { toast } from 'react-hot-toast'
-import Loader from '../component/Loader'
-import { ENDPOINT } from '../data'
-import { formatNumberWithCommas } from '../utils/functions'
+import axios from "axios";
+import React, { useEffect, useState, useRef, useMemo } from "react";
+import { toast } from "react-hot-toast";
+import Loader from "../component/Loader";
+import { ENDPOINT } from "../data";
+import { formatNumberWithCommas } from "../utils/functions";
 
 interface ILeaderboardProps {
-  user: any
+  user: any;
 }
 
 const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
-  const [users, setUsers] = useState<object[]>([])
-  const [curUser, setCurUser] = useState<any>({})
-  const [ranking, setRaking] = useState<number>(0)
-  const hasShownWarningRef = useRef(false)
-
-  const [loading, setLoading] = useState<boolean>(true)
+  const [users, setUsers] = useState<object[]>([]);
+  const [curUser, setCurUser] = useState<any>({});
+  const [ranking, setRaking] = useState<number>(0);
+  const hasShownWarningRef = useRef(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     if (!hasShownWarningRef.current && user) {
-      setLoading(true)
+      setLoading(true);
       axios
         .get(`${ENDPOINT}/api/user/top/${user.id}?num=100`, {
           headers: {
-            'ngrok-skip-browser-warning': 'true' // or any value you prefer
-          }
+            "ngrok-skip-browser-warning": "true", // or any value you prefer
+          },
         })
-        .then(res => {
-          let userInfo = res.data
-          setUsers(userInfo.topUsers)
-          setCurUser(userInfo.curUser)
-          setRaking(userInfo.ranking)
-          setLoading(false)
+        .then((res) => {
+          let userInfo = res.data;
+          setUsers(userInfo.topUsers);
+          setCurUser(userInfo.curUser);
+          setRaking(userInfo.ranking);
+          setLoading(false);
         })
-        .catch(err => {
-          console.error(err)
-          toast.error('Something Went Wrong!')
-        })
-      hasShownWarningRef.current = true
+        .catch((err) => {
+          console.error(err);
+          toast.error("Something Went Wrong!");
+        });
+      hasShownWarningRef.current = true;
     }
-  }, [])
+  }, []);
+  console.log("====>", curUser, "    ", users)
+
+  const formattedUserCount = useMemo(() => {
+    if (users.length > 1000000) {
+      return Math.round(users.length / 1000000) + "M";
+    } else if (users.length > 1000) {
+      return Math.round(users.length / 1000) + "K";
+    }
+    return users.length;
+  }, [users.length]);
 
   return (
     <div className='h-[calc(100%-40px)] w-full flex flex-col text-center items-center justify-between py-2 px-6 overflow-x-hidden overflow-y-auto hiddenScrollBar text-white'>
@@ -59,10 +68,10 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
         ) : (
           <div>
             <div
-              className={`flex my-3 px-3 py-2 items-center text-[#acacac] bg-[#110d33] rounded-lg w-full`}
-            >
+              className={`flex my-3 px-3 py-2 items-center text-[#acacac] bg-[#110d33] rounded-lg w-full`}>
               <div className='w-full flex flex-row gap-1 items-center'>
-                <div className='h-8 w-8 rounded-full bg-white text-center flex justify-center items-center '>
+                <div
+                  className={`h-8 w-8 rounded-full text-center flex justify-center items-center ${curUser?.style ?? 'bg-orange-600 text-white'}`}>
                   {curUser?.userName.substring(0, 2).toUpperCase()}
                 </div>
                 <div className='flex flex-col'>
@@ -70,7 +79,7 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
                     {curUser?.userName}
                   </p>
                   <p className='text-[8px] text-start pl-2'>
-                    {formatNumberWithCommas(curUser?.totalPoints) + ' BUFFY'}
+                    {formatNumberWithCommas(curUser?.totalPoints) + " BUFFY"}
                   </p>
                 </div>
               </div>
@@ -83,7 +92,7 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
                     className='w-4 h-6'
                   />
                 ) : (
-                  '#' + (ranking + 1)
+                  "#" + (ranking + 1)
                 )}
               </div>
             </div>
@@ -91,11 +100,7 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
             <div>
               <div className='flex pt-3 pb-1 text-2xl font-bold w-full items-center'>
                 <div className='text-center pl-2'>
-                  {users.length > 1000000
-                    ? Math.round(users.length / 1000000) + 'M'
-                    : users.length > 1000
-                    ? Math.round(users.length / 1000) + 'K'
-                    : users.length}
+                  {formattedUserCount}
                 </div>
                 <div className='text-center pl-2'>holders</div>
               </div>
@@ -103,17 +108,17 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
                 {users?.map((iUser: any, index) => (
                   <div
                     key={index}
-                    className={`flex px-2 py-1 items-center text-[#acacac] w-full`}
-                  >
+                    className={`flex px-2 py-1 items-center text-[#acacac] w-full`}>
                     <div className='relative h-10 overflow-hidden w-[100%] flex items-center'>
-                      <div className='h-8 w-8 rounded-full bg-white text-center flex justify-center items-center '>
+                      <div
+                        className={`h-8 w-8 rounded-full text-center flex justify-center items-center ${iUser?.style ?? 'bg-white text-black'}`}>
                         {iUser?.userName.substring(0, 2).toUpperCase()}
                       </div>
                       <div className='pl-4 text-start'>
                         <p className='text-xs text-white'>{iUser?.userName}</p>
                         <p className='text-[8px]'>
                           {formatNumberWithCommas(iUser?.totalPoints) +
-                            ' BUFFY'}
+                            " BUFFY"}
                         </p>
                       </div>
                     </div>
@@ -126,7 +131,7 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
                           className='w-4 h-6'
                         />
                       ) : (
-                        '#' + (index + 1)
+                        "#" + (index + 1)
                       )}
                     </div>
                   </div>
@@ -137,7 +142,7 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Leaderboard
+export default Leaderboard;
