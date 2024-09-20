@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import { ENDPOINT } from "../data";
 import { toast } from "react-hot-toast";
@@ -12,7 +12,7 @@ import { formatNumberWithCommas } from "../utils/functions";
 import Loader from "../component/Loader";
 import Tap from "../component/Tap";
 import { ChannelData } from "../utils/constants";
-
+import TimeCount from "../component/TimeCount";
 
 interface IHomeProps {
   setTab: (status: string) => void;
@@ -43,6 +43,7 @@ const Exchange: React.FC<IHomeProps> = ({ setTab, setTitle, user }) => {
   }, []);
 
   const handleFollow = () => {
+    console.log("This is handleFollow function!!!");
     axios
       .put(`${ENDPOINT}/api/user/task/${user?.id}`, {
         id: "twitter",
@@ -56,6 +57,10 @@ const Exchange: React.FC<IHomeProps> = ({ setTab, setTitle, user }) => {
       });
     window.open("https://twitter.com/BuffyDrop", "_blank");
   };
+
+  const formattedTotalPoints = useMemo(() => {
+    return formatNumberWithCommas(curUser?.totalPoints);
+  }, [curUser?.totalPoints]);
 
   return (
     <div className='h-[calc(100%-40px)] items-center gap-2 overflow-y-auto w-full overflow-x-hidden hiddenScrollBar relative'>
@@ -80,6 +85,7 @@ const Exchange: React.FC<IHomeProps> = ({ setTab, setTitle, user }) => {
       </div>
       <div className='relative rounded-2xl -top-5 w-full flex justify-between pt-5 px-5 gap-2 items-center flex-col bg-black exchange-content'>
         <div className='flex flex-col gap-4 justify-evenly w-full items-center h-full'>
+          <TimeCount />
           {claim && (
             <ClaimCard userId={user?.id} handleClose={() => setClaim(false)} />
           )}
@@ -90,17 +96,14 @@ const Exchange: React.FC<IHomeProps> = ({ setTab, setTitle, user }) => {
             You’re user {rank} to join the BuffyDrop!
           </p>
           {/* <Tap points={points} setPoints={setPoints}/> */}
-          <Tap points={points} setPoints={setPoints}/>
+          <Tap points={points} setPoints={setPoints} />
           <div>
-            {!curUser ||
-            formatNumberWithCommas(curUser?.totalPoints) == "NaN" ? (
+            {!curUser || formattedTotalPoints == "NaN" ? (
               <div className='flex items-center justify-center w-full'>
                 <Loader width='30' />
               </div>
             ) : (
-              <p className='text-3xl font-semibold'>
-                {formatNumberWithCommas(curUser?.totalPoints)}
-              </p>
+              <p className='text-3xl font-semibold'>{formattedTotalPoints}</p>
             )}
             <p className='text-xl text-[#acacac]'>$BUFFY</p>
           </div>

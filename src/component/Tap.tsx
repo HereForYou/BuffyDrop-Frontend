@@ -5,7 +5,7 @@ interface ITap {
   setPoints: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const Tap: React.FC<ITap> = ({ points, setPoints }) => {
+const Tap: React.FC<ITap> = React.memo(({ points, setPoints }) => {
   const [counts, setCounts] = useState<{ id: number; x: number; y: number }[]>(
     []
   );
@@ -16,10 +16,9 @@ const Tap: React.FC<ITap> = ({ points, setPoints }) => {
     //   return;
     // }
     const rect = e.currentTarget.getBoundingClientRect();
-    console.log(rect," ",e.clientX," ",e.clientY);
-    console.log(window.innerWidth)
-    
-    const x = e.clientX - window.innerWidth/2 + rect.x -rect.width;
+    console.log(rect, " ", e.clientX, " ", e.clientY);
+
+    const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
     setPoints(points + pointsToAdd);
@@ -31,31 +30,33 @@ const Tap: React.FC<ITap> = ({ points, setPoints }) => {
     setCounts((prevcounts) => prevcounts.filter((click) => click.id !== id));
   };
 
-  console.log("This is Buffy Dog!!!")
+  console.log("This is Buffy Dog!!!");
 
   return (
-    <div className='w-full flex justify-center relative'>
-      <img
-        src='/coat.png'
-        className='w-1/3'
-        alt='A cute dog avatar'
-        onClick={handleClick}
-      />
-      {counts.map((count) => (
-        <div
-          key={count.id}
-          className='absolute text-2xl text-red-500 font-bold opacity-0'
-          style={{
-            top: `${count.y - 42}px`,
-            left: `${count.x}px`,
-            animation: `float 1s ease-out`,
-          }}
-          onAnimationEnd={() => handleAnimationEnd(count.id)}>
-          1
-        </div>
-      ))}
+    <div className='flex justify-center'>
+      <div className="relative flex justify-center w-1/3" onClick={handleClick}>
+        <img
+          src='/coat.png'
+          className='w-full select-none pointer-events-none'
+          draggable={false}
+          alt='A cute dog avatar'
+        />
+        {counts.map((count) => (
+          <div
+            key={count.id}
+            className='absolute text-2xl text-red-500 font-bold opacity-0 select-none pointer-events-none'
+            style={{
+              top: `${count.y}px`,
+              left: `${count.x}px`,
+              animation: `float 1s ease-out`,
+            }}
+            onAnimationEnd={() => handleAnimationEnd(count.id)}>
+            1
+          </div>
+        ))}
+      </div>
     </div>
   );
-};
+});
 
 export default Tap;

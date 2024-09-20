@@ -7,6 +7,9 @@ import { useState, useEffect, useRef } from "react";
 import Exchange from "./page/Exchange";
 // import { useTelegram } from './hooks/useTelegram'
 import axios from "axios";
+import {
+  useTimeContext,
+} from "./context/TimeContextProvider";
 import { toast } from "react-hot-toast";
 import Footer from "./component/Footer";
 import Friends from "./page/Friends";
@@ -38,10 +41,11 @@ function App() {
   const [title, setTitle] = useState<string>("");
   const [totalPoint, setTotalPoint] = useState<number>(0.0);
   const [ranking, setRanking] = useState<number>();
+  const { remainTime, setMinedAmount, setRemainTime } = useTimeContext();
   // const [isMobile, setIsMobile] = useState<boolean>(false)
 
   useEffect(() => {
-    console.log("In useeffect")
+    console.log("In useeffect");
     injectSpeedInsights();
     // setIsMobile(isMobileDevice())
     if (!user) {
@@ -64,7 +68,6 @@ function App() {
       !hasShownWarningRef.current &&
       (tab == "Exchange" || tab == "Splash")
     ) {
-      
       if (tab == "Exchange") {
         hasShownWarningRef.current = true;
       }
@@ -89,6 +92,7 @@ function App() {
             .then((response) => {
               console.log("response.data", response.data);
               const userData = response.data.user;
+              setRemainTime(userData.countDown);
               if (response.data.signIn) setTab("Exchange");
               setTotalPoint(userData.totalPoints);
               setRanking(response?.data?.user?.joinRank);
@@ -113,6 +117,23 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (remainTime > 0) {
+        handleMining();
+      }
+    }, 1000);
+    if (remainTime === 0) clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [remainTime]);
+
+  const handleMining = () => {
+    setRemainTime((prev) => prev - 1);
+    setMinedAmount((prev) => prev + 0.2);
+  };
+
   return (
     <Router>
       {loading ? (
@@ -121,18 +142,9 @@ function App() {
         <div
           className={`h-full relative max-h-screen overflow-hidden max-w-[560px] w-full font-roboto`}>
           <div className={`flex h-screen overflow-hidden pb-4 w-full`}>
-            {tab == "Splash" && (
-              <Splash
-                ranking={ranking}
-                setTab={setTab}
-              />
-            )}
+            {tab == "Splash" && <Splash ranking={ranking} setTab={setTab} />}
             {tab == "Exchange" && (
-              <Exchange
-                setTab={setTab}
-                setTitle={setTitle}
-                user={user}
-              />
+              <Exchange setTab={setTab} setTitle={setTitle} user={user} />
             )}
             {tab == "Friends" && (
               <Friends
