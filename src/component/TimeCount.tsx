@@ -119,7 +119,7 @@ const TimeCount = () => {
         <button
           className='flex justify-center items-center w-full bg-green-700 px-4 py-1 rounded-lg h-14 font-bold transition-all duration-200 hover:bg-green-800 hover:translate-y-0.5 outline-none hover:outline-none'
           onClick={() => claimFarming()}>
-          Claim {minedAmount}
+          Claim {minedAmount} Buffy
         </button>
       )}
       <button className='absolute top-2 opacity-0 pointer-events-none'>
