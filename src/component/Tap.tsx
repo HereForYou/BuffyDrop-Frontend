@@ -8,7 +8,7 @@ interface ITap {
   setPoints: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const Tap: React.FC<ITap> = ({ setPoints }) => {
+const Tap: React.FC<ITap> = React.memo(({ setPoints }) => {
   const [counts, setCounts] = useState<{ id: number; x: number; y: number }[]>(
     []
   );
@@ -66,6 +66,6 @@ const Tap: React.FC<ITap> = ({ setPoints }) => {
       </div>
     </div>
   );
-};
+});
 
 export default Tap;
