@@ -29,8 +29,8 @@ export const TimeContextProvider: React.FC<ITimeContextProvider> = ({
   const [userId, setUserId] = useState("");
   const [isTimingStarted, setIsTimingStarted] = useState(false);
   const [totalTime, setTotalTime] = useState(0);
-  const [remainTime, setRemainTime] = useState(1);
-  const [totalPoints, setTotalPoints] = useState(1);
+  const [remainTime, setRemainTime] = useState(0);
+  const [totalPoints, setTotalPoints] = useState(0);
   const [minedAmount, setMinedAmount] = useState(0);
   const [notReceiveAmount, setNotReceivedAmount] = useState(0);
   return (
