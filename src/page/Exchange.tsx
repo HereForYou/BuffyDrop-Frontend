@@ -13,6 +13,7 @@ import Loader from "../component/Loader";
 import Tap from "../component/Tap";
 import { ChannelData } from "../utils/constants";
 import TimeCount from "../component/TimeCount";
+import { useTimeContext } from "../context/TimeContextProvider";
 
 interface IHomeProps {
   setTab: (status: string) => void;
@@ -41,6 +42,7 @@ const Exchange: React.FC<IHomeProps> = ({ setTab, setTitle, user }) => {
         toast.error("Something Went Wrong!");
       });
   }, []);
+  const { totalPoints } = useTimeContext();
 
   const handleFollow = () => {
     console.log("This is handleFollow function!!!");
@@ -59,8 +61,8 @@ const Exchange: React.FC<IHomeProps> = ({ setTab, setTitle, user }) => {
   };
 
   const formattedTotalPoints = useMemo(() => {
-    return formatNumberWithCommas(curUser?.totalPoints);
-  }, [curUser?.totalPoints]);
+    return formatNumberWithCommas(totalPoints);
+  }, [totalPoints]);
 
   return (
     <div className='h-[calc(100%-40px)] items-center gap-2 overflow-y-auto w-full overflow-x-hidden hiddenScrollBar relative'>
@@ -85,7 +87,6 @@ const Exchange: React.FC<IHomeProps> = ({ setTab, setTitle, user }) => {
       </div>
       <div className='relative rounded-2xl -top-5 w-full flex justify-between pt-5 px-5 gap-2 items-center flex-col bg-black exchange-content'>
         <div className='flex flex-col gap-4 justify-evenly w-full items-center h-full'>
-          <TimeCount />
           {claim && (
             <ClaimCard userId={user?.id} handleClose={() => setClaim(false)} />
           )}
@@ -139,6 +140,7 @@ const Exchange: React.FC<IHomeProps> = ({ setTab, setTitle, user }) => {
               ))}
             </Carousel>
           </div>
+          <TimeCount />
         </div>
         {/* <button
           className='bg-[#110d33] w-full py-4 leading-none mt-4'

@@ -39,15 +39,18 @@ function App() {
   const [totalPoint, setTotalPoint] = useState<number>(0.0);
   const [ranking, setRanking] = useState<number>();
   const {
+    isTimingStarted,
+    minedAmount,
     remainTime,
     totalTime,
+    setIsTimingStarted,
     setMinedAmount,
-    setRemainTime,
-    setTotalTime,
     setNotReceivedAmount,
+    setRemainTime,
+    setTotalPoints,
+    setTotalTime,
     setUserId,
   } = useTimeContext();
-  // const [isMobile, setIsMobile] = useState<boolean>(false)
 
   useEffect(() => {
     injectSpeedInsights();
@@ -95,13 +98,25 @@ function App() {
           axios
             .post(`${ENDPOINT}/api/user/${user?.id}`, data)
             .then((response) => {
-              console.log("response.data", response.data);
+              console.log("Initial Response > ", response);
+              const resRemainTime = Math.round(response.data.remainTime);
               const userData = response.data.user;
-              setTotalTime(response.data.countDown);
-              setMinedAmount(userData?.countDown * 0.01)
+              console.log("ResRemainTime", resRemainTime, userData.cliamed);
               if (response.data.signIn) setTab("Exchange");
-              setNotReceivedAmount(userData?.curPoints);
-              setTotalPoint(userData.totalPoints);
+              if (resRemainTime === 0 && !userData.cliamed) {
+                console.log("not claimed");
+                setNotReceivedAmount(60);
+                setTotalTime(0);
+              }
+              if (resRemainTime === 0 && userData.cliamed) {
+                setTotalTime(60);
+              }
+              if (resRemainTime > 0) {
+                setMinedAmount(resRemainTime);
+                setIsTimingStarted(true);
+                setTotalTime(60 - resRemainTime);
+              }
+              setTotalPoints(userData.totalPoints);
               setRanking(response?.data?.user?.joinRank);
               setTask(userData.task);
               if (
@@ -122,55 +137,42 @@ function App() {
           console.error(err);
         });
     }
+
+    // const handleBeforUnload = () => {  //============================== When close the mini app
+    //   console.log("Before Unload");
+    //   endMining();
+    // };
+    // window.addEventListener("beforeunload", handleBeforUnload);
+    // return () => {
+    //   window.removeEventListener("beforeunload", handleBeforUnload);
+    // };
   }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log("This is interval", remainTime, " ", totalTime);
-      if (remainTime <= totalTime) {
-        handleMining();
+      if (remainTime < totalTime && isTimingStarted) {
+        duringMining();
       }
     }, 1000);
     if (remainTime === totalTime && totalTime !== 0) {
-      endMining(true);
+      endMining();
     }
     return () => {
       clearInterval(interval);
     };
-  }, [remainTime]);
+  }, [remainTime, isTimingStarted]);
 
-  useEffect(() => {
-    const handleBeforUnload = () => {
-      console.log("Before Unload");
-      endMining(false);
-    };
-    window.addEventListener("beforeunload", handleBeforUnload);
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforUnload);
-    };
-  }, []);
-
-  const endMining = (flag: boolean) => {
-    axios
-      .put(`${ENDPOINT}/api/user/updatecount/${user?.id}`, {
-        countDown: remainTime,
-        cycle: flag,
-      })
-      .then((res) => {
-        console.log("new countDown", res.data);
-        setTotalTime(res.data?.countDown);
-        setRemainTime(1);
-        setNotReceivedAmount(res.data.user.curPoints);
-        setMinedAmount(0);
-      })
-      .catch((err) => {
-        console.log("There is some error while updating count!!!", err);
-      });
+  const endMining = () => {
+    setIsTimingStarted(false);
+    console.log("End Mining > minedAmount > ", minedAmount);
+    setTotalTime(0);
+    setMinedAmount(60);
   };
 
-  const handleMining = () => {
+  const duringMining = () => {
+    console.log("duringMining > ", minedAmount)
     setRemainTime((prev) => prev + 1);
-    setMinedAmount((prev) => prev + 0.01);
+    setMinedAmount((prev) => prev + 1);
   };
 
   return (
