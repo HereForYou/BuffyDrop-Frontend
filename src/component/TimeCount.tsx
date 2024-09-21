@@ -47,7 +47,11 @@ const TimeCount = () => {
 
   const claimFarmingCore = () => {
     axios
-      .get(`${ENDPOINT}/api/user/updatepoints/${userId}`)
+      .get(`${ENDPOINT}/api/user/updatepoints/${userId}`, {
+        headers: {
+          'ngrok-skip-browser-warning': 'true' // or any value you prefer
+        }
+      })
       .then((res) => {
         console.log("Receive Amount Response > ", res.data);
         setTotalTime(res.data.countDown);
