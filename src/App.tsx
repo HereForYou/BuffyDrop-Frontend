@@ -106,6 +106,7 @@ function App() {
               if (resRemainTime === 0 && !userData.cliamed) {
                 console.log("not claimed");
                 setNotReceivedAmount(60);
+                setMinedAmount(60);
                 setTotalTime(0);
               }
               if (resRemainTime === 0 && userData.cliamed) {
@@ -170,7 +171,7 @@ function App() {
   };
 
   const duringMining = () => {
-    console.log("duringMining > ", minedAmount)
+    console.log("duringMining > ", minedAmount);
     setRemainTime((prev) => prev + 1);
     setMinedAmount((prev) => prev + 1);
   };
