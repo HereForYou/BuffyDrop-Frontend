@@ -18,7 +18,6 @@ const TimeCount = () => {
     minedAmount,
     totalTime,
     setTotalTime,
-    notReceiveAmount,
     userId,
     setIsTimingStarted,
     setMinedAmount,
