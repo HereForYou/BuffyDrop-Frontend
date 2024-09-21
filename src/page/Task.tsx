@@ -5,6 +5,7 @@ import { toast } from "react-hot-toast";
 import { ENDPOINT } from "../data";
 import { formatNumberWithCommas } from "../utils/functions";
 import Loader from "../component/Loader";
+import { useTimeContext } from "../context/TimeContextProvider";
 
 interface ITaskProps {
   user: any;
@@ -31,6 +32,7 @@ const Task: React.FC<ITaskProps> = ({
   const [timeRemaining, setTimeRemaining] = useState<number>(5);
   const [tracking, setTracking] = useState<boolean>(false);
   const [currentItem, setCurrentItem] = useState<any>({});
+  const { setTotalPoints } = useTimeContext();
 
   const handleMouseEvent = () => {
     if (tracking) {
@@ -68,13 +70,14 @@ const Task: React.FC<ITaskProps> = ({
                     if (res.data) {
                       let newPoints = totalPoint + currentItem.profit;
                       setTotalPoint(newPoints);
+                      setTotalPoints((prev) => prev + currentItem.profit);
                       setTask([...task, currentItem.id]);
                       toast.success(`+${currentItem.profit} $GS!`, {
                         duration: 5000,
                         position: "top-center",
                         style: {
-                          marginTop: '30px'
-                        }
+                          marginTop: "30px",
+                        },
                       });
                     }
                   })
@@ -101,13 +104,14 @@ const Task: React.FC<ITaskProps> = ({
               if (res.data) {
                 let newPoints = totalPoint + currentItem.profit;
                 setTotalPoint(newPoints);
+                setTotalPoints((prev) => prev + currentItem.profit);
                 setTask([...task, currentItem.id]);
                 toast.success(`+${currentItem.profit} $Buffy!`, {
                   duration: 5000,
                   position: "top-center",
                   style: {
-                    marginTop: '30px'
-                  }
+                    marginTop: "30px",
+                  },
                 });
               }
             })
@@ -151,13 +155,14 @@ const Task: React.FC<ITaskProps> = ({
           if (res.data) {
             let newPoints = totalPoint + item.profit;
             setTotalPoint(newPoints);
+            setTotalPoints((prev) => prev + item.profit);
             setTask([...task, item.id]);
             toast.success(`+${item.profit} $Buffy!`, {
               duration: 5000,
               position: "top-center",
               style: {
-                marginTop: '30px'
-              }
+                marginTop: "30px",
+              },
             });
           }
         })
