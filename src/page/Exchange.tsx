@@ -65,7 +65,7 @@ const Exchange: React.FC<IHomeProps> = ({ setTab, setTitle, user }) => {
   }, [totalPoints]);
 
   return (
-    <div className='h-[calc(100%-40px)] items-center gap-2 overflow-y-auto w-full overflow-x-hidden hiddenScrollBar relative'>
+    <div className='h-[calc(100%-50px)] items-center gap-2 overflow-y-auto w-full overflow-x-hidden hiddenScrollBar relative'>
       <div className='bg-[#046ae2] flex gap-1 px-6 pt-5 pb-10 w-full justify-between items-center'>
         <div className='flex gap-2'>
           <img src='/x.svg' className='w-10' loading='lazy' />
@@ -108,39 +108,41 @@ const Exchange: React.FC<IHomeProps> = ({ setTab, setTitle, user }) => {
             )}
             <p className='text-xl text-[#acacac]'>$BUFFY</p>
           </div>
-          <div className='flex flex-row gap-2 w-full'>
-            <Carousel
-              className='carousel-card relative flex -left-[11%] overflow-visible'
-              infiniteLoop={true}
-              showArrows={false}
-              showIndicators={true}
-              showStatus={false}
-              centerMode
-              centerSlidePercentage={80}
-              showThumbs={false}
-              useKeyboardArrows={false}
-              autoPlay={false}
-              stopOnHover={false}
-              swipeable={true}
-              dynamicHeight={false}
-              emulateTouch={true}
-              transitionTime={900}
-              autoFocus={false}>
-              {ChannelData.map((idx, key) => (
-                <Channel
-                  id={idx.id}
-                  heading={idx.title}
-                  comment={idx.comment}
-                  src={idx.src}
-                  key={key}
-                  setTab={setTab}
-                  setTitle={setTitle}
-                  btnTitle={idx.btnTitle}
-                />
-              ))}
-            </Carousel>
+          <div className='w-full'>
+            <div className='flex flex-row w-full'>
+              <Carousel
+                className='carousel-card relative flex -left-[11%] overflow-visible'
+                infiniteLoop={true}
+                showArrows={false}
+                showIndicators={true}
+                showStatus={false}
+                centerMode
+                centerSlidePercentage={80}
+                showThumbs={false}
+                useKeyboardArrows={false}
+                autoPlay={false}
+                stopOnHover={false}
+                swipeable={true}
+                dynamicHeight={false}
+                emulateTouch={true}
+                transitionTime={900}
+                autoFocus={false}>
+                {ChannelData.map((idx, key) => (
+                  <Channel
+                    id={idx.id}
+                    heading={idx.title}
+                    comment={idx.comment}
+                    src={idx.src}
+                    key={key}
+                    setTab={setTab}
+                    setTitle={setTitle}
+                    btnTitle={idx.btnTitle}
+                  />
+                ))}
+              </Carousel>
+            </div>
+            <TimeCount />
           </div>
-          <TimeCount />
         </div>
         {/* <button
           className='bg-[#110d33] w-full py-4 leading-none mt-4'

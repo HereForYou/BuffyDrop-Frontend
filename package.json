@@ -28,6 +28,7 @@
     "react": "^18.2.0",
     "react-animated-counter": "^1.7.9",
     "react-confetti": "^6.1.0",
+    "react-confetti-explosion": "^2.1.2",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
     "react-loader-spinner": "^6.1.6",
