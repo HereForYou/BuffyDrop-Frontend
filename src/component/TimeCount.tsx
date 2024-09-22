@@ -54,7 +54,7 @@ const TimeCount = () => {
       })
       .then((res) => {
         console.log("Receive Amount Response > ", res.data);
-        setTotalTime(res.data.countDown);
+        setTotalTime(res.data.remainTime);
         setRemainTime(0);
         setNotReceivedAmount(0);
         setTotalPoints(res.data.user.totalPoints);
