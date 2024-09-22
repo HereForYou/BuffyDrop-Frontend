@@ -5,7 +5,7 @@ import ConfettiExplosion from "react-confetti-explosion";
 import {
   getHours,
   getMinutes,
-  // formatMiningNumber,
+  formatMiningNumber,
   getSeconds,
 } from "../utils/functions";
 import { useTimeContext } from "../context/TimeContextProvider";
@@ -80,10 +80,11 @@ const TimeCount = () => {
               <div className='flex h-full justify-center gap-2 items-center font-bold text-xl'>
                 <p>Farming</p>
                 <AnimatedCounter
-                  value={minedAmount}
-                  //   value={Number(formatMiningNumber(minedAmount))}
+                  // value={minedAmount}
+                  value={Number(formatMiningNumber(minedAmount))}
+                  decimalPrecision={1}
                   color='text-gray-400'
-                  includeDecimals={false}
+                  // includeDecimals={false}
                   incrementColor='text-gray-400'
                   decrementColor='text-gray-400'
                 />
@@ -115,7 +116,7 @@ const TimeCount = () => {
         <button
           className='flex justify-center items-center w-full bg-green-700 px-4 py-1 rounded-lg h-14 font-bold transition-all duration-200 hover:bg-green-800 hover:translate-y-0.5 outline-none hover:outline-none'
           onClick={() => claimFarming()}>
-          Claim {minedAmount} Buffy
+          Claim {Number(formatMiningNumber(minedAmount))} Buffy
         </button>
       )}
       {/* ==================================================== For Convetti ================================================================= */}

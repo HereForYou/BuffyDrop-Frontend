@@ -61,6 +61,7 @@ const Exchange: React.FC<IHomeProps> = ({ setTab, setTitle, user }) => {
   };
 
   const formattedTotalPoints = useMemo(() => {
+    console.log("This is totalpoints > ", totalPoints);
     return formatNumberWithCommas(totalPoints);
   }, [totalPoints]);
 
