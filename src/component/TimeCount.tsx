@@ -42,15 +42,15 @@ const TimeCount = () => {
     if (isClaimed) return;
     setIsClaimed(true);
     console.log("claim Farming click", minedAmount);
-    claimFarmingCore();
-  };
-
-  const claimFarmingCore = () => {
     axios
-      .get(`${ENDPOINT}/api/user/updatepoints/${userId}`)
+      .get(`${ENDPOINT}/api/user/updatepoints/${userId}`, {
+        headers: {
+          "ngrok-skip-browser-warning": "true", // or any value you prefer
+        },
+      })
       .then((res) => {
         console.log("Receive Amount Response > ", res.data);
-        setTotalTime(res.data.countDown);
+        setTotalTime(res.data.remainTime);
         setRemainTime(0);
         setNotReceivedAmount(0);
         setTotalPoints(res.data.user.totalPoints);
@@ -70,6 +70,7 @@ const TimeCount = () => {
       })
       .catch((err) => console.log("Start Farming Error > ", err));
   };
+  console.log("this is totla Time > ", totalTime)
 
   return (
     <div className='w-full justify-center items-center relative'>
@@ -115,9 +116,10 @@ const TimeCount = () => {
         <button
           className='flex justify-center items-center w-full bg-green-700 px-4 py-1 rounded-lg h-14 font-bold transition-all duration-200 hover:bg-green-800 hover:translate-y-0.5 outline-none hover:outline-none'
           onClick={() => claimFarming()}>
-          Claim {minedAmount}
+          Claim {minedAmount} Buffy
         </button>
       )}
+      {/* ==================================================== For Convetti ================================================================= */}
       <button className='absolute top-2 opacity-0 pointer-events-none'>
         {isClaimed && (
           <ConfettiExplosion

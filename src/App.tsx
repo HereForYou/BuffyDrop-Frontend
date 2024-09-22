@@ -105,17 +105,18 @@ function App() {
               if (response.data.signIn) setTab("Exchange");
               if (resRemainTime === 0 && !userData.cliamed) {
                 console.log("not claimed");
-                setNotReceivedAmount(60);
-                setMinedAmount(60);
+                setNotReceivedAmount(response?.data?.cycleTime);
+                setMinedAmount(response?.data?.cycleTime);
                 setTotalTime(0);
               }
               if (resRemainTime === 0 && userData.cliamed) {
-                setTotalTime(60);
+                console.log("This is remail 0, claimed ture");
+                setTotalTime(Number(response?.data?.cycleTime));
               }
               if (resRemainTime > 0) {
                 setMinedAmount(resRemainTime);
                 setIsTimingStarted(true);
-                setTotalTime(60 - resRemainTime);
+                setTotalTime(response?.data?.cycleTime - resRemainTime);
               }
               setTotalPoints(userData.totalPoints);
               setRanking(response?.data?.user?.joinRank);
