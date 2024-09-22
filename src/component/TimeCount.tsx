@@ -45,8 +45,8 @@ const TimeCount = () => {
     axios
       .get(`${ENDPOINT}/api/user/updatepoints/${userId}`, {
         headers: {
-          "ngrok-skip-browser-warning": "true", // or any value you prefer
-        },
+          'ngrok-skip-browser-warning': 'true' // or any value you prefer
+        }
       })
       .then((res) => {
         console.log("Receive Amount Response > ", res.data);
@@ -70,7 +70,6 @@ const TimeCount = () => {
       })
       .catch((err) => console.log("Start Farming Error > ", err));
   };
-  console.log("this is totla Time > ", totalTime)
 
   return (
     <div className='w-full justify-center items-center relative'>
