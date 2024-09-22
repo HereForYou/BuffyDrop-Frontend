@@ -42,10 +42,6 @@ const TimeCount = () => {
     if (isClaimed) return;
     setIsClaimed(true);
     console.log("claim Farming click", minedAmount);
-    claimFarmingCore();
-  };
-
-  const claimFarmingCore = () => {
     axios
       .get(`${ENDPOINT}/api/user/updatepoints/${userId}`, {
         headers: {
@@ -122,6 +118,7 @@ const TimeCount = () => {
           Claim {minedAmount} Buffy
         </button>
       )}
+      {/* ==================================================== For Convetti ================================================================= */}
       <button className='absolute top-2 opacity-0 pointer-events-none'>
         {isClaimed && (
           <ConfettiExplosion
