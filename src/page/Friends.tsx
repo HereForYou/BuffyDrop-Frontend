@@ -65,7 +65,7 @@ const Friends = ({
   }
   const handleClipBoardCopy = async () => {
     legacyCopy(
-      `https://t.me/BuffyDropbot/Buffy Drop?startapp=${inviteLink}${desText}`
+      `https://t.me/BuffyDropbot/BuffyDrop?startapp=${inviteLink}${desText}`
     );
     toast.success("Successfully Copied!");
   };
@@ -124,7 +124,7 @@ const Friends = ({
           setShowModal={setShowModal}
         />
       </div>
-      <InviteFriendModal 
+      <InviteFriendModal
         showModal={showModal}
         setShowModal={setShowModal}
         inviteLink={inviteLink}

@@ -72,7 +72,7 @@ const Task: React.FC<ITaskProps> = ({
                       setTotalPoint(newPoints);
                       setTotalPoints((prev) => prev + currentItem.profit);
                       setTask([...task, currentItem.id]);
-                      toast.success(`+${currentItem.profit} $GS!`, {
+                      toast.success(`+${currentItem.profit} $Buffy!`, {
                         duration: 5000,
                         position: "top-center",
                         style: {
