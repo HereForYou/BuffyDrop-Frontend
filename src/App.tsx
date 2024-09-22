@@ -39,10 +39,13 @@ function App() {
   const [totalPoint, setTotalPoint] = useState<number>(0.0);
   const [ranking, setRanking] = useState<number>();
   const {
+    increasingAmout,
     isTimingStarted,
     minedAmount,
     remainTime,
     totalTime,
+    setClaimed,
+    setIncreasingAmount,
     setIsTimingStarted,
     setMinedAmount,
     setNotReceivedAmount,
@@ -93,6 +96,7 @@ function App() {
           },
         })
         .then((res) => {
+          setIncreasingAmount(res?.data?.dailyRevenue);
           setLoading(true);
           setSetting(res.data);
           axios
@@ -101,12 +105,16 @@ function App() {
               console.log("Initial Response > ", response);
               const resRemainTime = Math.round(response.data.remainTime);
               const userData = response.data.user;
-              console.log("ResRemainTime", resRemainTime, userData.cliamed);
+              console.log(
+                "ResRemainTime",
+                resRemainTime * increasingAmout,
+                userData.cliamed
+              );
               if (response.data.signIn) setTab("Exchange");
               if (resRemainTime === 0 && !userData.cliamed) {
                 console.log("not claimed");
                 setNotReceivedAmount(response?.data?.cycleTime);
-                setMinedAmount(response?.data?.cycleTime);
+                setMinedAmount(response?.data?.cycleTime * increasingAmout);
                 setTotalTime(0);
               }
               if (resRemainTime === 0 && userData.cliamed) {
@@ -114,7 +122,8 @@ function App() {
                 setTotalTime(Number(response?.data?.cycleTime));
               }
               if (resRemainTime > 0) {
-                setMinedAmount(resRemainTime);
+                setClaimed(userData.cliamed);
+                setMinedAmount(resRemainTime * increasingAmout);
                 setIsTimingStarted(true);
                 setTotalTime(response?.data?.cycleTime - resRemainTime);
               }
@@ -172,7 +181,7 @@ function App() {
 
   const duringMining = () => {
     setRemainTime((prev) => prev + 1);
-    setMinedAmount((prev) => prev + 1);
+    setMinedAmount((prev) => prev + increasingAmout);
   };
 
   return (
