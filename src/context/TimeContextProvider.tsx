@@ -8,6 +8,7 @@ interface ITimeContext {
   // notReceiveAmount: number;
   remainTime: number;
   totalPoints: number;
+  rank: number;
   setClaimed: React.Dispatch<React.SetStateAction<boolean>>;
   setIncreasingAmount: React.Dispatch<React.SetStateAction<number>>;
   setMinedAmount: React.Dispatch<React.SetStateAction<number>>;
@@ -16,6 +17,7 @@ interface ITimeContext {
   setTotalTime: React.Dispatch<React.SetStateAction<number>>;
   setUserId: React.Dispatch<React.SetStateAction<string>>;
   setIsTimingStarted: React.Dispatch<React.SetStateAction<boolean>>;
+  setRank: React.Dispatch<React.SetStateAction<number>>;
   setTotalPoints: React.Dispatch<React.SetStateAction<number>>;
   totalTime: number;
   userId: string;
@@ -39,6 +41,7 @@ export const TimeContextProvider: React.FC<ITimeContextProvider> = ({
   // const [notReceiveAmount, setNotReceivedAmount] = useState(0);
   const [claimed, setClaimed] = useState(false);
   const [increasingAmout, setIncreasingAmount] = useState(0.3);
+  const [rank, setRank] = useState(0);
   return (
     <TimeContext.Provider
       value={{
@@ -47,6 +50,7 @@ export const TimeContextProvider: React.FC<ITimeContextProvider> = ({
         isTimingStarted,
         minedAmount,
         // notReceiveAmount,
+        rank,
         remainTime,
         setIsTimingStarted,
         totalPoints,
@@ -54,6 +58,7 @@ export const TimeContextProvider: React.FC<ITimeContextProvider> = ({
         setIncreasingAmount,
         setMinedAmount,
         // setNotReceivedAmount,
+        setRank,
         setRemainTime,
         setTotalPoints,
         setTotalTime,

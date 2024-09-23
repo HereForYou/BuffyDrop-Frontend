@@ -37,17 +37,18 @@ function App() {
   const [tab, setTab] = useState<string>("Splash");
   const [title, setTitle] = useState<string>("");
   const [totalPoint, setTotalPoint] = useState<number>(0.0);
-  const [ranking, setRanking] = useState<number>();
   const {
     increasingAmout,
     isTimingStarted,
     // minedAmount,
+    rank,
     remainTime,
     totalTime,
     setClaimed,
     setIncreasingAmount,
     setIsTimingStarted,
     setMinedAmount,
+    setRank,
     setRemainTime,
     setTotalPoints,
     setTotalTime,
@@ -126,7 +127,7 @@ function App() {
               setIsTimingStarted(userData.isStarted);
               setClaimed(userData.cliamed);
               setTotalPoints(userData.totalPoints);
-              setRanking(response?.data?.user?.joinRank);
+              setRank(response?.data?.user?.joinRank);
               setTask(userData.task);
               if (
                 start_param &&
@@ -184,7 +185,7 @@ function App() {
         <div
           className={`h-full relative max-h-screen overflow-hidden max-w-[560px] w-full font-roboto`}>
           <div className={`flex h-screen overflow-hidden pb-4 w-full`}>
-            {tab == "Splash" && <Splash ranking={ranking} setTab={setTab} />}
+            {tab == "Splash" && <Splash ranking={rank} setTab={setTab} />}
             {tab == "Exchange" && (
               <Exchange setTab={setTab} setTitle={setTitle} user={user} />
             )}
