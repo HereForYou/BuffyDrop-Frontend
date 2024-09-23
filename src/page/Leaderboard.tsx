@@ -20,7 +20,7 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
     if (!hasShownWarningRef.current && user) {
       setLoading(true);
       axios
-        .get(`${ENDPOINT}/api/user/top/${user.id}?num=100`, {
+        .get(`${ENDPOINT}/api/user/top/${user.id}`, {
           headers: {
             "ngrok-skip-browser-warning": "true", // or any value you prefer
           },
@@ -39,7 +39,6 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
       hasShownWarningRef.current = true;
     }
   }, []);
-  console.log("====>", curUser, "    ", users)
 
   const formattedUserCount = useMemo(() => {
     if (users.length > 1000000) {
@@ -71,7 +70,9 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
               className={`flex my-3 px-3 py-2 items-center text-[#acacac] bg-[#110d33] rounded-lg w-full`}>
               <div className='w-full flex flex-row gap-1 items-center'>
                 <div
-                  className={`h-8 w-8 rounded-full text-center flex justify-center items-center ${curUser?.style ?? 'bg-orange-600 text-white'}`}>
+                  className={`h-8 w-8 rounded-full text-center flex justify-center items-center ${
+                    curUser?.style ?? "bg-orange-600 text-white"
+                  }`}>
                   {curUser?.userName.substring(0, 2).toUpperCase()}
                 </div>
                 <div className='flex flex-col'>
@@ -99,9 +100,7 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
 
             <div>
               <div className='flex pt-3 pb-1 text-2xl font-bold w-full items-center'>
-                <div className='text-center pl-2'>
-                  {formattedUserCount}
-                </div>
+                <div className='text-center pl-2'>{formattedUserCount}</div>
                 <div className='text-center pl-2'>holders</div>
               </div>
               <div className='h-[62vh] overflow-auto w-full'>
@@ -111,7 +110,9 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
                     className={`flex px-2 py-1 items-center text-[#acacac] w-full`}>
                     <div className='relative h-10 overflow-hidden w-[100%] flex items-center'>
                       <div
-                        className={`h-8 w-8 rounded-full text-center flex justify-center items-center ${iUser?.style ?? 'bg-white text-black'}`}>
+                        className={`h-8 w-8 rounded-full text-center flex justify-center items-center ${
+                          iUser?.style ?? "bg-white text-black"
+                        }`}>
                         {iUser?.userName.substring(0, 2).toUpperCase()}
                       </div>
                       <div className='pl-4 text-start'>
