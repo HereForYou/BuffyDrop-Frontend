@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState, useRef, useMemo } from "react";
-import { toast } from "react-hot-toast";
+// import { toast } from "react-hot-toast";
 import Loader from "../component/Loader";
 import { ENDPOINT } from "../data";
 import { formatNumberWithCommas } from "../utils/functions";
