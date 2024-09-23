@@ -177,6 +177,7 @@ function App() {
     await axios.post(`${ENDPOINT}/api/user/end/${user?.id}`).then((res) => {
       console.log("End Mining > minedAmount > ", res);
       setClaimed(res.data.user.cliamed);
+      setIsTimingStarted(false);
       setTotalTime(0);
     });
   };
