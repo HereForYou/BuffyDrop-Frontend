@@ -80,4 +80,8 @@ const ChannelData = [
   },
 ];
 
-export { rankAvatarThemes, ChannelData };
+const increasingAmout = 0.3;
+
+const cycleTime = 28800;
+
+export { rankAvatarThemes, ChannelData, increasingAmout, cycleTime };

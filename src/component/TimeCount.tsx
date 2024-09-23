@@ -13,6 +13,7 @@ import { ENDPOINT } from "../data";
 
 const TimeCount = () => {
   const {
+    claimed,
     isTimingStarted,
     remainTime,
     setRemainTime,
@@ -23,6 +24,7 @@ const TimeCount = () => {
     setIsTimingStarted,
     setMinedAmount,
     setNotReceivedAmount,
+    setClaimed,
     setTotalPoints,
   } = useTimeContext();
   const [isClaimed, setIsClaimed] = useState(false);
@@ -45,8 +47,8 @@ const TimeCount = () => {
     axios
       .get(`${ENDPOINT}/api/user/updatepoints/${userId}`, {
         headers: {
-          'ngrok-skip-browser-warning': 'true' // or any value you prefer
-        }
+          "ngrok-skip-browser-warning": "true", // or any value you prefer
+        },
       })
       .then((res) => {
         console.log("Receive Amount Response > ", res.data);
@@ -55,6 +57,7 @@ const TimeCount = () => {
         setNotReceivedAmount(0);
         setTotalPoints(res.data.user.totalPoints);
         setMinedAmount(0);
+        setClaimed(res.data.user.cliamed);
       })
       .catch((err) => console.log("Receive Amount Error > ", err));
   };
@@ -73,7 +76,8 @@ const TimeCount = () => {
 
   return (
     <div className='w-full justify-center items-center relative'>
-      {totalTime > 0 ? (
+      {/* {totalTime > 0 ? ( */}
+      {claimed ? (
         isTimingStarted ? (
           <div className='w-full bg-gray-500 text-gray-400 px-4 py-1 rounded-lg h-14 transition-all duration-200'>
             <div className='flex justify-center items-center relative h-full'>
@@ -116,7 +120,7 @@ const TimeCount = () => {
         <button
           className='flex justify-center items-center w-full bg-green-700 px-4 py-1 rounded-lg h-14 font-bold transition-all duration-200 hover:bg-green-800 hover:translate-y-0.5 outline-none hover:outline-none'
           onClick={() => claimFarming()}>
-          Claim {Number(formatMiningNumber(minedAmount))} Buffy
+          Claim {Number(formatMiningNumber(minedAmount))} $Buffy
         </button>
       )}
       {/* ==================================================== For Convetti ================================================================= */}
