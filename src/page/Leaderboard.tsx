@@ -16,28 +16,17 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
   const [ranking, setRaking] = useState<number>(0);
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [page, setPage] = useState(0);
-
-  const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
-    const element = event.currentTarget;
-    // Check if we've reached the bottom
-    if (element.scrollHeight - element.scrollTop === element.clientHeight) {
-      setPage((prev) => prev + 1);
-      console.log("Scrolled to the bottom!");
-      // You can perform any action here, like loading more content
-    }
-  };
 
   useEffect(() => {
-    getTopUsers(page);
-  }, [page]);
+    getTopUsers();
+  }, []);
 
-  const getTopUsers = async (page: number) => {
+  const getTopUsers = async () => {
     setLoading(true);
     if (user) {
       try {
         const { data } = await axios.get(
-          `${ENDPOINT}/api/user/top/${user.id}?page=${page}`,
+          `${ENDPOINT}/api/user/top/${user.id}`,
           {
             headers: {
               "ngrok-skip-browser-warning": "true", // or any value you prefer
@@ -103,15 +92,15 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
                 </div>
               </div>
               <div className='text-xs text-center flex justify-center w-[15%]'>
-                {ranking + 1 == 1 || ranking + 1 == 2 || ranking + 1 == 3 ? (
+                {ranking == 1 || ranking == 2 || ranking == 3 ? (
                   <img
-                    src={`/rank_${ranking + 1}.webp`}
+                    src={`/rank_${ranking}.webp`}
                     loading='lazy'
                     alt='rank'
                     className='w-4 h-6'
                   />
                 ) : (
-                  "#" + (ranking + 1)
+                  "#" + ranking
                 )}
               </div>
             </div>
@@ -120,10 +109,7 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
                 <div className='text-center pl-2'>{formattedUserCount}</div>
                 <div className='text-center pl-2'>holders</div>
               </div>
-              <div
-                className='h-[62vh] overflow-auto w-full'
-                ref={scrollRef}
-                onScroll={handleScroll}>
+              <div className='h-[62vh] overflow-auto w-full' ref={scrollRef}>
                 {users?.map((iUser: any, index) => (
                   <div
                     key={index}
