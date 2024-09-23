@@ -48,7 +48,6 @@ function App() {
     setIncreasingAmount,
     setIsTimingStarted,
     setMinedAmount,
-    setNotReceivedAmount,
     setRemainTime,
     setTotalPoints,
     setTotalTime,
@@ -113,7 +112,6 @@ function App() {
               if (response.data.signIn) setTab("Exchange");
               if (resRemainTime === 0 && userData.isStarted) {
                 console.log("not claimed");
-                setNotReceivedAmount(response?.data?.cycleTime);
                 setMinedAmount(response?.data?.cycleTime * increasingAmout);
                 setTotalTime(0);
               }
@@ -148,15 +146,6 @@ function App() {
           console.error(err);
         });
     }
-
-    // const handleBeforUnload = () => {  //============================== When close the mini app
-    //   console.log("Before Unload");
-    //   endMining();
-    // };
-    // window.addEventListener("beforeunload", handleBeforUnload);
-    // return () => {
-    //   window.removeEventListener("beforeunload", handleBeforUnload);
-    // };
   }, []);
 
   useEffect(() => {
