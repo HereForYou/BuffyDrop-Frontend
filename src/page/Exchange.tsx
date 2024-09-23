@@ -1,7 +1,6 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import axios from "axios";
 import { ENDPOINT } from "../data";
-import { toast } from "react-hot-toast";
 import Channel from "../component/Channel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
@@ -22,27 +21,8 @@ interface IHomeProps {
 }
 const Exchange: React.FC<IHomeProps> = ({ setTab, setTitle, user }) => {
   const [claim, setClaim] = useState(false);
-  const [curUser, setCurUser] = useState<any>({});
-  const [rank, setRank] = useState(0);
   const [points, setPoints] = useState(29857775);
-  useEffect(() => {
-    axios
-      .get(`${ENDPOINT}/api/user/top/${user.id}?num=100`, {
-        headers: {
-          "ngrok-skip-browser-warning": "true", // or any value you prefer
-        },
-      })
-      .then((res) => {
-        let userInfo = res.data;
-        setCurUser(userInfo.curUser);
-        setRank(userInfo.curUser.joinRank);
-      })
-      .catch((err) => {
-        console.error(err);
-        toast.error("Something Went Wrong!");
-      });
-  }, []);
-  const { totalPoints } = useTimeContext();
+  const { rank, totalPoints } = useTimeContext();
 
   const handleFollow = () => {
     console.log("This is handleFollow function!!!");
@@ -61,7 +41,6 @@ const Exchange: React.FC<IHomeProps> = ({ setTab, setTitle, user }) => {
   };
 
   const formattedTotalPoints = useMemo(() => {
-    console.log("This is totalpoints > ", totalPoints);
     return formatNumberWithCommas(totalPoints);
   }, [totalPoints]);
 
@@ -97,10 +76,9 @@ const Exchange: React.FC<IHomeProps> = ({ setTab, setTitle, user }) => {
           <p className='text-2xl text-[#acacac] font-semibold bg-gradient-to-t from-[#444444] to-[#bdbdbd] bg-clip-text text-transparent'>
             You’re user {rank} to join the BuffyDrop!
           </p>
-          {/* <Tap points={points} setPoints={setPoints}/> */}
           <Tap points={points} setPoints={setPoints} />
           <div>
-            {!curUser || formattedTotalPoints == "NaN" ? (
+            {formattedTotalPoints == "NaN" ? (
               <div className='flex items-center justify-center w-full'>
                 <Loader width='30' />
               </div>
