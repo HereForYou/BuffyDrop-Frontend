@@ -23,57 +23,63 @@ const TimeCount = () => {
     userId,
     setIsTimingStarted,
     setMinedAmount,
-    setNotReceivedAmount,
     setClaimed,
     setTotalPoints,
   } = useTimeContext();
   const [isClaimed, setIsClaimed] = useState(false);
+  const elapsedTime = totalTime - remainTime >= 0 ? totalTime - remainTime : 0;
 
   const miningHour = useMemo(() => {
-    return getHours(totalTime - remainTime >= 0 ? totalTime - remainTime : 0);
-  }, [remainTime]);
+    return getHours(elapsedTime >= 0 ? elapsedTime : 0);
+  }, [elapsedTime]);
 
   const miningMinute = useMemo(() => {
-    return getMinutes(totalTime - remainTime >= 0 ? totalTime - remainTime : 0);
-  }, [remainTime]);
+    return getMinutes(elapsedTime >= 0 ? elapsedTime : 0);
+  }, [elapsedTime]);
   const miningSecond = useMemo(() => {
-    return getSeconds(totalTime - remainTime >= 0 ? totalTime - remainTime : 0);
-  }, [remainTime]);
+    return getSeconds(elapsedTime >= 0 ? elapsedTime : 0);
+  }, [elapsedTime]);
 
-  const claimFarming = () => {
+  const claimFarming = async () => {
     if (isClaimed) return;
     setIsClaimed(true);
-    console.log("claim Farming click", minedAmount);
-    axios
-      .get(`${ENDPOINT}/api/user/updatepoints/${userId}`, {
-        headers: {
-          "ngrok-skip-browser-warning": "true", // or any value you prefer
-        },
-      })
-      .then((res) => {
-        console.log("Receive Amount Response > ", res.data);
-        setTotalTime(res.data.remainTime);
-        setRemainTime(0);
-        setNotReceivedAmount(0);
-        setTotalPoints(res.data.user.totalPoints);
-        setMinedAmount(0);
-        setClaimed(res.data.user.cliamed);
-        setIsTimingStarted(res.data.user.isStarted);
-      })
-      .catch((err) => console.log("Receive Amount Error > ", err));
+
+    try {
+      const { data } = await axios.get(
+        `${ENDPOINT}/api/user/updatepoints/${userId}`,
+        {
+          headers: {
+            "ngrok-skip-browser-warning": "true",
+          },
+        }
+      );
+
+      console.log("Receive Amount Response > ", data);
+      setTotalTime(data.remainTime);
+      setRemainTime(0);
+      setTotalPoints(data.user.totalPoints);
+      setMinedAmount(0);
+      setClaimed(data.user.cliamed);
+      setIsTimingStarted(data.user.isStarted);
+    } catch (err) {
+      console.error("Receive Amount Error > ", err);
+      // Consider adding user feedback here
+    }
   };
 
   const startFarming = async () => {
     setIsClaimed(false);
-    await axios
-      .post(`${ENDPOINT}/api/user/start/${userId}`)
-      .then((res) => {
-        console.log("Start Farming Response > ", res);
-        setIsTimingStarted(res.data.user.isStarted);
-        setTotalTime(res.data.cycleTime);
-        setClaimed(res.data.user.cliamed);
-      })
-      .catch((err) => console.log("Start Farming Error > ", err));
+
+    try {
+      const { data } = await axios.post(`${ENDPOINT}/api/user/start/${userId}`);
+      console.log("Start Farming Response > ", data);
+      setIsTimingStarted(data.user.isStarted);
+      setTotalTime(data.cycleTime);
+      setClaimed(data.user.cliamed);
+    } catch (err) {
+      console.error("Start Farming Error > ", err);
+      // Consider adding user feedback here
+    }
   };
 
   return (

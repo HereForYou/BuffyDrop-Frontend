@@ -93,7 +93,6 @@ function formatMiningNumber(number: number): string {
   }
   // round to 4 decimal places
   const roundedNumber = Number(number.toFixed(1));
-  console.log("rou", roundedNumber);
   // Split the number into integer and decimal parts
   const [integerPart, decimalPart] = roundedNumber.toString().split(".");
   // If there's no decimal part, return the formatted integer

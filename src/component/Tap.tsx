@@ -19,7 +19,6 @@ const Tap: React.FC<ITap> = React.memo(({ setPoints }) => {
     //   return;
     // }
     const rect = e.currentTarget.getBoundingClientRect();
-    console.log(rect, " ", e.clientX, " ", e.clientY);
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     // setEnergy(energy - energyToReduce < 0 ? 0 : energy - energyToReduce);

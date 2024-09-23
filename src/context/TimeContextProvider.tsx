@@ -5,13 +5,13 @@ interface ITimeContext {
   increasingAmout: number;
   isTimingStarted: boolean;
   minedAmount: number;
-  notReceiveAmount: number;
+  // notReceiveAmount: number;
   remainTime: number;
   totalPoints: number;
   setClaimed: React.Dispatch<React.SetStateAction<boolean>>;
   setIncreasingAmount: React.Dispatch<React.SetStateAction<number>>;
   setMinedAmount: React.Dispatch<React.SetStateAction<number>>;
-  setNotReceivedAmount: React.Dispatch<React.SetStateAction<number>>;
+  // setNotReceivedAmount: React.Dispatch<React.SetStateAction<number>>;
   setRemainTime: React.Dispatch<React.SetStateAction<number>>;
   setTotalTime: React.Dispatch<React.SetStateAction<number>>;
   setUserId: React.Dispatch<React.SetStateAction<string>>;
@@ -36,7 +36,7 @@ export const TimeContextProvider: React.FC<ITimeContextProvider> = ({
   const [remainTime, setRemainTime] = useState(0);
   const [totalPoints, setTotalPoints] = useState(0);
   const [minedAmount, setMinedAmount] = useState(0);
-  const [notReceiveAmount, setNotReceivedAmount] = useState(0);
+  // const [notReceiveAmount, setNotReceivedAmount] = useState(0);
   const [claimed, setClaimed] = useState(false);
   const [increasingAmout, setIncreasingAmount] = useState(0.3);
   return (
@@ -46,14 +46,14 @@ export const TimeContextProvider: React.FC<ITimeContextProvider> = ({
         increasingAmout,
         isTimingStarted,
         minedAmount,
-        notReceiveAmount,
+        // notReceiveAmount,
         remainTime,
         setIsTimingStarted,
         totalPoints,
         setClaimed,
         setIncreasingAmount,
         setMinedAmount,
-        setNotReceivedAmount,
+        // setNotReceivedAmount,
         setRemainTime,
         setTotalPoints,
         setTotalTime,
