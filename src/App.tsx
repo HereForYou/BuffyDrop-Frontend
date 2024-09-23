@@ -111,21 +111,21 @@ function App() {
                 userData.cliamed
               );
               if (response.data.signIn) setTab("Exchange");
-              if (resRemainTime === 0 && !userData.cliamed) {
+              if (resRemainTime === 0 && userData.isStarted) {
                 console.log("not claimed");
                 setNotReceivedAmount(response?.data?.cycleTime);
                 setMinedAmount(response?.data?.cycleTime * increasingAmout);
                 setTotalTime(0);
               }
-              if (resRemainTime === 0 && userData.cliamed) {
+              if (resRemainTime === 0 && !userData.isStarted) {
                 console.log("This is remail 0, claimed ture");
                 setTotalTime(Number(response?.data?.cycleTime));
               }
               if (resRemainTime > 0) {
                 setMinedAmount(resRemainTime * increasingAmout);
-                setIsTimingStarted(true);
                 setTotalTime(response?.data?.cycleTime - resRemainTime);
               }
+              setIsTimingStarted(userData.isStarted);
               setClaimed(userData.cliamed);
               setTotalPoints(userData.totalPoints);
               setRanking(response?.data?.user?.joinRank);
@@ -177,7 +177,6 @@ function App() {
     await axios.post(`${ENDPOINT}/api/user/end/${user?.id}`).then((res) => {
       console.log("End Mining > minedAmount > ", res);
       setClaimed(res.data.user.cliamed);
-      setIsTimingStarted(false);
       setTotalTime(0);
     });
   };
