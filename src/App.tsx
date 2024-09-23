@@ -39,10 +39,13 @@ function App() {
   const [totalPoint, setTotalPoint] = useState<number>(0.0);
   const [ranking, setRanking] = useState<number>();
   const {
+    increasingAmout,
     isTimingStarted,
-    minedAmount,
+    // minedAmount,
     remainTime,
     totalTime,
+    setClaimed,
+    setIncreasingAmount,
     setIsTimingStarted,
     setMinedAmount,
     setNotReceivedAmount,
@@ -93,6 +96,7 @@ function App() {
           },
         })
         .then((res) => {
+          setIncreasingAmount(res?.data?.dailyRevenue);
           setLoading(true);
           setSetting(res.data);
           axios
@@ -101,23 +105,28 @@ function App() {
               console.log("Initial Response > ", response);
               const resRemainTime = Math.round(response.data.remainTime);
               const userData = response.data.user;
-              console.log("ResRemainTime", resRemainTime, userData.cliamed);
+              console.log(
+                "ResRemainTime",
+                resRemainTime * increasingAmout,
+                userData.cliamed
+              );
               if (response.data.signIn) setTab("Exchange");
-              if (resRemainTime === 0 && !userData.cliamed) {
+              if (resRemainTime === 0 && userData.isStarted) {
                 console.log("not claimed");
                 setNotReceivedAmount(response?.data?.cycleTime);
-                setMinedAmount(response?.data?.cycleTime);
+                setMinedAmount(response?.data?.cycleTime * increasingAmout);
                 setTotalTime(0);
               }
-              if (resRemainTime === 0 && userData.cliamed) {
+              if (resRemainTime === 0 && !userData.isStarted) {
                 console.log("This is remail 0, claimed ture");
                 setTotalTime(Number(response?.data?.cycleTime));
               }
               if (resRemainTime > 0) {
-                setMinedAmount(resRemainTime);
-                setIsTimingStarted(true);
+                setMinedAmount(resRemainTime * increasingAmout);
                 setTotalTime(response?.data?.cycleTime - resRemainTime);
               }
+              setIsTimingStarted(userData.isStarted);
+              setClaimed(userData.cliamed);
               setTotalPoints(userData.totalPoints);
               setRanking(response?.data?.user?.joinRank);
               setTask(userData.task);
@@ -164,15 +173,17 @@ function App() {
     };
   }, [remainTime, isTimingStarted]);
 
-  const endMining = () => {
-    setIsTimingStarted(false);
-    console.log("End Mining > minedAmount > ", minedAmount);
-    setTotalTime(0);
+  const endMining = async () => {
+    await axios.post(`${ENDPOINT}/api/user/end/${user?.id}`).then((res) => {
+      console.log("End Mining > minedAmount > ", res);
+      setClaimed(res.data.user.cliamed);
+      setTotalTime(0);
+    });
   };
 
   const duringMining = () => {
     setRemainTime((prev) => prev + 1);
-    setMinedAmount((prev) => prev + 1);
+    setMinedAmount((prev) => prev + increasingAmout);
   };
 
   return (

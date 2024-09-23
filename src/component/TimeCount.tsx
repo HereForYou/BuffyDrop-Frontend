@@ -5,7 +5,7 @@ import ConfettiExplosion from "react-confetti-explosion";
 import {
   getHours,
   getMinutes,
-  // formatMiningNumber,
+  formatMiningNumber,
   getSeconds,
 } from "../utils/functions";
 import { useTimeContext } from "../context/TimeContextProvider";
@@ -13,6 +13,7 @@ import { ENDPOINT } from "../data";
 
 const TimeCount = () => {
   const {
+    claimed,
     isTimingStarted,
     remainTime,
     setRemainTime,
@@ -23,6 +24,7 @@ const TimeCount = () => {
     setIsTimingStarted,
     setMinedAmount,
     setNotReceivedAmount,
+    setClaimed,
     setTotalPoints,
   } = useTimeContext();
   const [isClaimed, setIsClaimed] = useState(false);
@@ -55,6 +57,8 @@ const TimeCount = () => {
         setNotReceivedAmount(0);
         setTotalPoints(res.data.user.totalPoints);
         setMinedAmount(0);
+        setClaimed(res.data.user.cliamed);
+        setIsTimingStarted(res.data.user.isStarted);
       })
       .catch((err) => console.log("Receive Amount Error > ", err));
   };
@@ -65,26 +69,34 @@ const TimeCount = () => {
       .post(`${ENDPOINT}/api/user/start/${userId}`)
       .then((res) => {
         console.log("Start Farming Response > ", res);
-        setIsTimingStarted(true);
+        setIsTimingStarted(res.data.user.isStarted);
         setTotalTime(res.data.cycleTime);
+        setClaimed(res.data.user.cliamed);
       })
       .catch((err) => console.log("Start Farming Error > ", err));
   };
-  console.log("this is totla Time > ", totalTime)
 
   return (
     <div className='w-full justify-center items-center relative'>
-      {totalTime > 0 ? (
-        isTimingStarted ? (
+      {/* {totalTime > 0 ? ( */}
+      {isTimingStarted ? (
+        !claimed ? (
+          <button
+            className='flex justify-center items-center w-full bg-green-700 px-4 py-1 rounded-lg h-14 font-bold transition-all duration-200 hover:bg-green-800 hover:translate-y-0.5 outline-none hover:outline-none'
+            onClick={() => claimFarming()}>
+            Claim {Number(formatMiningNumber(minedAmount))} $Buffy
+          </button>
+        ) : (
           <div className='w-full bg-gray-500 text-gray-400 px-4 py-1 rounded-lg h-14 transition-all duration-200'>
             <div className='flex justify-center items-center relative h-full'>
               <div className='flex h-full justify-center gap-2 items-center font-bold text-xl'>
                 <p>Farming</p>
                 <AnimatedCounter
-                  value={minedAmount}
-                  //   value={Number(formatMiningNumber(minedAmount))}
+                  // value={minedAmount}
+                  value={Number(formatMiningNumber(minedAmount))}
+                  decimalPrecision={1}
                   color='text-gray-400'
-                  includeDecimals={false}
+                  // includeDecimals={false}
                   incrementColor='text-gray-400'
                   decrementColor='text-gray-400'
                 />
@@ -105,18 +117,12 @@ const TimeCount = () => {
               </div>
             </div>
           </div>
-        ) : (
-          <button
-            className='flex justify-center items-center h-14 w-full bg-white text-black rounded-lg font-bold transition-all duration-200 hover:translate-y-[2px]'
-            onClick={() => startFarming()}>
-            Start farming
-          </button>
         )
       ) : (
         <button
-          className='flex justify-center items-center w-full bg-green-700 px-4 py-1 rounded-lg h-14 font-bold transition-all duration-200 hover:bg-green-800 hover:translate-y-0.5 outline-none hover:outline-none'
-          onClick={() => claimFarming()}>
-          Claim {minedAmount} Buffy
+          className='flex justify-center items-center h-14 w-full bg-white text-black rounded-lg font-bold transition-all duration-200 hover:translate-y-[2px]'
+          onClick={() => startFarming()}>
+          Start farming
         </button>
       )}
       {/* ==================================================== For Convetti ================================================================= */}

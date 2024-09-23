@@ -25,8 +25,9 @@ function formatNumberWithCommas(number: number): string {
   ) {
     return "NaN"; // Return "NaN" for invalid inputs
   }
+  const roundedNumber = Number(number.toFixed(4));
   // Split the number into integer and decimal parts
-  const [integerPart, decimalPart] = number.toString().split(".");
+  const [integerPart, decimalPart] = roundedNumber.toString().split(".");
   // Format the integer part with commas
   const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   // If there's no decimal part, return the formatted integer
@@ -91,18 +92,19 @@ function formatMiningNumber(number: number): string {
     return "NaN"; // Return "NaN" for invalid inputs
   }
   // round to 4 decimal places
-  const roundedNumber = Number(number.toFixed(2));
+  const roundedNumber = Number(number.toFixed(1));
+  console.log("rou", roundedNumber);
   // Split the number into integer and decimal parts
   const [integerPart, decimalPart] = roundedNumber.toString().split(".");
   // If there's no decimal part, return the formatted integer
   if (!decimalPart) {
-    return integerPart + ".00";
+    return integerPart + ".0";
   }
   if (decimalPart.length === 1) {
     const [roundedInteger, roundedDecimal] = roundedNumber
       .toString()
       .split(".");
-    return `${roundedInteger}.${roundedDecimal}0`;
+    return `${roundedInteger}.${roundedDecimal}`;
   } else {
     const [roundedInteger, roundedDecimal] = roundedNumber
       .toString()
