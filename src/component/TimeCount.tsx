@@ -123,7 +123,6 @@ const TimeCount = () => {
           className='flex justify-center items-center h-14 w-full bg-white text-black rounded-lg font-bold transition-all duration-200 hover:translate-y-[2px]'
           onClick={() => startFarming()}>
           Start farming
-          Claim {Number(formatMiningNumber(minedAmount))} $Buffy
         </button>
       )}
       {/* ==================================================== For Convetti ================================================================= */}
