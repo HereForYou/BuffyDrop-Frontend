@@ -95,7 +95,7 @@ const TimeCount = () => {
         ) : (
           <div className='w-full bg-gray-500 text-gray-400 px-4 py-1 rounded-lg h-14 transition-all duration-200'>
             <div className='flex justify-center items-center relative h-full'>
-              <div className='flex h-full justify-center gap-2 items-center font-bold text-xl'>
+              <div className='flex h-full justify-center gap-2 items-center font-bold text-base xxs:text-xl'>
                 <p>Farming</p>
                 <AnimatedCounter
                   // value={minedAmount}
@@ -105,20 +105,23 @@ const TimeCount = () => {
                   // includeDecimals={false}
                   incrementColor='text-gray-400'
                   decrementColor='text-gray-400'
+                  fontSize="xxs:text-xl text-base"
                 />
               </div>
-              <div className='flex gap-2 absolute right-0 top-0 justify-center text-sm items-center h-full'>
+              <div className='flex gap-0 absolute right-0 top-0 justify-center text-sm items-center h-full xxs:gap-1'>
                 <div className='flex'>
                   <p>{miningHour}</p>
-                  <p>h</p>
+                  <p className="xxs:block hidden">h</p>
+                  <p className="xxs:hidden block">:</p>
                 </div>
                 <div className='flex'>
                   <p>{miningMinute}</p>
-                  <p>m</p>
+                  <p className="xxs:block hidden">m</p>
+                  <p className="xxs:hidden block">:</p>
                 </div>
                 <div className='flex'>
                   <p>{miningSecond}</p>
-                  <p className='uppercase'>s</p>
+                  <p className="xxs:block hidden">s</p>
                 </div>
               </div>
             </div>
