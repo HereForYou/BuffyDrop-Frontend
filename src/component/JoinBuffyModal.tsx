@@ -24,7 +24,7 @@ const JoinBuffyModal: React.FC<IJoinBuffyModalProps> = ({ setIsModal }) => {
         </p>
         <div className='flex w-full'>
           <Link
-            to='https://t.me/buffy_drop'
+            to='https://t.me/BuffyDrop'
             className='bg-main text-white px-5 w-full py-3 font-roboto text-sm  font-semibold mx-5 rounded-lg cursor-pointer hover:text-gray-300 transition-all duration-300'>
             Join for Buffy
           </Link>
