@@ -169,7 +169,7 @@ function App() {
 
   const endMining = async () => {
     try {
-      const res = await axios.post(`${ENDPOINT}/api/user/end/${user.id}`);
+      const res = await axios.post(`${ENDPOINT}/api/user/end/${user?.id}`);
       console.log("End Mining > minedAmount > ", res.data);
       setClaimed(res.data.user.cliamed);
       setIsTimingStarted(res.data.user.isStarted);
