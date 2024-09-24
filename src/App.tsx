@@ -19,6 +19,7 @@ import Admin from "./page/Admin";
 // import { isMobileDevice } from './utils/mobileDetect'
 import { rankAvatarThemes } from "./utils/constants";
 import LandingLoader from "./component/LandingLoader";
+import NotFound from "./page/NotFount";
 // const user = {
 //   id: "7202566331",
 //   username: "SmartFox",
@@ -37,18 +38,19 @@ function App() {
   const [tab, setTab] = useState<string>("Splash");
   const [title, setTitle] = useState<string>("");
   const [totalPoint, setTotalPoint] = useState<number>(0.0);
-  const [ranking, setRanking] = useState<number>();
+  const [isNewUser, setIsNewUser] = useState<boolean>(false);
   const {
     increasingAmout,
     isTimingStarted,
     // minedAmount,
+    rank,
     remainTime,
     totalTime,
     setClaimed,
     setIncreasingAmount,
     setIsTimingStarted,
     setMinedAmount,
-    setNotReceivedAmount,
+    setRank,
     setRemainTime,
     setTotalPoints,
     setTotalTime,
@@ -103,32 +105,29 @@ function App() {
             .post(`${ENDPOINT}/api/user/${user?.id}`, data)
             .then((response) => {
               console.log("Initial Response > ", response);
-              const resRemainTime = Math.round(response.data.remainTime);
+              const passedTime = Math.round(response.data.remainTime);
               const userData = response.data.user;
               console.log(
-                "ResRemainTime",
-                resRemainTime * increasingAmout,
+                "passedTime",
+                passedTime * increasingAmout,
                 userData.cliamed
               );
               if (response.data.signIn) setTab("Exchange");
-              if (resRemainTime === 0 && userData.isStarted) {
-                console.log("not claimed");
-                setNotReceivedAmount(response?.data?.cycleTime);
+              setIsNewUser(!response.data.signIn);
+              if (passedTime === 0 && userData.isStarted) {
                 setMinedAmount(response?.data?.cycleTime * increasingAmout);
-                setTotalTime(0);
               }
-              if (resRemainTime === 0 && !userData.isStarted) {
-                console.log("This is remail 0, claimed ture");
+              if (passedTime === 0 && !userData.isStarted) {
                 setTotalTime(Number(response?.data?.cycleTime));
               }
-              if (resRemainTime > 0) {
-                setMinedAmount(resRemainTime * increasingAmout);
-                setTotalTime(response?.data?.cycleTime - resRemainTime);
+              if (passedTime > 0) {
+                setMinedAmount(passedTime * increasingAmout);
+                setTotalTime(response?.data?.cycleTime - passedTime);
               }
               setIsTimingStarted(userData.isStarted);
               setClaimed(userData.cliamed);
               setTotalPoints(userData.totalPoints);
-              setRanking(response?.data?.user?.joinRank);
+              setRank(response?.data?.user?.joinRank);
               setTask(userData.task);
               if (
                 start_param &&
@@ -141,22 +140,17 @@ function App() {
               setLoading(false);
             })
             .catch((error) => {
+              setLoading(false);
+              setTab("error");
               console.error("Error occurred during PUT request:", error);
             });
         })
         .catch((err) => {
+          setLoading(false);
+          setTab("error");
           console.error(err);
         });
     }
-
-    // const handleBeforUnload = () => {  //============================== When close the mini app
-    //   console.log("Before Unload");
-    //   endMining();
-    // };
-    // window.addEventListener("beforeunload", handleBeforUnload);
-    // return () => {
-    //   window.removeEventListener("beforeunload", handleBeforUnload);
-    // };
   }, []);
 
   useEffect(() => {
@@ -174,11 +168,15 @@ function App() {
   }, [remainTime, isTimingStarted]);
 
   const endMining = async () => {
-    await axios.post(`${ENDPOINT}/api/user/end/${user?.id}`).then((res) => {
-      console.log("End Mining > minedAmount > ", res);
+    try {
+      const res = await axios.post(`${ENDPOINT}/api/user/end/${user?.id}`);
+      console.log("End Mining > minedAmount > ", res.data);
       setClaimed(res.data.user.cliamed);
+      setIsTimingStarted(res.data.user.isStarted);
       setTotalTime(0);
-    });
+    } catch (error) {
+      console.error("Error ending mining:", error);
+    }
   };
 
   const duringMining = () => {
@@ -194,9 +192,14 @@ function App() {
         <div
           className={`h-full relative max-h-screen overflow-hidden max-w-[560px] w-full font-roboto`}>
           <div className={`flex h-screen overflow-hidden pb-4 w-full`}>
-            {tab == "Splash" && <Splash ranking={ranking} setTab={setTab} />}
+            {tab == "Splash" && <Splash ranking={rank} setTab={setTab} />}
             {tab == "Exchange" && (
-              <Exchange setTab={setTab} setTitle={setTitle} user={user} />
+              <Exchange
+                setTab={setTab}
+                setTitle={setTitle}
+                user={user}
+                isNewUser={isNewUser}
+              />
             )}
             {tab == "Friends" && (
               <Friends
@@ -212,6 +215,7 @@ function App() {
                 modal={true}
               />
             )}
+            {tab == "error" && <NotFound />}
             {tab == "Channel" && (
               <Task
                 title={title}
@@ -236,7 +240,7 @@ function App() {
             )}
             {tab == "Leaderboard" && <Leaderboard user={user} />}
           </div>
-          {tab !== "Splash" && tab !== "Admin" && (
+          {tab !== "Splash" && tab !== "Admin" && tab !== "error" && (
             <Footer tab={tab} setTab={setTab} />
           )}
         </div>

@@ -5,17 +5,19 @@ interface ITimeContext {
   increasingAmout: number;
   isTimingStarted: boolean;
   minedAmount: number;
-  notReceiveAmount: number;
+  // notReceiveAmount: number;
   remainTime: number;
   totalPoints: number;
+  rank: number;
   setClaimed: React.Dispatch<React.SetStateAction<boolean>>;
   setIncreasingAmount: React.Dispatch<React.SetStateAction<number>>;
   setMinedAmount: React.Dispatch<React.SetStateAction<number>>;
-  setNotReceivedAmount: React.Dispatch<React.SetStateAction<number>>;
+  // setNotReceivedAmount: React.Dispatch<React.SetStateAction<number>>;
   setRemainTime: React.Dispatch<React.SetStateAction<number>>;
   setTotalTime: React.Dispatch<React.SetStateAction<number>>;
   setUserId: React.Dispatch<React.SetStateAction<string>>;
   setIsTimingStarted: React.Dispatch<React.SetStateAction<boolean>>;
+  setRank: React.Dispatch<React.SetStateAction<number>>;
   setTotalPoints: React.Dispatch<React.SetStateAction<number>>;
   totalTime: number;
   userId: string;
@@ -36,9 +38,10 @@ export const TimeContextProvider: React.FC<ITimeContextProvider> = ({
   const [remainTime, setRemainTime] = useState(0);
   const [totalPoints, setTotalPoints] = useState(0);
   const [minedAmount, setMinedAmount] = useState(0);
-  const [notReceiveAmount, setNotReceivedAmount] = useState(0);
+  // const [notReceiveAmount, setNotReceivedAmount] = useState(0);
   const [claimed, setClaimed] = useState(false);
   const [increasingAmout, setIncreasingAmount] = useState(0.3);
+  const [rank, setRank] = useState(0);
   return (
     <TimeContext.Provider
       value={{
@@ -46,14 +49,16 @@ export const TimeContextProvider: React.FC<ITimeContextProvider> = ({
         increasingAmout,
         isTimingStarted,
         minedAmount,
-        notReceiveAmount,
+        // notReceiveAmount,
+        rank,
         remainTime,
         setIsTimingStarted,
         totalPoints,
         setClaimed,
         setIncreasingAmount,
         setMinedAmount,
-        setNotReceivedAmount,
+        // setNotReceivedAmount,
+        setRank,
         setRemainTime,
         setTotalPoints,
         setTotalTime,

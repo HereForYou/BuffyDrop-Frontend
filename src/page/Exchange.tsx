@@ -1,7 +1,6 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import axios from "axios";
 import { ENDPOINT } from "../data";
-import { toast } from "react-hot-toast";
 import Channel from "../component/Channel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
@@ -14,35 +13,19 @@ import Tap from "../component/Tap";
 import { ChannelData } from "../utils/constants";
 import TimeCount from "../component/TimeCount";
 import { useTimeContext } from "../context/TimeContextProvider";
+import JoinBuffyModal from "../component/JoinBuffyModal";
 
 interface IHomeProps {
   setTab: (status: string) => void;
   setTitle: (status: string) => void;
+  isNewUser: boolean;
   user: any;
 }
-const Exchange: React.FC<IHomeProps> = ({ setTab, setTitle, user }) => {
+const Exchange: React.FC<IHomeProps> = ({ setTab, setTitle, user, isNewUser }) => {
   const [claim, setClaim] = useState(false);
-  const [curUser, setCurUser] = useState<any>({});
-  const [rank, setRank] = useState(0);
   const [points, setPoints] = useState(29857775);
-  useEffect(() => {
-    axios
-      .get(`${ENDPOINT}/api/user/top/${user.id}?num=100`, {
-        headers: {
-          "ngrok-skip-browser-warning": "true", // or any value you prefer
-        },
-      })
-      .then((res) => {
-        let userInfo = res.data;
-        setCurUser(userInfo.curUser);
-        setRank(userInfo.curUser.joinRank);
-      })
-      .catch((err) => {
-        console.error(err);
-        toast.error("Something Went Wrong!");
-      });
-  }, []);
-  const { totalPoints } = useTimeContext();
+  const { rank, totalPoints } = useTimeContext();
+  const [isModal, setIsModal] = useState(isNewUser);
 
   const handleFollow = () => {
     console.log("This is handleFollow function!!!");
@@ -61,13 +44,12 @@ const Exchange: React.FC<IHomeProps> = ({ setTab, setTitle, user }) => {
   };
 
   const formattedTotalPoints = useMemo(() => {
-    console.log("This is totalpoints > ", totalPoints);
     return formatNumberWithCommas(totalPoints);
   }, [totalPoints]);
 
   return (
     <div className='h-[calc(100%-50px)] items-center gap-2 overflow-y-auto w-full overflow-x-hidden hiddenScrollBar relative'>
-      <div className='bg-[#046ae2] flex gap-1 px-6 pt-5 pb-10 w-full justify-between items-center'>
+      <div className={`bg-[#046ae2] flex gap-1 px-6 pt-5 pb-10 w-full justify-between items-center ${isModal && 'blur-md opacity-30'}`}>
         <div className='flex gap-2'>
           <img src='/x.svg' className='w-10' loading='lazy' />
           <div className='flex flex-col text-white text-left justify-center text-xs sm:text-sm'>
@@ -86,7 +68,7 @@ const Exchange: React.FC<IHomeProps> = ({ setTab, setTitle, user }) => {
           Post
         </div>
       </div>
-      <div className='relative rounded-2xl -top-5 w-full flex justify-between pt-5 px-5 gap-2 items-center flex-col bg-black exchange-content'>
+      <div className={`relative rounded-2xl -top-5 w-full flex justify-between pt-5 px-5 gap-2 items-center flex-col bg-black exchange-content ${isModal && 'blur-md opacity-30'}`}>
         <div className='flex flex-col gap-4 justify-evenly w-full items-center h-full'>
           {claim && (
             <ClaimCard userId={user?.id} handleClose={() => setClaim(false)} />
@@ -94,20 +76,19 @@ const Exchange: React.FC<IHomeProps> = ({ setTab, setTitle, user }) => {
           {/* <div>
             <WalletConnect />
           </div> */}
-          <p className='text-2xl text-[#acacac] font-semibold bg-gradient-to-t from-[#444444] to-[#bdbdbd] bg-clip-text text-transparent'>
+          <p className='text-lg xxs:text-2xl text-[#acacac] font-semibold bg-gradient-to-t from-[#444444] to-[#bdbdbd] bg-clip-text text-transparent'>
             You’re user {rank} to join the BuffyDrop!
           </p>
-          {/* <Tap points={points} setPoints={setPoints}/> */}
           <Tap points={points} setPoints={setPoints} />
           <div>
-            {!curUser || formattedTotalPoints == "NaN" ? (
+            {formattedTotalPoints == "NaN" ? (
               <div className='flex items-center justify-center w-full'>
                 <Loader width='30' />
               </div>
             ) : (
-              <p className='text-3xl font-semibold'>{formattedTotalPoints}</p>
+              <p className='xxs:text-3xl text-2xl font-semibold'>{formattedTotalPoints}</p>
             )}
-            <p className='text-xl text-[#acacac]'>$BUFFY</p>
+            <p className='xxs:text-xl text-lg text-[#acacac]'>$BUFFY</p>
           </div>
           <div className='w-full'>
             <div className='flex flex-row w-full'>
@@ -151,6 +132,7 @@ const Exchange: React.FC<IHomeProps> = ({ setTab, setTitle, user }) => {
           Claim hints
         </button> */}
       </div>
+      {isModal && <JoinBuffyModal setIsModal={setIsModal} />}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState, useRef, useMemo } from "react";
-import { toast } from "react-hot-toast";
+// import { toast } from "react-hot-toast";
 import Loader from "../component/Loader";
 import { ENDPOINT } from "../data";
 import { formatNumberWithCommas } from "../utils/functions";
@@ -12,42 +12,49 @@ interface ILeaderboardProps {
 const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
   const [users, setUsers] = useState<object[]>([]);
   const [curUser, setCurUser] = useState<any>({});
+  const [totalUsersCount, setTotalUsersCount] = useState(0);
   const [ranking, setRaking] = useState<number>(0);
-  const hasShownWarningRef = useRef(false);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    if (!hasShownWarningRef.current && user) {
-      setLoading(true);
-      axios
-        .get(`${ENDPOINT}/api/user/top/${user.id}`, {
-          headers: {
-            "ngrok-skip-browser-warning": "true", // or any value you prefer
-          },
-        })
-        .then((res) => {
-          let userInfo = res.data;
-          setUsers(userInfo.topUsers);
-          setCurUser(userInfo.curUser);
-          setRaking(userInfo.ranking);
-          setLoading(false);
-        })
-        .catch((err) => {
-          console.error(err);
-          toast.error("Something Went Wrong!");
-        });
-      hasShownWarningRef.current = true;
-    }
+    getTopUsers();
   }, []);
 
-  const formattedUserCount = useMemo(() => {
-    if (users.length > 1000000) {
-      return Math.round(users.length / 1000000) + "M";
-    } else if (users.length > 1000) {
-      return Math.round(users.length / 1000) + "K";
+  const getTopUsers = async () => {
+    setLoading(true);
+    if (user) {
+      try {
+        const { data } = await axios.get(
+          `${ENDPOINT}/api/user/top/${user.id}`,
+          {
+            headers: {
+              "ngrok-skip-browser-warning": "true", // or any value you prefer
+            },
+          }
+        );
+        console.log("loading data > ", data);
+        setUsers((prev) => [...prev, ...data.topUsers]);
+        setTotalUsersCount(data.totalMembers);
+        setCurUser(data.curUser);
+        setRaking(data.ranking);
+        setLoading(false);
+      } catch (err) {
+        console.log("An error occurs while retrieving the top users.", err);
+      } finally {
+        setLoading(false);
+      }
     }
-    return users.length;
-  }, [users.length]);
+  };
+
+  const formattedUserCount = useMemo(() => {
+    if (totalUsersCount > 1000000) {
+      return Math.round(totalUsersCount / 1000000) + "M";
+    } else if (totalUsersCount > 1000) {
+      return Math.round(totalUsersCount / 1000) + "K";
+    }
+    return totalUsersCount;
+  }, [totalUsersCount]);
 
   return (
     <div className='h-[calc(100%-40px)] w-full flex flex-col text-center items-center justify-between py-2 px-6 overflow-x-hidden overflow-y-auto hiddenScrollBar text-white'>
@@ -85,25 +92,24 @@ const Leaderboard: React.FC<ILeaderboardProps> = ({ user }) => {
                 </div>
               </div>
               <div className='text-xs text-center flex justify-center w-[15%]'>
-                {ranking + 1 == 1 || ranking + 1 == 2 || ranking + 1 == 3 ? (
+                {ranking == 1 || ranking == 2 || ranking == 3 ? (
                   <img
-                    src={`/rank_${ranking + 1}.webp`}
+                    src={`/rank_${ranking}.webp`}
                     loading='lazy'
                     alt='rank'
                     className='w-4 h-6'
                   />
                 ) : (
-                  "#" + (ranking + 1)
+                  "#" + ranking
                 )}
               </div>
             </div>
-
             <div>
               <div className='flex pt-3 pb-1 text-2xl font-bold w-full items-center'>
                 <div className='text-center pl-2'>{formattedUserCount}</div>
                 <div className='text-center pl-2'>holders</div>
               </div>
-              <div className='h-[62vh] overflow-auto w-full'>
+              <div className='h-[62vh] overflow-auto w-full' ref={scrollRef}>
                 {users?.map((iUser: any, index) => (
                   <div
                     key={index}
