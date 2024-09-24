@@ -4,6 +4,8 @@ export default {
     content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
     theme: {
         screens: {
+            xxxs: "350px",
+            xxs: "380px",
             xs: "400px",
             sm: "450px",
             md: "500px",
@@ -19,7 +21,11 @@ export default {
             },
             fontFamily: {
                 roboto: ['Roboto', 'sans-serif'],
+                consolas: ['Consolas', 'monospace'],
             },
+            backgroundColor: {
+                main: "#4b37dd"
+            }
         },
     },
     plugins: [],
