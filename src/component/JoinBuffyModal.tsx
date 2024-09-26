@@ -1,10 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 interface IJoinBuffyModalProps {
-  setIsModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsModal: React.Dispatch<React.SetStateAction<boolean>>
 }
-
+///
 const JoinBuffyModal: React.FC<IJoinBuffyModalProps> = ({ setIsModal }) => {
   return (
     <div
@@ -28,13 +28,14 @@ const JoinBuffyModal: React.FC<IJoinBuffyModalProps> = ({ setIsModal }) => {
           <Link
             to='https://t.me/BuffyDrop'
             className='bg-main text-white px-5 w-full py-3 font-roboto text-sm  font-semibold mx-5 rounded-lg cursor-pointer hover:text-gray-300 transition-all duration-300'
-            onClick={() => setIsModal(false)}>
+            onClick={() => setIsModal(false)}
+          >
             Join for Buffy
           </Link>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default JoinBuffyModal;
+export default JoinBuffyModal
