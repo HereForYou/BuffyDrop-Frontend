@@ -204,9 +204,12 @@ const Task: React.FC<ITaskProps> = ({
         />
         <div className='text-3xl text-white'>{title}</div>
       </div>
-      <div className='flex justify-between text-[#acacac] px-4 xxs:px-10 xxxs:text-base text-sm'>
+      <div className='flex justify-around text-[#acacac] px-4 xxs:px-10 xxxs:text-base text-sm'>
         {earnCategories.map((item, index) => (
-          <div key={index} className='px-6 my-1' onClick={() => setCurrentCategory(index)}>
+          <div
+            key={index}
+            className='px-6 my-1'
+            onClick={() => setCurrentCategory(index)}>
             <p
               className={`hover:text-white transition-all duration-300 ease-in-out font-semibold cursor-pointer ${
                 currentCategory === index ? "text-white" : ""
@@ -221,7 +224,9 @@ const Task: React.FC<ITaskProps> = ({
       </div>
       <div className='px-6'>
         {setting?.taskList
-          .filter((item: any, index: number) => currentCategory === 0 ? currentCategory === index : currentCategory === 2 ? index === 5 : index !== 0 && index !== 5 && item.id !== '')
+          .filter((item: any, index: number) =>
+            currentCategory === 0 ? true : index === 5 && item.id !== ""
+          )
           .map(
             (item: any) => (
               <button

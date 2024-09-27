@@ -81,9 +81,8 @@ const ChannelData = [
 ];
 
 const earnCategories = [
-  'Daily task',
   'Social',
-  'Other',
+  'Daily task',
 ]
 
 const cycleTime = 28800;
