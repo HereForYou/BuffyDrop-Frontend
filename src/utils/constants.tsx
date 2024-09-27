@@ -80,6 +80,12 @@ const ChannelData = [
   },
 ];
 
+const earnCategories = [
+  'Daily task',
+  'Social',
+  'Other',
+]
+
 const cycleTime = 28800;
 
-export { rankAvatarThemes, ChannelData, cycleTime };
+export { rankAvatarThemes, ChannelData, cycleTime, earnCategories };

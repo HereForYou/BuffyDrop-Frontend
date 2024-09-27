@@ -15,7 +15,7 @@ import Leaderboard from "./page/Leaderboard";
 import { ENDPOINT } from "./data";
 import Splash from "./page/Splash";
 import Task from "./page/Task";
-import Admin from "./page/Admin";
+// import Admin from "./page/Admin";
 // import { isMobileDevice } from './utils/mobileDetect'
 import { rankAvatarThemes } from "./utils/constants";
 import LandingLoader from "./component/LandingLoader";
@@ -245,7 +245,8 @@ function App() {
           )}
         </div>
       ) : (
-        <Admin setting={setting} setSetting={setSetting} />
+        // <Admin setting={setting} setSetting={setSetting} />
+        ""
       )}
       <Analytics />
       <SpeedInsights />

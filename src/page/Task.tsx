@@ -5,6 +5,7 @@ import { toast } from "react-hot-toast";
 import { ENDPOINT } from "../data";
 import { formatNumberWithCommas } from "../utils/functions";
 import Loader from "../component/Loader";
+import { earnCategories } from "../utils/constants";
 import { useTimeContext } from "../context/TimeContextProvider";
 
 interface ITaskProps {
@@ -26,12 +27,12 @@ const Task: React.FC<ITaskProps> = ({
   setting,
   title,
 }) => {
-  console.log("---> setting --->", setting, "---> task --->", task);
   const [isLoading, setIsLoading] = useState<string>("");
   const [count, setCount] = useState<number>(0);
   const [timeRemaining, setTimeRemaining] = useState<number>(5);
   const [tracking, setTracking] = useState<boolean>(false);
   const [currentItem, setCurrentItem] = useState<any>({});
+  const [currentCategory, setCurrentCategory] = useState<number>(0);
   const { setTotalPoints } = useTimeContext();
 
   const handleMouseEvent = () => {
@@ -196,65 +197,82 @@ const Task: React.FC<ITaskProps> = ({
     <div className='w-full h-[calc(100%-40px)] overflow-x-hidden overflow-y-auto hiddenScrollBar'>
       <div className='flex flex-col justify-center items-center text-xl text-[#acacac] font-bold pt-16 pb-6'>
         <img
-          src={`${title != "DAILY REWARD" ? "/comm.webp" : "/daily.webp"}`}
+          src={`${title != "DAILY REWARD" ? "/back_earn.png" : "/daily.webp"}`}
           alt=''
-          className='min-w-24 w-[15vw] pb-4'
+          className='min-w-40 w-[15vw] pb-4'
           loading='lazy'
         />
         <div className='text-3xl text-white'>{title}</div>
       </div>
+      <div className='flex justify-between text-[#acacac] px-4 xxs:px-10 xxxs:text-base text-sm'>
+        {earnCategories.map((item, index) => (
+          <div key={index} className='px-6 my-1' onClick={() => setCurrentCategory(index)}>
+            <p
+              className={`hover:text-white transition-all duration-300 ease-in-out font-semibold cursor-pointer ${
+                currentCategory === index ? "text-white" : ""
+              }`}>
+              {item}
+            </p>
+            {currentCategory === index && (
+              <div className='w-full h-1 rounded-full mt-0.5 bg-[#acacac]' />
+            )}
+          </div>
+        ))}
+      </div>
       <div className='px-6'>
-        {setting?.taskList.map(
-          (item: any) => (
-            <button
-              onClick={() => handleItemClick(item)}
-              key={item.id}
-              disabled={tracking}
-              className='flex w-full justify-between items-center rounded-lg px-3 py-2 cursor-pointer my-2 text-sm bg-[#110d33]'>
-              <div className='flex flex-row gap-1 items-center text-[#acacac]'>
-                <img
-                  src={`${item.image ? item.image : "choose.svg"}`}
-                  loading='lazy'
-                  alt='icon'
-                  className='w-10 aspect-square'
-                />
-                <div className='flex flex-col pl-2 gap-0.5'>
-                  <div className='flex flex-col'>{item.title}</div>
-                  <div className='flex flex-row items-center'>
-                    <img
-                      src='buffy_icon.webp'
-                      alt=''
-                      className='w-4 h-4'
-                      loading='lazy'
-                    />
-                    <div className='pl-1'>
-                      +{formatNumberWithCommas(item.profit)}
+        {setting?.taskList
+          .filter((item: any, index: number) => currentCategory === 0 ? currentCategory === index : currentCategory === 2 ? index === 5 : index !== 0 && index !== 5 && item.id !== '')
+          .map(
+            (item: any) => (
+              <button
+                onClick={() => handleItemClick(item)}
+                key={item.id}
+                disabled={tracking}
+                className='flex w-full justify-between items-center rounded-lg px-3 py-2 cursor-pointer my-2 text-sm bg-[#110d33]'>
+                <div className='flex flex-row gap-1 items-center text-[#acacac]'>
+                  <img
+                    src={`${item.image ? item.image : "choose.svg"}`}
+                    loading='lazy'
+                    alt='icon'
+                    className='w-10 aspect-square'
+                  />
+                  <div className='flex flex-col pl-2 gap-0.5'>
+                    <div className='flex flex-col'>{item.title}</div>
+                    <div className='flex flex-row items-center'>
+                      <img
+                        src='buffy_icon.webp'
+                        alt=''
+                        className='w-4 h-4'
+                        loading='lazy'
+                      />
+                      <div className='pl-1'>
+                        +{formatNumberWithCommas(item.profit)}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className='w-[10%] flex justify-center'>
-                {isLoading === item.id ? (
-                  <Loader width='20' />
-                ) : (
-                  <img
-                    src={`${
-                      task.includes(item.id)
-                        ? "/check_green.webp"
-                        : "/next_icon.webp"
-                    }`}
-                    alt=''
-                    className={`${
-                      task.includes(item.id) ? "w-6 h-6" : "w-2 h-3"
-                    }`}
-                    loading='lazy'
-                  />
-                )}
-              </div>
-            </button>
-          )
-          // )
-        )}
+                <div className='w-[10%] flex justify-center'>
+                  {isLoading === item.id ? (
+                    <Loader width='20' />
+                  ) : (
+                    <img
+                      src={`${
+                        task.includes(item.id)
+                          ? "/check_green.webp"
+                          : "/next_icon.webp"
+                      }`}
+                      alt=''
+                      className={`${
+                        task.includes(item.id) ? "w-6 h-6" : "w-2 h-3"
+                      }`}
+                      loading='lazy'
+                    />
+                  )}
+                </div>
+              </button>
+            )
+            // )
+          )}
       </div>
     </div>
   );
