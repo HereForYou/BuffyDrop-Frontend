@@ -9,6 +9,11 @@ const tabs = [
     img: 'home.svg'
   },
   {
+    id: 'Buffy',
+    name: 'Earn',
+    img: 'earn.png'
+  },
+  {
     id: 'Leaderboard',
     name: 'Leaderboard',
     img: 'leaderboard.svg'
@@ -25,7 +30,7 @@ const Footer: React.FC<IFooterProps> = ({ tab, setTab }) => {
     setTab(tab)
   }
   return (
-    <div className='footer grid grid-cols-3 justify-between absolute z-50 h-[60px] w-full bottom-0 items-center px-4 rounded-2xl'>
+    <div className='footer flex justify-around absolute z-50 h-[60px] w-full bottom-0 items-center px-4 rounded-2xl'>
       {tabs.map((item, index) => (
         <div
           key={index}

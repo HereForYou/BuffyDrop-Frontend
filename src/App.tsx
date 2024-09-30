@@ -229,7 +229,7 @@ function App() {
             )}
             {tab == "Buffy" && (
               <Task
-                title={title}
+                title={tab}
                 user={user}
                 totalPoint={totalPoint}
                 setTotalPoint={setTotalPoint}
