@@ -19,6 +19,7 @@ const tabs = [
     img: 'friend.svg'
   }
 ]
+
 const Footer: React.FC<IFooterProps> = ({ tab, setTab }) => {
   const handleClick = (tab: string) => {
     setTab(tab)
