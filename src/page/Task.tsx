@@ -225,7 +225,7 @@ const Task: React.FC<ITaskProps> = ({
       <div className='px-6'>
         {setting?.taskList
           .filter((item: any, index: number) =>
-            currentCategory === 0 ? true : index === 5 && item.id !== ""
+            currentCategory === 0 ? index !== 5 : index === 5 && item.id !== ""
           )
           .map(
             (item: any) => (
