@@ -201,7 +201,7 @@ const Task: React.FC<ITaskProps> = ({
           alt=''
           className='min-w-40 w-[15vw] pb-4'
           loading='lazy'
-        />
+        />   
         <div className='text-3xl text-white'>{title}</div>
       </div>
       <div className='flex justify-around text-[#acacac] px-4 xxs:px-10 xxxs:text-base text-sm'>
