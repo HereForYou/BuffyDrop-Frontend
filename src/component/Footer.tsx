@@ -18,7 +18,6 @@ const tabs = [
     name: 'Leaderboard',
     img: 'leaderboard.svg'
   },
-
   {
     id: 'Friends',
     name: 'Friends',
@@ -43,7 +42,7 @@ const Footer: React.FC<IFooterProps> = ({ tab, setTab }) => {
               item.id === tab && 'border-b-2 border-[#fff]'
             } gap-1`}
           >
-            <img src={item.img} alt='play' className='w-5 h-5'  loading='lazy' />
+            <img src={item.img} alt='play' className='w-5 h-5' loading='lazy' />
             <h3 className='text-[10px]'>{item.name}</h3>
           </div>
         </div>
