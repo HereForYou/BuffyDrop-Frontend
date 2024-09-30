@@ -204,23 +204,43 @@ const Task: React.FC<ITaskProps> = ({
         <div className='text-3xl text-white'>{title}</div>
       </div>
       <div className='px-6'>
-        {setting?.taskList.map(
-          (item: any) => (
-            <button
-              onClick={() => handleItemClick(item)}
-              key={item.id}
-              disabled={tracking}
-              className='flex w-full justify-between items-center rounded-lg px-3 py-2 cursor-pointer my-2 text-sm bg-[#110d33]'>
-              <div className='flex flex-row gap-1 items-center text-[#acacac]'>
-                <img
-                  src={`${item.image ? item.image : "choose.svg"}`}
-                  loading='lazy'
-                  alt='icon'
-                  className='w-10 aspect-square'
-                />
-                <div className='flex flex-col pl-2 gap-0.5'>
-                  <div className='flex flex-col'>{item.title}</div>
-                  <div className='flex flex-row items-center'>
+        {setting?.taskList
+          .filter((item: any, index: number) =>
+            currentCategory === 0 ? index !== 5 : index === 5 && item.id !== ""
+          )
+          .map(
+            (item: any) => (
+              <button
+                onClick={() => handleItemClick(item)}
+                key={item.id}
+                disabled={tracking}
+                className='flex w-full justify-between items-center rounded-lg px-3 py-2 cursor-pointer my-2 text-sm bg-[#110d33]'>
+                <div className='flex flex-row gap-1 items-center text-[#acacac]'>
+                  <img
+                    src={`${item.image ? item.image : "choose.svg"}`}
+                    loading='lazy'
+                    alt='icon'
+                    className='w-10 aspect-square'
+                  />
+                  <div className='flex flex-col pl-2 gap-0.5'>
+                    <div className='flex flex-col'>{item.title}</div>
+                    <div className='flex flex-row items-center'>
+                      <img
+                        src='buffy_icon.webp'
+                        alt=''
+                        className='w-4 h-4'
+                        loading='lazy'
+                      />
+                      <div className='pl-1'>
+                        +{formatNumberWithCommas(item.profit)}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className='w-[10%] flex justify-center'>
+                  {isLoading === item.id ? (
+                    <Loader width='20' />
+                  ) : (
                     <img
                       src='buffy_icon.webp'
                       alt=''
