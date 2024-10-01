@@ -24,6 +24,7 @@ const Friends = ({ user, inviteRevenue, modal }: { user: any; inviteRevenue: num
 
   const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
+    setInviteLink(auth?.userId);
     if (!hasShownWarningRef.current && user) {
       //https:reques
       setLoading(true);
@@ -35,7 +36,6 @@ const Friends = ({ user, inviteRevenue, modal }: { user: any; inviteRevenue: num
         })
         .then((res) => {
           console.log("friends > res.data", res.data);
-          setInviteLink(auth?.userId);
           setFriends(res.data.friendsInfo);
           setLoading(false);
         })
@@ -62,7 +62,7 @@ const Friends = ({ user, inviteRevenue, modal }: { user: any; inviteRevenue: num
     legacyCopy(`https://t.me/BuffyDropbot/BuffyDrop?startapp=${inviteLink}${desText}`);
     toast.success("Successfully Copied!");
   };
-  
+
   return (
     <div className='flex flex-col h-full w-full justify-start px-5 gap-2 overflow-y-auto overflow-x-hidden hiddenScrollBar'>
       <div>
