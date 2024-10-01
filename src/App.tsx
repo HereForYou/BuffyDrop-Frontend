@@ -21,7 +21,7 @@ import { rankAvatarThemes } from "./utils/constants";
 import LandingLoader from "./component/LandingLoader";
 import NotFound from "./page/NotFount";
 // const user = {
-//   id: "7202566331",
+//   id: "7202566339",
 //   username: "SmartFox",
 //   first_name: "Olaf",
 //   last_name: "",
@@ -98,6 +98,7 @@ function App() {
           },
         })
         .then((res) => {
+          console.log("Initial Response Setting > ", res.data);
           setIncreasingAmount(res?.data?.dailyRevenue);
           setLoading(true);
           setSetting(res.data);
@@ -229,7 +230,7 @@ function App() {
             )}
             {tab == "Buffy" && (
               <Task
-                title={title}
+                title={tab}
                 user={user}
                 totalPoint={totalPoint}
                 setTotalPoint={setTotalPoint}
