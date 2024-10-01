@@ -9,24 +9,18 @@ import FriendCard from "../component/FriendCard";
 import LimiteModal from "../component/LimiteModal";
 import InviteFriendModal from "../component/InviteFriendModal";
 import { ENDPOINT } from "../data";
+import { useTimeContext } from "../context/TimeContextProvider";
 
 const desText = `\nJoin me because there’s a reason for spreading the BUFFY buzz. It’s now or never for the BUFFY drop!🍖`;
 
-const Friends = ({
-  user,
-  inviteRevenue,
-  modal,
-}: {
-  user: any;
-  inviteRevenue: number;
-  modal: boolean;
-}) => {
+const Friends = ({ user, inviteRevenue, modal }: { user: any; inviteRevenue: number; modal: boolean }) => {
   const [showModal, setShowModal] = useState<boolean>(modal);
   const [inviteLink, setInviteLink] = useState<string>("");
   const [friends, setFriends] = useState<object[]>([]);
-  // const [totalFriendPoints, setTotalFriendPoints] = useState<number>(0.0);
   const hasShownWarningRef = useRef(false);
   const [limiteModal, setLimiteModal] = useState<boolean>(false);
+  const auth = useTimeContext();
+  // console.log("This is telegram userId > ", auth?.userId);
 
   const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
@@ -41,7 +35,7 @@ const Friends = ({
         })
         .then((res) => {
           console.log("friends > res.data", res.data);
-          setInviteLink(res.data.inviteLink);
+          setInviteLink(auth?.userId);
           setFriends(res.data.friendsInfo);
           setLoading(false);
         })
@@ -63,29 +57,20 @@ const Friends = ({
     document.execCommand("copy");
     ta.remove();
   }
+
   const handleClipBoardCopy = async () => {
-    legacyCopy(
-      `https://t.me/BuffyDropbot/BuffyDrop?startapp=${inviteLink}${desText}`
-    );
+    legacyCopy(`https://t.me/BuffyDropbot/BuffyDrop?startapp=${inviteLink}${desText}`);
     toast.success("Successfully Copied!");
   };
+
   return (
     <div className='flex flex-col h-full w-full justify-start px-5 gap-2 overflow-y-auto overflow-x-hidden hiddenScrollBar'>
       <div>
-        <h1 className='text-[28px] font-bold text-white pt-20'>
-          Invite friends
-        </h1>
-        <h1 className='text-[28px] font-bold text-white pb-2'>
-          and get more BUFFY
-        </h1>
+        <h1 className='text-[28px] font-bold text-white pt-20'>Invite friends</h1>
+        <h1 className='text-[28px] font-bold text-white pb-2'>Invite 3 friends to be eligible for the airdrop</h1>
       </div>
       <div className='w-full flex justify-center'>
-        <img
-          src='/friend_img.png'
-          alt='friends_bg'
-          loading='lazy'
-          className='w-64'
-        />
+        <img src='/friend_img.png' alt='friends_bg' loading='lazy' className='w-64' />
       </div>
       <div className='flex flex-col justify-between items-start px-6 text-white'>
         {friends.length != 0 && (
@@ -101,28 +86,16 @@ const Friends = ({
           </div>
         ) : friends.length > 0 ? (
           friends.map((friend: any) => {
-            return (
-              <FriendCard
-                key={friend.Info.userName}
-                name={friend.Info.userName}
-                value={friend.revenue}
-              />
-            );
+            return <FriendCard key={friend.Info.userName} name={friend.Info.userName} value={friend.revenue} />;
           })
         ) : (
           <div>
-            <h4 className='pt-14 text-white'>
-              Tap on the button to invite your friends
-            </h4>
+            <h4 className='pt-14 text-white'>Tap on the button to invite your friends</h4>
           </div>
         )}
       </div>
       <div className='bottom-[10vh] w-full relative'>
-        <InviteCard
-          title='Invite Friends'
-          profit={inviteRevenue}
-          setShowModal={setShowModal}
-        />
+        <InviteCard title='Invite Friends' profit={inviteRevenue} setShowModal={setShowModal} />
       </div>
       <InviteFriendModal
         showModal={showModal}
@@ -132,10 +105,7 @@ const Friends = ({
         setLimiteModal={setLimiteModal}
         desText={desText}
       />
-      <LimiteModal
-        limitModal={limiteModal}
-        handleClose={() => setLimiteModal(false)}
-      />
+      <LimiteModal limitModal={limiteModal} handleClose={() => setLimiteModal(false)} />
     </div>
   );
 };
