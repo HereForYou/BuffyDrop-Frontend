@@ -21,6 +21,7 @@ const Friends = ({ user, inviteRevenue, modal }: { user: any; inviteRevenue: num
   const hasShownWarningRef = useRef(false);
   const [limiteModal, setLimiteModal] = useState<boolean>(false);
   const [numOfInvites, setNumOfInvites] = useState(0);
+  const [showFriends, setShowFriends] = useState(false);
   const auth = useTimeContext();
   // console.log("This is telegram userId > ", auth?.userId);
 
@@ -67,7 +68,7 @@ const Friends = ({ user, inviteRevenue, modal }: { user: any; inviteRevenue: num
   };
 
   return (
-    <div className='flex flex-col h-full w-full justify-start px-5 gap-2 overflow-y-auto overflow-x-hidden hiddenScrollBar'>
+    <div className='flex flex-col friends-content w-full justify-start px-5 gap-2 overflow-y-auto overflow-x-hidden hiddenScrollBar'>
       <div className='w-full flex justify-center pt-20'>
         <img src='/friends/voice.png' alt='friends_bg' loading='lazy' className='w-48' />
       </div>
@@ -129,7 +130,9 @@ const Friends = ({ user, inviteRevenue, modal }: { user: any; inviteRevenue: num
       </div>
       <div className='flex justify-between items-center px-6 bg-main bg-opacity-30 text-white font-semibold rounded-lg py-2.5 font-consolas text-lg'>
         <p>{friends.length} friends</p>
-        <ChevronDown size={20} />
+        <div onClick={() => setShowFriends((prev) => !prev)}>
+          <ChevronDown size={24} className={`transform ${showFriends && 'rotate-180'} transition-all duration-300`} />
+        </div>
       </div>
       {/* <div className='flex flex-col justify-between items-start px-6 text-white'>
         {friends.length != 0 && (
@@ -138,21 +141,23 @@ const Friends = ({ user, inviteRevenue, modal }: { user: any; inviteRevenue: num
           </h3>
         )}
       </div> */}
-      <div className='flex flex-col overflow-auto h-full'>
-        {loading ? (
-          <div className='flex items-center justify-center w-full'>
-            <Loader width='30' />
-          </div>
-        ) : friends.length > 0 ? (
-          friends.map((friend: any) => {
-            return <FriendCard key={friend.Info.userName} name={friend.Info.userName} value={friend.revenue} />;
-          })
-        ) : (
-          <div>
-            <h4 className='pt-2 text-white'>Tap on the button to invite your friends</h4>
-          </div>
-        )}
-      </div>
+      {showFriends && (
+        <div className='flex flex-col'>
+          {loading ? (
+            <div className='flex items-center justify-center w-full'>
+              <Loader width='30' />
+            </div>
+          ) : friends.length > 0 ? (
+            friends.map((friend: any) => {
+              return <FriendCard key={friend.Info.userName} name={friend.Info.userName} value={friend.revenue} />;
+            })
+          ) : (
+            <div>
+              <h4 className='py-2 text-white'>Tap on the button to invite your friends</h4>
+            </div>
+          )}
+        </div>
+      )}
 
       <InviteFriendModal
         showModal={showModal}
