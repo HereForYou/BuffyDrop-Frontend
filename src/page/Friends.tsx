@@ -85,15 +85,15 @@ const Friends = ({ user, inviteRevenue, modal }: { user: any; inviteRevenue: num
       </div>
       <div className='relative h-14'>
         <div className='flex w-[calc(100%+4px)] -left-0.5 bg-black h-5 transform origin-center -rotate-[0.8deg] relative top-3' />
-        <div className='flex w-full h-8'>
+        <div className='flex w-full h-8 justify-start'>
           <div
             className={`bg-green-500 transition-all duration-500 ${
-              numOfInvites === 0 ? "w-0" : numOfInvites === 3 ? "w-full" : "w-" + numOfInvites + "/3"
+              numOfInvites === 0 ? "w-0" : numOfInvites === 3 ? "w-full" : numOfInvites === 1 ? "w-1/3" : "w-2/3"
             }`}
           />
           <div
             className={`bg-gray-500 transition-all duration-500 ${
-              numOfInvites === 0 ? "w-full" : numOfInvites === 3 ? "w-0" : "w-" + (3 - numOfInvites) + "/3"
+              numOfInvites === 0 ? "w-full" : numOfInvites === 3 ? "w-0" : numOfInvites === 1 ? "w-2/3" : "w-1/3"
             }`}
           />
         </div>

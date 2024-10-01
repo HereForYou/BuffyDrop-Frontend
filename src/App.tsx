@@ -5,7 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import "./App.css";
 import { useState, useEffect, useRef } from "react";
 import Exchange from "./page/Exchange";
-import { useTelegram } from "./hooks/useTelegram";
+// import { useTelegram } from "./hooks/useTelegram";
 import axios from "axios";
 import { useTimeContext } from "./context/TimeContextProvider";
 import { toast } from "react-hot-toast";
@@ -20,17 +20,17 @@ import Admin from "./page/Admin";
 import { rankAvatarThemes } from "./utils/constants";
 import LandingLoader from "./component/LandingLoader";
 import NotFound from "./page/NotFount";
-// const user = {
-//   id: "7202566339",
-//   username: "SmartFox",
-//   first_name: "Olaf",
-//   last_name: "",
-// };
-// const start_param = "";
+const user = {
+  id: "7202566339",
+  username: "SmartFox",
+  first_name: "Olaf",
+  last_name: "",
+};
+const start_param = "";
 
 function App() {
   const hasShownWarningRef = useRef(false);
-  const { user, start_param } = useTelegram();
+  // const { user, start_param } = useTelegram();
   const [inviteMsg, setInviteMsg] = useState<boolean>(false);
   const [task, setTask] = useState<string[]>([]);
   const [setting, setSetting] = useState<any>({});
