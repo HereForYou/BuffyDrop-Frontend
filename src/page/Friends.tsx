@@ -40,7 +40,7 @@ const Friends = ({ user, inviteRevenue, modal }: { user: any; inviteRevenue: num
         .then((res) => {
           console.log("friends > res.data", res.data);
           setFriends(res.data.friendsInfo);
-          setNumOfInvites(res.data.friendsInfo.length % 4);
+          setNumOfInvites(res.data.friendsInfo.length > 3 ? 3 : res.data.friendsInfo.length);
           setLoading(false);
         })
         .catch((err) => {
@@ -76,7 +76,7 @@ const Friends = ({ user, inviteRevenue, modal }: { user: any; inviteRevenue: num
         <h1 className='text-3xl font-bold text-white'>Invite friends</h1>
         <h1 className='text-base font-bold text-white pb-2'>Invite 3 friends to be eligible for the airdrop</h1>
       </div>
-      <div className='w-full flex justify-center min-h-[72px] items-end'>
+      <div className='w-full flex justify-center items-end'>
         <img
           src={`/friends/${numOfInvites === 3 ? "openBox.png" : "closeBox.png"}`}
           alt='friends_bg'
@@ -131,7 +131,7 @@ const Friends = ({ user, inviteRevenue, modal }: { user: any; inviteRevenue: num
       <div className='flex justify-between items-center px-6 bg-main bg-opacity-30 text-white font-semibold rounded-lg py-2.5 font-consolas text-lg'>
         <p>{friends.length} friends</p>
         <div onClick={() => setShowFriends((prev) => !prev)}>
-          <ChevronDown size={24} className={`transform ${showFriends && 'rotate-180'} transition-all duration-300`} />
+          <ChevronDown size={24} className={`transform ${showFriends && "rotate-180"} transition-all duration-300`} />
         </div>
       </div>
       {/* <div className='flex flex-col justify-between items-start px-6 text-white'>
