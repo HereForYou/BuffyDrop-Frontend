@@ -62,12 +62,12 @@ const Friends = ({ user, inviteRevenue, modal }: { user: any; inviteRevenue: num
     legacyCopy(`https://t.me/BuffyDropbot/BuffyDrop?startapp=${inviteLink}${desText}`);
     toast.success("Successfully Copied!");
   };
-
+  
   return (
     <div className='flex flex-col h-full w-full justify-start px-5 gap-2 overflow-y-auto overflow-x-hidden hiddenScrollBar'>
       <div>
         <h1 className='text-[28px] font-bold text-white pt-20'>Invite friends</h1>
-        <h1 className='text-[28px] font-bold text-white pb-2'>Invite 3 friends to be eligible for the airdrop</h1>
+        <h1 className='text-[28px] font-bold text-white pb-2'>and get more BUFFY</h1>
       </div>
       <div className='w-full flex justify-center'>
         <img src='/friend_img.png' alt='friends_bg' loading='lazy' className='w-64' />
