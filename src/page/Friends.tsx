@@ -6,6 +6,7 @@ import { toast } from "react-hot-toast";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import InviteCard from "../component/InviteCard";
 import FriendCard from "../component/FriendCard";
+import { ChevronDown } from "lucide-react";
 import LimiteModal from "../component/LimiteModal";
 import InviteFriendModal from "../component/InviteFriendModal";
 import { ENDPOINT } from "../data";
@@ -19,11 +20,13 @@ const Friends = ({ user, inviteRevenue, modal }: { user: any; inviteRevenue: num
   const [friends, setFriends] = useState<object[]>([]);
   const hasShownWarningRef = useRef(false);
   const [limiteModal, setLimiteModal] = useState<boolean>(false);
+  const [numOfInvites, setNumOfInvites] = useState(0);
   const auth = useTimeContext();
   // console.log("This is telegram userId > ", auth?.userId);
 
   const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
+    setInviteLink(auth?.userId);
     if (!hasShownWarningRef.current && user) {
       //https:reques
       setLoading(true);
@@ -35,8 +38,8 @@ const Friends = ({ user, inviteRevenue, modal }: { user: any; inviteRevenue: num
         })
         .then((res) => {
           console.log("friends > res.data", res.data);
-          setInviteLink(auth?.userId);
           setFriends(res.data.friendsInfo);
+          setNumOfInvites(res.data.friendsInfo.length % 4);
           setLoading(false);
         })
         .catch((err) => {
@@ -65,20 +68,76 @@ const Friends = ({ user, inviteRevenue, modal }: { user: any; inviteRevenue: num
 
   return (
     <div className='flex flex-col h-full w-full justify-start px-5 gap-2 overflow-y-auto overflow-x-hidden hiddenScrollBar'>
-      <div>
-        <h1 className='text-[28px] font-bold text-white pt-20'>Invite friends</h1>
-        <h1 className='text-[28px] font-bold text-white pb-2'>Invite 3 friends to be eligible for the airdrop</h1>
+      <div className='w-full flex justify-center pt-20'>
+        <img src='/friends/voice.png' alt='friends_bg' loading='lazy' className='w-48' />
       </div>
-      <div className='w-full flex justify-center'>
-        <img src='/friend_img.png' alt='friends_bg' loading='lazy' className='w-64' />
+      <div className='font-consolas'>
+        <h1 className='text-3xl font-bold text-white'>Invite friends</h1>
+        <h1 className='text-base font-bold text-white pb-2'>Invite 3 friends to be eligible for the airdrop</h1>
       </div>
-      <div className='flex flex-col justify-between items-start px-6 text-white'>
+      <div className='w-full flex justify-center min-h-[72px] items-end'>
+        <img
+          src={`/friends/${numOfInvites === 3 ? "openBox.png" : "closeBox.png"}`}
+          alt='friends_bg'
+          loading='lazy'
+          className='w-16 h-fit'
+        />
+      </div>
+      <div className='relative h-14'>
+        <div className='flex w-[calc(100%+4px)] -left-0.5 bg-black h-5 transform origin-center -rotate-[0.8deg] relative top-3' />
+        <div className='flex w-full h-8'>
+          <div
+            className={`bg-green-500 transition-all duration-500 ${
+              numOfInvites === 0 ? "w-0" : numOfInvites === 3 ? "w-full" : "w-" + numOfInvites + "/3"
+            }`}
+          />
+          <div
+            className={`bg-gray-500 transition-all duration-500 ${
+              numOfInvites === 0 ? "w-full" : numOfInvites === 3 ? "w-0" : "w-" + (3 - numOfInvites) + "/3"
+            }`}
+          />
+        </div>
+        <div className='flex w-[calc(100%+4px)] -left-0.5 bg-black h-5 transform origin-center rotate-[0.8deg] relative -top-3' />
+        <div className='absolute w-3 h-3 top-[30px] -left-1.5 rounded-full bg-white' />
+        <div
+          className={`absolute w-4 h-4 top-7 left-1/3 -translate-x-1/2 rounded-full transition-all delay-500 duration-300 ${
+            numOfInvites > 0 ? "bg-green-500" : "bg-white"
+          }`}
+        />
+        <div
+          className={`absolute w-5 h-5 top-[26px] left-2/3 -translate-x-1/2 rounded-full transition-all delay-500 duration-300 ${
+            numOfInvites > 1 ? "bg-green-500" : "bg-white"
+          }`}
+        />
+        <div
+          className={`absolute w-6 h-6 top-6 -right-1 rounded-full transition-all delay-500 duration-300 ${
+            numOfInvites > 2 ? "bg-green-500" : "bg-white"
+          }`}
+        />
+      </div>
+      <div
+        className='flex gap-2 items-center bg-main bg-opacity-30 p-2'
+        onClick={() => setNumOfInvites((prev) => (prev + 1) % 4)}>
+        <img src='/friends/lampHint.png' alt='lampHint' loading='lazy' className='w-6' />
+        <div className='flex flex-col gap-0.5 w-full text-xs font-consolas'>
+          <p className='text-justify w-full'>The more friends you invite, the more rewards you earn.</p>
+          <p className='text-justify w-full'>You&apos;ll receive %1-2 of each friends&apos;s tokens as a bonus.</p>
+        </div>
+      </div>
+      <div className='flex w-full pt-5'>
+        <InviteCard title='Invite' profit={inviteRevenue} setShowModal={setShowModal} />
+      </div>
+      <div className='flex justify-between items-center px-6 bg-main bg-opacity-30 text-white font-semibold rounded-lg py-2.5 font-consolas text-lg'>
+        <p>{friends.length} friends</p>
+        <ChevronDown size={20} />
+      </div>
+      {/* <div className='flex flex-col justify-between items-start px-6 text-white'>
         {friends.length != 0 && (
           <h3 className='text-left text-2xl font-bold'>
             <span>{friends.length}</span> friends
           </h3>
         )}
-      </div>
+      </div> */}
       <div className='flex flex-col overflow-auto h-full'>
         {loading ? (
           <div className='flex items-center justify-center w-full'>
@@ -90,13 +149,11 @@ const Friends = ({ user, inviteRevenue, modal }: { user: any; inviteRevenue: num
           })
         ) : (
           <div>
-            <h4 className='pt-14 text-white'>Tap on the button to invite your friends</h4>
+            <h4 className='pt-2 text-white'>Tap on the button to invite your friends</h4>
           </div>
         )}
       </div>
-      <div className='bottom-[10vh] w-full relative'>
-        <InviteCard title='Invite Friends' profit={inviteRevenue} setShowModal={setShowModal} />
-      </div>
+
       <InviteFriendModal
         showModal={showModal}
         setShowModal={setShowModal}
