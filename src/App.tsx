@@ -20,6 +20,7 @@ import Admin from "./page/Admin";
 import { rankAvatarThemes } from "./utils/constants";
 import LandingLoader from "./component/LandingLoader";
 import NotFound from "./page/NotFount";
+
 // const user = {
 //   id: "7202566339",
 //   username: "SmartFox",
@@ -29,6 +30,7 @@ import NotFound from "./page/NotFount";
 // const start_param = "";
 
 function App() {
+  console.log("endpoint",ENDPOINT)
   const hasShownWarningRef = useRef(false);
   const { user, start_param } = useTelegram();
   const [inviteMsg, setInviteMsg] = useState<boolean>(false);
