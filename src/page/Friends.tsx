@@ -11,6 +11,7 @@ import LimiteModal from "../component/LimiteModal";
 import InviteFriendModal from "../component/InviteFriendModal";
 import { ENDPOINT } from "../data";
 import { useTimeContext } from "../context/TimeContextProvider";
+import { BOT_URL } from "../data";
 
 const desText = `\nJoin me because there’s a reason for spreading the BUFFY buzz. It’s now or never for the BUFFY drop!🍖`;
 
@@ -63,7 +64,7 @@ const Friends = ({ user, inviteRevenue, modal }: { user: any; inviteRevenue: num
   }
 
   const handleClipBoardCopy = async () => {
-    legacyCopy(`https://t.me/BuffyDropbot/BuffyDrop?startapp=${inviteLink}${desText}`);
+    legacyCopy(`${BOT_URL}?startapp=${inviteLink}${desText}`);
     toast.success("Successfully Copied!");
   };
 
